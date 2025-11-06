@@ -22,5 +22,7 @@ public class ForLoop02 {
             System.out.println(StartingPoint);
             StartingPoint++;
         }
+
+        scanner.close();
     }
 }

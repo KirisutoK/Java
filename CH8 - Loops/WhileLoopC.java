@@ -29,6 +29,8 @@ public class WhileLoopC {
             StartingNumber += IncrementorNumber;
             terms++;
         }
+
+        scanner.close();
     }
 
     // Put yer dang tootin' code here!

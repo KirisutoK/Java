@@ -29,8 +29,7 @@ public class ForLoop04 {
         for (int i = StartingNumber; i <= StoppingNumber; i += IncrementNumber) {
             System.out.println(i);
         }
+
+        scanner.close();
     }
-
-    // Put yer loopy code here!
-
 }

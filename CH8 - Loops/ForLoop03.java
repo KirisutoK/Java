@@ -26,5 +26,6 @@ public class ForLoop03 {
             System.out.println(i);
         }
         
+        scanner.close();
     }
 }

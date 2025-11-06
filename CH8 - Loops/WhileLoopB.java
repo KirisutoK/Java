@@ -20,6 +20,8 @@ public class WhileLoopB {
             UserNum++;
             System.out.println(UserNum);
         }
+
+        scanner.close();
     }
 
 }

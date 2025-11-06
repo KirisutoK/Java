@@ -21,6 +21,8 @@ public class WhileLoopD {
         }
         
         System.out.println("You chose " + num + ".");
+
+        scanner.close();
     }
 
 }
