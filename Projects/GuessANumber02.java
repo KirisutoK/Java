@@ -22,8 +22,27 @@ public class GuessANumber02 {
         int Seed = scanner.nextInt();
         Random random = new Random(Seed);
 
-        System.out.println("Welcome!");
+        int AnswerNumber = random.nextInt(100)+1;
+
+        System.out.println("\nWelcome!");
+
         System.out.println("Please enter a number between 1 and 100:");
-        
+        int Number = scanner.nextInt();
+
+        int Guesses = 1;
+
+        while (Number != AnswerNumber) {
+            if (Number > AnswerNumber) {
+                System.out.println("\nToo high. Guess again: ");
+                Number = scanner.nextInt();
+            } else {
+                System.out.println("\nToo low. Guess again: ");
+                Number = scanner.nextInt();
+            }
+            Guesses++;
+        }
+
+        System.out.println("Congratulations. You guessed correctly! ");
+        System.out.println("You needed " + Guesses + " guesses.");
     }
 }
