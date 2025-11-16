@@ -3,6 +3,6 @@ public class SelfStudy1 {
         
         String[] Foods = {"Noodles", "Burgers", "Pizza", "Donut"};
 
-        System.out.println(Foods[2]);
+        System.out.println(Foods[0]);
     }
 }

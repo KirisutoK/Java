@@ -1,4 +1,4 @@
-public class NestedLoopsPractice {
+public class NestedLoopsPractice01 {
     public static void main(String[] args) {
         Practice1();
         System.out.println(" ");
