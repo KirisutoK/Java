@@ -1,3 +1,6 @@
+//Oct 17, 2025
+// Difference between regular loop and enhanced loop
+
 import java.util.ArrayList;
 
 public class SelfStudyArrayList02 {
