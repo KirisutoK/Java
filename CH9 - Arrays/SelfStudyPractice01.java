@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class SelfStudyPractice01 {
 
     public static void main(String[] args) {
-        
+        MovieRatingSystemArray();
     }
 
     public static void MovieRatingSystemArray() {
@@ -19,10 +19,11 @@ public class SelfStudyPractice01 {
         int[] ArrayRating = new int[ArrayMaximum];
 
         for (int i = 0; i < ArrayMaximum; i++) {
-            System.out.println("Enter movie #" + (i+1) +" name: ");
+            System.out.print("\nEnter movie #" + (i+1) +" name: ");
+            scanner.nextLine();
             ArrayValues[i] = scanner.nextLine();
 
-            System.out.println("Rate Inception (1-5 stars): ");
+            System.out.print("Rate " + ArrayValues[i] + " (1-5 stars): ");
             ArrayRating[i] = scanner.nextInt();
         }
 
