@@ -18,7 +18,7 @@ public class SelfStudyArray04 {
         int ListMaximum = scanner.nextInt();
         scanner.nextLine();
 
-        String[] ArrayValues = new String[ListMaximum];
+        String[] ArrayValues = new String[ListMaximum]; // Creates an array
 
         for (int i = 0; i < ListMaximum; i++) {
             System.out.println("Enter Value " + (i+1) + ":");
@@ -26,6 +26,7 @@ public class SelfStudyArray04 {
         }
 
         scanner.close();
+        
         System.out.println();
 
         //============================ Display ============================//

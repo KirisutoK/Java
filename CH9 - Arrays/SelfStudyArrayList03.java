@@ -35,6 +35,8 @@ public class SelfStudyArrayList03 {
             }
         }
 
+        scanner.close();
+
         System.out.println("\nStudents:");
         for (int i = 0; i < Students.size(); i++) {
             System.out.println((i+1) + ". " + Students.get(i));
