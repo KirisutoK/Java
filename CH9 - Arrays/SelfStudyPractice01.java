@@ -1,4 +1,5 @@
 // Oct 17, 2025
+// This creates a list or an array. creating array slots based on user's int input and then rating them.
 import java.util.Scanner;
 
 public class SelfStudyPractice01 {
@@ -56,5 +57,9 @@ public class SelfStudyPractice01 {
                 break;
             }
         }
+    }
+
+    public static void MovieRatingSystemArrayList() {
+        
     }
 }

@@ -1,12 +1,25 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Test {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        ArrayList<Double> Value = new ArrayList<>();
 
-        System.out.println("How many stars?");
-        int Stars = scanner.nextInt();
+        Value.add(12.0);
+        Value.add(14.0);
+        Value.add(17.56);
 
-        System.out.println("");
+        System.out.println(Value);
+        double Total = CalculateTotal(Value);
+        System.out.println(Total);
+    }
+
+    public static double CalculateTotal(ArrayList<Double> Total) {
+        double TotalValue = 0.6;
+
+        for (Double Values : Total) {
+            TotalValue += Values;
+        }
+
+        return TotalValue;
     }
 }

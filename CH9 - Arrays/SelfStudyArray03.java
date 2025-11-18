@@ -1,7 +1,6 @@
 // Oct 17, 2025
 // This code ask a user for an input and stores the input to an Array
 
-import java.net.Socket;
 import java.util.Scanner;
 
 public class SelfStudyArray03 {
