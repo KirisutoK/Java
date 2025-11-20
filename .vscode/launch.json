@@ -1,9 +1,44 @@
-t{
+{
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        {
+            "type": "java",
+            "name": "CenteredAverage",
+            "request": "launch",
+            "mainClass": "CenteredAverage",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "TestArray4",
+            "request": "launch",
+            "mainClass": "TestArray4",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "ArrayShiftRight",
+            "request": "launch",
+            "mainClass": "ArrayShiftRight",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "ArrayShiftLeft",
+            "request": "launch",
+            "mainClass": "ArrayShiftLeft",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "ArrayBackwards",
+            "request": "launch",
+            "mainClass": "ArrayBackwards",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
         {
             "type": "java",
             "name": "Current File",
