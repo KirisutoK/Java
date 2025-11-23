@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
             "name": "CenteredAverage",
             "request": "launch",
             "mainClass": "CenteredAverage",
