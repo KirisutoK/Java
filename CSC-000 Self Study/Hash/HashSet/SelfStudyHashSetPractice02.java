@@ -1,54 +1,40 @@
-// Oct 22, 2025
+// Unfinished
 // This is for LeetCode Substring Quiz
 // 3. Longest Substring Without Repeating Characters
 
-// Ideas:
-// String is abcdabcd: if there is already a in the hashset, it replaces with a
-//
-
-import java.util.Scanner;
 import java.util.HashSet;
 
 public class SelfStudyHashSetPractice02 {
-   public static void main (String [] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+        String s = "asjrgapa"; // Input
 
-        System.out.print("s = ");
-        String Word = scanner.nextLine();
-        
-        System.out.println(lengthOfLongestSubstring(Word));
-    }
+        HashSet HashSetCharacters = new HashSet<>(); // Creates HashSet
 
-    public static int lengthOfLongestSubstring(String s) { //Finds the Substring
-        HashSet HashSetWordsIGuess = new HashSet<>();
-
-        int StartingPoint = 0;
-        int ConsecutiveAdds = 0;
         int HighestConsecutiveAdds = 0;
+        int ConsecutiveCountAdded = 0;
 
-        for (int i = 0; i < s.length(); i++) {
-            Boolean DetectAdded = HashSetWordsIGuess.add(s.charAt(i));
+        for (int j = 0; j < s.length(); j++) { // For every time the loop finishes in a string, it addes +1 to the starting point
+            for (int i = 0 + j; i < s.length(); i++) { // Loops a char inside a string
+                Boolean DetectAdded = HashSetCharacters.add(s.charAt(i)); // // Detect if Value has been added to HashSet
 
-            if (DetectAdded == true) {
-                if (HashSetWordsIGuess.contains(s.charAt(i))) {
-                    HashSetWordsIGuess.clear();
-                    HashSetWordsIGuess.add(s.charAt(i));
-                    ConsecutiveAdds++;
-                }
-            } else if (DetectAdded == false) {
-                if (ConsecutiveAdds > HighestConsecutiveAdds) {
-                    HighestConsecutiveAdds = ConsecutiveAdds;
-                    StartingPoint = i;
+                if (DetectAdded == true) {
+                    ConsecutiveCountAdded++;
+                    if (ConsecutiveCountAdded > HighestConsecutiveAdds) {
+                        HighestConsecutiveAdds = ConsecutiveCountAdded;
+                    }
+                } else if (DetectAdded == false) {
+                    ConsecutiveCountAdded = 0;
+                    HashSetCharacters.clear();
+                    HashSetCharacters.add(s.charAt(i));
+                    ConsecutiveCountAdded++;
+                    break;
                 }
             }
         }
 
-        int EndingPoint = StartingPoint+HighestConsecutiveAdds;
-        
-        s.substring(StartingPoint, EndingPoint);
-
-        return;
-    }  
+        System.out.println(HashSetCharacters);
+        System.out.println(HighestConsecutiveAdds);
+    }
 }
    
     
