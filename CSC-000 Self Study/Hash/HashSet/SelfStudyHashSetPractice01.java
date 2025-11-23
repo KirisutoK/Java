@@ -4,8 +4,6 @@
 import java.util.HashSet;
 import java.util.Scanner;
 
-import javax.xml.parsers.FactoryConfigurationError;
-
 public class SelfStudyHashSetPractice01 {
     public static void main(String[]args) {
         Scanner scanner = new Scanner(System.in);

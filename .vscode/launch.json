@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SelfStudyHashSet03",
+            "request": "launch",
+            "mainClass": "SelfStudyHashSet03",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
             "name": "SelfStudyHashSet02",
             "request": "launch",
             "mainClass": "SelfStudyHashSet02",
