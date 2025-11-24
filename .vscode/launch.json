@@ -6,6 +6,83 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SelfStudyFixedSlidingWindowPractice03",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindowPractice03",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "SelfStudyFixedSlidingWindowPractice02",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindowPractice02",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "SelfStudyFixedSlidingWindowPractice01",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindowPractice01",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "SelfStudyFixedSlidingWindow02",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindow02",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "ForLoop02",
+            "request": "launch",
+            "mainClass": "ForLoop02",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "NestedLoopsPractice02",
+            "request": "launch",
+            "mainClass": "NestedLoopsPractice02",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "MultiplicationTable",
+            "request": "launch",
+            "mainClass": "MultiplicationTable",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "SelfStudyFixedSlidingWindow03",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindow03",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "SelfStudyFixedSlidingWindow01",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindow01",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "SelfStudyFixedSlidingWindows02",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindows02",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "SelfStudySlidingWindow01",
+            "request": "launch",
+            "mainClass": "SelfStudySlidingWindow01",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
             "name": "SlidingWindowBasics",
             "request": "launch",
             "mainClass": "SlidingWindowBasics",

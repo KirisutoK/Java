@@ -1,4 +1,4 @@
-//Unfinished
+//Oct 23, 2025
 //count how many times the char has duplicates
 //counts how many times a value has added inside the hashset
 
@@ -18,9 +18,12 @@ public class SelfStudyHashSet03 {
                 Addedcount++;
             } else if (AddedConditions == false) {
                 DidNotCount++;
-            }           
+            }
+
+            System.out.println(CharInStrings);           
         }
 
+        System.out.println();
         System.out.println(Addedcount);
         System.out.println(DidNotCount);
     }
