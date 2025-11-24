@@ -1,8 +1,8 @@
 // Oct 23, 2025
 
-public class SelfStudyFixedSlidingWindow01 {
+public class SelfStudyFixedSlidingWindow01A {
     public static void main (String []args) {
-        int[] Numbers = {1, 3, 4, 8, 9, 2, 5};
+        int[] Numbers =  new int[] {1, 3, 4, 8, 9, 2, 5};
 
         System.out.println(Numbers); // Array is not formatted properly so it prints something instead of [1, 3, 4, 8, 9, 2, 5]
 
