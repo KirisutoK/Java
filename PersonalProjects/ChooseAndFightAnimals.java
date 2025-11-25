@@ -151,7 +151,9 @@ public class ChooseAndFightAnimals {
         }
     }
     public static void Story1() {
-        
+        Dialogue("""
+                As you saw the poster, you went out to a nearby animal shop and decided to look for a companion to get that million dollars.
+                """);
     }
     // ================================ MISCELLANIOUS METHODS ================================ \\
 
