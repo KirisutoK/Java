@@ -1,4 +1,5 @@
 // Oct 23, 2025
+import java.util.Arrays; // In order to use toString(), sort(), binarySearch(), etc.
 
 public class SelfStudyFixedSlidingWindow02 {
     public static void main(String[] args) {
@@ -6,6 +7,8 @@ public class SelfStudyFixedSlidingWindow02 {
 
         int WindowSize = 3;
         int sum = 0;
+
+        System.out.println(Arrays.toString(numbers)); // This is what the import java.util.Arrays is used for
 
         for (int j = 0; j < numbers.length - WindowSize + 1; j++) {
             for (int i = 0+j; i < j+WindowSize; i++) {

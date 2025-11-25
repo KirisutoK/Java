@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SelfStudyFixedSlidingWindow02",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindow02",
+            "projectName": "Java_5db56c"
+        },
+        {
+            "type": "java",
+            "name": "SelfStudyFixedSlidingWindow01",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindow01",
+            "projectName": "Java_5db56c"
+        },
+        {
+            "type": "java",
             "name": "SelfStudyFixedSlidingWindowPractice03",
             "request": "launch",
             "mainClass": "SelfStudyFixedSlidingWindowPractice03",

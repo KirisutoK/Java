@@ -6,8 +6,8 @@ public class SelfStudyFixedSlidingWindow01 {
 
         System.out.println(Numbers); // Array is not formatted properly so it prints something instead of [1, 3, 4, 8, 9, 2, 5]
 
-        // In order to make it print like [1, 3, 4, 8, 9, 2, 5], we have to create an array properly:
-        // int[] Numbers = new Int[] {1, 3, 4, 8, 9, 2, 5}; 
+        // In order to make it print like [1, 3, 4, 8, 9, 2, 5], we have to create import array:
+        // import java.util.Arrays;
 
         int WindowSize = 3;
 
