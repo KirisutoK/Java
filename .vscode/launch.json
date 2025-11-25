@@ -6,6 +6,7 @@
     "configurations": [
         {
             "type": "java",
+<<<<<<< HEAD
             "name": "ChooseAndFightAnimals",
             "request": "launch",
             "mainClass": "ChooseAndFightAnimals",
@@ -38,6 +39,19 @@
             "request": "launch",
             "mainClass": "SelfStudyFixedSlidingWindow01A",
             "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+=======
+            "name": "SelfStudyFixedSlidingWindow02",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindow02",
+            "projectName": "Java_5db56c"
+        },
+        {
+            "type": "java",
+            "name": "SelfStudyFixedSlidingWindow01",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindow01",
+            "projectName": "Java_5db56c"
+>>>>>>> f4abbdc96b152f3be6fdc54a768a9301642361dd
         },
         {
             "type": "java",
