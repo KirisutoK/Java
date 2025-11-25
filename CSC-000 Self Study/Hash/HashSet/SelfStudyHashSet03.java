@@ -1,5 +1,5 @@
 //Oct 23, 2025
-//count how many times the char has duplicates
+//counts how many times the char has duplicates
 //counts how many times a value has added inside the hashset
 
 import java.util.HashSet;

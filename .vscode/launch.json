@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ChooseAndFightAnimals",
+            "request": "launch",
+            "mainClass": "ChooseAndFightAnimals",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "LoadingText",
+            "request": "launch",
+            "mainClass": "LoadingText",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "ChooseAndFight",
+            "request": "launch",
+            "mainClass": "ChooseAndFight",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "RPGame",
+            "request": "launch",
+            "mainClass": "RPGame",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
+            "name": "SelfStudyFixedSlidingWindow01A",
+            "request": "launch",
+            "mainClass": "SelfStudyFixedSlidingWindow01A",
+            "projectName": "My-School-Labs-Intro-to-Programming-_6b81b038"
+        },
+        {
+            "type": "java",
             "name": "SelfStudyFixedSlidingWindowPractice03",
             "request": "launch",
             "mainClass": "SelfStudyFixedSlidingWindowPractice03",

@@ -5,10 +5,6 @@ public class RPGame {
     static Scanner scanner = new Scanner(System.in);
     static Random random = new Random();
 
-
-    // Classes \\ Java OOP
-    // static Player player = new Player();
-
     // Global Variables // Miscallenous //
     static int DialogueSpeed = 0; // speed of the loading message
     static boolean AbletoPlay = false; // if the user is ready to play the game
@@ -32,14 +28,8 @@ public class RPGame {
         }
         if (AbletoPlayStory == true) {
             Chapter1();
-
             WorkInProgressMessage();
         }
-        
-        //Player p1 = new Player(10);
-
-        //p1.setHealth(100);
-
     }
 
     //-----------------------------------------------------------------------------\\
