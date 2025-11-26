@@ -33,7 +33,7 @@ public class ChooseAndFightAnimals {
         Story1();
         int Story1SecretChance = random.nextInt(10)+1;
         if (Story1SecretChance < 2) {
-            Story1Secret()
+            Story1Secret();
         } else {
 
         }
@@ -58,23 +58,8 @@ public class ChooseAndFightAnimals {
                 """);
 
         int DialogueSpeedChoice = scanner.nextInt();
-        switch (DialogueSpeedChoice) {
-                case 1:
-                    DialogueSpeed = 1;
-                    break;
-                case 2:
-                    DialogueSpeed = 2;
-                    break;
-                case 3:
-                    DialogueSpeed = 3;
-                    break;
-                case 4:
-                    DialogueSpeed = 0;
-                    break;
-                default:
-                    Dialogue("Invalid choice, please choose again.");
-                    break;
-        }
+        int[] DialogueSpeedArray = {1, 2, 3, 0}; // Choices
+        DialogueSpeed = DialogueSpeedArray[DialogueSpeedChoice-1]; // -1 in order to meet the required slot
     }
     public static void Introduction() {
         Dialogue("\n|| ================ BECOME THE GREATEST ANIMAL OWNER ================ ||\n\n");
