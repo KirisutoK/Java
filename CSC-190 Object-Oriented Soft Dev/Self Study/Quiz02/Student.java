@@ -5,8 +5,8 @@ public class Student {
 
     public Student(String n, int g, String studentid) {
         this.name = n;
-        this.grade = g;
         this.studentId = studentid;
+        setGrade(g);
     }
     //==================RETURNS=============\\
     public String getName() { 
@@ -23,7 +23,7 @@ public class Student {
     }
     //==================VOID================\\
     public void setGrade(int g) {
-        if (g > 0 && g < 100) { // if its not 0-100
+        if (g >= 0 && g <= 100) { // if its not 0-100
             grade = g;
         } else {
             System.out.println("ERROR! Index out of bounds");
@@ -34,5 +34,6 @@ public class Student {
         System.out.println("Student: " + name);
         System.out.println("Student ID: " + studentId);
         System.out.println("Grade: " + grade);
+        System.out.println("Passed: " + isPassing());
     }
 }

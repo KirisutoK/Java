@@ -18,15 +18,12 @@ public class ChooseAndFightAnimals {
     // ========== GLOBAL VARIABLES =========== \\
     static int DialogueSpeed = 0;
 
-    static String UserName = " ";
-    static int Health = 100;
-    static String Weapon = " ";
-    static int WeaponDamage = 0;
-
     // ======================================== \\
     public static void main(String[] args) {
 
         getNameAndDialogueSpeed();
+
+        Player player1 = new Player(" ", ) //////////// THIS IS WHERE YOU LEFT OFF
 
         Introduction();
 
