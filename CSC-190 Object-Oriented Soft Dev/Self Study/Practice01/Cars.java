@@ -1,4 +1,5 @@
 public class Cars {
+    // ATTRIBUTES OR VARIABLES
     private String Name; // Private means it cant be accessed outside
     private int Price;
 
@@ -7,11 +8,8 @@ public class Cars {
         this.Price = price;
     }
 
-    public String getName() { // we used this in order to get the private variables
-        return Name;
-    }
-
-    public int getPrice() {
-        return Price;
+    public void displayInfo() {
+        System.out.println("Name: " + Name);
+        System.out.println("Price: " + Price);
     }
 }
