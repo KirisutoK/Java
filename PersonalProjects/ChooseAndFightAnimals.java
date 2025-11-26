@@ -28,10 +28,17 @@ public class ChooseAndFightAnimals {
 
         getNameAndDialogueSpeed();
 
-        showStats();
-
         Introduction();
-        ChooseAnimals();
+
+        Story1();
+        int Story1SecretChance = random.nextInt(10)+1;
+        if (Story1SecretChance < 2) {
+            Story1Secret()
+        } else {
+
+        }
+
+        showStats();
 
     }
 
@@ -152,8 +159,22 @@ public class ChooseAndFightAnimals {
     }
     public static void Story1() {
         Dialogue("""
-                As you saw the poster, you went out to a nearby animal shop and decided to look for a companion to get that million dollars.
+                When you saw the poster, you rushed to a nearby pet store in search of a 
+                companion—the next animal champion who could help you win that 
+                million-dollar prize.
                 """);
+    }
+    public static void Story1Secret() {
+        Dialogue("""
+                    You rushed through the store until suddenly, you felt it—your 
+                instincts screaming that you had been chosen by something primordial.
+                A Tyrannosaurus Rex!
+                """);
+        Dialogue("The Tyrannosaurus Rex choose you as his Master!");
+
+        Weapon = "Tyrannosaurus Rex";
+        WeaponDamage += 5000;
+        Health += 10000;
     }
     // ================================ MISCELLANIOUS METHODS ================================ \\
 
