@@ -14,38 +14,36 @@ public class ChooseAndFightAnimals {
     // ========== GLOBAL INSTANCES ========= \\
     static Scanner scanner = new Scanner(System.in);
     static Random random = new Random();
+    static Player player1 = new Player(" ", 100, " ", 0); // UserName, Health, Weapon, WeaponDamage
 
     // ========== GLOBAL VARIABLES =========== \\
     static int DialogueSpeed = 0;
 
+
     // ======================================== \\
     public static void main(String[] args) {
-
         getNameAndDialogueSpeed();
-
-        Player player1 = new Player(" ", ) //////////// THIS IS WHERE YOU LEFT OFF
 
         Introduction();
 
         Story1();
         int Story1SecretChance = random.nextInt(10)+1;
-        if (Story1SecretChance < 2) {
+        if (Story1SecretChance > 2) {
             Story1Secret();
         } else {
-
+            ChooseAnimals();
         }
 
         showStats();
-
     }
 
     // ================================ Story METHODS ================================ \\
 
     public static void getNameAndDialogueSpeed() {
         System.out.print("\nLadies and gentlemen... or should I say, FUTURE CHAMPION! Before the games begin, please state your name for the record. ");
-        UserName = scanner.nextLine();
+        player1.setUserName(scanner.nextLine());
 
-        System.out.println("\nExcellent! " + UserName + " has entered the arena!\n");
+        System.out.println("\nExcellent! " + player1.getUserName() + " has entered the arena!\n");
 
         System.out.println("How fast would you like the dialogue to be?");
         System.out.println("""
@@ -55,6 +53,7 @@ public class ChooseAndFightAnimals {
                 """);
 
         int DialogueSpeedChoice = scanner.nextInt();
+
         int[] DialogueSpeedArray = {1, 2, 3, 0}; // Choices
         DialogueSpeed = DialogueSpeedArray[DialogueSpeedChoice-1]; // -1 in order to meet the required slot
     }
@@ -83,59 +82,37 @@ public class ChooseAndFightAnimals {
         int AnimalChoices = scanner.nextInt();
         switch (AnimalChoices) {
             case 1: // Cat
-                Weapon = "Cat";
-                WeaponDamage += 10;
-                Health += 100;
+                player1.setAll(100, "Cat", 10); // +health, weapon, +weapondamage
                 break;
             case 2: // Dog
-                Weapon = "Dog";
-                WeaponDamage += 25;
-                Health += 50;
+                player1.setAll(50, "Dog", 25); // +health, weapon, +weapondamage
                 break;
             case 3: // Squirrel
-                Weapon = "Squirrel";
-                WeaponDamage += 1;
-                Health += 1;
+                player1.setAll(1, "Squirrel", 1); // +health, weapon, +weapondamage
                 break;
             case 4: // Bird
-                Weapon = "Bird";
-                WeaponDamage += 20;
-                Health += 5;
+                player1.setAll(5, "Bird", 20); // +health, weapon, +weapondamage
                 break;
             case 5: // Hamster
-                Weapon = "Hamster";
-                WeaponDamage += 0;
-                Health += 0;
+                player1.setAll(0, "Hamster", 0); // +health, weapon, +weapondamage 
                 break;
             case 6: // Cow
-                Weapon = "Cow";
-                WeaponDamage += 5;
-                Health += 75;
+                player1.setAll(75, "Cow", 5); // +health, weapon, +weapondamage
                 break;
             case 7: // Pig
-                Weapon = "Pig";
-                WeaponDamage += 10;
-                Health += 100;
+                player1.setAll(100, "Pig", 10); // +health, weapon, +weapondamage
                 break;
             case 8: // Chicken
-                Weapon = "Chicken";
-                WeaponDamage += 120;
-                Health += 10;
+                player1.setAll(10, "Chicken", 120); // +health, weapon, +weapondamage
                 break;
             case 9: // Goat
-                Weapon = "Goat";
-                WeaponDamage += 200;
-                Health += 100;
+                player1.setAll(100, "Goat", 200); // +health, weapon, +weapondamage
                 break;
             case 10: // Horse
-                Weapon = "Horse";
-                WeaponDamage += 100;
-                Health += 500;
+                player1.setAll(500, "Horse", 100); // +health, weapon, +weapondamage
                 break;
             default: // Cat
-                Weapon = "Cat";
-                WeaponDamage += 10;
-                Health += 100;
+                player1.setAll(100, "Cat", 10); // +health, weapon, +weapondamage
                 break;
         }
     }
@@ -154,9 +131,7 @@ public class ChooseAndFightAnimals {
                 """);
         Dialogue("The Tyrannosaurus Rex choose you as his Master!");
 
-        Weapon = "Tyrannosaurus Rex";
-        WeaponDamage += 5000;
-        Health += 10000;
+        player1.setAll(1000, "Tyrannosaurus Rex", 500); // +health, weapon, +weapondamage
     }
     // ================================ MISCELLANIOUS METHODS ================================ \\
 
