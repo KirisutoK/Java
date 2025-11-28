@@ -6,7 +6,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
-        Player player1 = new Player("John", 100, 50);
+        Player player1 = new Player("John", 100, 50); // Name, Health, Stamina
 
         System.out.println("Enter your name: ");
         player1.setName(scanner.nextLine());
