@@ -1,6 +1,6 @@
 public class Player {
     private String UserName = " ";
-    private int Health = 50;
+    private int Health = 0;
     private String Pet = " ";
     private int PetDamage = 0;
 
