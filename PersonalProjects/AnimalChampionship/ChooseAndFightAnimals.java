@@ -3,7 +3,7 @@
 // INTRODUCTION
 // 1. Ask the user for its name
 // 2. Choose an Animal
-// 3. Use that Animal as a Weapon
+// 3. Use that Animal as a Pet
 // 4. There are multiple mobs that appears everytime you advance
 // 4. There are 10 stages
 
@@ -14,7 +14,7 @@ public class ChooseAndFightAnimals {
     // ========== GLOBAL INSTANCES ========= \\
     static Scanner scanner = new Scanner(System.in);
     static Random random = new Random();
-    static Player player1 = new Player(" ", 100, " ", 0); // UserName, Health, Weapon, WeaponDamage
+    static Player player1 = new Player(" ", 100, " ", 0); // UserName, Health, Pet, PetDamage
 
     // ========== GLOBAL VARIABLES =========== \\
     static int DialogueSpeed = 0;
@@ -37,8 +37,37 @@ public class ChooseAndFightAnimals {
         showStats();
     }
 
-    // ================================ Story METHODS ================================ \\
+    // ================================ STORY METHODS ================================ \\
+    public static void Introduction() {
+        Dialogue("\n|| ================ BECOME THE GREATEST ANIMAL OWNER ================ ||\n\n");
 
+        Dialogue("""
+                    One day, you stumbled upon a poster announcing the Grand Animal 
+                Championship. The prize? One million dollars and the title of Champion. 
+                all yours if you could defeat the current title holder. You knew this was 
+                your chance. All you needed was the right companion by your side, and 
+                victory would be within reach.
+                """);
+    }
+    public static void Story1() {
+        Dialogue("""
+                \nWhen you saw the poster, you rushed to a nearby pet store in search of a 
+                companion—the next animal champion who could help you win that 
+                million-dollar prize.
+                """);
+    }
+    public static void Story1Secret() {
+        Dialogue("""
+                    \nYou rushed through the store until suddenly, you felt it—your 
+                instincts screaming that you had been chosen by something primordial.
+                A Tyrannosaurus Rex!
+                """);
+        Dialogue("\nThe Tyrannosaurus Rex choose you as his Master!");
+
+        player1.setAll(1000, "Tyrannosaurus Rex", 500); // +health, Pet, +Petdamage
+    }
+
+    // ======================================  METHODS ====================================== \\
     public static void getNameAndDialogueSpeed() {
         System.out.print("\nLadies and gentlemen... or should I say, FUTURE CHAMPION! Before the games begin, please state your name for the record. ");
         player1.setUserName(scanner.nextLine());
@@ -57,18 +86,7 @@ public class ChooseAndFightAnimals {
         int[] DialogueSpeedArray = {1, 2, 3, 0}; // Choices
         DialogueSpeed = DialogueSpeedArray[DialogueSpeedChoice-1]; // -1 in order to meet the required slot
     }
-    public static void Introduction() {
-        Dialogue("\n|| ================ BECOME THE GREATEST ANIMAL OWNER ================ ||\n\n");
-
-        Dialogue("""
-                    One day, you stumbled upon a poster announcing the Grand Animal 
-                Championship. The prize? One million dollars and the title of Champion. 
-                all yours if you could defeat the current title holder. You knew this was 
-                your chance. All you needed was the right companion by your side, and 
-                victory would be within reach.\n\n.
-                """);
-    }
-    public static void ChooseAnimals() { // Assigns the Weapon & Weapon Damage
+    public static void ChooseAnimals() { // Assigns the Pet & Pet Damage
         Dialogue("""
                 ||========================= CHOOSE AN ANIMAL ========================= ||
                 1. Cat                                     6. Cow  
@@ -82,66 +100,50 @@ public class ChooseAndFightAnimals {
         int AnimalChoices = scanner.nextInt();
         switch (AnimalChoices) {
             case 1: // Cat
-                player1.setAll(100, "Cat", 10); // +health, weapon, +weapondamage
+                player1.setAll(100, "Cat", 10); // +health, Pet, +Petdamage
                 break;
             case 2: // Dog
-                player1.setAll(50, "Dog", 25); // +health, weapon, +weapondamage
+                player1.setAll(50, "Dog", 25); // +health, Pet, +Petdamage
                 break;
             case 3: // Squirrel
-                player1.setAll(1, "Squirrel", 1); // +health, weapon, +weapondamage
+                player1.setAll(1, "Squirrel", 1); // +health, Pet, +Petdamage
                 break;
             case 4: // Bird
-                player1.setAll(5, "Bird", 20); // +health, weapon, +weapondamage
+                player1.setAll(5, "Bird", 20); // +health, Pet, +Petdamage
                 break;
             case 5: // Hamster
-                player1.setAll(0, "Hamster", 0); // +health, weapon, +weapondamage 
+                player1.setAll(0, "Hamster", 0); // +health, Pet, +Petdamage 
                 break;
             case 6: // Cow
-                player1.setAll(75, "Cow", 5); // +health, weapon, +weapondamage
+                player1.setAll(75, "Cow", 5); // +health, Pet, +Petdamage
                 break;
             case 7: // Pig
-                player1.setAll(100, "Pig", 10); // +health, weapon, +weapondamage
+                player1.setAll(100, "Pig", 10); // +health, Pet, +Petdamage
                 break;
             case 8: // Chicken
-                player1.setAll(10, "Chicken", 120); // +health, weapon, +weapondamage
+                player1.setAll(10, "Chicken", 120); // +health, Pet, +Petdamage
                 break;
             case 9: // Goat
-                player1.setAll(100, "Goat", 200); // +health, weapon, +weapondamage
+                player1.setAll(100, "Goat", 200); // +health, Pet, +Petdamage
                 break;
             case 10: // Horse
-                player1.setAll(500, "Horse", 100); // +health, weapon, +weapondamage
+                player1.setAll(500, "Horse", 100); // +health, Pet, +Petdamage
                 break;
             default: // Cat
-                player1.setAll(100, "Cat", 10); // +health, weapon, +weapondamage
+                player1.setAll(100, "Cat", 10); // +health, Pet, +Petdamage
                 break;
         }
     }
-    public static void Story1() {
-        Dialogue("""
-                When you saw the poster, you rushed to a nearby pet store in search of a 
-                companion—the next animal champion who could help you win that 
-                million-dollar prize.
-                """);
-    }
-    public static void Story1Secret() {
-        Dialogue("""
-                    You rushed through the store until suddenly, you felt it—your 
-                instincts screaming that you had been chosen by something primordial.
-                A Tyrannosaurus Rex!
-                """);
-        Dialogue("The Tyrannosaurus Rex choose you as his Master!");
-
-        player1.setAll(1000, "Tyrannosaurus Rex", 500); // +health, weapon, +weapondamage
-    }
+    
     // ================================ MISCELLANIOUS METHODS ================================ \\
 
     public static void showStats() {
         Dialogue("""
-                \n|| ================== USER STATS ================== ||
-                Username: """ + UserName + """
-                \nHealth: """ + Health + """
-                \nWeapon: """ + Weapon + """
-                \nDamage: """ + WeaponDamage+ """
+                \n\n|| ================== USER STATS ================== ||
+                Username: """ + player1.getUserName() + """
+                \nHealth: """ + player1.getHealth() + """
+                \nPet: """ + player1.getPet() + """
+                \nDamage: """ + player1.getPetDamage() + """
                 \n=================================================\n               
                 """
                         );

@@ -1,14 +1,14 @@
 public class Player {
     private String UserName = " ";
     private int Health = 100;
-    private String Weapon = " ";
-    private int WeaponDamage = 0;
+    private String Pet = " ";
+    private int PetDamage = 0;
 
     public Player(String n, int h, String w, int wdmg) {
         this.UserName = n;
         this.Health = h;
-        this.Weapon = w;
-        this.WeaponDamage = wdmg;
+        this.Pet = w;
+        this.PetDamage = wdmg;
     }
 
     //=================Setters and Getters=================\\
@@ -18,16 +18,16 @@ public class Player {
     public void setHealth(int health) {
         this.Health += health;
     }
-    public void setWeapon(String weapon) {
-        this.Weapon = weapon;
+    public void setPet(String Pet) {
+        this.Pet = Pet;
     }
-    public void setWeaponDamage(int weaponDamage) {
-        this.WeaponDamage += weaponDamage;
+    public void setPetDamage(int PetDamage) {
+        this.PetDamage += PetDamage;
     }
-    public void setAll(int health, String weapon, int weaponDamage) {
+    public void setAll(int health, String Pet, int PetDamage) {
         this.Health += health;
-        this.Weapon = weapon;
-        this.WeaponDamage += weaponDamage;
+        this.Pet = Pet;
+        this.PetDamage += PetDamage;
     }
 
 
@@ -37,11 +37,11 @@ public class Player {
     public int getHealth() {
         return Health;
     }
-    public String getWeapon() {
-        return Weapon;
+    public String getPet() {
+        return Pet;
     }
-    public int getWeaponDamage() {
-        return WeaponDamage;
+    public int getPetDamage() {
+        return PetDamage;
     }
 
     //=================Other Methods=================\\
