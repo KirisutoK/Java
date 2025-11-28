@@ -90,7 +90,7 @@ public class ChooseAndFightAnimals {
     }
 
     // STORY 3: INTRODUCTION TO OPEN WORLD
-    public static void Story3() {
+    public static void Story3() { /////////////////////////////THIS IS WHERE YOU LEFT OFF
         Dialogue("""
                 \nAs you exit the animal center, you saw the sun blazing down on the bustling city streets.
                 The sounds of honking cars and chattering pedestrians filled the air.
