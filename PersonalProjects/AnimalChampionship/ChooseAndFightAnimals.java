@@ -14,6 +14,7 @@ public class ChooseAndFightAnimals {
     // ========== GLOBAL INSTANCES ========= \\
     static Scanner scanner = new Scanner(System.in);
     static Random random = new Random();
+
     static Player player1 = new Player(" ", 0, " ", 0); // UserName, Health, Pet, PetDamage
 
     // ========== GLOBAL VARIABLES =========== \\
@@ -27,7 +28,7 @@ public class ChooseAndFightAnimals {
         Introduction();
         Story1();
         int Story1SecretChance = random.nextInt(10)+1;
-        if (Story1SecretChance > 2) {
+        if (Story1SecretChance < 2) {
             Story1Secret();
         } else {
             ChooseAnimals();
@@ -36,6 +37,8 @@ public class ChooseAndFightAnimals {
         showStats();
 
         // PHASE 2: Getting Started with Fighting 
+        Story3();
+
     }
 
     // ================================ STORY METHODS ================================ \\
@@ -110,13 +113,13 @@ public class ChooseAndFightAnimals {
                 Story3Forest();
                 break;
             case 2:
-                Story3Park();
+                System.out.println("WIP");
                 break;
             case 3:
-                Story3City();
+                System.out.println("WIP");
                 break;
             default:
-                Story3Forest();
+                System.out.println("WIP");
                 break;
         }
     }
@@ -125,6 +128,46 @@ public class ChooseAndFightAnimals {
                 \nYou decided to head to the Forest to train your pet.
                 The dense trees and chirping birds created a serene atmosphere, perfect for honing your pet's skills.
                 """);
+
+        int RandomForestMob = random.nextInt(7)+1;
+        Mob ForestEnemy;
+
+        switch (RandomForestMob) {
+            case 1:
+                ForestEnemy = new Mob("Wild Wolf", 80, "Wolf", 20); // Name, Health, Pet, PetDamage
+                break;
+            case 2:
+                ForestEnemy = new Mob("Cunning Fox", 50, "Fox", 15);
+                break;
+            case 3:
+                ForestEnemy = new Mob("Grizzly Bear", 150, "Bear", 35);
+                break;
+            case 4:
+                ForestEnemy = new Mob("Golden Eagle", 40, "Eagle", 25);
+                break;
+            case 5:
+                ForestEnemy = new Mob("Wild Rabbit", 20, "Rabbit", 5);
+                break;
+            case 6:
+                ForestEnemy = new Mob("Buck Deer", 70, "Deer", 18);
+                break;
+            case 7:
+                ForestEnemy = new Mob("Masked Raccoon", 45, "Raccoon", 12);
+                break;
+            default:
+                ForestEnemy = new Mob("Wild Wolf", 80, "Wolf", 20);
+                break;
+        }
+
+        boolean playerWon = CombatSystem.startCombat(player1, ForestEnemy);
+        
+        if (playerWon) {
+            Dialogue("\nYou and your " + player1.getPet() + " continue deeper into the forest...");
+            // Continue story here
+        } else {
+            Dialogue("\nYour journey ends here...");
+            // Game over
+        }
     }
 
     // ====================================== SET METHODS ====================================== \\
@@ -158,7 +201,7 @@ public class ChooseAndFightAnimals {
                 \n""");
 
         int AnimalChoices = scanner.nextInt();
-        switch (AnimalChoices) {
+        switch (AnimalChoices) {  ////////THIS IS WHERE YOU LEFT OFF (THE STATS ARE NOT APPLYING PROPERLY)
             case 1: // Cat
                 player1.setAll(100, "Cat", 10); // +health, Pet, +Petdamage
                 break;
