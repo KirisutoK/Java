@@ -29,7 +29,7 @@ public class Vehicle {
         System.out.println("Price: $" + price);
     }
 
-    public void startEngine() {
+    public void startEngine() { // ALL CHILDREN HAS THIS METHOD
         System.out.println(brand + " engine is starting...");
     }
 }
