@@ -5,8 +5,6 @@ public class Array01 {
 
         Array01 solution = new Array01();
         int[] result = solution.twoSum(nums, target);
-
-        System.out.println(result);
     }
 
     public int[] twoSum(int[] nums, int target) {
@@ -16,7 +14,7 @@ public class Array01 {
                     return new int[] { i, j };
                 }
             }
-        }
+        };
         return new int[] {};
     }
 }
