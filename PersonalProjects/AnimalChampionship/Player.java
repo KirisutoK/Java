@@ -3,16 +3,25 @@ import java.util.Random;
 public class Player {
     static Random random = new Random();
 
-    protected String UserName = " ";
-    protected int Health = 0;
-    protected String Pet = " ";
-    protected int PetDamage = 0;
+    protected String UserName = " "; // Player's name
 
-    public Player(String n, int h, String w, int wdmg) {
-        this.UserName = n;
-        this.Health = h;
-        this.Pet = w;
-        this.PetDamage = wdmg;
+    protected int Health = 0; // Player's health
+    protected String Pet = " "; // Player's pet
+    protected int PetDamage = 0; // Player's pet damage
+
+    protected int Level = 1; // Player's level
+    protected int Experience = 0; // Player's experience points
+    protected int ExperienceToNextLevel = 100; // Experience points needed for next level
+    
+    protected int MaxHealth = 0; // Player's maximum health to calculate HP and EXP Calculation
+
+
+    public Player(String n, int h, String w, int wdmg) { // Constructor (Name, Health, Pet, PetDamage)
+        this.UserName = n; // Shows in User Stats 
+        this.Health = h; // Shows in User Stats 
+        this.MaxHealth = h; // For HP and EXP Calculation
+        this.Pet = w; // Shows in User Stats 
+        this.PetDamage = wdmg; // Shows in User Stats 
     }
 
     //=================Setters and Getters=================\\
@@ -30,11 +39,11 @@ public class Player {
     }
     public void setAll(int health, String Pet, int PetDamage) {
         this.Health += health;
+        this.MaxHealth += health;
         this.Pet = Pet;
         this.PetDamage += PetDamage;
     }
-
-
+    //------------------------------------------------\\
     public String getUserName() {
         return UserName;
     }
@@ -46,6 +55,49 @@ public class Player {
     }
     public int getPetDamage() {
         return PetDamage;
+    }
+        public int getLevel() {
+        return Level;
+    }
+    public int getExp() {
+        return  Experience;
+    }
+    public int getExpToNextLevel() {
+        return ExperienceToNextLevel;
+    }
+    public int getMaxHealth() {
+        return MaxHealth;
+    }
+
+    //=================Leveling Methods==============\\
+    public void addExp(int expGained) {
+        this.Experience += expGained;
+        System.out.println("\n✨ Gained " + expGained + " EXP!");
+        
+        // Check if leveled up
+        while (this.Experience >= this.ExperienceToNextLevel) {
+            levelUp();
+        }
+    }
+    
+    // Level up method
+    private void levelUp() {
+        this.Level++;
+        this.Experience -= this.ExperienceToNextLevel;
+        this.ExperienceToNextLevel = (int)(this.ExperienceToNextLevel * 1.5); // Increase exp needed by 50%
+        
+        // Stat increases on level up
+        int healthIncrease = 20;
+        int damageIncrease = 5;
+        
+        this.Health += healthIncrease;
+        this.PetDamage += damageIncrease;
+        
+        System.out.println("\n🎉 LEVEL UP! 🎉");
+        System.out.println("Your " + this.Pet + " is now Level " + this.Level + "!");
+        System.out.println("Health increased by " + healthIncrease + "!");
+        System.out.println("Damage increased by " + damageIncrease + "!");
+        System.out.println("Next level at: " + this.ExperienceToNextLevel + " EXP");
     }
 
     //=================Other Methods=================\\

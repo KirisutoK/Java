@@ -68,7 +68,7 @@ public class ChooseAndFightAnimals {
                 """);
         Dialogue("\nThe Tyrannosaurus Rex choose you as his Master!\n");
 
-        player1.setAll(1000, "Tyrannosaurus Rex", 500); // +health, Pet, +Petdamage
+        player1.setAll(500, "Tyrannosaurus Rex", 200); // +health, Pet, +Petdamage
     }
     public static void Story2() {
         Dialogue("""
@@ -93,7 +93,7 @@ public class ChooseAndFightAnimals {
     }
 
     // STORY 3: INTRODUCTION TO OPEN WORLD
-    public static void Story3() { /////////////////////////////THIS IS WHERE YOU LEFT OFF
+    public static void Story3() { 
         Dialogue("""
                 \nAs you exit the animal center, you saw the sun blazing down on the bustling city streets.
                 The sounds of honking cars and chattering pedestrians filled the air.
@@ -101,10 +101,10 @@ public class ChooseAndFightAnimals {
                 You took a deep breath and decided to think about what your next move would be.
                 """);
 
-        Dialogue("Choose your next move:");
-        Dialogue("1. Head to the Forest to train your pet.");
-        Dialogue("2. Fight with other owners in the Park.");
-        Dialogue("3. Explore the City for hidden challenges.");
+        Dialogue("\nChoose your next move:");
+        Dialogue("\n1. Head to the Forest to train your pet.");
+        Dialogue("\n2. Fight with other owners in the Park.");
+        Dialogue("\n3. Explore the City for hidden challenges.");
 
         int NextMoveChoiceS3 = scanner.nextInt();
 
@@ -126,36 +126,44 @@ public class ChooseAndFightAnimals {
     public static void Story3Forest() {
         Dialogue("""
                 \nYou decided to head to the Forest to train your pet.
-                The dense trees and chirping birds created a serene atmosphere, perfect for honing your pet's skills.
+                \nThe dense trees and chirping birds created a serene atmosphere, perfect for honing your pet's skills.
                 """);
 
         int RandomForestMob = random.nextInt(7)+1;
         Mob ForestEnemy;
-
+        
         switch (RandomForestMob) {
             case 1:
-                ForestEnemy = new Mob("Wild Wolf", 80, "Wolf", 20); // Name, Health, Pet, PetDamage
+                System.out.println("\nA Wild Forest Wolf appears!\n");
+                ForestEnemy = new Mob("Wild Forest Wolf", 80, "Wolf", 20); // Name, Health, Pet, PetDamage
                 break;
             case 2:
-                ForestEnemy = new Mob("Cunning Fox", 50, "Fox", 15);
+                System.out.println("\nA Wild Forest Fox appears!");
+                ForestEnemy = new Mob("Wild Forest Fox", 50, "Fox", 15);
                 break;
             case 3:
-                ForestEnemy = new Mob("Grizzly Bear", 150, "Bear", 35);
+                System.out.println("\nA Wild Grizzly Bear appears!");
+                ForestEnemy = new Mob("Wild Grizzly Bear", 150, "Bear", 100);
                 break;
             case 4:
-                ForestEnemy = new Mob("Golden Eagle", 40, "Eagle", 25);
+                System.out.println("\nA Wild Golden Eagle appears!");
+                ForestEnemy = new Mob("Wild Golden Eagle", 40, "Eagle", 25);
                 break;
             case 5:
+                System.out.println("\nA Wild Rabbit appears!");
                 ForestEnemy = new Mob("Wild Rabbit", 20, "Rabbit", 5);
                 break;
             case 6:
-                ForestEnemy = new Mob("Buck Deer", 70, "Deer", 18);
+                System.out.println("\nA Wild Deer appears!");
+                ForestEnemy = new Mob("Wild Deer", 70, "Deer", 18);
                 break;
             case 7:
-                ForestEnemy = new Mob("Masked Raccoon", 45, "Raccoon", 12);
+                System.out.println("\nA Wild Masked Raccoon appears!");
+                ForestEnemy = new Mob("Wild Masked Raccoon", 45, "Raccoon", 12);
                 break;
             default:
-                ForestEnemy = new Mob("Wild Wolf", 80, "Wolf", 20);
+                System.out.println("\nA Wild Forest Wolf appears!");
+                ForestEnemy = new Mob("Wild Forest Wolf", 80, "Wolf", 20);
                 break;
         }
 
@@ -201,39 +209,39 @@ public class ChooseAndFightAnimals {
                 \n""");
 
         int AnimalChoices = scanner.nextInt();
-        switch (AnimalChoices) {  ////////THIS IS WHERE YOU LEFT OFF (THE STATS ARE NOT APPLYING PROPERLY)
+        switch (AnimalChoices) {  
             case 1: // Cat
-                player1.setAll(100, "Cat", 10); // +health, Pet, +Petdamage
+                player1.setAll(15, "Cat", 5); // +health, Pet, +Petdamage
                 break;
             case 2: // Dog
-                player1.setAll(50, "Dog", 25); // +health, Pet, +Petdamage
+                player1.setAll(20, "Dog", 10); // +health, Pet, +Petdamage
                 break;
             case 3: // Squirrel
-                player1.setAll(1, "Squirrel", 1); // +health, Pet, +Petdamage
+                player1.setAll(2, "Squirrel", 1); // +health, Pet, +Petdamage
                 break;
             case 4: // Crow
-                player1.setAll(5, "Crow", 20); // +health, Pet, +Petdamage
+                player1.setAll(5, "Crow", 7); // +health, Pet, +Petdamage
                 break;
             case 5: // Hamster
-                player1.setAll(0, "Hamster", 0); // +health, Pet, +Petdamage 
+                player1.setAll(1, "Hamster", 1); // +health, Pet, +Petdamage 
                 break;
             case 6: // Cow
-                player1.setAll(75, "Cow", 5); // +health, Pet, +Petdamage
+                player1.setAll(50, "Cow", 1); // +health, Pet, +Petdamage
                 break;
             case 7: // Pig
-                player1.setAll(100, "Pig", 10); // +health, Pet, +Petdamage
+                player1.setAll(65, "Pig", 10); // +health, Pet, +Petdamage
                 break;
             case 8: // Chicken
-                player1.setAll(10, "Chicken", 120); // +health, Pet, +Petdamage
+                player1.setAll(20, "Chicken", 10); // +health, Pet, +Petdamage
                 break;
             case 9: // Goat
-                player1.setAll(100, "Goat", 200); // +health, Pet, +Petdamage
+                player1.setAll(45, "Goat", 40); // +health, Pet, +Petdamage
                 break;
             case 10: // Horse
-                player1.setAll(500, "Horse", 100); // +health, Pet, +Petdamage
+                player1.setAll(70, "Horse", 70); // +health, Pet, +Petdamage
                 break;
             default: // Cat
-                player1.setAll(100, "Cat", 10); // +health, Pet, +Petdamage
+                player1.setAll(15, "Cat", 5); // +health, Pet, +Petdamage
                 break;
         }
     }
@@ -242,6 +250,8 @@ public class ChooseAndFightAnimals {
     public static void showStats() {
         Dialogue("\n\n||================== USER STATS ==================||");
         Dialogue("\n Username:  " + player1.getUserName());
+        Dialogue("\n Level:  " + player1.getLevel());
+        Dialogue("\n EXP:  " + player1.getExp() + " / " + player1.getExpToNextLevel());
         Dialogue("\n Health:  " + player1.getHealth());
         Dialogue("\n Pet:  " + player1.getPet());
         Dialogue("\n PetDamage:  " + player1.getPetDamage());
