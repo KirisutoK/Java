@@ -75,6 +75,7 @@ public class ChooseAndFightAnimals {
                 \nYou stride into the nearest animal center to register your companion.
 
                 The clerk glances at your pet, then slowly looks back at you. A smirk creeps across his face.
+
                 "So... you're entering the Grand Animal Championship?" he asks, barely suppressing a chuckle.
 
                 You meet his gaze with unwavering confidence. "That's right. And I'm not just entering, I'm going to WIN."
@@ -82,6 +83,7 @@ public class ChooseAndFightAnimals {
                 The clerk lets out a mocking laugh. "Well then, best of luck to you both. You're going to need it." 
                 
                 He slides your registration papers across the counter with a dismissive flick of his wrist. 
+                
                 "Try not to get too crushed when reality hits."
 
                 Your jaw tightens, but you refuse to give him the satisfaction of a response.
@@ -95,7 +97,8 @@ public class ChooseAndFightAnimals {
     // STORY 3: INTRODUCTION TO OPEN WORLD
     public static void Story3() { 
         Dialogue("""
-                \nAs you exit the animal center, you saw the sun blazing down on the bustling city streets.
+                \n\nAs you exit the animal center, you saw the sun blazing down on the bustling city streets.
+                
                 The sounds of honking cars and chattering pedestrians filled the air.
 
                 You took a deep breath and decided to think about what your next move would be.
@@ -105,6 +108,9 @@ public class ChooseAndFightAnimals {
         Dialogue("\n1. Head to the Forest to train your pet.");
         Dialogue("\n2. Fight with other owners in the Park.");
         Dialogue("\n3. Explore the City for hidden challenges.");
+
+        System.out.println();
+        System.out.println();
 
         int NextMoveChoiceS3 = scanner.nextInt();
 
@@ -125,7 +131,7 @@ public class ChooseAndFightAnimals {
     }
     public static void Story3Forest() {
         Dialogue("""
-                \nYou decided to head to the Forest to train your pet.
+                \n\nYou decided to head to the Forest to train your pet.
                 \nThe dense trees and chirping birds created a serene atmosphere, perfect for honing your pet's skills.
                 """);
 
@@ -138,31 +144,31 @@ public class ChooseAndFightAnimals {
                 ForestEnemy = new Mob("Wild Forest Wolf", 80, "Wolf", 20); // Name, Health, Pet, PetDamage
                 break;
             case 2:
-                System.out.println("\nA Wild Forest Fox appears!");
+                System.out.println("\nA Wild Forest Fox appears!\n");
                 ForestEnemy = new Mob("Wild Forest Fox", 50, "Fox", 15);
                 break;
             case 3:
-                System.out.println("\nA Wild Grizzly Bear appears!");
+                System.out.println("\nA Wild Grizzly Bear appears!\n");
                 ForestEnemy = new Mob("Wild Grizzly Bear", 150, "Bear", 100);
                 break;
             case 4:
-                System.out.println("\nA Wild Golden Eagle appears!");
+                System.out.println("\nA Wild Golden Eagle appears!\n");
                 ForestEnemy = new Mob("Wild Golden Eagle", 40, "Eagle", 25);
                 break;
             case 5:
-                System.out.println("\nA Wild Rabbit appears!");
+                System.out.println("\nA Wild Rabbit appears!\n");
                 ForestEnemy = new Mob("Wild Rabbit", 20, "Rabbit", 5);
                 break;
             case 6:
-                System.out.println("\nA Wild Deer appears!");
+                System.out.println("\nA Wild Deer appears!\n");
                 ForestEnemy = new Mob("Wild Deer", 70, "Deer", 18);
                 break;
             case 7:
-                System.out.println("\nA Wild Masked Raccoon appears!");
+                System.out.println("\nA Wild Masked Raccoon appears!\n");
                 ForestEnemy = new Mob("Wild Masked Raccoon", 45, "Raccoon", 12);
                 break;
             default:
-                System.out.println("\nA Wild Forest Wolf appears!");
+                System.out.println("\nA Wild Forest Wolf appears!\n");
                 ForestEnemy = new Mob("Wild Forest Wolf", 80, "Wolf", 20);
                 break;
         }
@@ -170,8 +176,9 @@ public class ChooseAndFightAnimals {
         boolean playerWon = CombatSystem.startCombat(player1, ForestEnemy);
         
         if (playerWon) {
-            Dialogue("\nYou and your " + player1.getPet() + " continue deeper into the forest...");
-            // Continue story here
+            Dialogue("Choose your Next Move:");
+            Dialogue("\n1. Continue Training in the Forest.");
+            Dialogue("\n2. Return to the City.");
         } else {
             Dialogue("\nYour journey ends here...");
             // Game over

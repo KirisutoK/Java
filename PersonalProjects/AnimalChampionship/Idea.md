@@ -18,6 +18,8 @@ IDEAS:
         2. 
     >Pet Weakness & Effectiveness
     >Change Pet Name Option
+    >Forest Difficulty Mob Encounters
+        1. The First time the user enters the forest, lessen the chance of pet with huge Power to be encountered
 
 BUGS:
 -EXP Gained is Negative

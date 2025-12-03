@@ -17,12 +17,10 @@ public class CombatSystem {
     
     // Method to show the introduction
     public static void showIntroduction(Player player, Mob enemy) {
-        System.out.println("╔════════════════════════════════╗");
-        System.out.println("      A " + enemy.getUserName() + " Appears!");
-        System.out.println("╚════════════════════════════════╝");
+        System.out.println("[[[ " + player.getUserName() + " V.S. " + enemy.getUserName() + " ]]]");
         System.out.println();
-        System.out.println("Your Champion: " + player.getPet() + " (HP: " + player.getHealth() + ") (" + player.getPetDamage() + " DMG)"); //Your Champion: Dog (HP: 100) (20 DMG)
-        System.out.println("Enemy: " + enemy.getPet() + " (HP: " + enemy.getHealth() + ") (" + enemy.getPetDamage() + " DMG)");
+        System.out.println(player.getUserName() + ": " + player.getPet() + " (HP: " + player.getHealth() + ") (" + player.getPetDamage() + " DMG)"); //Your Champion: Dog (HP: 100) (20 DMG)
+        System.out.println(enemy.getUserName() + ": " + enemy.getPet() + " (HP: " + enemy.getHealth() + ") (" + enemy.getPetDamage() + " DMG)");
         System.out.println();
     }
     
@@ -30,7 +28,7 @@ public class CombatSystem {
     public static void waitForPlayerToEngage() {
         System.out.println("Press Enter to ENGAGE FIGHT...");
         scanner.nextLine();
-        System.out.println("⚔️  THE FIGHT BEGINS! ⚔️");
+        System.out.println("{  THE FIGHT BEGINS! }");
         System.out.println();
         pause(1500);
     }
@@ -65,7 +63,7 @@ public class CombatSystem {
     public static boolean isEnemyDefeated(Mob enemy) {
         if (enemy.getHealth() <= 0) {
             System.out.println();
-            System.out.println("💀 The " + enemy.getPet() + " has been defeated!");
+            System.out.println("[:D] The " + enemy.getPet() + " has been defeated!");
             return true;
         }
         return false;
@@ -75,7 +73,7 @@ public class CombatSystem {
     public static boolean isPlayerDefeated(Player player) {
         if (player.getHealth() <= 0) {
             System.out.println();
-            System.out.println("💀 Your " + player.getPet() + " has been defeated!");
+            System.out.println("[D:] Your " + player.getPet() + " has been defeated!");
             return true;
         }
         return false;
@@ -84,8 +82,8 @@ public class CombatSystem {
     // Method to display current HP status
     public static void displayStatus(Player player, Mob enemy) {
         System.out.println();
-        System.out.println("📊 " + player.getPet() + " HP: " + player.getHealth());
-        System.out.println("📊 " + enemy.getPet() + " HP: " + enemy.getHealth());
+        System.out.println(".: " + player.getPet() + " HP: " + player.getHealth());
+        System.out.println(".: " + enemy.getPet() + " HP: " + enemy.getHealth());
         System.out.println();
         pause(1500);
     }
@@ -133,7 +131,7 @@ public class CombatSystem {
         System.out.println("        FIGHT RESULTS");
         System.out.println("════════════════════════════════");
         System.out.println();
-        System.out.println("🏆 VICTORY! 🏆");
+        System.out.println("|--- { VICTORY! } ---|");
         System.out.println("Your " + player.getPet() + " wins with " + player.getHealth() + " HP remaining!");
         System.out.println();
 
@@ -156,7 +154,7 @@ public class CombatSystem {
         System.out.println("        FIGHT RESULTS");
         System.out.println("════════════════════════════════");
         System.out.println();
-        System.out.println("💔 DEFEAT! 💔");
+        System.out.println("|--- { DEFEAT! } ---|");
         System.out.println("Your " + player.getPet() + " was defeated!");
         System.out.println("The " + enemy.getPet() + " had " + enemy.getHealth() + " HP remaining.");
         System.out.println();
