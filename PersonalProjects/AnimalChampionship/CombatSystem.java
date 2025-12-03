@@ -82,8 +82,8 @@ public class CombatSystem {
     // Method to display current HP status
     public static void displayStatus(Player player, Mob enemy) {
         System.out.println();
-        System.out.println(".: " + player.getPet() + " HP: " + player.getHealth());
-        System.out.println(".: " + enemy.getPet() + " HP: " + enemy.getHealth());
+        System.out.println(".: " + player.getPet() + " HP {" + player.getHealth() + "} ");
+        System.out.println(".: " + enemy.getPet() + " HP {" + enemy.getHealth() + "} ");
         System.out.println();
         pause(1500);
     }
@@ -132,8 +132,8 @@ public class CombatSystem {
         System.out.println("════════════════════════════════");
         System.out.println();
         System.out.println("|--- { VICTORY! } ---|");
-        System.out.println("Your " + player.getPet() + " wins with " + player.getHealth() + " HP remaining!");
         System.out.println();
+        System.out.println("Your " + player.getPet() + " wins with " + player.getHealth() + " HP remaining!");
 
          // Award EXP based on enemy difficulty
         int expGained = calculateExpReward(enemy);

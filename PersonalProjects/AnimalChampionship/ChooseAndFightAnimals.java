@@ -116,6 +116,10 @@ public class ChooseAndFightAnimals {
 
         switch (NextMoveChoiceS3) {
             case 1:
+                Dialogue("""
+                        \nYou decided to head to the Forest to train your pet.
+                        \nThe dense trees and chirping birds created a serene atmosphere, perfect for honing your pet's skills.
+                        """);
                 Story3Forest();
                 break;
             case 2:
@@ -130,11 +134,6 @@ public class ChooseAndFightAnimals {
         }
     }
     public static void Story3Forest() {
-        Dialogue("""
-                \n\nYou decided to head to the Forest to train your pet.
-                \nThe dense trees and chirping birds created a serene atmosphere, perfect for honing your pet's skills.
-                """);
-
         int RandomForestMob = random.nextInt(7)+1;
         Mob ForestEnemy;
         
@@ -175,10 +174,29 @@ public class ChooseAndFightAnimals {
 
         boolean playerWon = CombatSystem.startCombat(player1, ForestEnemy);
         
-        if (playerWon) {
-            Dialogue("Choose your Next Move:");
+        if (playerWon) { // If Player Wins
+            showStats();
+            Dialogue("\n\nChoose your Next Move:");
             Dialogue("\n1. Continue Training in the Forest.");
             Dialogue("\n2. Return to the City.");
+
+            int NextMoveChoiceS3Forest = scanner.nextInt();
+
+            if (NextMoveChoiceS3Forest == 1) {
+                Dialogue("You went deeper in the woods");
+                Dialogue(". . . . . . . . . . . . . . .");
+
+                Story3Forest(); // Brings him back to the forest
+            }
+            else {
+                Dialogue("You headed back to the city. Choose your next move:"); // if player does not choose 1. (could be 2-Infinite)
+                Dialogue("\n1. Fight with other owners in the Park.");
+                Dialogue("\n2. Explore the City.");
+                Dialogue("\n3. Visit the Animal Center to heal your pet.");
+                Dialogue("\n4. Check your Stats.");
+
+                int NextMoveChoiceS3City = scanner.nextInt();
+            }
         } else {
             Dialogue("\nYour journey ends here...");
             // Game over
@@ -255,7 +273,7 @@ public class ChooseAndFightAnimals {
     
     // ================================ MISCELLANIOUS METHODS ================================ \\
     public static void showStats() {
-        Dialogue("\n\n||================== USER STATS ==================||");
+        Dialogue("\n||================== USER STATS ==================||");
         Dialogue("\n Username:  " + player1.getUserName());
         Dialogue("\n Level:  " + player1.getLevel());
         Dialogue("\n EXP:  " + player1.getExp() + " / " + player1.getExpToNextLevel());
