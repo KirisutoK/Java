@@ -21,7 +21,9 @@ IDEAS:
         1. The First time the user enters the forest, lessen the chance of pet with huge Power to be encountered
 
 BUGS:
--EXP Gained Print has no Dialogue Effect
+
+WHAT TO DO:
+-> Create methods for main option (City, Forest, Park)
 
 BALANCING:
 Small Sized Animals:

@@ -205,6 +205,9 @@ public class ChooseAndFightAnimals {
             // Game over
         }
     }
+    public static void FirstOptions() {
+        
+    }
 
     // ====================================== SET METHODS ====================================== \\
     public static void getNameAndDialogueSpeed() {
@@ -281,7 +284,7 @@ public class ChooseAndFightAnimals {
         Dialogue("\n Username:  " + player1.getUserName());
         Dialogue("\n Level:  " + player1.getLevel());
         Dialogue("\n EXP:  " + player1.getExp() + " / " + player1.getExpToNextLevel());
-        Dialogue("\n Health:  " + player1.getHealth());
+        Dialogue("\n Health:  " + player1.getHealth() + "/ " + player1.getMaxHealth());
         Dialogue("\n Pet:  " + player1.getPet());
         Dialogue("\n PetDamage:  " + player1.getPetDamage());
         Dialogue("\n=================================================");

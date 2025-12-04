@@ -91,6 +91,8 @@ public class Player {
         // Stat increases on level up
         int healthIncrease = 20;
         int damageIncrease = 5;
+
+        this.MaxHealth += healthIncrease;
         
         this.Health += healthIncrease;
         this.PetDamage += damageIncrease;
