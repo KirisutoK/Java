@@ -147,7 +147,7 @@ public class Main {
     public static void Story3Park() {
         
     }
-    public static void Story3Forest() {
+    public static void Story3Forest() { /////////////////////YOU LEFT HERE/////////////////////
         int RandomForestMob = random.nextInt(7)+1;
         Mob ForestEnemy;
         
