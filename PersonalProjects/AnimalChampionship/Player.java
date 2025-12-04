@@ -15,6 +15,8 @@ public class Player {
     
     protected int MaxHealth = 0; // Player's maximum health to calculate HP and EXP Calculation
 
+    protected int DialogueSpeed = 0; // Speed of dialogue display (not used in current code)
+
 
     public Player(String n, int h, String w, int wdmg) { // Constructor (Name, Health, Pet, PetDamage)
         this.UserName = n; // Shows in User Stats 
@@ -30,6 +32,9 @@ public class Player {
     }
     public void setHealth(int health) {
         this.Health += health;
+    }
+    public void setMaxHealth(int maxHealth) {
+        this.MaxHealth += maxHealth;
     }
     public void setPet(String Pet) {
         this.Pet = Pet;
@@ -135,7 +140,7 @@ public class Player {
                 String[] horseAttacks = {"kicks", "tramples", "bites", "rears and strikes at", "charges at", "bucks at", "neighs and stomps on"};
                 return horseAttacks[random.nextInt(horseAttacks.length)];
             case "Tyrannosaurus Rex":
-                String[] trexAttacks = {"chomps on", "tail-whips", "stomps on", "roars and bites", "crushes with jaws", "slams into"};
+                String[] trexAttacks = {"chomps on", "tail-whips", "stomps on", "roars and bites", "crushes with jaws at", "slams into"};
                 return trexAttacks[random.nextInt(trexAttacks.length)];
             default:
                 String[] defaultAttacks = {"attacks", "strikes at", "hits", "charges at", "lunges at"};

@@ -1,4 +1,4 @@
-|| YOU LEFT OFF FROM COMBAT SYSTEM>getMaxHealth | You were working on MaxHealth inorder to fix the negative exp gained bug || 
+|| || 
 
 // INTRODUCTION
 // 1. Ask the user for its name
@@ -22,7 +22,8 @@ IDEAS:
         1. The First time the user enters the forest, lessen the chance of pet with huge Power to be encountered
 
 BUGS:
--EXP Gained is Negative
+-Health restores fully after each fight
+-EXP Gained Print has no Dialogue Effect
 
 BALANCING:
 Small Sized Animals:

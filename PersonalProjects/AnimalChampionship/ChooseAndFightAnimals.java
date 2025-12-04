@@ -64,9 +64,9 @@ public class ChooseAndFightAnimals {
         Dialogue("""
                     \nYou rushed through the store until suddenly, you felt it, your 
                 instincts screaming that you had been chosen by something primordial.
-                A Tyrannosaurus Rex! (2/10 Chance)
+                A [Tyrannosaurus Rex]! (2/10 Chance)
                 """);
-        Dialogue("\nThe Tyrannosaurus Rex choose you as his Master!\n");
+        Dialogue("\nThe [Tyrannosaurus Rex] choose you as his Master!\n");
 
         player1.setAll(500, "Tyrannosaurus Rex", 200); // +health, Pet, +Petdamage
     }
@@ -139,36 +139,36 @@ public class ChooseAndFightAnimals {
         
         switch (RandomForestMob) {
             case 1:
-                System.out.println("\nA Wild Forest Wolf appears!\n");
-                ForestEnemy = new Mob("Wild Forest Wolf", 80, "Wolf", 20); // Name, Health, Pet, PetDamage
+                System.out.println("\nA Wild Wolf appears!\n");
+                ForestEnemy = new Mob("The Forest", 80, "Wolf", 20); // UserName, Health, PetName, PetDamage
                 break;
             case 2:
-                System.out.println("\nA Wild Forest Fox appears!\n");
-                ForestEnemy = new Mob("Wild Forest Fox", 50, "Fox", 15);
+                System.out.println("\nA Wild Fox appears!\n");
+                ForestEnemy = new Mob("The Forest", 50, "Fox", 15);
                 break;
             case 3:
                 System.out.println("\nA Wild Grizzly Bear appears!\n");
-                ForestEnemy = new Mob("Wild Grizzly Bear", 150, "Bear", 100);
+                ForestEnemy = new Mob("The Forest", 150, "Bear", 100);
                 break;
             case 4:
                 System.out.println("\nA Wild Golden Eagle appears!\n");
-                ForestEnemy = new Mob("Wild Golden Eagle", 40, "Eagle", 25);
+                ForestEnemy = new Mob("The Forest", 40, "Eagle", 25);
                 break;
             case 5:
                 System.out.println("\nA Wild Rabbit appears!\n");
-                ForestEnemy = new Mob("Wild Rabbit", 20, "Rabbit", 5);
+                ForestEnemy = new Mob("The Forest", 20, "Rabbit", 5);
                 break;
             case 6:
                 System.out.println("\nA Wild Deer appears!\n");
-                ForestEnemy = new Mob("Wild Deer", 70, "Deer", 18);
+                ForestEnemy = new Mob("The Forest", 70, "Deer", 18);
                 break;
             case 7:
                 System.out.println("\nA Wild Masked Raccoon appears!\n");
-                ForestEnemy = new Mob("Wild Masked Raccoon", 45, "Raccoon", 12);
+                ForestEnemy = new Mob("The Forest", 45, "Raccoon", 12);
                 break;
             default:
-                System.out.println("\nA Wild Forest Wolf appears!\n");
-                ForestEnemy = new Mob("Wild Forest Wolf", 80, "Wolf", 20);
+                System.out.println("\nA Wild Wolf appears!\n");
+                ForestEnemy = new Mob("The Forest", 80, "Wolf", 20);
                 break;
         }
 
@@ -178,13 +178,16 @@ public class ChooseAndFightAnimals {
             showStats();
             Dialogue("\n\nChoose your Next Move:");
             Dialogue("\n1. Continue Training in the Forest.");
-            Dialogue("\n2. Return to the City.");
+            Dialogue("\n2. Return to the City.\n");
+
+            // Blank Lines for Readability
+            System.out.println();
 
             int NextMoveChoiceS3Forest = scanner.nextInt();
 
             if (NextMoveChoiceS3Forest == 1) {
-                Dialogue("You went deeper in the woods");
-                Dialogue(". . . . . . . . . . . . . . .");
+                Dialogue("\nYou went deeper in the woods");
+                Dialogue("\n. . . . . . . . . . . . . . .\n");
 
                 Story3Forest(); // Brings him back to the forest
             }
@@ -221,6 +224,7 @@ public class ChooseAndFightAnimals {
 
         int[] DialogueSpeedArray = {1, 2, 3, 0}; // Choices
         DialogueSpeed = DialogueSpeedArray[DialogueSpeedChoice-1]; // -1 in order to meet the required slot
+        CombatSystem.setDialogueSpeed(DialogueSpeed);
     }
     public static void ChooseAnimals() { // Assigns the Pet & Pet Damage
         Dialogue("""

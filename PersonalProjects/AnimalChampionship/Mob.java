@@ -1,7 +1,7 @@
 public class Mob extends Player {
     
     public Mob(String n, int h, String w, int wdmg) {
-        super(n, h, w, wdmg);
+        super(n, h, w, wdmg); 
     }
     
     // Override getAttackMessage for mob-specific attacks
