@@ -146,10 +146,6 @@ public class CombatSystem {
         Dialogue("\n|--- { VICTORY! } ---|");
         Dialogue("\n");
         Dialogue("\nYour " + player.getPet() + " wins with " + player.getHealth() + "/" + player.getMaxHealth() + " HP remaining!\n");
-
-         // Award EXP based on enemy difficulty
-        int expGained = calculateExpReward();
-        player.addExp(expGained);
     }
     // Method to show defeat message
     public static void showDefeat(Player player, Mob enemy) {
@@ -169,7 +165,7 @@ public class CombatSystem {
 
     //=================== EXP CALCULATION ===================\\
     // Calculate EXP reward based on enemy stats
-    private static int calculateExpReward() {
+    public static int calculateExpReward() {
         // Base EXP is related to enemy's power
         int baseExp = (EnemyMaxHealth / 2) + (EnemyMaxDamage * 2);
         return baseExp;

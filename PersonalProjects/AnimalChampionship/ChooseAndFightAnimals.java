@@ -104,6 +104,10 @@ public class ChooseAndFightAnimals {
                 You took a deep breath and decided to think about what your next move would be.
                 """);
 
+        Story3Options();
+    }
+
+    public static void Story3Options() {
         Dialogue("\nChoose your next move:");
         Dialogue("\n1. Head to the Forest to train your pet.");
         Dialogue("\n2. Fight with other owners in the Park.");
@@ -118,12 +122,19 @@ public class ChooseAndFightAnimals {
             case 1:
                 Dialogue("""
                         \nYou decided to head to the Forest to train your pet.
-                        \nThe dense trees and chirping birds created a serene atmosphere, perfect for honing your pet's skills.
+
+                        The dense trees and chirping birds created a serene atmosphere, perfect for honing your pet's skills.
                         """);
                 Story3Forest();
                 break;
             case 2:
-                System.out.println("WIP");
+                Dialogue("""
+                \nYou went to the City Park.
+
+                The bustling streets and towering skyscrapers offered endless opportunities for adventure and growth.
+                """);
+
+                Story3Park();
                 break;
             case 3:
                 System.out.println("WIP");
@@ -132,6 +143,9 @@ public class ChooseAndFightAnimals {
                 System.out.println("WIP");
                 break;
         }
+    }
+    public static void Story3Park() {
+        
     }
     public static void Story3Forest() {
         int RandomForestMob = random.nextInt(7)+1;
@@ -175,6 +189,9 @@ public class ChooseAndFightAnimals {
         boolean playerWon = CombatSystem.startCombat(player1, ForestEnemy);
         
         if (playerWon) { // If Player Wins
+            int expGained = CombatSystem.calculateExpReward();
+            player1.addExp(expGained);
+
             showStats();
             Dialogue("\n\nChoose your Next Move:");
             Dialogue("\n1. Continue Training in the Forest.");
@@ -192,21 +209,12 @@ public class ChooseAndFightAnimals {
                 Story3Forest(); // Brings him back to the forest
             }
             else {
-                Dialogue("You headed back to the city. Choose your next move:"); // if player does not choose 1. (could be 2-Infinite)
-                Dialogue("\n1. Fight with other owners in the Park.");
-                Dialogue("\n2. Explore the City.");
-                Dialogue("\n3. Visit the Animal Center to heal your pet.");
-                Dialogue("\n4. Check your Stats.");
-
-                int NextMoveChoiceS3City = scanner.nextInt();
+               Story3Options();
             }
         } else {
             Dialogue("\nYour journey ends here...");
             // Game over
         }
-    }
-    public static void FirstOptions() {
-        
     }
 
     // ====================================== SET METHODS ====================================== \\
@@ -284,7 +292,7 @@ public class ChooseAndFightAnimals {
         Dialogue("\n Username:  " + player1.getUserName());
         Dialogue("\n Level:  " + player1.getLevel());
         Dialogue("\n EXP:  " + player1.getExp() + " / " + player1.getExpToNextLevel());
-        Dialogue("\n Health:  " + player1.getHealth() + "/ " + player1.getMaxHealth());
+        Dialogue("\n Health:  " + player1.getHealth() + " / " + player1.getMaxHealth());
         Dialogue("\n Pet:  " + player1.getPet());
         Dialogue("\n PetDamage:  " + player1.getPetDamage());
         Dialogue("\n=================================================");

@@ -8,7 +8,6 @@
 // 4. There are 5 stages
 
 IDEAS: 
-    >Coin System/Shop
     >Pet Characteristics
     >Pet Traits
     >Pet Skill/Move Buffs
@@ -23,7 +22,7 @@ IDEAS:
 BUGS:
 
 WHAT TO DO:
--> Create methods for main option (City, Forest, Park)
+-> Add an option before fighting: (Fight or Run(Chances are based on the gap of Player Power and Enemy Power))
 
 BALANCING:
 Small Sized Animals:
