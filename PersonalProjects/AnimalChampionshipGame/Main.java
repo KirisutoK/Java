@@ -10,7 +10,7 @@
 import java.util.Scanner;
 import java.util.Random;
 
-public class ChooseAndFightAnimals {
+public class Main {
     // ========== GLOBAL INSTANCES ========= \\
     static Scanner scanner = new Scanner(System.in);
     static Random random = new Random();

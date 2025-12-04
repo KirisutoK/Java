@@ -13,6 +13,8 @@ public class CombatSystem {
     // Dialogue Speed
     static int DialogueSpeed = 1; // Default speed
     
+
+    //=================== INTRODUCTIONS ===================\\
     // Method to show the introduction
     public static void showIntroduction(Player player, Mob enemy) {
         Dialogue("\n[[[ " + player.getUserName() + " V.S. " + enemy.getUserName() + " ]]]");
@@ -24,14 +26,79 @@ public class CombatSystem {
         EnemyMaxDamage = enemy.getPetDamage();
         EnemyMaxHealth = enemy.getHealth();
     }
-    // Method to wait for player to engage
-    public static void waitForPlayerToEngage() {
-        Dialogue("\nPress Enter to ENGAGE FIGHT...");
-        scanner.nextLine();
-        Dialogue("\n{  THE FIGHT BEGINS! }");
+    
+    // Method to wait for player to choose Fight or Run
+    public static boolean waitForPlayerDecision(Player player, Mob enemy) {
+        int runChance = calculateRunChance(player, enemy);
+        
+        Dialogue("\n╔════════════════════════════════════╗");
+        Dialogue("\n║   WHAT WILL YOU DO?                ║");
+        Dialogue("\n╚════════════════════════════════════╝");
         Dialogue("\n");
+        Dialogue("\n[ENTER] - Fight");
+        Dialogue("\n[BACKSPACE] - Run (" + runChance + "% Chance)");
+        Dialogue("\n");
+        System.out.print("\nYour choice: ");
+        
+        String input = scanner.nextLine().trim();
+        
+        // Check if player wants to run (backspace key or typing "run")
+        if (input.isEmpty() || input.equalsIgnoreCase("run") || input.equalsIgnoreCase("r")) {
+            // Attempt to run
+            return attemptRun(player, enemy, runChance);
+        } else {
+            // Fight
+            Dialogue("\n{  THE FIGHT BEGINS! }");
+            Dialogue("\n");
+            return true; // Continue to fight
+        }
     }
     
+    // Method to attempt running away
+    public static boolean attemptRun(Player player, Mob enemy, int runChance) {
+        Dialogue("\n");
+        Dialogue("\nYou attempt to run away...");
+        Dialogue("\n");
+        
+        int roll = random.nextInt(100) + 1; // Roll 1-100
+        
+        if (roll <= runChance) {
+            // Successfully ran away
+            Dialogue("\n✓ You successfully escaped!");
+            Dialogue("\nYour " + player.getPet() + " managed to get away safely!");
+            return false; // Don't fight
+        } else {
+            // Failed to run away
+            Dialogue("\n✗ You couldn't escape!");
+            Dialogue("\nThe " + enemy.getPet() + " blocks your path!");
+            Dialogue("\n");
+            Dialogue("\n{  THE FIGHT BEGINS! }");
+            Dialogue("\n");
+            return true; // Must fight
+        }
+    }
+    // Method to calculate run chance
+    public static int calculateRunChance(Player player, Mob enemy) {
+        int playerPower = player.getHealth() + player.getPetDamage();
+        int enemyPower = enemy.getHealth() + enemy.getPetDamage();
+        
+        int runChance;
+        
+        if (playerPower >= enemyPower) {
+            // Player is stronger or equal - higher chance to run
+            int powerDifference = playerPower - enemyPower;
+            runChance = 70 + (powerDifference / 10); // Base 70% + bonus
+            if (runChance > 95) runChance = 95; // Cap at 95%
+        } else {
+            // Player is weaker - lower chance to run
+            int powerDifference = enemyPower - playerPower;
+            runChance = 70 - (powerDifference / 10); // Base 70% - penalty
+            if (runChance < 20) runChance = 20; // Minimum 20% chance
+        }
+        
+        return runChance;
+    }
+    //=======================================================\\
 
 
 
@@ -62,7 +129,14 @@ public class CombatSystem {
     // Main combat loop
     public static boolean startCombat(Player player, Mob enemy) {
         showIntroduction(player, enemy);
-        waitForPlayerToEngage();
+        
+        // Ask player if they want to fight or run
+        boolean shouldFight = waitForPlayerDecision(player, enemy);
+        
+        // If player successfully ran away, return null or special value
+        if (!shouldFight) {
+            return false; // Player escaped, no winner
+        }
         
         int round = 1;
         
