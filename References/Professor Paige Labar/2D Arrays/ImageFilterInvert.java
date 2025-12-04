@@ -11,7 +11,7 @@ public class ImageFilterInvert {
     public static void main(String[] args) {
         try {
             // 1. READ THE IMAGE
-            File inputFile = new File("src/sunflowers.png");
+            File inputFile = new File("C:\\Users\\kiris\\OneDrive - Finger Lakes Community College\\Documents\\FLCC\\Coding\\Java\\References\\Professor Paige Labar\\2D Arrays\\sunflowers.png");
             BufferedImage img = ImageIO.read(inputFile);
 
             // Get dimensions (The 2D Array limits)
