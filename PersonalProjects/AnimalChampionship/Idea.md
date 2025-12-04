@@ -1,4 +1,4 @@
-|| || 
+|| TEST TEST TEST || 
 
 // INTRODUCTION
 // 1. Ask the user for its name
