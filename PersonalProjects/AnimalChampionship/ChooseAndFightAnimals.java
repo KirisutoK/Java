@@ -277,7 +277,7 @@ public class ChooseAndFightAnimals {
     
     // ================================ MISCELLANIOUS METHODS ================================ \\
     public static void showStats() {
-        Dialogue("\n||================== USER STATS ==================||");
+        Dialogue("\n\n||================== USER STATS ==================||");
         Dialogue("\n Username:  " + player1.getUserName());
         Dialogue("\n Level:  " + player1.getLevel());
         Dialogue("\n EXP:  " + player1.getExp() + " / " + player1.getExpToNextLevel());

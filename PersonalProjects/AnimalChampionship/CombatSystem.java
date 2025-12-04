@@ -145,7 +145,7 @@ public class CombatSystem {
         Dialogue("\n");
         Dialogue("\n|--- { VICTORY! } ---|");
         Dialogue("\n");
-        Dialogue("\nYour " + player.getPet() + " wins with " + player.getHealth() + "/" + player.getMaxHealth() + " HP remaining!");
+        Dialogue("\nYour " + player.getPet() + " wins with " + player.getHealth() + "/" + player.getMaxHealth() + " HP remaining!\n");
 
          // Award EXP based on enemy difficulty
         int expGained = calculateExpReward();
@@ -159,8 +159,8 @@ public class CombatSystem {
         Dialogue("\n════════════════════════════════");
         Dialogue("\n");
         Dialogue("\n|--- { DEFEAT! } ---|");
-        Dialogue("\nYour " + player.getPet() + " was defeated!");
-        Dialogue("\nThe " + enemy.getPet() + " had " + enemy.getHealth() + "/" + enemy.getMaxHealth() + " HP remaining.");
+        Dialogue("\n\nYour " + player.getPet() + " was defeated!");
+        Dialogue("\n\nThe " + enemy.getPet() + " had " + enemy.getHealth() + "/" + enemy.getMaxHealth() + " HP remaining.");
         Dialogue("\n");
     }
     //=======================================================\\

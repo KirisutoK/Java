@@ -74,7 +74,7 @@ public class Player {
     //=================Leveling Methods==============\\
     public void addExp(int expGained) {
         this.Experience += expGained;
-        System.out.println("\n+ Gained " + expGained + " EXP!");
+        Dialogue("\n+ Gained " + expGained + " EXP!");
         
         // Check if leveled up
         while (this.Experience >= this.ExperienceToNextLevel) {
@@ -95,11 +95,11 @@ public class Player {
         this.Health += healthIncrease;
         this.PetDamage += damageIncrease;
         
-        System.out.println("\n[" + getLevel() +"] LEVEL UP! " + "[" + getLevel() +"]");
-        System.out.println("Your " + this.Pet + " is now Level " + this.Level + "!");
-        System.out.println("Health increased by " + healthIncrease + "!");
-        System.out.println("Damage increased by " + damageIncrease + "!");
-        System.out.println("Next level at: " + this.ExperienceToNextLevel + " EXP");
+        Dialogue("\n\n[" + getLevel() +"] LEVEL UP! " + "[" + getLevel() +"]");
+        Dialogue("\n\nYour " + this.Pet + " is now Level " + this.Level + "!");
+        Dialogue("\nHealth increased by " + healthIncrease + "!");
+        Dialogue("\nDamage increased by " + damageIncrease + "!");
+        Dialogue("\nNext level at: " + this.ExperienceToNextLevel + " EXP");
     }
 
     //=================Other Methods=================\\
