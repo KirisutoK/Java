@@ -15,9 +15,6 @@ public class Player {
     
     protected int MaxHealth = 0; // Player's maximum health to calculate HP and EXP Calculation
 
-    protected int DialogueSpeed = 0; // Speed of dialogue display (not used in current code)
-
-
     public Player(String n, int h, String w, int wdmg) { // Constructor (Name, Health, Pet, PetDamage)
         this.UserName = n; // Shows in User Stats 
         this.Health = h; // Shows in User Stats 
@@ -146,6 +143,18 @@ public class Player {
                 String[] defaultAttacks = {"attacks", "strikes at", "hits", "charges at", "lunges at"};
                 return defaultAttacks[random.nextInt(defaultAttacks.length)];
         }
+    }
+
+    public static String Dialogue(String Dialogue) { // Prints each word by word with a delay making it look like a typing effect
+        try { 
+            for (char Characters : Dialogue.toCharArray()) {
+                System.out.print(Characters);
+                Thread.sleep(25 * 1);
+            }
+        } catch (InterruptedException e) {
+            Dialogue("An error occurred during loading.");
+        }
+        return Dialogue;
     }
 }
 

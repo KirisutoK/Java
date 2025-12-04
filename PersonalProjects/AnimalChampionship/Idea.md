@@ -15,14 +15,12 @@ IDEAS:
         1.Refine Random Attack Messages to be modified
             -Every time a speficic attack messages is called. it does something.
             -Change a specific attack message randomness to be either 10% for that or 50% for this.
-        2. 
     >Pet Weakness & Effectiveness
     >Change Pet Name Option
     >Forest Difficulty Mob Encounters
         1. The First time the user enters the forest, lessen the chance of pet with huge Power to be encountered
 
 BUGS:
--Health restores fully after each fight
 -EXP Gained Print has no Dialogue Effect
 
 BALANCING:
