@@ -26,7 +26,6 @@ public class CombatSystem {
         EnemyMaxDamage = enemy.getPetDamage();
         EnemyMaxHealth = enemy.getHealth();
     }
-    
     // Method to wait for player to choose Fight or Run
     public static boolean waitForPlayerDecision(Player player, Mob enemy) {
         int runChance = calculateRunChance(player, enemy);
@@ -35,15 +34,15 @@ public class CombatSystem {
         Dialogue("\n║   WHAT WILL YOU DO?                ║");
         Dialogue("\n╚════════════════════════════════════╝");
         Dialogue("\n");
-        Dialogue("\n[ENTER] - Fight");
-        Dialogue("\n[BACKSPACE] - Run (" + runChance + "% Chance)");
+        Dialogue("\n[1] - Fight");
+        Dialogue("\n[2] - Run (" + runChance + "% Chance)");
         Dialogue("\n");
         System.out.print("\nYour choice: ");
         
-        String input = scanner.nextLine().trim();
+        int input = scanner.nextInt();
         
         // Check if player wants to run (backspace key or typing "run")
-        if (input.isEmpty() || input.equalsIgnoreCase("run") || input.equalsIgnoreCase("r")) {
+        if (input == 2) {
             // Attempt to run
             return attemptRun(player, enemy, runChance);
         } else {
@@ -53,7 +52,6 @@ public class CombatSystem {
             return true; // Continue to fight
         }
     }
-    
     // Method to attempt running away
     public static boolean attemptRun(Player player, Mob enemy, int runChance) {
         Dialogue("\n");

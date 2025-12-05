@@ -23,6 +23,11 @@ BUGS:
 
 WHAT TO DO:
 -> Add an option before fighting: (Fight or Run(Chances are based on the gap of Player Power and Enemy Power))
+    1.  Change the inputs to be int options rather than [enter] and [backspace]
+-> Improve the Prints
+    1. Enhance Boxes by using thicker lines
+    2. Do not use a dashed line
+
 
 BALANCING:
 Small Sized Animals:

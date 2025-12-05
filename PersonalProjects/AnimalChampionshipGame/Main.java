@@ -186,12 +186,16 @@ public class Main {
                 break;
         }
 
-        boolean playerWon = CombatSystem.startCombat(player1, ForestEnemy);
-        
-        if (playerWon) { // If Player Wins
-            int expGained = CombatSystem.calculateExpReward();
-            player1.addExp(expGained);
-
+        boolean fightResult = CombatSystem.startCombat(player1, ForestEnemy);
+    
+        // Check if player ran away successfully (fightResult is false but player is still alive)
+        if (!fightResult && player1.getHealth() > 0) {
+            // Player successfully ran away
+            Dialogue("\n\nYou have sucessfully escaped the battle!");
+            
+            Story3Options();
+        }
+        else if (fightResult) { // If Player Wins the fight
             showStats();
             Dialogue("\n\nChoose your Next Move:");
             Dialogue("\n1. Continue Training in the Forest.");
@@ -201,6 +205,7 @@ public class Main {
             System.out.println();
 
             int NextMoveChoiceS3Forest = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline
 
             if (NextMoveChoiceS3Forest == 1) {
                 Dialogue("\nYou went deeper in the woods");
@@ -209,11 +214,12 @@ public class Main {
                 Story3Forest(); // Brings him back to the forest
             }
             else {
-               Story3Options();
+                Story3Options(); // Brings him back to the city
             }
-        } else {
-            Dialogue("\nYour journey ends here...");
-            // Game over
+        } 
+        else {
+            // Player was defeated in combat
+            Dialogue("\n\nYour journey ends here...");
         }
     }
 
