@@ -26,7 +26,12 @@ WHAT TO DO:
     1.  Change the inputs to be int options rather than [enter] and [backspace]
 -> Improve the Prints
     1. Enhance Boxes by using thicker lines
+        ╔══════╗
+        ║      ║
+        ╚══════╝
     2. Do not use a dashed line
+
+
 
 
 BALANCING:

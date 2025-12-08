@@ -43,7 +43,13 @@ public class Main {
 
     // ================================ STORY METHODS ================================ \\
     public static void Introduction() {
-        Dialogue("\n|| ================ BECOME THE GREATEST ANIMAL OWNER ================ ||\n\n");
+        Dialogue("\n");
+        Dialogue("""
+                ╔═════════════════════════════════════════════════════════════════════╗
+                ║                  BECOME THE GREATEST ANIMAL OWNER                   ║
+                ╚═════════════════════════════════════════════════════════════════════╝
+                """);
+        Dialogue("\n");
 
         Dialogue("""
                     One day, you stumbled upon a poster announcing the Grand Animal 
@@ -66,7 +72,56 @@ public class Main {
                 instincts screaming that you had been chosen by something primordial.
                 A [Tyrannosaurus Rex]! (2/10 Chance)
                 """);
-        Dialogue("\nThe [Tyrannosaurus Rex] choose you as his Master!\n");
+                
+        String VisualTREX = ("""
+
+
+                .       --.                  ╔═══════════════════════════════════════════════════╗                                                                     
+      ------.--------+++++++---              ║ The [Tyrannosaurus Rex] choose you as his Master! ║                                                         
+    -+++--.--+++++++++++#++-+++--.           ╚═══════════════════════════════════════════════════╝                                                         
+   -+----..-------+++++++++---+----                                                               
+  -++++----.---..---++++++-.---+--+-                                                                                
+ ++++++----......---++++++-...-+-------      ----------                                                   .-++++--  
+  +++++++----...---+++++--------++.-----------------------..--------                                .-----+-..      
+   . .-....--+++#######++---+++-+---+-.-......-------........-+--------                         .-------.           
+             -#######++++++-++--++-.----...-.....----.........----+------                    .-------.              
+             .######++++----+---++++------..--....----.........+--++-----..               ---------                 
+              ++++#+-++++++++-.-++++++.---...------------......-++++-----.--..       ...---------.                  
+              .---+-++++++++-.---+-++++--++-.----+-++------....--+++++++-.-..-.--....--.--------                    
+             .--+++#+++++++--.--+++++-++-+++--+++++++-.----......--++++++.-.----....-----.----                      
+         +++++++#++++++++-------+++----------++++++++------......-++++++--...------......--+.                       
+           .+##+++++++------- .++++++-------++++++++++-.-+--.....-++++++----.--+-.-.----++.                         
+         .-++--++------+-..      .-+++++++++++++++++++------.-...++++++++--.---+++++++-.                            
+       .--+-++------.              ....--++++++++#++++--------.--++++++++-....-+-----                               
+       -++++++---                  -#+-.---+++++##++++++------..-+++++++++-...-++-                                  
+         +++-                    #++++.--+-++#+-+#+++--+++---..--+#+++++++--.-.                                     
+                               -+##++ .-++++++++++-+++-+++----.-++##+++#++++--                                      
+                                -  ..  -++#-+++++++++++--+++-.-++++++++++++++-.                                     
+                                        -++++++++++++++++++++++---.  ++++++++--+-                                   
+                                        -+++#++++++                   .++#+++--+++                                  
+                                         ++++++++++                    .+#+++--+--                                  
+                                         .+++++++++                      -+++++++-..                                
+                                           +#++++++                        .+++++++-.                               
+                                             ++++++.                           -+#++-                               
+                                              ++++++                            .++++                               
+                                              .++++++                           --+++                               
+                                             .+++++++                            --+++                              
+                                            -+--#++.                             +.+++-                             
+                                          -+++-+-+                          .--++--+++..                            
+                                    .----+++---+ .                        -#++++++++++-+-                           
+                              +#+++#++++++--#++-                                                                    
+                                ------... .-+-             
+                                                  
+                """);
+                
+        try { 
+            for (char c : VisualTREX.toCharArray()) {
+                System.out.print(c);
+                Thread.sleep(1);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("An error occurred during loading.");
+        }
 
         player1.setAll(500, "Tyrannosaurus Rex", 200); // +health, Pet, +Petdamage
     }
@@ -94,7 +149,7 @@ public class Main {
                 """);
     }
 
-    // STORY 3: INTRODUCTION TO OPEN WORLD
+    // STORY 3: INTRODUCTION TO SEMI-OPEN WORLD
     public static void Story3() { 
         Dialogue("""
                 \n\nAs you exit the animal center, you saw the sun blazing down on the bustling city streets.
@@ -108,18 +163,68 @@ public class Main {
     }
 
     public static void Story3Options() {
-        Dialogue("\nChoose your next move:");
-        Dialogue("\n1. Head to the Forest to train your pet.");
-        Dialogue("\n2. Fight with other owners in the Park.");
-        Dialogue("\n3. Explore the City for hidden challenges.");
+        String VisualCityMap = ("""
+                
+                ═══════════╗
+                 CITY...   ║
+                ═══════════╝
+                                                    +              
+                                                   / \\
+                 _____        _____     __________/ o \\/\\_________      _________
+                |o o o|_______|    |___|               | | # # #  |____|o o o o  | /\\
+                |o o o|  * * *|: ::|. .|               |o| # # #  |. . |o o o o  |//\\\\
+                |o o o|* * *  |::  |. .| []  []  []  []|o| # # #  |. . |o o o o  |((|))
+                |o o o|**  ** |:  :|. .| []  []  []    |o| # # #  |. . |o o o o  |((|))
+                |_[]__|__[]___|_||_|__<|____________;;_|_|___/\\___|_.|_|____[]___|  |
+                """);
+        
+        try { 
+            for (char c : VisualCityMap.toCharArray()) {
+                System.out.print(c);
+                Thread.sleep(5);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("An error occurred during loading.");
+        }
 
-        System.out.println();
-        System.out.println();
-
+        Dialogue("\n╔═════════════════════════════════════════════╗");
+        Dialogue("\n║ 1. Head to the Forest to train your pet.    ║");
+        Dialogue("\n║ 2. Fight with other owners in the Park.     ║");
+        Dialogue("\n║ 3. Explore the City for hidden challenges.  ║");
+        Dialogue("\n╚═════════════════════════════════════════════╝");
+        Dialogue("\n");
+        Dialogue("\nChoose your Next Move: ");
+        
         int NextMoveChoiceS3 = scanner.nextInt();
 
         switch (NextMoveChoiceS3) {
             case 1:
+                String VisualForest = ("""
+
+                ═══════════╗
+                 Forest    ║
+                ═══════════╝
+
+
+                                         ^    ^	          
+                                  ^     / \\  / \\              (o)
+                                 /  \\  /   \\/   \\  ^         
+                                /    \\/    /     \\/ \\  
+                        ^  ^  ^   ^ \\   /   ^  ^   ^  ^  ^   ^  ^
+                        /|\\/|\\/|\\ /|\\ \\     /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\
+                        /|\\/|\\/|\\ /|\\       /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\
+                        /|\\/|\\/|\\ /|\\.!.,!! /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\ 
+                """);
+
+                try { 
+                    for (char c : VisualForest.toCharArray()) {
+                        System.out.print(c);
+                        Thread.sleep(5);
+                    }
+                } catch (InterruptedException e) {
+                    System.out.println("An error occurred during loading.");
+                }
+
                 Dialogue("""
                         \nYou decided to head to the Forest to train your pet.
 
@@ -189,10 +294,7 @@ public class Main {
         boolean fightResult = CombatSystem.startCombat(player1, ForestEnemy);
     
         // Check if player ran away successfully (fightResult is false but player is still alive)
-        if (!fightResult && player1.getHealth() > 0) {
-            // Player successfully ran away
-            Dialogue("\n\nYou have sucessfully escaped the battle!");
-            
+        if (!fightResult && player1.getHealth() > 0) {  
             Story3Options();
         }
         else if (fightResult) { // If Player Wins the fight
@@ -203,6 +305,8 @@ public class Main {
 
             // Blank Lines for Readability
             System.out.println();
+
+            System.out.print("Your Next Move: ");
 
             int NextMoveChoiceS3Forest = scanner.nextInt();
             scanner.nextLine(); // Consume the newline

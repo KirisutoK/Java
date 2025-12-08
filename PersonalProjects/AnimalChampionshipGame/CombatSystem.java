@@ -19,8 +19,8 @@ public class CombatSystem {
     public static void showIntroduction(Player player, Mob enemy) {
         Dialogue("\n[[[ " + player.getUserName() + " V.S. " + enemy.getUserName() + " ]]]");
         Dialogue("\n");
-        Dialogue("\n" + player.getUserName() + ": " + player.getPet() + " (HP: " + player.getHealth() + ") (" + player.getPetDamage() + " DMG)"); //Your Champion: Dog (HP: 100) (20 DMG)
-        Dialogue("\n" + enemy.getUserName() + ": " + enemy.getPet() + " (HP: " + enemy.getHealth() + ") (" + enemy.getPetDamage() + " DMG)");
+        Dialogue("\n" + player.getUserName() + ": " + player.getPet() + " (HP: " + player.getHealth() + ") (DMG: " + player.getPetDamage() + ")"); //Your Champion: Dog (HP: 100) (20 DMG)
+        Dialogue("\n" + enemy.getUserName() + ": " + enemy.getPet() + " (HP: " + enemy.getHealth() + ") (DMG: " + enemy.getPetDamage() + ")"); //Enemy Champion: Cat (HP: 80) (15 DMG)
         Dialogue("\n");
 
         EnemyMaxDamage = enemy.getPetDamage();
@@ -41,7 +41,7 @@ public class CombatSystem {
         
         int input = scanner.nextInt();
         
-        // Check if player wants to run (backspace key or typing "run")
+        // Check if player wants to run (1 = Fight, 2 = Run)
         if (input == 2) {
             // Attempt to run
             return attemptRun(player, enemy, runChance);
@@ -54,21 +54,29 @@ public class CombatSystem {
     }
     // Method to attempt running away
     public static boolean attemptRun(Player player, Mob enemy, int runChance) {
-        Dialogue("\n");
-        Dialogue("\nYou attempt to run away...");
+        Dialogue("\nYou attempt to run away");
+
+        String Title = ". . . . .";
+        try { 
+            for (char c : Title.toCharArray()) {
+                System.out.print(c);
+                Thread.sleep(500);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("An error occurred during loading.");
+        }
+
         Dialogue("\n");
         
         int roll = random.nextInt(100) + 1; // Roll 1-100
         
         if (roll <= runChance) {
             // Successfully ran away
-            Dialogue("\n✓ You successfully escaped!");
-            Dialogue("\nYour " + player.getPet() + " managed to get away safely!");
+            Dialogue("\nYou have successfully escaped!\n");
             return false; // Don't fight
         } else {
             // Failed to run away
-            Dialogue("\n✗ You couldn't escape!");
-            Dialogue("\nThe " + enemy.getPet() + " blocks your path!");
+            Dialogue("\nYou couldn't escape!");
             Dialogue("\n");
             Dialogue("\n{  THE FIGHT BEGINS! }");
             Dialogue("\n");
