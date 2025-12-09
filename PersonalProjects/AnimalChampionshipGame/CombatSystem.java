@@ -37,7 +37,7 @@ public class CombatSystem {
         Dialogue("\n[1] - Fight");
         Dialogue("\n[2] - Run (" + runChance + "% Chance)");
         Dialogue("\n");
-        System.out.print("\nYour choice: ");
+        System.out.print("\nYour Choice: ");
         
         int input = scanner.nextInt();
         
@@ -226,6 +226,10 @@ public class CombatSystem {
         Dialogue("\n|--- { VICTORY! } ---|");
         Dialogue("\n");
         Dialogue("\nYour " + player.getPet() + " wins with " + player.getHealth() + "/" + player.getMaxHealth() + " HP remaining!\n");
+
+        // Award EXP based on enemy difficulty
+        int expGained = calculateExpReward();
+        player.addExp(expGained);
     }
     // Method to show defeat message
     public static void showDefeat(Player player, Mob enemy) {
@@ -235,9 +239,10 @@ public class CombatSystem {
         Dialogue("\n════════════════════════════════");
         Dialogue("\n");
         Dialogue("\n|--- { DEFEAT! } ---|");
-        Dialogue("\n\nYour " + player.getPet() + " was defeated!");
-        Dialogue("\n\nThe " + enemy.getPet() + " had " + enemy.getHealth() + "/" + enemy.getMaxHealth() + " HP remaining.");
         Dialogue("\n");
+        Dialogue("\nYour " + player.getPet() + " was defeated!");
+        Dialogue("\n");
+        Dialogue("\nThe " + enemy.getPet() + " had " + enemy.getHealth() + "/" + enemy.getMaxHealth() + " HP remaining.");
     }
     //=======================================================\\
 

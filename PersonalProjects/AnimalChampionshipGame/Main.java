@@ -161,9 +161,9 @@ public class Main {
 
         Story3Options();
     }
-
     public static void Story3Options() {
         String VisualCityMap = ("""
+                
                 
                 ═══════════╗
                  CITY...   ║
@@ -191,6 +191,7 @@ public class Main {
         Dialogue("\n║ 1. Head to the Forest to train your pet.    ║");
         Dialogue("\n║ 2. Fight with other owners in the Park.     ║");
         Dialogue("\n║ 3. Explore the City for hidden challenges.  ║");
+        Dialogue("\n║ 4. Show User ID                             ║");
         Dialogue("\n╚═════════════════════════════════════════════╝");
         Dialogue("\n");
         Dialogue("\nChoose your Next Move: ");
@@ -198,7 +199,7 @@ public class Main {
         int NextMoveChoiceS3 = scanner.nextInt();
 
         switch (NextMoveChoiceS3) {
-            case 1:
+            case 1: // FOREST
                 String VisualForest = ("""
 
                 ═══════════╗
@@ -232,27 +233,147 @@ public class Main {
                         """);
                 Story3Forest();
                 break;
-            case 2:
+            case 2: // PARK
+                String VisualPark = ("""
+
+                ═══════════╗
+                 Park      ║
+                ═══════════╝
+
+                           _______
+                          | []  []|            O
+                    _______ []  []|       -
+                   | #   # |[]  []|      - -
+                   |^  ^ # |[]  []|          ^  ^
+                 _ / \\/ \\  _   ...   ^   _  / \\/ \\ _
+                | |,,,,,,,| |-------/ \\!| |,,,,,,,| |
+                | |!!!!!!!| |  !.       | |!!!!!!!| |
+                | |=======| |___________| |=======| |
+                """);
+
+                try { 
+                    for (char c : VisualPark.toCharArray()) {
+                        System.out.print(c);
+                        Thread.sleep(5);
+                    }
+                } catch (InterruptedException e) {
+                    System.out.println("An error occurred during loading.");
+                }
+
                 Dialogue("""
                 \nYou went to the City Park.
 
                 The bustling streets and towering skyscrapers offered endless opportunities for adventure and growth.
+
+                In the Park, you encountered many types of animal owners looking to test their pets' skills.
+
+                As you look around, there are animal owners fighting each other.
                 """);
 
                 Story3Park();
                 break;
-            case 3:
+            case 3: // EXPLORE CITY
                 System.out.println("WIP");
+                break;
+            case 4: // SHOW STATS
+                showStats();
+                Story3Options();
                 break;
             default:
                 System.out.println("WIP");
                 break;
         }
     }
-    public static void Story3Park() {
+    public static void Story3Park() { //Displays 3 Random Enemies. Display which one he fights
+        int RandomPlayer1 = random.nextInt(3)+1;
+        Mob ParkEnemy1;
+
+        switch (RandomPlayer1) {
+            case 1:
+                ParkEnemy1 = new Mob("Mihai", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+                break;
+            case 2:
+                ParkEnemy1 = new Mob("Mordecai", 120, "Cat", 10); // UserName, Health, PetName, PetDamage
+                break;
+            case 3:
+                ParkEnemy1 = new Mob("Koba", 150, "Horse", 25); // UserName, Health, PetName, PetDamage
+                break;
+            default:
+                ParkEnemy1 = new Mob("Sigurd", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+                break;
+        }
+
+        int RandomPlayer2 = random.nextInt(3)+1;
+        Mob ParkEnemy2;
+
+        switch (RandomPlayer2) {
+            case 1:
+                ParkEnemy2 = new Mob("Tahir", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+                break;
+            case 2:
+                ParkEnemy2 = new Mob("Angele", 120, "Cat", 10); // UserName, Health, PetName, PetDamage
+                break;
+            case 3:
+                ParkEnemy2 = new Mob("Martim", 150, "Horse", 25); // UserName, Health, PetName, PetDamage
+                break;
+            default:
+                ParkEnemy2 = new Mob("Catharina", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+                break;
+        }
+
+        int RandomPlayer3 = random.nextInt(3)+1;
+        Mob ParkEnemy3;
+
+        switch (RandomPlayer3) {
+            case 1:
+                ParkEnemy3 = new Mob("Jamal", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+                break;
+            case 2:
+                ParkEnemy3 = new Mob("Ava", 120, "Cat", 10); // UserName, Health, PetName, PetDamage
+                break;
+            case 3:
+                ParkEnemy3 = new Mob("Nahal", 150, "Horse", 25); // UserName, Health, PetName, PetDamage
+                break;
+            default:
+                ParkEnemy3 = new Mob("Darshan", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+                break;
+        }
         
+        Dialogue("\n=================== CHOOSE YOUR OPPONENT ===================");
+        Dialogue("\n1. " + ParkEnemy1.getUserName() + " (Pet: " + ParkEnemy1.getPet() + " | Health: " + ParkEnemy1.getHealth() + " | Damage: " + ParkEnemy1.getPetDamage() + ")\n");
+        Dialogue("2. " + ParkEnemy2.getUserName() + " (Pet: " + ParkEnemy2.getPet() + " | Health: " + ParkEnemy2.getHealth() + " | Damage: " + ParkEnemy2.getPetDamage() + ")\n");
+        Dialogue("3. " + ParkEnemy3.getUserName() + " (Pet: " + ParkEnemy3.getPet() + " | Health: " + ParkEnemy3.getHealth() + " | Damage: " + ParkEnemy3.getPetDamage() + ")\n");
+        Dialogue("4. Refresh Opponents");
+        Dialogue("\n=============================================================");
+        Dialogue("\n");
+        Dialogue("\nYour Choice: ");
+        
+
+        int ParkOpponentChoice = scanner.nextInt();
+        
+        switch (ParkOpponentChoice) {
+            case 1:
+                CombatSystem.startCombat(player1, ParkEnemy1);
+                Story3Options();
+                break;
+            case 2:
+                CombatSystem.startCombat(player1, ParkEnemy2);
+                Story3Options();
+                break;
+            case 3:
+                CombatSystem.startCombat(player1, ParkEnemy3);
+                Story3Options();
+                break;
+            case 4:
+                Story3Park();
+                break;
+            default:
+                Dialogue("\nInvalid choice. Please select a valid opponent.\n");
+                Story3Park();
+                break;
+        }
     }
-    public static void Story3Forest() { /////////////////////YOU LEFT HERE/////////////////////
+    public static void Story3Forest() {
         int RandomForestMob = random.nextInt(7)+1;
         Mob ForestEnemy;
         
@@ -306,7 +427,7 @@ public class Main {
             // Blank Lines for Readability
             System.out.println();
 
-            System.out.print("Your Next Move: ");
+            System.out.print("Your Choice: ");
 
             int NextMoveChoiceS3Forest = scanner.nextInt();
             scanner.nextLine(); // Consume the newline
@@ -395,7 +516,7 @@ public class Main {
                 break;
         }
     }
-    
+
     // ================================ MISCELLANIOUS METHODS ================================ \\
     public static void showStats() {
         Dialogue("\n\n||================== USER STATS ==================||");
