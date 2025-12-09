@@ -22,14 +22,13 @@ IDEAS:
 BUGS:
 
 WHAT TO DO:
--> Add an option before fighting: (Fight or Run(Chances are based on the gap of Player Power and Enemy Power))
-    1.  Change the inputs to be int options rather than [enter] and [backspace]
 -> Improve the Prints
     1. Enhance Boxes by using thicker lines
-        ╔══════╗
-        ║      ║
-        ╚══════╝
-    2. Do not use a dashed line
+-> Add 20% Chance to get a game over when entering the park (Falling in love)
+-> Add Hospital (Automatically Heals Player and then brings back to [Explore City])
+-> Add a Game Over when user choose to follow the man in [Explore City]
+-> Add the Arena (5 Rounds)
+
 
 
 

@@ -273,7 +273,48 @@ public class Main {
                 Story3Park();
                 break;
             case 3: // EXPLORE CITY
-                System.out.println("WIP");
+                String VisualExploreCity = ("""
+
+                ═══════════╗
+                 CITY      ║
+                ═══════════╝
+
+
+                                     ┌┐                                            
+                                     ││             ┌┐             ┌┐              
+                                     │└┐           ┌┘│            ┌┘└┐       ╓─╖   
+                                     │:└┐          │:│            └┐┌┘       ║:║   
+                               ╔═══════╗│        ┌─┘ └───┐      ╔══╧╧═╗  ╓──╥╜:║   
+                               ║ ≡≡≡≡≡≡╚╗        │= = = =│     ╔╝┌┬┬┬┐║  ║::║::║   
+                               ║ ≡≡≡≡≡≡ ║        │=  = ==└┐    ║┌┼┼┼┼┤╚╗ ║::║::║   
+                        ╔═══════╗≡≡≡≡≡≡ ║                      ║├┼┼┼┼├┐║ ║::║::║   
+                        ║ [] [] ║≡≡≡≡≡≡ ║           ▓▓▓        ║└┴┴┴┴┴┘╓─╨──╨──╨─╖ 
+                        ║ [] [] ║≡≡≡≡≡≡ ║   ▓▓     ▓▓▓▓▓  ╔════╝───────║ () () ()║ 
+                        ║ [] [] ║≡≡≡≡≡≡ ║  ▓▓▓▓    ▓▓▓▓▓  ║ ┌┐┌┐┌┐┌┐┌┐ ║ () () ()║ 
+                        ║       ║       ║  ▓▓▓▓     ├┼┤   ║ └┘└┘└┘└┘└┘ ║ () () ()║ 
+                        ║ ┌───┐ ║    ╔╖ ║   ├┤      ├┼┤   ║ ┌┬┬┬┬┬┬┬┬┐ ║ ╔══════╗║ 
+                        ▒▒▒░░░░░▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+                        """);
+
+                try { 
+                    for (char c : VisualExploreCity.toCharArray()) {
+                        System.out.print(c);
+                        Thread.sleep(5);
+                    }
+                } catch (InterruptedException e) {
+                    System.out.println("An error occurred during loading.");
+                }
+
+                Dialogue("\n╔═════════════════════════════════════════════╗");
+                Dialogue("\n║ 1. Go to the Hospital.                      ║");
+                Dialogue("\n║ 2. Follow the Suspicious Man                ║");
+                Dialogue("\n║ 3. Enter the Arena.                         ║");
+                Dialogue("\n║ 4. Show User ID                             ║");
+                Dialogue("\n╚═════════════════════════════════════════════╝");
+                Dialogue("\n");
+                Dialogue("\nChoose your Next Move: ");
+
+
                 break;
             case 4: // SHOW STATS
                 showStats();
@@ -284,74 +325,80 @@ public class Main {
                 break;
         }
     }
-    public static void Story3Park() { //Displays 3 Random Enemies. Display which one he fights
-        int RandomPlayer1 = random.nextInt(3)+1;
+    public static void Story3Park() { // Creates 3 Random Opponents (Mobs) to choose from
+        int RandomPlayer1 = random.nextInt(4)+1;
         Mob ParkEnemy1;
-
         switch (RandomPlayer1) {
             case 1:
-                ParkEnemy1 = new Mob("Mihai", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+                ParkEnemy1 = new Mob("Mihai", 20, "Dog", 10); // UserName, Health, PetName, PetDamage
                 break;
             case 2:
-                ParkEnemy1 = new Mob("Mordecai", 120, "Cat", 10); // UserName, Health, PetName, PetDamage
+                ParkEnemy1 = new Mob("Mordecai", 15, "Cat", 5); // UserName, Health, PetName, PetDamage
                 break;
             case 3:
-                ParkEnemy1 = new Mob("Koba", 150, "Horse", 25); // UserName, Health, PetName, PetDamage
+                ParkEnemy1 = new Mob("Koba", 70, "Horse", 70); // UserName, Health, PetName, PetDamage
                 break;
-            default:
-                ParkEnemy1 = new Mob("Sigurd", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+            case 4:
+                ParkEnemy1 = new Mob("Sigurd", 2, "Squirrel", 1); // UserName, Health, PetName, PetDamage
+                break;
+            default: // JUST NEEDED INCASE THERE IS AN ERROR
+                ParkEnemy1 = new Mob("ERROR", 0, "error", 0); 
                 break;
         }
 
-        int RandomPlayer2 = random.nextInt(3)+1;
+        int RandomPlayer2 = random.nextInt(4)+1;
         Mob ParkEnemy2;
-
         switch (RandomPlayer2) {
             case 1:
-                ParkEnemy2 = new Mob("Tahir", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+                ParkEnemy2 = new Mob("Tahir", 1, "Hamster", 1); // UserName, Health, PetName, PetDamage
                 break;
             case 2:
-                ParkEnemy2 = new Mob("Angele", 120, "Cat", 10); // UserName, Health, PetName, PetDamage
+                ParkEnemy2 = new Mob("Angele", 50, "Cow", 1); // UserName, Health, PetName, PetDamage
                 break;
             case 3:
-                ParkEnemy2 = new Mob("Martim", 150, "Horse", 25); // UserName, Health, PetName, PetDamage
+                ParkEnemy2 = new Mob("Martim", 20, "Chicken", 10); // UserName, Health, PetName, PetDamage
                 break;
-            default:
-                ParkEnemy2 = new Mob("Catharina", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+            case 4:
+                ParkEnemy2 = new Mob("Catharina", 65, "Pig", 10); // UserName, Health, PetName, PetDamage
+                break;
+            default: // JUST NEEDED INCASE THERE IS AN ERROR
+                ParkEnemy2 = new Mob("ERROR", 0, "error", 0); 
                 break;
         }
 
-        int RandomPlayer3 = random.nextInt(3)+1;
+        int RandomPlayer3 = random.nextInt(4)+1;
         Mob ParkEnemy3;
-
         switch (RandomPlayer3) {
             case 1:
-                ParkEnemy3 = new Mob("Jamal", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+                ParkEnemy3 = new Mob("Jamal", 45, "Goat", 40); // UserName, Health, PetName, PetDamage
                 break;
             case 2:
-                ParkEnemy3 = new Mob("Ava", 120, "Cat", 10); // UserName, Health, PetName, PetDamage
+                ParkEnemy3 = new Mob("Ava", 5, "Crow", 7); // UserName, Health, PetName, PetDamage
                 break;
             case 3:
                 ParkEnemy3 = new Mob("Nahal", 150, "Horse", 25); // UserName, Health, PetName, PetDamage
                 break;
-            default:
+            case 4:
                 ParkEnemy3 = new Mob("Darshan", 100, "Dog", 15); // UserName, Health, PetName, PetDamage
+                break;
+            default: // JUST NEEDED INCASE THERE IS AN ERROR
+                ParkEnemy3 = new Mob("ERROR", 0, "error", 0); 
                 break;
         }
         
         Dialogue("\n=================== CHOOSE YOUR OPPONENT ===================");
-        Dialogue("\n1. " + ParkEnemy1.getUserName() + " (Pet: " + ParkEnemy1.getPet() + " | Health: " + ParkEnemy1.getHealth() + " | Damage: " + ParkEnemy1.getPetDamage() + ")\n");
-        Dialogue("2. " + ParkEnemy2.getUserName() + " (Pet: " + ParkEnemy2.getPet() + " | Health: " + ParkEnemy2.getHealth() + " | Damage: " + ParkEnemy2.getPetDamage() + ")\n");
-        Dialogue("3. " + ParkEnemy3.getUserName() + " (Pet: " + ParkEnemy3.getPet() + " | Health: " + ParkEnemy3.getHealth() + " | Damage: " + ParkEnemy3.getPetDamage() + ")\n");
-        Dialogue("4. Refresh Opponents");
+        Dialogue("\n1. " + ParkEnemy1.getUserName() + " (Pet: " + ParkEnemy1.getPet() + " | Health: " + ParkEnemy1.getHealth() + " | Damage: " + ParkEnemy1.getPetDamage() + ")");
+        Dialogue("\n2. " + ParkEnemy2.getUserName() + " (Pet: " + ParkEnemy2.getPet() + " | Health: " + ParkEnemy2.getHealth() + " | Damage: " + ParkEnemy2.getPetDamage() + ")");
+        Dialogue("\n3. " + ParkEnemy3.getUserName() + " (Pet: " + ParkEnemy3.getPet() + " | Health: " + ParkEnemy3.getHealth() + " | Damage: " + ParkEnemy3.getPetDamage() + ")");
+        Dialogue("\n4. Refresh Opponents");
+        Dialogue("\n5. Leave the Park");
         Dialogue("\n=============================================================");
         Dialogue("\n");
         Dialogue("\nYour Choice: ");
         
 
-        int ParkOpponentChoice = scanner.nextInt();
-        
-        switch (ParkOpponentChoice) {
+        int ParkChoice = scanner.nextInt();
+        switch (ParkChoice) {
             case 1:
                 CombatSystem.startCombat(player1, ParkEnemy1);
                 Story3Options();
@@ -367,12 +414,18 @@ public class Main {
             case 4:
                 Story3Park();
                 break;
+            case 5:
+                Story3Options();
+                break;
             default:
                 Dialogue("\nInvalid choice. Please select a valid opponent.\n");
                 Story3Park();
                 break;
         }
     }
+    public static void Story3ParkSecret() {
+        Dialogue("");
+    }   
     public static void Story3Forest() {
         int RandomForestMob = random.nextInt(7)+1;
         Mob ForestEnemy;
@@ -447,7 +500,9 @@ public class Main {
             Dialogue("\n\nYour journey ends here...");
         }
     }
-
+    public static void Story3CityExploration() {
+        //WIP
+    }
     // ====================================== SET METHODS ====================================== \\
     public static void getNameAndDialogueSpeed() {
         System.out.print("\nLadies and gentlemen... or should I say, FUTURE CHAMPION! Before the games begin, please state your name for the record. ");
@@ -527,6 +582,13 @@ public class Main {
         Dialogue("\n Pet:  " + player1.getPet());
         Dialogue("\n PetDamage:  " + player1.getPetDamage());
         Dialogue("\n=================================================");
+    }
+    public static void GameOverDisplay() {
+        Dialogue("\n╔════════════════════════════════════╗");
+        Dialogue("\n║             GAME OVER!             ║");
+        Dialogue("\n║   Better luck next time, Champion. ║");
+        Dialogue("\n╚════════════════════════════════════╝");
+        Dialogue("\n");
     }
     public static String Dialogue(String Dialogue) { // Prints each word by word with a delay making it look like a typing effect
         try { 

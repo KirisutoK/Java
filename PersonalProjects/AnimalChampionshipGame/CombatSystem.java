@@ -1,3 +1,15 @@
+
+// Description:
+// This Combat System is originally created by ClaudeAI
+// Stats, Quality of Life, and Variables are modified by Christ Aerjil C. Dampog
+//
+// Process:
+// 1. Enabled combat between Player and Mob classes. (Ask's user if to fight or run)
+// 2. Call startCombat(Player player, Mob enemy) to initiate combat between the player and an enemy mob.
+// 3. The combat loop starts, alternating attacks between the player and the enemy until one is defeated.
+// 4. The system includes methods for calculating damage, checking for defeat, displaying combat status.
+//
+
 import java.util.Scanner;
 import java.util.Random;
 
