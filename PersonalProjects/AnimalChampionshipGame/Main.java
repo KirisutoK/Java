@@ -19,6 +19,7 @@ public class Main {
 
     // ========== GLOBAL VARIABLES =========== \\
     static int DialogueSpeed = 0;
+    static boolean hasRolledParkSecret = false;
 
     // ======================================== \\
     public static void main(String[] args) {
@@ -270,7 +271,19 @@ public class Main {
                 As you look around, there are animal owners fighting each other.
                 """);
 
-                Story3Park();
+                int SecretRouteChance = random.nextInt(10)+1;
+
+                if (hasRolledParkSecret == false) { // Roll only once
+                    hasRolledParkSecret = true;
+                    if (SecretRouteChance <= 3) { // 30% Chance of falling in love (Rolls once only)
+                    Story3ParkSecret();
+                    } else {
+                        Story3Park();
+                    }
+                } else {
+                    Story3Park();
+                }
+
                 break;
             case 3: // EXPLORE CITY
                 String VisualExploreCity = ("""
@@ -313,7 +326,6 @@ public class Main {
                 Dialogue("\n╚═════════════════════════════════════════════╝");
                 Dialogue("\n");
                 Dialogue("\nChoose your Next Move: ");
-
 
                 break;
             case 4: // SHOW STATS
@@ -424,7 +436,30 @@ public class Main {
         }
     }
     public static void Story3ParkSecret() {
-        Dialogue("");
+        Dialogue("""
+
+                You bumped into a mysterious animal owner, you look at her feet, then her dress, and then her face. She looks at you with a smile.
+
+                ╔════════════════════════════════════════════╗
+                ║  Congratulations! You've fallen in love    ║
+                ╚════════════════════════════════════════════╝
+
+                You and the mysterious animal owner started to date, training your pets together and eventually becoming girlfriends and boyfriends.
+
+                After a few years, you both are now married and have a family together, raising your pets and children with love and care.
+
+                Your family opened a business helping other animal owners help improve their performance and health.
+
+                Time passed by and you became wealthy, famous, and is living on happiness.
+
+                Beyond the passion to pursue success, it is not what you always see, but rather the greatest victory is found in places that you dont expect.
+
+                ╔════════════════════════════════════════════╗
+                ║   SECRET ROUTE: Falling In Love   (30%)    ║
+                ╚════════════════════════════════════════════╝
+
+                """);
+
     }   
     public static void Story3Forest() {
         int RandomForestMob = random.nextInt(7)+1;
@@ -585,8 +620,7 @@ public class Main {
     }
     public static void GameOverDisplay() {
         Dialogue("\n╔════════════════════════════════════╗");
-        Dialogue("\n║             GAME OVER!             ║");
-        Dialogue("\n║   Better luck next time, Champion. ║");
+        Dialogue("\n║            GAME OVER!              ║");
         Dialogue("\n╚════════════════════════════════════╝");
         Dialogue("\n");
     }
