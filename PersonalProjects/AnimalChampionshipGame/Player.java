@@ -58,7 +58,7 @@ public class Player {
     public int getPetDamage() {
         return PetDamage;
     }
-        public int getLevel() {
+    public int getLevel() {
         return Level;
     }
     public int getExp() {
@@ -71,6 +71,11 @@ public class Player {
         return MaxHealth;
     }
 
+    //=================Healing Methods==============\\
+    public void fullHeal() {
+        this.Health = this.MaxHealth;
+    }
+
     //=================Leveling Methods==============\\
     public void addExp(int expGained) {
         this.Experience += expGained;
@@ -81,7 +86,6 @@ public class Player {
             levelUp();
         }
     }
-    
     // Level up method
     private void levelUp() {
         this.Level++;
@@ -146,7 +150,6 @@ public class Player {
                 return defaultAttacks[random.nextInt(defaultAttacks.length)];
         }
     }
-
     public static String Dialogue(String Dialogue) { // Prints each word by word with a delay making it look like a typing effect
         try { 
             for (char Characters : Dialogue.toCharArray()) {

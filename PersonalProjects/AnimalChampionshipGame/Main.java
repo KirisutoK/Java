@@ -20,6 +20,7 @@ public class Main {
     // ========== GLOBAL VARIABLES =========== \\
     static int DialogueSpeed = 0;
     static boolean hasRolledParkSecret = false;
+    static int PlayerChoice = 0;
 
     // ======================================== \\
     public static void main(String[] args) {
@@ -286,55 +287,13 @@ public class Main {
 
                 break;
             case 3: // EXPLORE CITY
-                String VisualExploreCity = ("""
-
-                ═══════════╗
-                 CITY      ║
-                ═══════════╝
-
-
-                                     ┌┐                                            
-                                     ││             ┌┐             ┌┐              
-                                     │└┐           ┌┘│            ┌┘└┐       ╓─╖   
-                                     │:└┐          │:│            └┐┌┘       ║:║   
-                               ╔═══════╗│        ┌─┘ └───┐      ╔══╧╧═╗  ╓──╥╜:║   
-                               ║ ≡≡≡≡≡≡╚╗        │= = = =│     ╔╝┌┬┬┬┐║  ║::║::║   
-                               ║ ≡≡≡≡≡≡ ║        │=  = ==└┐    ║┌┼┼┼┼┤╚╗ ║::║::║   
-                        ╔═══════╗≡≡≡≡≡≡ ║                      ║├┼┼┼┼├┐║ ║::║::║   
-                        ║ [] [] ║≡≡≡≡≡≡ ║           ▓▓▓        ║└┴┴┴┴┴┘╓─╨──╨──╨─╖ 
-                        ║ [] [] ║≡≡≡≡≡≡ ║   ▓▓     ▓▓▓▓▓  ╔════╝───────║ () () ()║ 
-                        ║ [] [] ║≡≡≡≡≡≡ ║  ▓▓▓▓    ▓▓▓▓▓  ║ ┌┐┌┐┌┐┌┐┌┐ ║ () () ()║ 
-                        ║       ║       ║  ▓▓▓▓     ├┼┤   ║ └┘└┘└┘└┘└┘ ║ () () ()║ 
-                        ║ ┌───┐ ║    ╔╖ ║   ├┤      ├┼┤   ║ ┌┬┬┬┬┬┬┬┬┐ ║ ╔══════╗║ 
-                        ▒▒▒░░░░░▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-                        """);
-
-                try { 
-                    for (char c : VisualExploreCity.toCharArray()) {
-                        System.out.print(c);
-                        Thread.sleep(5);
-                    }
-                } catch (InterruptedException e) {
-                    System.out.println("An error occurred during loading.");
-                }
-
-                Dialogue("\n╔═════════════════════════════════════════════╗");
-                Dialogue("\n║ 1. Go to the Hospital.                      ║");
-                Dialogue("\n║ 2. Follow the Suspicious Man                ║");
-                Dialogue("\n║ 3. Enter the Arena.                         ║");
-                Dialogue("\n║ 4. Show User ID                             ║");
-                Dialogue("\n╚═════════════════════════════════════════════╝");
-                Dialogue("\n");
-                Dialogue("\nChoose your Next Move: ");
-
+                Story3CityExploration();
                 break;
-            case 4: // SHOW STATS
-                showStats();
-                Story3Options();
-                break;
+
+
             default:
-                System.out.println("WIP");
                 break;
+                
         }
     }
     public static void Story3Park() { // Creates 3 Random Opponents (Mobs) to choose from
@@ -536,7 +495,181 @@ public class Main {
         }
     }
     public static void Story3CityExploration() {
-        //WIP
+        String VisualExploreCity = ("""
+
+                ═══════════╗
+                 CITY      ║
+                ═══════════╝
+
+
+                                     ┌┐                                            
+                                     ││             ┌┐             ┌┐              
+                                     │└┐           ┌┘│            ┌┘└┐       ╓─╖   
+                                     │:└┐          │:│            └┐┌┘       ║:║   
+                               ╔═══════╗│        ┌─┘ └───┐      ╔══╧╧═╗  ╓──╥╜:║   
+                               ║ ≡≡≡≡≡≡╚╗        │= = = =│     ╔╝┌┬┬┬┐║  ║::║::║   
+                               ║ ≡≡≡≡≡≡ ║        │=  = ==└┐    ║┌┼┼┼┼┤╚╗ ║::║::║   
+                        ╔═══════╗≡≡≡≡≡≡ ║                      ║├┼┼┼┼├┐║ ║::║::║   
+                        ║ [] [] ║≡≡≡≡≡≡ ║           ▓▓▓        ║└┴┴┴┴┴┘╓─╨──╨──╨─╖ 
+                        ║ [] [] ║≡≡≡≡≡≡ ║   ▓▓     ▓▓▓▓▓  ╔════╝───────║ () () ()║ 
+                        ║ [] [] ║≡≡≡≡≡≡ ║  ▓▓▓▓    ▓▓▓▓▓  ║ ┌┐┌┐┌┐┌┐┌┐ ║ () () ()║ 
+                        ║       ║       ║  ▓▓▓▓     ├┼┤   ║ └┘└┘└┘└┘└┘ ║ () () ()║ 
+                        ║ ┌───┐ ║    ╔╖ ║   ├┤      ├┼┤   ║ ┌┬┬┬┬┬┬┬┬┐ ║ ╔══════╗║ 
+                        ▒▒▒░░░░░▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+                        """);
+
+                try { 
+                    for (char c : VisualExploreCity.toCharArray()) {
+                        System.out.print(c);
+                        Thread.sleep(5);
+                    }
+                } catch (InterruptedException e) {
+                    System.out.println("An error occurred during loading.");
+                }
+
+                Dialogue("\n╔═════════════════════════════════════════════╗");
+                Dialogue("\n║ 1. Go to the Hospital.                      ║");
+                Dialogue("\n║ 2. Follow the Suspicious Man                ║");
+                Dialogue("\n║ 3. Enter the Arena.                         ║");
+                Dialogue("\n║ 4. Show User ID                             ║");
+                Dialogue("\n╚═════════════════════════════════════════════╝");
+                Dialogue("\n");
+                Dialogue("\nChoose your Next Move: ");
+
+                int PlayerCityExplorationChoice = scanner.nextInt();
+
+                switch (PlayerCityExplorationChoice) {
+                    case 1: // Hospital
+                        Dialogue("\nYou went inside the hospital to heal your animal");
+                        Dialogue("\nHealing");
+
+                        String HealingLoading = ". . . ";
+                        try { 
+                            for (char c : HealingLoading.toCharArray()) {
+                                System.out.print(c);
+                                Thread.sleep(500);
+                            }
+                        } catch (InterruptedException e) {
+                            System.out.println("An error occurred during loading.");
+                        }
+
+                        player1.fullHeal();
+
+                        Dialogue("\nYour pet has successfuly healed!");
+                        break;
+
+
+                    case 2: // Follow the Suspicious Man
+                        Dialogue("You follow the suspicious man ");
+
+                        String FollowingLoading = ". . . ";
+                        try { 
+                            for (char c : FollowingLoading.toCharArray()) {
+                                System.out.print(c);
+                                Thread.sleep(500);
+                            }
+                        } catch (InterruptedException e) {
+                            System.out.println("An error occurred during loading.");
+                        }
+
+                        GameOverDisplay();
+                        break;
+                    case 3: // Arena
+
+                        break;
+                    case 4:
+                        showStats();
+                        Story3CityExploration();
+                        break;
+
+                    default:
+
+                        break;
+                }
+
+    }
+    public static void Arena() { //Initiated by going through Exploration City 
+        String VisualArenaMap = ("""
+                ═══════════╗
+                  ARENA    ║
+                ═══════════╝
+
+
+                                                  ô            
+                     ô                            │            
+                     │                            │            
+                     │                           ┌┼┐           
+                    ┌┼┐              ô       ╔╦╦╦╦╦╦╦╦╦╗       
+                ╔═══╧╧╧═══╗          │       ║╫╫╫╫╫╫╫╫╫║       
+                ║ ┌ ┐ ┌ ┐ ║          │       ╚╩╬╩╩╩╩╩╬╩╝       
+                ║ ╔══════════════════╗┐        ║     ║         
+                ║-║ ╔╗  ╔╗╔╗  ╔╗╔╗╔╗ ╚╧═══╗┐   ║     ║         
+                ║-║ ╚╝  ╚╝╚╝  ╚╝╚╝╚╝      ╚╧═╗┐║     ║──┐      
+                ║-║ ╔╗╔╗      ╔╗╔╗  ╔╗╔╗╔╗╔╗ ╚══════════╗      
+                ║-║ ╚╝╚╝      ╚╝╚╝  ╚╝╚╝╚╝╚╝            ║      
+                ║-║ ╔╗  ╔╗╔╗    ╔╗╔╗╔╗╔╗  ╔╗╔╗  ╔╗  ╔╗  ║      
+                ║-║ ╚╝  ╚╝╚╝    ╚╝╚╝╚╝╚╝  ╚╝╚╝  ╚╝  ╚╝  ║      
+                ║-║----   ---          -----      ----- ║      
+                ║-║╔╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╗║      
+            ▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓
+
+                """);
+        
+                try { 
+                    for (char c : VisualArenaMap.toCharArray()) {
+                        System.out.print(c);
+                            Thread.sleep(5);
+                        }
+                    } catch (InterruptedException e) {
+                        System.out.println("An error occurred during loading.");
+                    }
+        
+        
+
+        Dialogue("""
+
+            ╔═════════════════════════════════════════════════════════════════════════╗
+            ║ WELCOME TO THE [ARENA] WHERE THE STRONGEST SURIVE WHILE THE WEAKEST DIE ║
+            ╚═════════════════════════════════════════════════════════════════════════╝
+
+                """);
+
+        Dialogue("\nThere Are 5 opponents that you have to beat to get the Championship: ");
+        Dialogue("\n1. ");
+        Dialogue("\n2. ");
+        Dialogue("\n3. ");
+        Dialogue("\n4. ");
+        Dialogue("\n5. ");
+        Dialogue("\n");
+        Dialogue("\n╔═════════════════════════════════════════════╗");
+        Dialogue("\n║ 1. Enter the Arena                          ║");
+        Dialogue("\n║ 2. Leave                                    ║");
+        Dialogue("\n║ 3. Show User ID                             ║");
+        Dialogue("\n╚═════════════════════════════════════════════╝");
+        Dialogue("\n");
+        Dialogue("\nChoose your Next Move: ");
+
+        PlayerChoice = scanner.nextInt();
+
+        switch (PlayerChoice) {
+            case 1:
+                ArenaBattle();
+                break;
+            case 2:
+                Story3CityExploration();
+                break;
+            case 3:
+                showStats();
+                Arena();
+                break;
+            default:
+                Story3CityExploration();
+                break;
+        }
+    }
+    
+    public static void ArenaBattle() {
+
     }
     // ====================================== SET METHODS ====================================== \\
     public static void getNameAndDialogueSpeed() {

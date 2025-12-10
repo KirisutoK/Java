@@ -24,10 +24,8 @@ BUGS:
 WHAT TO DO:
 -> Improve the Prints
     1. Enhance Boxes by using thicker lines
--> Add Hospital (Automatically Heals Player and then brings back to [Explore City])
--> Add a Game Over when user choose to follow the man in [Explore City]
 -> Add the Arena (5 Rounds)
-
+-> replace local int choices variables with global(static) variables
 
 
 
