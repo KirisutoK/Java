@@ -40,3 +40,6 @@ Medium Sized Animals:
 Large Sized Animals:
     >HP: 50-70
     >DMG: 1-100
+Special Animals:
+    >HP: 100-Unli
+    >DMG: 100-Unli

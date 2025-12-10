@@ -198,9 +198,9 @@ public class Main {
         Dialogue("\n");
         Dialogue("\nChoose your Next Move: ");
         
-        int NextMoveChoiceS3 = scanner.nextInt();
+        PlayerChoice = scanner.nextInt();
 
-        switch (NextMoveChoiceS3) {
+        switch (PlayerChoice) {
             case 1: // FOREST
                 String VisualForest = ("""
 
@@ -368,19 +368,61 @@ public class Main {
         Dialogue("\nYour Choice: ");
         
 
-        int ParkChoice = scanner.nextInt();
-        switch (ParkChoice) {
+        PlayerChoice = scanner.nextInt();
+        switch (PlayerChoice) {
             case 1:
-                CombatSystem.startCombat(player1, ParkEnemy1);
-                Story3Options();
+                boolean FightResult1 = CombatSystem.startCombat(player1, ParkEnemy1);
+
+                if (FightResult1 == true) {
+                    Dialogue("\nWould you like to fight again?");
+                    Dialogue("\n 1. Yes");
+                    Dialogue("\n 2. No");
+                    Dialogue("\n");
+                    Dialogue("\nYour Choice:");
+                    int TryAgain = scanner.nextInt();
+
+                    if (TryAgain == 1) {
+                        Story3Park();
+                    } else {
+                        Story3Options();
+                    }
+                } 
                 break;
             case 2:
-                CombatSystem.startCombat(player1, ParkEnemy2);
-                Story3Options();
+                boolean FightResult2 = CombatSystem.startCombat(player1, ParkEnemy2);
+
+                if (FightResult2 == true) {
+                    Dialogue("\nWould you like to fight again?");
+                    Dialogue("\n 1. Yes");
+                    Dialogue("\n 2. No");
+                    Dialogue("\n");
+                    Dialogue("\nYour Choice:");
+                    int TryAgain = scanner.nextInt();
+
+                    if (TryAgain == 1) {
+                        Story3Park();
+                    } else {
+                        Story3Options();
+                    }
+                }    
                 break;
             case 3:
-                CombatSystem.startCombat(player1, ParkEnemy3);
-                Story3Options();
+                boolean FightResult3 = CombatSystem.startCombat(player1, ParkEnemy3);
+
+                if (FightResult3 == true) {
+                    Dialogue("\nWould you like to fight again?");
+                    Dialogue("\n 1. Yes");
+                    Dialogue("\n 2. No");
+                    Dialogue("\n");
+                    Dialogue("\nYour Choice:");
+                    int TryAgain = scanner.nextInt();
+
+                    if (TryAgain == 1) {
+                        Story3Park();
+                    } else {
+                        Story3Options();
+                    }
+                }    
                 break;
             case 4:
                 Story3Park();
@@ -476,10 +518,10 @@ public class Main {
 
             System.out.print("Your Choice: ");
 
-            int NextMoveChoiceS3Forest = scanner.nextInt();
+            PlayerChoice= scanner.nextInt();
             scanner.nextLine(); // Consume the newline
 
-            if (NextMoveChoiceS3Forest == 1) {
+            if (PlayerChoice == 1) {
                 Dialogue("\nYou went deeper in the woods");
                 Dialogue("\n. . . . . . . . . . . . . . .\n");
 
@@ -536,11 +578,12 @@ public class Main {
                 Dialogue("\n");
                 Dialogue("\nChoose your Next Move: ");
 
-                int PlayerCityExplorationChoice = scanner.nextInt();
+                PlayerChoice = scanner.nextInt();
 
-                switch (PlayerCityExplorationChoice) {
+                switch (PlayerChoice) {
                     case 1: // Hospital
                         Dialogue("\nYou went inside the hospital to heal your animal");
+                        Dialogue("\n");
                         Dialogue("\nHealing");
 
                         String HealingLoading = ". . . ";
@@ -555,7 +598,10 @@ public class Main {
 
                         player1.fullHeal();
 
+                        Dialogue("\n");
                         Dialogue("\nYour pet has successfuly healed!");
+
+                        Story3CityExploration();
                         break;
 
 
@@ -575,7 +621,7 @@ public class Main {
                         GameOverDisplay();
                         break;
                     case 3: // Arena
-
+                        Arena();
                         break;
                     case 4:
                         showStats();
@@ -583,7 +629,7 @@ public class Main {
                         break;
 
                     default:
-
+                        Story3CityExploration();
                         break;
                 }
 
@@ -615,14 +661,14 @@ public class Main {
 
                 """);
         
-                try { 
-                    for (char c : VisualArenaMap.toCharArray()) {
-                        System.out.print(c);
-                            Thread.sleep(5);
-                        }
-                    } catch (InterruptedException e) {
-                        System.out.println("An error occurred during loading.");
+            try { 
+                for (char c : VisualArenaMap.toCharArray()) {
+                    System.out.print(c);
+                        Thread.sleep(5);
                     }
+                } catch (InterruptedException e) {
+                    System.out.println("An error occurred during loading.");
+                }
         
         
 
@@ -642,7 +688,7 @@ public class Main {
         Dialogue("\n5. ");
         Dialogue("\n");
         Dialogue("\n╔═════════════════════════════════════════════╗");
-        Dialogue("\n║ 1. Enter the Arena                          ║");
+        Dialogue("\n║ 1. Participate in the Arena                 ║");
         Dialogue("\n║ 2. Leave                                    ║");
         Dialogue("\n║ 3. Show User ID                             ║");
         Dialogue("\n╚═════════════════════════════════════════════╝");
@@ -667,9 +713,26 @@ public class Main {
                 break;
         }
     }
-    
     public static void ArenaBattle() {
+        Mob ArenaEnemy1 = new Mob("Brenna", 70, "Crocodile", 100); // UserName, Health, PetName, PetDamage
+        Mob ArenaEnemy2 = new Mob("Laren", 50, "Lion", 70);
+        Mob ArenaEnemy3 = new Mob("Qaranih", 1000, "Mammoth", 500);
+        Mob ArenaEnemy4 = new Mob("Jabez", 2000, "Kraken", 1500);
+        Mob ArenaEnemy5 = new Mob("Samuel", 5000, "Dragon", 4200);
 
+        CombatSystem.startCombat(player1, ArenaEnemy1);
+        CombatSystem.startCombat(player1, ArenaEnemy2);
+        CombatSystem.startCombat(player1, ArenaEnemy3);
+        CombatSystem.startCombat(player1, ArenaEnemy4);
+        CombatSystem.startCombat(player1, ArenaEnemy5);
+
+        Dialogue("""
+
+            
+                ╔═══════════════════════════════════════════╗
+                ║ CONGRATULATIONS YOU HAVE BEATEN THE GAME  ║
+                ╚═══════════════════════════════════════════╝
+                """);
     }
     // ====================================== SET METHODS ====================================== \\
     public static void getNameAndDialogueSpeed() {

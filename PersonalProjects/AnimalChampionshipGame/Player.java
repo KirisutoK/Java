@@ -92,19 +92,19 @@ public class Player {
         this.Experience -= this.ExperienceToNextLevel;
         this.ExperienceToNextLevel = (int)(this.ExperienceToNextLevel * 1.5); // Increase exp needed by 50%
         
-        // Stat increases on level up
-        int healthIncrease = 20;
-        int damageIncrease = 5;
-
-        this.MaxHealth += healthIncrease;
+        // Calculate 100% of current stats (double them)
+        int healthIncrease = this.MaxHealth; // 100% of max health
+        int damageIncrease = this.PetDamage; // 100% of damage
         
-        this.Health += healthIncrease;
-        this.PetDamage += damageIncrease;
+        // Apply increases
+        this.MaxHealth += healthIncrease;  // Doubles max health
+        this.Health += healthIncrease;      // Adds to current health
+        this.PetDamage += damageIncrease;   // Doubles damage
         
         Dialogue("\n\n[" + getLevel() +"] LEVEL UP! " + "[" + getLevel() +"]");
         Dialogue("\n\nYour " + this.Pet + " is now Level " + this.Level + "!");
-        Dialogue("\nHealth increased by " + healthIncrease + "!");
-        Dialogue("\nDamage increased by " + damageIncrease + "!");
+        Dialogue("\nHealth increased by " + healthIncrease + "! (New Max: " + this.MaxHealth + ")");
+        Dialogue("\nDamage increased by " + damageIncrease + "! (New Damage: " + this.PetDamage + ")");
         Dialogue("\nNext level at: " + this.ExperienceToNextLevel + " EXP");
     }
 
