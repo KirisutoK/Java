@@ -20,6 +20,7 @@ public class Main {
     // ========== GLOBAL VARIABLES =========== \\
     static int DialogueSpeed = 0;
     static boolean hasRolledParkSecret = false;
+    static boolean hasRolledExploreCitySecret = false;
     static int PlayerChoice = 0;
 
     // ======================================== \\
@@ -537,6 +538,32 @@ public class Main {
         }
     }
     public static void Story3CityExploration() {
+
+        int RollExploreCitySecret = random.nextInt(10)+1;
+
+        if (hasRolledExploreCitySecret == false) {
+            hasRolledExploreCitySecret = true;
+            if (RollExploreCitySecret <=1) {
+                player1.setMaxHealth(100);
+                player1.setPetDamage(100);
+                player1.fullHeal();
+
+                Dialogue("""
+                    
+                        ╔═══════════════════════════════╗
+                        ║ MYSTERIOUS BLESSING OBTAINED! ║
+                        ╚═══════════════════════════════╝
+
+                        """);
+                Dialogue("\nYour MaxHealth is increased by 100!");
+                Dialogue("\nYour MaxHealth is increased by 100!");
+                Dialogue("\n");
+
+                showStats();
+            }
+        }
+
+
         String VisualExploreCity = ("""
 
                 ═══════════╗
@@ -728,7 +755,7 @@ public class Main {
 
         Dialogue("""
 
-            
+
                 ╔═══════════════════════════════════════════╗
                 ║ CONGRATULATIONS YOU HAVE BEATEN THE GAME  ║
                 ╚═══════════════════════════════════════════╝
