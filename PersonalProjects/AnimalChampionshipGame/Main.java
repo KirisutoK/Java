@@ -600,7 +600,8 @@ public class Main {
                 Dialogue("\n║ 1. Go to the Hospital.                      ║");
                 Dialogue("\n║ 2. Follow the Suspicious Man                ║");
                 Dialogue("\n║ 3. Enter the Arena.                         ║");
-                Dialogue("\n║ 4. Show User ID                             ║");
+                Dialogue("\n║ 4. Go Back                                  ║")
+                Dialogue("\n║ 5. Show User ID                             ║");
                 Dialogue("\n╚═════════════════════════════════════════════╝");
                 Dialogue("\n");
                 Dialogue("\nChoose your Next Move: ");
@@ -651,6 +652,9 @@ public class Main {
                         Arena();
                         break;
                     case 4:
+                        Story3Options();
+                        break;
+                    case 5:
                         showStats();
                         Story3CityExploration();
                         break;
