@@ -17,6 +17,12 @@ public class Main {
 
     static Player player1 = new Player(" ", 0, " ", 0); // UserName, Health, Pet, PetDamage
 
+    static Mob ArenaEnemy1 = new Mob("Brenna", 70, "Crocodile", 100); // originally was made in ArenaBattle Method but theres 2 methods that need this.
+    static Mob ArenaEnemy2 = new Mob("Laren", 50, "Lion", 70);
+    static Mob ArenaEnemy3 = new Mob("Qaranih", 1000, "Mammoth", 500);
+    static Mob ArenaEnemy4 = new Mob("Jabez", 2000, "Kraken", 1500);
+    static Mob ArenaEnemy5 = new Mob("Samuel", 5000, "Dragon", 4200);
+
     // ========== GLOBAL VARIABLES =========== \\
     static int DialogueSpeed = 0;
     static boolean hasRolledParkSecret = false;
@@ -712,11 +718,11 @@ public class Main {
                 """);
 
         Dialogue("\nThere Are 5 opponents that you have to beat to get the Championship: ");
-        Dialogue("\n1. ");
-        Dialogue("\n2. ");
-        Dialogue("\n3. ");
-        Dialogue("\n4. ");
-        Dialogue("\n5. ");
+        Dialogue("\n1. " + ArenaEnemy1.getUserName() + " (Pet: " + ArenaEnemy1.getPet() + " | HP: " + ArenaEnemy1.getHealth() + " | DMG: " + ArenaEnemy1.getPetDamage() + ")");
+        Dialogue("\n1. " + ArenaEnemy2.getUserName() + " (Pet: " + ArenaEnemy2.getPet() + " | HP: " + ArenaEnemy2.getHealth() + " | DMG: " + ArenaEnemy2.getPetDamage() + ")");
+        Dialogue("\n1. " + ArenaEnemy3.getUserName() + " (Pet: " + ArenaEnemy3.getPet() + " | HP: " + ArenaEnemy3.getHealth() + " | DMG: " + ArenaEnemy3.getPetDamage() + ")");
+        Dialogue("\n1. " + ArenaEnemy4.getUserName() + " (Pet: " + ArenaEnemy4.getPet() + " | HP: " + ArenaEnemy4.getHealth() + " | DMG: " + ArenaEnemy4.getPetDamage() + ")");
+        Dialogue("\n1. " + ArenaEnemy5.getUserName() + " (Pet: " + ArenaEnemy5.getPet() + " | HP: " + ArenaEnemy5.getHealth() + " | DMG: " + ArenaEnemy5.getPetDamage() + ")");
         Dialogue("\n");
         Dialogue("\n╔═════════════════════════════════════════════╗");
         Dialogue("\n║ 1. Participate in the Arena                 ║");
@@ -745,12 +751,6 @@ public class Main {
         }
     }
     public static void ArenaBattle() {
-        Mob ArenaEnemy1 = new Mob("Brenna", 70, "Crocodile", 100); // UserName, Health, PetName, PetDamage
-        Mob ArenaEnemy2 = new Mob("Laren", 50, "Lion", 70);
-        Mob ArenaEnemy3 = new Mob("Qaranih", 1000, "Mammoth", 500);
-        Mob ArenaEnemy4 = new Mob("Jabez", 2000, "Kraken", 1500);
-        Mob ArenaEnemy5 = new Mob("Samuel", 5000, "Dragon", 4200);
-
         CombatSystem.startCombat(player1, ArenaEnemy1);
         CombatSystem.startCombat(player1, ArenaEnemy2);
         CombatSystem.startCombat(player1, ArenaEnemy3);
