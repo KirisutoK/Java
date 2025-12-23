@@ -22,6 +22,8 @@ public class CreditCalculation {
         System.out.println("Enter your total 2027 Spring Credit Hours:");
         int Spring2027CreditsHrs = scanner.nextInt();
 
+        scanner.close();
+
         int TotalCreditHours = Fall2025CreditsHrs + Spring2026CreditsHrs + Fall2026CreditsHrs + Spring2027CreditsHrs;
 
         if (TotalCreditHours >=60){

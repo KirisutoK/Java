@@ -294,6 +294,7 @@ public class About_Me {
 
         if (CASE1RETURN == 'y' || CASE1RETURN == 'Y') {
             main(new String[0]);
+            scanner.close();
             return;
         } else {
             System.out.println("\nThank you for your time!");
