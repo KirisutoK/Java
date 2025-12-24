@@ -24,8 +24,9 @@ public class SSConstantTime1 {
     }
 
     public static void main(String[] args) {
-        int[] LoadUpCompiler = {9999999};
-        LoadUpCompiler[0] = 99999;
+        int[] LoadUpCompiler = new int[9999999];
+        LoadUpCompiler[0] = 99919;
+        LoadUpCompiler[1] = 12345;
         int[] small = {1, 2, 3};
         int[] huge = new int[1000000];
         huge[0] = 42;
