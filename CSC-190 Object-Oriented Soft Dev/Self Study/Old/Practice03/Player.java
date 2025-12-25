@@ -9,13 +9,16 @@ public class Player {
         this.damage = d;
     }
 
-    //=================RETURNS================\\
-    public String setName(String n) {
+    //=================SETTERS & GETTERS================\\
+
+    public String getName(String n) {
         name = n;
+        return name;
     }
 
+
     //===================VOID==================\\
-    public static void displayUserStats() {
+    public void displayUserStats() {
         System.out.println("Username: " + name);
         System.out.println("Health: " + health);
         System.out.println("Damage: " + damage);
