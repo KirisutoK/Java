@@ -12,6 +12,8 @@ public class Main {
         student3.DisplayInfo();
         System.out.println(" ");
         System.out.println("UPDATING INFORMATION...");
+        System.out.println(".."); // creates a new space for readability
+        System.out.println("."); // creates a new space for readability
 
         student2.setGPA(5.0);
         student2.setMajor("AuraFarming");

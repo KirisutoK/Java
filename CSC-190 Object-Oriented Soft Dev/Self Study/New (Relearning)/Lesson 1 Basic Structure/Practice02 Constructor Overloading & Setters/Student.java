@@ -38,25 +38,25 @@ public class Student {
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-    public String setName(String name) {
-        return Name = name;
+    public void setName(String name) {
+        Name = name;
     }
-    public int setStudentID(int studentid) {
-        return StudentID = studentid;
+    public void setStudentID(int studentid) {
+        StudentID = studentid;
     }
-    public double setGPA(double gpa) {
-        return GPA = gpa;
+    public void setGPA(double gpa) {
+        GPA = gpa;
     }
-    public String setMajor(String major) {
-        return Major = major;
+    public void setMajor(String major) {
+        Major = major;
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void DisplayInfo() { 
         System.out.println("Name: " + Name);
-        System.out.println("Student ID: " + Name);
-        System.out.println("GPA: " + Name);
-        System.out.println("Major: " + Name);
+        System.out.println("Student ID: " + StudentID);
+        System.out.println("GPA: " + GPA);
+        System.out.println("Major: " + Major);
     }
     
 }
