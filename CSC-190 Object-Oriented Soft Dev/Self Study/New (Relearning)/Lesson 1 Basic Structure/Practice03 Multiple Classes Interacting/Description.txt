@@ -1,0 +1,48 @@
+Challenge #3: Multiple Classes Interacting
+    This one tests if you can make classes work together, which is crucial for OOP.
+    Create a Library System with two classes:
+
+Class 1: Book
+
+→ Private attributes: 
+    • title (String), 
+    • author (String), 
+    • isbn (String), 
+    • isAvailable (boolean)
+→ Constructor that takes title, author, and isbn (set isAvailable to true by default)
+→ Getters for all attributes
+→ Method borrowBook() - sets isAvailable to false and prints a message
+→ Method returnBook() - sets isAvailable to true and prints a message
+→ Method to display book info
+
+Class 2: Member
+→ Private attributes: 
+    • memberName (String), 
+    • memberId (int), 
+    • borrowedBook (Book) - this holds a Book object!
+→ Constructor that takes memberName and memberId
+→ Getters for all attributes
+→ Method borrowBook(Book book) - takes a Book parameter, checks if it's available, if yes: borrows it and stores it in borrowedBook, if no: prints "Book not available"
+→ Method returnBook() - returns the borrowed book (if they have one) and sets borrowedBook to null
+→ Method to display member info including borrowed book details
+
+In Main:
+    • Create 3 books
+    • Create 2 members
+    • Have member 1 borrow a book
+    • Have member 2 try to borrow the same book (should fail)
+    • Have member 1 return the book
+    • Have member 2 borrow it successfully now
+    • Display all information
+
+
+===========================================
+    What I'm testing:
+
+    Classes referencing other classes
+    Object composition (Member "has-a" Book)
+    Methods that take objects as parameters
+    Logic and state management
+
+    This is more complex - take your time!
+===========================================
