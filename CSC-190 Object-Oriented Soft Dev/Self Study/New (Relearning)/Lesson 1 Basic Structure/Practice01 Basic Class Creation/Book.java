@@ -1,25 +1,4 @@
-/*
-    Practice #1: Basic Class Creation
-    Create a Book class with the following requirements:
-    Requirements:
-
-    1. The class should have three private attributes:
-        title (String)
-        author (String)
-        pageCount (int)
-    2. Create a constructor that takes all three parameters and initializes the attributes
-    3. Create getter methods for all three attributes
-    4. Create a method called getBookInfo() that returns a String with all the book information formatted nicely (however you want to format it)
-    5. In your main method, create at least 2 Book objects and print their information
-
-    NOTES:
-    1. There are 3 classifications of Variables
-        1. Private
-        2. Public
-        3. Protected
-*/
-
-public class Book { 
+public class Book {
     private String Title = "";
     private String Author = "";
     private int PageCount = 0;

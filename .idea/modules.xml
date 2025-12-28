@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/References/AI/AI.iml" filepath="$PROJECT_DIR$/References/AI/AI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/References/Benny/Benny.iml" filepath="$PROJECT_DIR$/References/Benny/Benny.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CSC-000 Self Study/CSC-000 Self Study.iml" filepath="$PROJECT_DIR$/CSC-000 Self Study/CSC-000 Self Study.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CSC-115 Introduction to Programming/CSC-115 Introduction to Programming.iml" filepath="$PROJECT_DIR$/CSC-115 Introduction to Programming/CSC-115 Introduction to Programming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Coding.iml" filepath="$PROJECT_DIR$/Coding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CSC-000 Self Study/Data Structures &amp; Algorithms/Data Structures &amp; Algorithms.iml" filepath="$PROJECT_DIR$/CSC-000 Self Study/Data Structures &amp; Algorithms/Data Structures &amp; Algorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CSC-000 Self Study/Hash/Hash.iml" filepath="$PROJECT_DIR$/CSC-000 Self Study/Hash/Hash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/References/Professor Paige Labar/Professor Paige Labar.iml" filepath="$PROJECT_DIR$/References/Professor Paige Labar/Professor Paige Labar.iml" />
+    </modules>
+  </component>
+</project>

@@ -24,14 +24,16 @@ public class Member {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void memberborrowBook(Book b) { //Book = DataType | book = variable
         if (b.getIsAvailable() == true) { //Checks if Book is available through the variable in the Book Class
-            b.borrowBook(); // turns isAvailable to false
+            b.borrowBook(MemberName); // turns isAvailable to false
+            this.MemberBook = b; // Assigns the borrowed book to the member
         } else {
-            System.out.println("Book is not available");
+            System.out.println(b.getTitle() + " is not available");
         }
     }
 
     public void returnBook(Book b) {
-        b.returnBook();
+        b.returnBook(MemberName);
+        this.MemberBook = null;
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
@@ -39,6 +41,11 @@ public class Member {
     public void DisplayMemberBookInfo() {
         System.out.println("Member Name: " + MemberName);
         System.out.println("Member ID: " + MemberID);
-        System.out.println("Member Book: " + MemberBook);
+        if (MemberBook == null) {
+            System.out.println("Member Book: None");
+            return;
+        } else {
+            System.out.println("Member Book: " + MemberBook.getTitle());
+        }
     }
 }

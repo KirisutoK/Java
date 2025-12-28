@@ -27,11 +27,13 @@ public class Book {
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-    public void borrowBook() { // Sets the IsAvailabe to false
+    public void borrowBook(String membername) { // Sets the IsAvailabe to false
         this.IsAvailable = false;
+        System.out.println(membername + " have borrowed: " + Title);
     }
-    public void returnBook() { // Sets the IsAvailabe to true
+    public void returnBook(String membername) { // Sets the IsAvailabe to true
         this.IsAvailable = true;
+        System.out.println(membername + " have returned: " + Title);
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
