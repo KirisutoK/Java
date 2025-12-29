@@ -14,6 +14,13 @@ public class BankAccounts {
         this.AccountHolder = accountholder;
     }
 
+    public BankAccounts() {
+        // This shows that the constructor is empty but still has default values
+        // Account Number:
+        // Account Holder:
+        // Account Balance:
+    }
+
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
     public String getAccountNumber() {
         return AccountNumber;
@@ -32,13 +39,14 @@ public class BankAccounts {
         System.out.println("1. Yes");
         System.out.println("2. No");
         System.out.println(" "); // Space for Readability
+        System.out.print("\nAnswer Box: ");
 
         int DepositChoice = scanner.nextInt();
         if (DepositChoice == 1) {
             AccountBalance += amount;
-            System.out.println("Transaction Completed");
+            System.out.println("\nTransaction Completed");
         } else {
-            System.out.println("Transction Declined");
+            System.out.println("\nTransaction Declined");
         }
     }
     public void withdraw(Double amount) {
@@ -47,16 +55,17 @@ public class BankAccounts {
             System.out.println("1. Yes");
             System.out.println("2. No");
             System.out.println(" "); // Space for Readability
+            System.out.println("\nAnswer Box: ");
 
             int WithdawChoice = scanner.nextInt();
             if (WithdawChoice == 1) {
                 AccountBalance -= amount;
-                System.out.println("Transaction Completed");
+                System.out.println("\nTransaction Completed");
             } else {
-                System.out.println("Transaction Declined");
+                System.out.println("\nTransaction Declined");
             }
         } else {
-            System.out.println("Insufficient Account Balance");
+            System.out.println("\nInsufficient Account Balance");
             System.out.println(" "); // Space for Readability
             System.out.println("Transaction Declined.");
         }
@@ -67,6 +76,7 @@ public class BankAccounts {
             System.out.println("1. Yes");
             System.out.println("2. No");
             System.out.println(" "); // Space for Readability
+            System.out.print("\nAnswer Box: ");
 
             int WithdawChoice = scanner.nextInt();
             if (WithdawChoice == 1) {
