@@ -1,5 +1,5 @@
 # JAVA
-  #### This is where all i put my java files and its where i edit.
+  #### This is where all I put my java files, and it's where I edit.
 
   ### How to open the files or run it?
   #### Just click a specific chapter down below
