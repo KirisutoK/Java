@@ -39,7 +39,7 @@ public class BankAccounts {
         System.out.println("1. Yes");
         System.out.println("2. No");
         System.out.println(" "); // Space for Readability
-        System.out.print("\nAnswer Box: ");
+        System.out.print("Answer Box: ");
 
         int DepositChoice = scanner.nextInt();
         if (DepositChoice == 1) {
@@ -50,12 +50,12 @@ public class BankAccounts {
         }
     }
     public void withdraw(Double amount) {
-        if (AccountBalance <= amount) { // If AccountBalance is less than the amount needed to withdraw
+        if (amount <= AccountBalance) { // If AccountBalance is less than the amount needed to withdraw
             System.out.println("Would you like to withdraw $" + amount + " to your account?");
             System.out.println("1. Yes");
             System.out.println("2. No");
             System.out.println(" "); // Space for Readability
-            System.out.println("\nAnswer Box: ");
+            System.out.print("Answer Box: ");
 
             int WithdawChoice = scanner.nextInt();
             if (WithdawChoice == 1) {
@@ -71,23 +71,23 @@ public class BankAccounts {
         }
     }
     public void transfer(BankAccounts targetaccount, Double amount) {
-        if (AccountBalance <= amount) { // If AccountBalance is less than the amount needed to withdraw
+        if (AccountBalance >= amount) { // If AccountBalance is less than the amount needed to withdraw
             System.out.println("Would you like to transfer $" + amount + " to " + targetaccount.getAccountHolder() + "?");
             System.out.println("1. Yes");
             System.out.println("2. No");
             System.out.println(" "); // Space for Readability
-            System.out.print("\nAnswer Box: ");
+            System.out.print("Answer Box: ");
 
             int WithdawChoice = scanner.nextInt();
             if (WithdawChoice == 1) {
                 AccountBalance -= amount;
-                amount += targetaccount.AccountBalance;
-                System.out.println("Transaction Completed");
+                targetaccount.AccountBalance += amount ;
+                System.out.println("\nTransaction Completed");
             } else {
-                System.out.println("Transaction Declined");
+                System.out.println("\nTransaction Declined");
             }
         } else {
-            System.out.println("Insufficient Account Balance");
+            System.out.println("\nInsufficient Account Balance");
             System.out.println(" "); // Space for Readability
             System.out.println("Transaction Declined.");
         }
