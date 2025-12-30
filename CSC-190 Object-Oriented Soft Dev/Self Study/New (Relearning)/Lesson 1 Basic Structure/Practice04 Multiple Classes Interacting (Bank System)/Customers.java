@@ -9,8 +9,8 @@ public class Customers {
     private BankAccounts PrimaryAccount; // has default values but not changeable values
     private BankAccounts SavingsAccount; // has default values but not changeable values
 
-    static Boolean hasPrimaryAccount = false; // Checks if they have opened a primary account
-    static Boolean hasSavingsAccount = false; // Checks if they have opened a savings account
+    private Boolean hasPrimaryAccount = false; // Checks if they have opened a primary account
+    private Boolean hasSavingsAccount = false; // Checks if they have opened a savings account
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public Customers(String CustomerName, int CustomerID) {

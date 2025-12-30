@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class BankAccounts {
-    static Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
     //==========VARIABLES==========\\
     private String AccountNumber = "";
@@ -12,13 +12,6 @@ public class BankAccounts {
     public BankAccounts(String accountholder, String accountnumber) {
         this.AccountNumber = accountnumber;
         this.AccountHolder = accountholder;
-    }
-
-    public BankAccounts() {
-        // This shows that the constructor is empty but still has default values
-        // Account Number:
-        // Account Holder:
-        // Account Balance:
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES

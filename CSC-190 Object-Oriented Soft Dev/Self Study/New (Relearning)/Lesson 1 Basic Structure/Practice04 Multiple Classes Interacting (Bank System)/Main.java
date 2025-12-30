@@ -38,13 +38,13 @@ public class Main {
         customer2.getPrimaryAccount().withdraw(1000.0); // WITHDRAWS 1000.0 FROM BANK ACCOUNT
         System.out.println(" "); // Space for readability
 
-        customer1.getPrimaryAccount().DisplayBankAccountInfo();
+        customer1.getPrimaryAccount().DisplayBankAccountInfo(); // Checks Customer1's Primary Bank Information
         System.out.println(" "); // Space for readability
-        customer1.getSavingsAccount().DisplayBankAccountInfo();
+        customer1.getSavingsAccount().DisplayBankAccountInfo(); // Checks Customer1's Savings Bank Information
         System.out.println(" "); // Space for readability
-        customer2.getPrimaryAccount().DisplayBankAccountInfo();
+        customer2.getPrimaryAccount().DisplayBankAccountInfo(); // Checks Customer2's Primary Bank Information
         System.out.println(" "); // Space for readability
-        customer2.getSavingsAccount().DisplayBankAccountInfo();
+        customer2.getSavingsAccount().DisplayBankAccountInfo(); // Checks Customer2's Savings Bank Information
         System.out.println(" "); // Space for readability
     }
 }
