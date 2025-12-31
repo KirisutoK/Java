@@ -6,7 +6,7 @@ public class Customer {
     public Customer(String name, int id) {
         this.CustomerName = name;
         this.CustomerID = id;
-        Order CustomerOrder = new Order();  // BUG HERE - Order constructor needs parameter
+        CustomerOrder = new Order(20);  // BUG HERE - Order constructor needs parameter // Solution: All customers who order has a limit of 20 orders (can be flexible with ArrayList)
     }
 
     public void placeOrder(Item item) {

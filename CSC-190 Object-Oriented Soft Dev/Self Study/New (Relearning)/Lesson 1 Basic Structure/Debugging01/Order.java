@@ -1,3 +1,8 @@
+// So there was an Array bug here and i have noticed that the array parameters is not versatile, it puts a fixed amount every time a costumer opens an order
+// I wanted to create an array that is flexible towards customers which is able to take many orders (has no limits)
+import java.util.ArrayList;
+
+
 public class Order {
     private Item[] items;
     private int itemCount;
@@ -21,8 +26,8 @@ public class Order {
     }
 
     public double calculateTotal() {
-        double total = 0;
-        for (int i = 0; i <= itemCount; i++) {  // BUG HERE - array bounds
+        double total = 0.0;
+        for (int i = 0; i < itemCount; i++) {  // BUG HERE - array bounds
             total += items[i].getPrice();
         }
         return total;
