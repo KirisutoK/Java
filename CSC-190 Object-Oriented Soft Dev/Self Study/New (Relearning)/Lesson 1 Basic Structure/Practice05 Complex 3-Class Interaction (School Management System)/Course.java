@@ -1,18 +1,16 @@
-import javax.xml.transform.Source;
-
 public class Course {
     //=======VARIABLES=======//
     private String CourseName;
     private String CourseCode;
-    private String Instructor;
+    private String Professor;
     private int MaxStudents;
     private int EnrolledStudents = 0;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    public Course(String CourseName, String CourseCode, String Instructor, int MaxStudents) {
+    public Course(String CourseName, String CourseCode, String Professor, int MaxStudents) {
         this.CourseName = CourseName; // this. tells the code that it is telling the private variables above, not the parameter.
         this.CourseCode = CourseCode; // this. tells the code that it is telling the private variables above, not the parameter.
-        this.Instructor = Instructor; // this. tells the code that it is telling the private variables above, not the parameter.
+        this.Professor = Professor; // this. tells the code that it is telling the private variables above, not the parameter.
         this.MaxStudents = MaxStudents; // this. tells the code that it is telling the private variables above, not the parameter.
     }
 
@@ -23,8 +21,8 @@ public class Course {
     public String getCourseCode() {
         return CourseCode;
     }
-    public String getInstructor() {
-        return Instructor;
+    public String getProfessor() {
+        return Professor;
     }
     public int getMaxStudents() {
         return MaxStudents;
@@ -59,5 +57,13 @@ public class Course {
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+    public void DispalyCourseInformation() {
+        System.out.println("Course: " + CourseName);
+        System.out.println("Course Code: " + CourseCode);
+        System.out.println("Professor: " + Professor);
+        System.out.println("Course: " + CourseName);
+        System.out.println("Max Students: " + MaxStudents);
+        System.out.println("Enrolled Students: " + EnrolledStudents);
+    }
 
 }
