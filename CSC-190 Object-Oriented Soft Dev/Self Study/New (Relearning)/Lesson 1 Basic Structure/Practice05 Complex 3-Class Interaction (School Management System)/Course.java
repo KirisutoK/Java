@@ -30,7 +30,7 @@ public class Course {
     public int getEnrolledStudents() {
         return EnrolledStudents;
     }
-    public boolean isItFull() { // Checks if the course if full
+    public boolean isItFull() { // Checks if the course is full
         if (EnrolledStudents >= MaxStudents) {
             return true;
         } else {

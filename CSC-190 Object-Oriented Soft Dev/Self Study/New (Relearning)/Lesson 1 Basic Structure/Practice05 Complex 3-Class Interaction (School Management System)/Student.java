@@ -25,14 +25,39 @@ public class Student {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void enrollInCourse(Course course) {
         // Add iteration to check if course is in the EnrolledCourse[]
+        for (int i = 0; i < CourseCount; i++) { // Checks on all the enrolled courses in the array (not all the array values inside)
+            if (EnrolledCourse[i].equals(course)) { // Checks if the enrolled course is the same as the course that needs to be enrolled
+                System.out.println("You are already enrolled in this course.");
+                return; // this stops the iteration and moves in into the next code
+            }
+        }
 
-
-        if (CourseCount >= EnrolledCourse.length) {
+        if (CourseCount >= EnrolledCourse.length) { // Checks if it exceeds the maximum amount of classes a student can take.
             System.out.println("You have reached the maximum amount of courses you can take.");
-        } else if (course.isItFull() == true) {
+        } else if (course.isItFull() == true) { // Checks if the courses is full.
             System.out.println("Course is full.");
         } else {
+            EnrolledCourse[CourseCount] = course; // Course Count is what is the available open position in the array, course is the value that is going to put in so basically EnrolledCourse[position] = value
+            CourseCount++;
+            course.enrollStudent(this.StudentName);
+        }
+    }
 
+    public void dropCourse(Course course) {
+        // Removes the value inside the array
+        // Decrease CourseCount
+        // active dropStudent method
+
+
+        for (int i = 0; i < CourseCount; i++) { // for every CourseCount
+            if (EnrolledCourse[i].equals(course)) { // Checks if the courses matches the courses inside the arra
+
+
+
+
+                course.dropStudent(this.StudentName); // Drops the course
+                CourseCount--;
+            }
         }
     }
 

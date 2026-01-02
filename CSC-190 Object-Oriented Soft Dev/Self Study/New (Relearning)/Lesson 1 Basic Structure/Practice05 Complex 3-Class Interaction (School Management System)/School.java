@@ -1,3 +1,3 @@
-public class Java {
+public class School {
 
 }
