@@ -50,7 +50,7 @@ public class Student {
 
 
         for (int i = 0; i < CourseCount; i++) { // for every CourseCount
-            if (EnrolledCourse[i].equals(course)) { // Checks if the courses matches the courses inside the arra
+            if (EnrolledCourse[i].equals(course)) { // Checks if the courses matches the courses inside the array
 
 
 

@@ -1,0 +1,18 @@
+===Regular Array===
+
+Practice01.java:
+    • Adding values inside an array and printing one specific value inside an array.
+
+Practice02.java:
+    • Prints a randomized value from an array.
+
+Practice03.java:
+    • Ask's users for an input to store a value inside an array.
+
+Practice04.java:
+    • Ask's users to determine how big (maximum values) inside an array.
+    • Prints each value inside an array by using for loops.
+
+Practice05.java:
+    • Removes a specific value inside an array and fill out the removed value inside an array.
+    • Prints each value inside an array by using for loops.
