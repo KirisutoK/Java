@@ -3,7 +3,7 @@
 
 import java.util.Scanner;
 
-public class SelfStudyArray04 {
+public class Practice04 {
     public static void main(String[] args) {
         CustomizeableArray();
     }

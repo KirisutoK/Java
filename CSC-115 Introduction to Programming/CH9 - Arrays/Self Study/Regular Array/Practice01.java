@@ -1,4 +1,4 @@
-public class SelfStudyArray01 {
+public class Practice01 {
     public static void main(String[]args) {
         
         String[] Foods = {"Noodles", "Burgers", "Pizza", "Donut"};

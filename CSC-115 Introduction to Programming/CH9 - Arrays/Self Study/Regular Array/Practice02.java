@@ -3,7 +3,7 @@
 
 import java.util.Random;
 
-public class SelfStudyArray02 {
+public class Practice02 {
     public static void main(String[]args) {
         Random random = new Random();
         
