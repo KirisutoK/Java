@@ -1,0 +1,67 @@
+Challenge #5b: Complex 3-Class Interaction (School Management System)
+This is the most complex challenge yet. You'll have 3 classes working together with multiple relationships.
+Create a School Management System:
+
+Class 1: Course
+    • Private attributes: courseName (String), courseCode (String), instructor (String), maxStudents (int), enrolledCount (int)
+    • Constructor takes courseName, courseCode, instructor, and maxStudents (set enrolledCount to 0)
+    • Getters for all attributes
+    • Method enrollStudent() - increases enrolledCount by 1 if course isn't full, returns true if successful, false if full
+    • Method dropStudent() - decreases enrolledCount by 1 if there are enrolled students, returns true if successful, false if no students enrolled
+    • Method isFull() - returns true if enrolledCount >= maxStudents
+    • Method to display course info including how many spots are left
+
+
+Class 2: Student
+ • Private attributes: studentName (String), studentId (int), enrolledCourses (Course array with size 5 - max 5 courses per student), courseCount (int - tracks how many courses enrolled)
+ • Constructor takes studentName and studentId (initialize the array, set courseCount to 0)
+ • Getters for studentName, studentId, and courseCount
+ • Method enrollInCourse(Course course) - attempts to enroll in a course. Check if:
+    → Student isn't already at max courses (5)
+    → Course isn't full
+    → Student isn't already enrolled in this course (check the array)
+    → If all checks pass: add course to array, increment courseCount, call course.enrollStudent(), print success message
+    → If any check fails: print appropriate error message
+ • Method dropCourse(Course course) - finds the course in the array, removes it, shifts remaining courses left in array, decrements courseCount, calls course.dropStudent()
+ • Method to display student info including all enrolled courses
+
+
+Class 3: School
+    • Private attributes: schoolName (String), students (Student array with size 10), studentCount (int), courses (Course array with size 5), courseCount (int)
+    • Constructor takes schoolName (initialize arrays, set counts to 0)
+    • Method addStudent(Student student) - adds student to array if space available
+    • Method addCourse(Course course) - adds course to array if space available
+    • Method findStudent(int studentId) - searches student array and returns the Student object (or null if not found)
+    • Method findCourse(String courseCode) - searches course array and returns the Course object (or null if not found)
+    • Method displayAllStudents() - displays info for all students
+    • Method displayAllCourses() - displays info for all courses
+
+
+In Main:
+    • Create a School
+    • Create 3 courses with different max student limits (e.g., 2, 3, 2)
+    • Add courses to the school
+    • Create 4 students
+    • Add students to the school
+    • Have students enroll in various courses:
+        → Student 1 enrolls in Course 1 and Course 2
+        → Student 2 enrolls in Course 1 and Course 2
+        → Student 3 tries to enroll in Course 1 (should fail - course full)
+        → Student 3 enrolls in Course 3
+        → Student 1 tries to enroll in Course 3
+    • Student 1 drops Course 2
+    • Student 4 enrolls in Course 2 (should succeed now)
+
+    • Display all students and their enrolled courses
+    • Display all courses and their enrollment numbers
+
+
+What I'm testing:
+Managing arrays of objects within objects (School has Students, Students have Courses)
+Complex validation logic across multiple classes
+Methods that interact with methods in other classes
+Searching through arrays
+Array manipulation (removing items, shifting elements)
+Return values to indicate success/failure
+
+This is challenging! Take your time and work through it step by step. Don't hesitate to test as you go.

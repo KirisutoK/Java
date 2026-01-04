@@ -44,7 +44,7 @@ public class Course {
             System.out.println("Course is Full!");
         } else {
             EnrolledStudents += 1;
-            System.out.println(studentname + " has successfully enrolled the course.");
+            System.out.println(studentname + " has successfully enrolled in " + CourseName);
         }
     }
     public void dropStudent(String studentname) { // To Drop a Student
@@ -52,7 +52,7 @@ public class Course {
             System.out.println("There are no students in the course.");
         } else {
             EnrolledStudents -= 1;
-            System.out.println(studentname + " has successfully dropped the course.");
+            System.out.println(studentname + " has successfully dropped " + CourseName);
         }
     }
 

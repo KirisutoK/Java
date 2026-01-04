@@ -25,17 +25,17 @@ public class Student {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void enrollInCourse(Course course) {
         // Add iteration to check if course is in the EnrolledCourse[]
-        for (int i = 0; i < CourseCount; i++) { // Checks on all the enrolled courses in the array (not all the array values inside)
+        for (int i = 0; i < CourseCount; i++) { // Checks from 0 to how many course count
             if (EnrolledCourse[i].equals(course)) { // Checks if the enrolled course is the same as the course that needs to be enrolled
-                System.out.println("You are already enrolled in this course.");
+                System.out.println(StudentName + " is already enrolled in " + course.getCourseName());
                 return; // this stops the iteration and moves in into the next code
             }
         }
 
         if (CourseCount >= EnrolledCourse.length) { // Checks if it exceeds the maximum amount of classes a student can take.
-            System.out.println("You have reached the maximum amount of courses you can take.");
+            System.out.println(StudentName + " has reached the maximum amount of courses enrolled");
         } else if (course.isItFull() == true) { // Checks if the courses is full.
-            System.out.println("Course is full.");
+            System.out.println(course.getCourseName() + " Course is full.");
         } else {
             EnrolledCourse[CourseCount] = course; // Course Count is what is the available open position in the array, course is the value that is going to put in so basically EnrolledCourse[position] = value
             CourseCount++;
@@ -44,22 +44,39 @@ public class Student {
     }
 
     public void dropCourse(Course course) {
-        // Removes the value inside the array
-        // Decrease CourseCount
-        // active dropStudent method
+        int Position = -1;
 
-
-        for (int i = 0; i < CourseCount; i++) { // for every CourseCount
-            if (EnrolledCourse[i].equals(course)) { // Checks if the courses matches the courses inside the array
-
-
-
-
-                course.dropStudent(this.StudentName); // Drops the course
-                CourseCount--;
+        for (int i = 0; i < CourseCount; i++) { // FIND POSITION OF THE COURSE
+            if (course.equals(EnrolledCourse[i])) { // if the value of course is equal to the value inside EnrolledCourse then do this
+                Position = i;
+                break; // so that when it is found, the code breaks (To make the thing go faster)
             }
+        }
+
+        if (Position != -1) { // If they are not equal
+            for (int i = Position; i < CourseCount; i++) { // Position - Course Count
+                if (i != CourseCount-1) { // if they not equal then do this
+                    EnrolledCourse[i] = EnrolledCourse[i + 1];
+                } else { // if i equal to CourseCount then do this
+                    EnrolledCourse[i] = null;
+                }
+            }
+            CourseCount--;
+            System.out.println(StudentName + " have successfully dropped " + course.getCourseName());
+        } else { // if it's still the same then do this
+            System.out.println(StudentName + " is not enrolled in " + course.getCourseName());
         }
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+    public void DisplayStudentInformation() {
+        System.out.println("Student Name: " + StudentName);
+        System.out.println("Student ID: " + StudentID);
+        System.out.print("Courses Enrolled: " );
+        for (int i = 0; i < CourseCount; i++) {
+            System.out.print(EnrolledCourse[i].getCourseName());
+            System.out.print(" ");
+        }
+        System.out.println(" "); // Space for readability
+    }
 }
