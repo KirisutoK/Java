@@ -12,17 +12,5 @@ public class Main {
 
         // METHODS
 
-        Christ.DisplayStudentInformation();
-
-        Christ.enrollInCourse(Math);
-        Christ.enrollInCourse(English);
-        Christ.enrollInCourse(Java);
-
-        Christ.enrollInCourse(Math);
-
-        Christ.DisplayStudentInformation();
-
-
-
     }
 }
