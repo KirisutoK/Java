@@ -11,6 +11,17 @@ public class School {
         this.SchoolName = SchoolName;
     }
 
+    //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public int getStudentCount() {
+        return StudentCount;
+    }
+    public int getCourseCount() {
+        return CourseCount;
+    }
+    public Student[] getStudents() {
+        return Students;
+    }
+
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
     public void addStudent(Student student) { // Adds a Student into Students Array
@@ -55,7 +66,7 @@ public class School {
             if (CourseCount < Courses.length) { // If CourseCount is less than the amount of Courses.length which is 9 (Originally is 10 but readed from 0-9)
                 Courses[CourseCount] = course;
                 CourseCount++;
-                System.out.println(course.getCourseName() + " has successfully been put into the school's courses.");
+                System.out.println(course.getCourseName() + " has successfully been added into " + SchoolName +" courses.");
             } else {
                 System.out.println("There are no more available slots for courses");
             }
@@ -92,8 +103,32 @@ public class School {
     }
 
     public void displayAllStudents() {
-        for (int i = 0; i < StudentCount; i++) {
+        System.out.print(SchoolName + " Students: ");
 
+        for (int i = 0; i < StudentCount; i++) {
+            System.out.print(Students[i].getStudentName() + " |");
+        }
+    }
+
+    public void displayAllCourses() {
+        System.out.print(SchoolName + " Courses: ");
+
+        for (int i = 0; i < CourseCount; i++) {
+            System.out.print(Courses[i].getCourseName() + " |");
+        }
+    }
+
+    public void displayAllStudentsInformation() {
+        for (int i = 0; i < StudentCount; i++) {
+            Students[i].DisplayStudentInformation();
+            System.out.println(" "); // Space for readability
+        }
+    }
+
+    public void displayAllCoursesInformation() {
+        for (int i = 0; i < CourseCount; i++) {
+            Courses[i].DispalyCourseInformation();
+            System.out.println(" "); // Space for readability
         }
     }
 }

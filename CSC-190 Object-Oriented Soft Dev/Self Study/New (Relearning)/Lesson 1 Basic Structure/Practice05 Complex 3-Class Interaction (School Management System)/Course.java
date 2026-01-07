@@ -65,5 +65,4 @@ public class Course {
         System.out.println("Max Students: " + MaxStudents);
         System.out.println("Enrolled Students: " + EnrolledStudents);
     }
-
 }
