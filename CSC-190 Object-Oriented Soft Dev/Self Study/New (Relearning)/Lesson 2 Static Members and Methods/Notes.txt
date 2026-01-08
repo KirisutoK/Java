@@ -1,0 +1,17 @@
+Static are commonly used for tracking (Variables are shared across)
+
+What is static?
+
+• static members (variables and methods) belong to the class itself, not to individual objects
+    → They're shared across all instances of the class
+    → You can access them without creating an object using ClassName.staticMember
+
+Key differences:
+    • Instance variables: Each object has its own copy (e.g., each Student has their own name)
+    • Static variables: One copy shared by all objects (e.g., a counter for total students created)
+
+Common uses:
+• Utility methods (like Math.sqrt(), Math.random())
+• Constants (like Math.PI)
+• Counters (tracking how many objects were created)
+• Shared data across all instances
