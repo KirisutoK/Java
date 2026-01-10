@@ -8,8 +8,8 @@ public class Student {
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public Student(String Name) {
         this.Name = Name;
-        StudentID += NextID;
-        NextID += 1000;
+        StudentID = NextID;
+        NextID ++;
         TotalStudents++;
         System.out.println("Student Created");
     }
