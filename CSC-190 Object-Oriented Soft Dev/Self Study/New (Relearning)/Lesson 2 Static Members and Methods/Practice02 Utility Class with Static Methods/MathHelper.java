@@ -1,6 +1,8 @@
 public class MathHelper {
     //=======VARIABLES=======//
-    private static double PI = Math.PI;
+    private static final double PI = Math.PI;
+
+    // NOTE: final means the variable will not be able to change
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     private MathHelper() {
@@ -18,10 +20,10 @@ public class MathHelper {
         return length *  width;
     }
     public static double calculateRectanglePerimeter(double length, double width) { // 𝑃 = 2(length+width)
-        return 2 * length + width;
+        return 2 * (length + width);
     }
     public static int findMax(int a, int b, int c) {
-        int MaximumNumber = 0; // Default Max is 0
+        int MaximumNumber = a; // Default Max is 0
         int[] array = {a, b, c}; // Creates an array
 
         for (int i = 0; i < array.length; i++) { // 0-2 (Array is 3)
@@ -33,7 +35,7 @@ public class MathHelper {
         return MaximumNumber;
     }
     public static int findMin(int a, int b, int c) {
-        int MinimumNumber = a + b + c;
+        int MinimumNumber = a;
 
         int[] array = {a, b, c};
 

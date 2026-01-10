@@ -27,7 +27,7 @@ public class Main {
         System.out.println(Device1.getResult()); // Prints
         Device1.subtract(75); // Substracts 300 by 75  --------> 225 Total Now
         System.out.println(Device1.getResult()); // Prints
-        Device1.division(5); // Divides 225 by 5       --------> 45 Total Now
+        Device1.divide(5); // Divides 225 by 5       --------> 45 Total Now
         System.out.println(Device1.getResult()); // Prints
         Device1.reset(); // Resets the numbers                -------> 0 Total Now
         System.out.println(Device1.getResult()); // Prints

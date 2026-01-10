@@ -22,7 +22,12 @@ public class Calculator {
     public void multiply(double num) {
         result = result*num;
     }
-    public void division(double num) {
+    public void divide(double num) {
+        if (num == 0) {
+            System.out.println("You cant divide a 0!");
+            return; // Stops or exit the whole method
+        }
+
         result = result/num;
     }
     public void reset() {

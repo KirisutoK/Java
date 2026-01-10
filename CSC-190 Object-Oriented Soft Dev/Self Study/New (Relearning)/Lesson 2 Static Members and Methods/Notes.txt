@@ -15,3 +15,8 @@ Common uses:
 • Constants (like Math.PI)
 • Counters (tracking how many objects were created)
 • Shared data across all instances
+
+Important Syntax that i have learned:
+
+    final -> This makes the variable unable to be changed (makes the variable constant)
+    return -> Exit the method when called
