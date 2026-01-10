@@ -19,7 +19,7 @@ public class SelfStudyFixedSlidingWindow01 {
             for (int i = j; i < j + WindowSize; i++) { // j + WindowSize so that Window will be able to move from 3 to j+(1) = 4. this mean i(1) < 4. i(2) < 5
                 System.out.print(Numbers[i] + " ");
             }
-            System.err.println();
+            System.out.println();
         }
 
     }
