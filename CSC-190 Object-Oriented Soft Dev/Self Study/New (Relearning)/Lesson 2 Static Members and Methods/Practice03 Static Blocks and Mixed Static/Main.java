@@ -1,13 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        //=======VARIABLES=======//
+        BankAccount ChristAccount = new BankAccount("TEST123", "CHRIST", 0.0);
 
-        //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-
-        //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-
-        //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-
-        //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+        ChristAccount.withdraw(100);
     }
 }
