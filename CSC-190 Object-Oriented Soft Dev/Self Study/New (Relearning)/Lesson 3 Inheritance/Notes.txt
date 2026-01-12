@@ -1,0 +1,36 @@
+Inheritance allows a class to inherit properties and methods from another class
+(Think: A child inheriting traits from a parent)
+
+What is Inheritance?
+
+• Inheritance creates a parent-child relationship between classes
+    → The child class (subclass) gets all non-private members from the parent class (superclass)
+    → The child can add its own unique features on top
+    → Use the "extends" keyword to inherit
+
+Key terminology:
+    • Superclass (Parent class): The class being inherited from
+    • Subclass (Child class): The class that inherits
+    • "extends": The keyword that creates the inheritance relationship
+
+Common uses:
+→ Code reusability (write common code once in parent, use in all children)
+→ Creating hierarchies (Animal → Dog, Cat, Bird)
+→ Specialization (BankAccount → SavingsAccount, CheckingAccount)
+→ Polymorphism (treating different objects through a common parent type)
+
+Important Syntax that I have learned:
+
+    extends             → Creates inheritance relationship (class Dog extends Animal)
+    super()             → Calls the parent class constructor (must be first line in child constructor)
+    super.methodName()  → Calls a parent class method from the child
+    @Override           → Indicates you're replacing a parent method with a new version
+    protected           → Access modifier that allows child classes to access parent members
+    instanceof          → Checks if an object is an instance of a class (dog instanceof Animal)
+
+Key rules:
+- Java only allows single inheritance (one parent class, but a parent can have many children)
+- Constructors are NOT inherited (but you can call them with super())
+- Private members are inherited but NOT directly accessible in the child
+- A subclass can override parent methods to change behavior
+- Use super() to call parent constructor, must be FIRST line in child constructor
