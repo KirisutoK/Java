@@ -27,9 +27,5 @@ public class Main {
         Princess.Scratch();
         Bird0.Fly();
         Bird1.Fly();
-
-
-
-
     }
 }
