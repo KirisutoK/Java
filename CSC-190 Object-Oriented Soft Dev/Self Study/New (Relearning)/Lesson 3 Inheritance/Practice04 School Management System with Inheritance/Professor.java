@@ -28,7 +28,7 @@ public class Professor extends Person {
         System.out.println("Professor " + Name + " is teaching " + Department);
     }
     public void adviseMenTee(GraduateStudent GradStudent) {
-        System.out.println("Professor " + Name + " is advising " + GradStudent.Name + " on " + GradStudent.ThesisTopic);
+        System.out.println("Professor " + Name + " is advising " + GradStudent.Name + " on " + GradStudent.getThesisTopic());
     }
 
     // @OVERRIDE

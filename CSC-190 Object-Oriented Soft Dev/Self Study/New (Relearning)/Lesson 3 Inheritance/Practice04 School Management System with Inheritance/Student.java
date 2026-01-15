@@ -21,6 +21,9 @@ public class Student extends Person{
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+    public void Study() {
+        System.out.println(Name + " is studying hard");
+    }
 
     // @OVERRIDE
     @Override
