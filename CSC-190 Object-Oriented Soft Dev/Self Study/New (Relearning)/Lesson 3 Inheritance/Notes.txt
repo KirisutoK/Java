@@ -27,7 +27,7 @@ Important Syntax that I have learned:
     @Override           → Indicates you're replacing a parent method with a new version
     protected           → Access modifier that allows child classes to access parent members
     instanceof          → Checks if an object is an instance of a class (dog instanceof Animal)
-    final               →
+    final               → Makes it unchangeable
 
 Key rules:
 - Java only allows single inheritance (one parent class, but a parent can have many children)

@@ -31,5 +31,6 @@ public class Motorcycle extends Vehicle {
     public void DisplayInfo() {
         super.DisplayInfo();
         System.out.println("Has Helmet: " + HasHelmet);
+        System.out.println("Max Speed: " + MaxSpeed);
     }
 }

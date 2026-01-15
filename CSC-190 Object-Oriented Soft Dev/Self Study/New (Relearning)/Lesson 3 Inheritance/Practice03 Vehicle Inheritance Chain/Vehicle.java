@@ -14,7 +14,7 @@ public class Vehicle {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    public int getVehicleAge() {
+    public final int getVehicleAge() {
         return 2026 - Year;
     }
 

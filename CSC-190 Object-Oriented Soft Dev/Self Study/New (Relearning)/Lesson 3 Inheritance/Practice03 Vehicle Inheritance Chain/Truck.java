@@ -1,4 +1,4 @@
-public class Truck extends Vehicle {
+public final class Truck extends Vehicle {
     //=======VARIABLES=======//
     private double CargoCapacity; // in Tons
     private boolean IsLoaded; // Default: false
