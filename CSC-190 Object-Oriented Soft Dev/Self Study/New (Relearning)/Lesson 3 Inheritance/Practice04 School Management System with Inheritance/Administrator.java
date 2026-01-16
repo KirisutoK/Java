@@ -14,6 +14,9 @@ public class Administrator extends Person {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public static int getTotalAdmins() {
+        return TotalAdmins;
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 

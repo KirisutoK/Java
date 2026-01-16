@@ -1,6 +1,6 @@
 public class Student extends Person{
     //=======VARIABLES=======//
-    private static int TotalStudents = 0;
+    static int TotalStudents = 0;
 
     protected int GradeLevel;
     protected double GPA;
@@ -14,9 +14,6 @@ public class Student extends Person{
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    public int getTotalStudents() {
-        return TotalStudents;
-    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 

@@ -8,13 +8,16 @@ public class Professor extends Person {
     private double Salary;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    public Professor(String Name, int Age, String ID) {
+    public Professor(String Name, int Age, String ID, String Department, int YearsOfExperience, double Salary) {
         super(Name, Age, ID);
+        this.Department = Department;
+        this.YearsOfExperience = YearsOfExperience;
+        this.Salary = Salary;
         TotalProfessors++;
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    public int getTotalProfessors() {
+    public static int getTotalProfessors() {
         return TotalProfessors;
     }
     public boolean hasTenure() {

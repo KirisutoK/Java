@@ -1,6 +1,6 @@
 public class GraduateStudent extends Student{
     //=======VARIABLES=======//
-    private static int TotalGraduateStudents = 0;
+    static int TotalGraduateStudents = 0;
 
     private String ThesisTopic;
     private Professor Advisor;
@@ -16,6 +16,9 @@ public class GraduateStudent extends Student{
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
     public String getThesisTopic() {
         return ThesisTopic;
+    }
+    public static int getTotalGraduateStudents() {
+        return TotalGraduateStudents;
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
@@ -35,12 +38,12 @@ public class GraduateStudent extends Student{
     @Override
     public void Introduce() {
         super.Introduce();
-        System.out.println("I'm a student in grade " + GradeLevel);
+        System.out.println("I'm working on my thesis: " + ThesisTopic);
     }
     @Override
     public void DisplayInfo() {
         super.DisplayInfo();
-        System.out.println("Grade: " + GradeLevel);
-        System.out.println("GPA: " + GPA);
+        System.out.println("Thesis Topic: " + ThesisTopic);
+        System.out.println("Advisor Name: " + Advisor.Name);
     }
 }
