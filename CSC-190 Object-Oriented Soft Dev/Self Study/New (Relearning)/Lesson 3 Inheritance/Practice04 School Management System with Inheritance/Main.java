@@ -74,10 +74,5 @@ public class Main {
         Professor01.Teach();
         Professor02.Teach();
         Admin01.handleAdminWork();
-
-
-
-
-
     }
 }

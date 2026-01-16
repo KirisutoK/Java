@@ -28,9 +28,6 @@ public class Person {
     public void Introduce() {
         System.out.println("Hi, im " + Name);
     }
-    public void Study() {
-        System.out.println(Name + " is studying hard");
-    }
     public void DisplayInfo() {
         System.out.println("Name: " + Name);
         System.out.println("Age: " + Age);
