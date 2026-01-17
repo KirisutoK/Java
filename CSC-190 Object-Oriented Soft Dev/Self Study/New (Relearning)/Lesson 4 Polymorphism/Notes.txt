@@ -1,0 +1,48 @@
+Polymorphism allows objects to take many forms and behave differently based on their actual type
+(Think: A remote control that works with different devices - same buttons, different results)
+
+What is Polymorphism?
+
+- Polymorphism means "many forms" - one interface, multiple implementations
+    → A parent class reference can hold different child objects
+    → Each child object behaves according to its own type, not the parent
+    → The correct method is called at runtime based on the actual object type
+    → Use parent types to write flexible, reusable code
+
+Key terminology:
+    • Upcasting: Storing a child object in a parent reference (Animal a = new Dog();)
+    • Dynamic method dispatch: JVM automatically calls the correct overridden method at runtime
+    • Compile-time type: The declared type (what the variable says it is)
+    • Runtime type: The actual object type (what it really is)
+
+Common uses:
+→ Writing flexible code that works with multiple types (one method handles all Animals)
+→ Collections of mixed objects (ArrayList<Animal> can hold Dogs, Cats, Birds)
+→ Method parameters accepting any subclass (processAnimal(Animal a) works with any animal)
+→ Reducing code duplication (one loop processes different object types differently)
+
+Important Syntax that I have learned:
+
+    Parent ref = new Child();     → Upcasting (store child in parent reference)
+    animal.makeSound();           → Calls overridden method from actual object type
+    instanceof                    → Checks actual object type before casting
+    (Child) parentRef             → Downcasting (convert parent reference back to child)
+    @Override                     → Marks method as polymorphic (overriding parent)
+
+Key rules:
+- Parent reference can only call methods defined in the parent class (even if child has more)
+- The actual method executed is determined by the object's real type, not the reference type
+- Overridden methods are called polymorphically, but new child methods are not accessible without casting
+- Use instanceof before downcasting to avoid ClassCastException
+- Polymorphism only works with overridden methods (not with fields or static methods)
+- Parent reference = flexibility, Child reference = access to all child methods
+
+Examples of polymorphism:
+    Animal animal = new Dog();     // Dog stored as Animal
+    animal.makeSound();            // Calls Dog's makeSound(), not Animal's
+    // animal.fetch();             // ERROR! fetch() not in Animal class
+    
+    if (animal instanceof Dog) {   // Check before casting
+        Dog dog = (Dog) animal;    // Downcast to access Dog methods
+        dog.fetch();               // Now works!
+    }
