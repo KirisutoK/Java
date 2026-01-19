@@ -12,6 +12,10 @@ public class Media {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public Boolean isLongContent() {
+        int DurationInMinutes = Integer.parseInt(Duration);
+        return DurationInMinutes >= 120; // in Minutes
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 

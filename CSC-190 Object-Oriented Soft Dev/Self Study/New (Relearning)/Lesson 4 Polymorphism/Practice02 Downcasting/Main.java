@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
         // CREATING INSTANCES or OBJECTS
@@ -15,11 +17,69 @@ public class Main {
         for (Media i : Medias) { // for every value inside Medias
             i.Play();
         }
+        System.out.println(" "); // Space for Readability
 
         // DISPLAY INFO METHOD
         System.out.println("=== DISPLAY INFO ===");
         for (Media i: Medias) {
             i.DisplayInformation();
+            System.out.println(" "); // Space for Readability
         }
+
+        // FILTER BY RATING
+        System.out.println("=== FILTER BY RATING (4.0 Above) ===");
+        for (Media i: Medias) {
+            if (i.Rating >= 4.0) {
+                System.out.println(i.Title + ": " + i.Rating);
+            }
+        }
+        System.out.println(" "); // Space for Readability
+
+        // FILTER BY DURATION
+        System.out.println("=== FILTER BY DURATION (120 Minutes Above) ===");
+        for (Media i: Medias) {
+            if (i.isLongContent() == true) {
+                System.out.println(i.Title + ": " + i.Duration + " Minutes");
+            }
+        }
+        System.out.println(" "); // Space of Readability
+
+        // DOWNCASTING
+        System.out.println("=== DOWNCASTING ===");
+        for (Media i: Medias) {
+            if (i instanceof Movie) {
+                ((Movie)i).enableSubtitles(); // Concatenating the Parent Class into Child Class (Which is called Downcasting)
+            } else if (i instanceof Song) {
+                ((Song)i).addToPlaylist("Favorites");
+            } else if (i instanceof Podcast) {
+                ((Podcast) i).downloadEpisode();
+            }
+        }
+        System.out.println(" "); // Space for Readability
+
+        // COUNTING AND SEPARATING MEDIA TYPES
+        System.out.println("=== COUNTING AND SEPARATING MEDIA TYPES ===");
+        int MovieCount = 0;
+        int SongCount = 0;
+        int PodcastCount = 0;
+
+        for (Media i: Medias) { // To Count
+            if (i instanceof Movie) {
+                MovieCount++;
+            } else if (i instanceof Song) {
+                SongCount++;
+            } else if (i instanceof Podcast) {
+                PodcastCount++;
+            }
+        }
+
+        ArrayList<Movie> Movies = new ArrayList<>();
+
+
+        System.out.println("Movie Count: " + MovieCount);
+        System.out.println("Song Count: " + SongCount);
+        System.out.println("Podcast Count: " + PodcastCount);
+        System.out.println("Arrays for each Media Types");
+
     }
 }
