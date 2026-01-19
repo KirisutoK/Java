@@ -148,8 +148,6 @@ public class Main {
         for (Media i: library) {
             if (i.Title.equals(title)) {
                 return i;
-            } else {
-                return null;
             }
         }
         return null;
