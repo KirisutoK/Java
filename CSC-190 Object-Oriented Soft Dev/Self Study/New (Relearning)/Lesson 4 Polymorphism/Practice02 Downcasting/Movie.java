@@ -27,7 +27,7 @@ public class Movie extends Media {
     // @OVERRIDE
     @Override
     public void Play() {
-        System.out.println("Playing movie:" + Title + " directed by " + Director);
+        System.out.println("Playing movie: " + Title + " directed by " + Director);
     }
     @Override
     public void DisplayInformation() {

@@ -23,7 +23,7 @@ public class Song extends Media {
     // @OVERRIDE
     @Override
     public void Play() {
-        System.out.println("Playing song:" + Title + " by " + Artist);
+        System.out.println("Playing song: " + Title + " by " + Artist);
     }
     @Override
     public void DisplayInformation() {
