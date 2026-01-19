@@ -37,11 +37,14 @@ Key rules:
 - Polymorphism only works with overridden methods (not with fields or static methods)
 - Parent reference = flexibility, Child reference = access to all child methods
 
-Examples of polymorphism:
+Examples of Polymorphism:
+
+    UPCASTING:
     Animal animal = new Dog();     // Dog stored as Animal
     animal.makeSound();            // Calls Dog's makeSound(), not Animal's
     // animal.fetch();             // ERROR! fetch() not in Animal class
-    
+
+    DOWNCASTING:
     if (animal instanceof Dog) {   // Check before casting
         Dog dog = (Dog) animal;    // Downcast to access Dog methods
         dog.fetch();               // Now works!
