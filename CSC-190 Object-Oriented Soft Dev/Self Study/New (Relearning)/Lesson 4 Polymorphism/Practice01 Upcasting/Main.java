@@ -50,7 +50,7 @@ public class Main {
             }
         }
         System.out.println("Total Cash Payment: " + TotalCashPayment);
-        System.out.println("Total PayPal Payment: " + TotalPaymentAmount);
+        System.out.println("Total PayPal Payment: " + TotalPayPalPayment);
         System.out.println("Total Credit Card Payment: " + TotalCreditCardPayment);
     }
 }
