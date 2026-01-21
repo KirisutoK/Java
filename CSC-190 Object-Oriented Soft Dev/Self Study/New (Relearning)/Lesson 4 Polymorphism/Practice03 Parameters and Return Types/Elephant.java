@@ -14,7 +14,7 @@ public class Elephant extends Mammal {
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void spray() {
-        System.out.println(Name + " sprays water on the ground!");
+        System.out.println(Name + " sprays water with it's trunk");
     }
 
     //@OVERRIDE

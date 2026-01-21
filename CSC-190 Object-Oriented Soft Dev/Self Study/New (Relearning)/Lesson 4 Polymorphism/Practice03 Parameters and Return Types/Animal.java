@@ -17,6 +17,9 @@ public class Animal {
     public String getHealthStatus() {
         return HealthStatus;
     }
+    public String getName() {
+        return Name;
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
