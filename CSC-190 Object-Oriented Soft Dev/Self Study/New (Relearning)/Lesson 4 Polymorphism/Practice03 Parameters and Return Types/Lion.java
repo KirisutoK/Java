@@ -23,10 +23,6 @@ public class Lion extends  Mammal{
         System.out.println("ROAR! "+Name+" the lion roars");
     }
     @Override
-    public void eat(String food) {
-        System.out.println(Name+" hunts and eats "+food);
-    }
-    @Override
     public void DisplayInfo() {
         super.DisplayInfo();
         System.out.println("Pride Size: " + PrideSize);

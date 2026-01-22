@@ -3,8 +3,8 @@ public class Elephant extends Mammal {
     private double TrunkLength; // In Meters
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    public Elephant(String Name, int Age, String Gender, String FurColor, double TrunkLength) {
-        super(Name, Age, Gender, FurColor);
+    public Elephant(String Name, int Age, String Species, String FurColor, double TrunkLength) {
+        super(Name, Age, Species, FurColor);
         this.TrunkLength = TrunkLength;
     }
 
@@ -19,7 +19,7 @@ public class Elephant extends Mammal {
 
     //@OVERRIDE
     public void makeSound() {
-        System.out.println("TRUMPET!"+Name+" the elephant trumpets");
+        System.out.println("TRUMPET! "+Name+" the elephant trumpets");
     }
     public void DisplayInfo() {
         super.DisplayInfo();

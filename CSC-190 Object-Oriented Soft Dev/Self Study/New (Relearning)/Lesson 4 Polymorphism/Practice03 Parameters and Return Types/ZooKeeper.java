@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class ZooKeeper {
     //=======VARIABLES=======//
     private String Name;
@@ -8,8 +10,32 @@ public class ZooKeeper {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public Animal getMostActiveAnimal(Animal[] animals) { // Returns the Animal with the lowest age (Class type)
+        int LowestAge = animals[0].Age;
+        Animal Species = animals[0];
+
+        for (Animal i:animals) {
+            if (LowestAge > i.Age) {
+                LowestAge = i.Age;
+                Species = i;
+            }
+        }
+
+        return Species;
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
+    public Mammal[] seperateMammals(Animal[] animals) { // Returns an Arraylist (not regular array)
+        ArrayList<Mammal> Mammals = new ArrayList<>(); // Arraylist (No limit of size)
+
+        for (Animal i:animals) {
+            if (i instanceof Mammal) {
+                Mammals.add((Mammal)i); // Downcasting and adding value into an array
+            }
+        }
+
+        return Mammals.toArray(new Mammal[0]); // Concatenating an Arraylist to a Regular Array.
+    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 
@@ -30,9 +56,12 @@ public class ZooKeeper {
     }
     public void playWithAnimal(Animal animal) {
         animal.makeSound();
-        if (animal instanceof Mammal) { // THIS IS WHERE YOU LEFT OFF
-
-            }
+        if (animal instanceof Lion) {
+            ((Lion)animal).hunt(); // Concatenating Animal into Lion (Parenet into Child)
+        } else if (animal instanceof Elephant) {
+            ((Elephant)animal).spray();
+        } else if (animal instanceof Parrot) {
+            ((Parrot)animal).mimic("I love the zoo!");
         }
     }
 }
