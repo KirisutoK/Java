@@ -38,16 +38,16 @@ public class Main {
 
     public static Shape[] getShapesByType(Shape[] shapes, String type) {
         int count = 0;
-        for (Shape s : shapes) {
-            if (s.getClass().getName().equals(type)) {
+        for (Shape s : shapes) { // Counts how many matches are there
+            if (s.getClass().getSimpleName().equals(type)) { // from getName() to GetSimpleName() (CHANGED)
                 count++;
             }
         }
 
-        Shape[] result = new Shape[count];
+        Shape[] result = new Shape[count]; // Creates a new array for the new matched type shapes
         int index = 0;
         for (Shape s : shapes) {
-            if (s.getClass().getName() == type) {
+            if (s.getClass().getSimpleName().equals(type)) { // from getName() to getSimpleName() | from == to .equals() (CHANGED)
                 result[index] = s;
                 index++;
             }

@@ -9,7 +9,7 @@ public class Rectangle extends Shape {
     }
 
     public double getArea() {
-        return width + height;
+        return width * height;
     }
 
     public void displayInfo() {
