@@ -10,7 +10,7 @@ public class PartTimeEmployee extends Employee {
 
     @Override // ADDED
     public double calculateMonthlySalary() {
-        return hourlyRate + hoursPerMonth;
+        return hourlyRate * hoursPerMonth; // Changed from + (Addition) to * (Multiplication)
     }
 
     @Override // ADDED
