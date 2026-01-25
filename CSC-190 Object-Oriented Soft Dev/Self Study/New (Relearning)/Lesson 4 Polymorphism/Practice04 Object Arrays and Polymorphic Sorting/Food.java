@@ -1,24 +1,27 @@
 public class Food extends Product {
     //=======VARIABLES=======//
-    private String ExpirationDate;
+    private int ExpirationDate; // from String to int (CHANGED)
     private boolean isOrganic;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILE WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    public Food(String Name, double Price, int StockQuantity, String ProductID, String ExpirationDate, boolean isOrganic) {
+    public Food(String Name, double Price, int StockQuantity, String ProductID, int ExpirationDate, boolean isOrganic) {
         super(Name, Price, StockQuantity, ProductID);
         this.ExpirationDate = ExpirationDate;
         this.isOrganic = isOrganic;
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    public boolean isExpired(String currentdate) {
-        return Integer.parseInt(ExpirationDate) < ; // THIS IS WHERE YOU LEFT, YOU HAD QUESTIONS WHY THE VARIABLES ARE STRING INSTEAD OF INT (TAKE A  LOOK AT CompareTo())
+    public boolean isExpired(int currentdate) {
+        return currentdate > ExpirationDate;
     }
 
     // @OVERRIDE
     @Override
     public double calculateValue() {
-        return (Price * StockQuantity) * 1.1;
+        if (isOrganic) { // if isOrganic is true
+            return (Price * StockQuantity) * 1.2;
+        }
+        return Price * StockQuantity;
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
