@@ -1,0 +1,27 @@
+What is Bubble Sort?
+    Bubble Sort repeatedly compares neighboring elements and swaps them if they're in the wrong order.
+    It's called "bubble" because the largest values gradually "bubble up" to the end.
+
+The formula/pattern:
+    1. Compare two neighbors
+    2. If left > right, swap them
+    3. Move to next pair
+    4. Repeat until array is sorted
+
+VISUAL EXAMPLE:
+
+ARRAY: [5, 2, 8, 1]
+
+    [5, 2, 8, 1]  → Compare 5 and 2 → 5 > 2? YES → Swap
+    [2, 5, 8, 1]  → Compare 5 and 8 → 5 > 8? NO → Don't swap
+    [2, 5, 8, 1]  → Compare 8 and 1 → 8 > 1? YES → Swap
+    [2, 5, 1, 8]  → 8 is now in correct position!
+
+FORMULA:
+    OUTER LOOPS: n-1 (n = length of array)
+    INNER LOOPS: n-i-1 (i = index of current element) (n = length of array)
+
+EXAMPLE CODE:
+    for (int i = 0; i < array.length - 1; i++) {                        // OUTER LOOPS
+        for (int j = 0; j < array.length - i - 1; j++)                  // INNER LOOPS
+    }
