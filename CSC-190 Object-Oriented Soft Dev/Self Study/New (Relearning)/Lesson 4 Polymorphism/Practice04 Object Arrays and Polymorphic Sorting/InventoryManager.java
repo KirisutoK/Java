@@ -20,7 +20,7 @@ public class InventoryManager {
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void addProduct(Product product) {
-        Inventory.add(product);
+        Inventory.add(product); 
     }
     public void removeProduct(Product product) {
         Inventory.remove(product);
