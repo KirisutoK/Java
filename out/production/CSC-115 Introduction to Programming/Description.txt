@@ -20,4 +20,4 @@ Syntax:
     .contains() -> checks if a specific value is in an array
     .indexOf() -> checks the position of a value inside an array
     .toArray() -> converts an array into an array list
-    .toString() -> converts an array into a string (Prints the array neatly) [Automatically called]
+    .toString() -> converts an array into a string (Prints the array neatly)

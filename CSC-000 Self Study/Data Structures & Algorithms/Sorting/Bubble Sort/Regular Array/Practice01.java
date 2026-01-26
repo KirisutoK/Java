@@ -2,14 +2,15 @@ import java.util.Arrays; // This is a regular array with multiple convenient met
 
 public class Practice01 {
     public static void main(String[] args) {
-        int[] RandomNumbers = {1, 3, 8, 9, 5}; // Array
+        int[] RandomNumbers = {1, 3, 8, 9, 5, 6, 2, 1, 3, 2, 3, 6, 8, 9, 1, 2, 3, 5, 21, 3}; // Array
 
-        int[] SortedRandomNumbers = BubbleSort(RandomNumbers); // Calles the method
+        System.out.println("Original:" + Arrays.toString(RandomNumbers));
+        BubbleSort(RandomNumbers);
+        System.out.println("Sorted:" + Arrays.toString(RandomNumbers)); // Prints out the sorted array
+    }
 
-        System.out.println("Original:"+Arrays.toString(RandomNumbers)); // Prints out the array
 
-
-    public static void BubbleSort(int[] array) {
+    public static int[] BubbleSort(int[] array) {
         for (int i = 0; i < array.length-1; i++) { // OUTER LOOPS
             for (int j = 0; j < array.length-i-1; j++) { // INNER LOOPS
                 if (array[j] > array[j+1]) { // if Left > Right then
@@ -19,5 +20,7 @@ public class Practice01 {
                 }
             }
         }
+
+        return array;
     }
 }
