@@ -2,7 +2,7 @@ What is Bubble Sort?
     Bubble Sort repeatedly compares neighboring elements and swaps them if they're in the wrong order.
     It's called "bubble" because the largest values gradually "bubble up" to the end.
 
-The formula/pattern:
+The pattern/process:
     1. Compare two neighbors
     2. If left > right, swap them
     3. Move to next pair
