@@ -66,6 +66,10 @@ FORMULA:
         arr[minIndex] = arr[i];
         arr[i] = temp;
 
+    Variables that needed to be stored:
+     m = minimumIndex (index of the lowest value)
+     t = temporary variable of the minimum value
+
 EXAMPLE CODE:
     for (int i = 0; i < arr.length - 1; i++) {                               // OUTER LOOP
         int minIndex = i;                                                    // saving the index of the minimum value
@@ -75,7 +79,8 @@ EXAMPLE CODE:
                 }
             }
 
-            int temp = arr[minIndex];                                        // swapping the values
-            arr[minIndex] = arr[i];
-            arr[i] = temp;
+        int MinimumValue = arr[minIndex];                                        // swapping the values
+        arr[minIndex] = arr[i];
+        arr[i] = MinimumValue;
         }
+
