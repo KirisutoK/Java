@@ -25,6 +25,29 @@ public class InventoryManager {
     public void removeProduct(Product product) {
         Inventory.remove(product);
     }
+    public void sortByPrice() {
+        // already has an array list
+        // LEFT HERE:
+        // INITIAL PLAN WAS TO CONVERT THE ARRAYLIST TO AN ARRAY
+        // USE THAT ARRAY TO SORT AND THEN PRINT
+
+        // SELECTION SORT
+        for (int i = 0; i < Inventory.size(); i++) { // OUTER LOOP
+            int MinIndex = i;
+            for (int j = i + 1; j < Inventory.size(); j++) { // INNER LOOP
+                if (Inventory.get(j).getPrice() < Inventory.get(MinIndex).getPrice()) {
+                    MinIndex = j;
+                }
+            }
+
+            Product temp = Inventory.get(i);
+            Inventory.set(i, Inventory.get(MinIndex));
+            Inventory.set(MinIndex, temp);
+        }
+
+        // DISPLAY
+        System.out.println("SORTED BY PRICE: "+Inventory.);
+    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 }
