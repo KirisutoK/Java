@@ -18,7 +18,7 @@ public class Concatenation {
     }
 
     // (Integer is an object/wrapper class or data type while int is a primitive data type)
-    // Concatenating an arraylist Integer into a regular array int
+    // Converting an arraylist Integer into a regular array int
     public static int[] ArraylistToArray(ArrayList<Integer> arrlist) {
         int[] result = new int[arrlist.size()];
         for (int i = 0; i < arrlist.size(); i++) {
