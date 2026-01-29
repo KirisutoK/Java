@@ -64,7 +64,7 @@ public class InventoryManager {
     public void removeProduct(Product product) {
         Inventory.remove(product);
     }
-    public void sortByPrice() {
+    public void sortByPrice() { // ASCENDING ORDER
         // ARRAYLIST INTO ARRAY
         Product[] TempArrayInventory = new Product[Inventory.size()];
 
@@ -90,10 +90,30 @@ public class InventoryManager {
         }
 
     }
-    public void soryByValue() {
+    public void soryByValue() { // DESCENDING ORDER
         // ARRAYLIST INTO ARRAY
         Product[] result = new Product[Inventory.size()];
 
+        for (int i = 0; i < result.length; i++) {
+            result[i] = Inventory.get(i);
+        }
+
+        // SELECTION SORT
+        for (int i = 0; i < result.length-1; i++) {                                  // OUTER LOOP
+            for (int j = i+1; j < result.length; j++) {                              // INNER LOOP
+                if (result[i].calculateValue() < result[j].calculateValue()) {       // SWAPPING PART
+                    Product temp = result[i];
+                    result[i] = result[j];
+                    result[j] = temp;
+                }
+            }
+        }
+
+        // APPLY THE SORTING INTO THE ARRAYLIST
+        Inventory.clear();
+        for (Product i : result) {
+            Inventory.add(i);
+        }
 
     }
 

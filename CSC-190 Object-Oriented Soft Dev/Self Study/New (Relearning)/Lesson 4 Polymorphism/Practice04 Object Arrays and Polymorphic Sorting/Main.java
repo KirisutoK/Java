@@ -32,9 +32,15 @@ public class Main {
         InvManager01.sortByPrice();
 
         // DISPLAYING OBJECTS
+        System.out.println(" SORTED BY PRICE: ");
         InvManager01.DisplayInventory();
 
         // SORT BY VALUE METHOD ---------------->>>> YOU LEFT HERE (FORGOT TO MAKE THE METHOD) [INVENTORY MANAGER]
+        System.out.println(" SORTED BY VALUE: ");
+        InvManager01.soryByValue();
+
+        // DISPLAYING OBJECTS
+        InvManager01.DisplayInventory();
 
     }
 }
