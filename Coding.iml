@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/OpenTest" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/LeetCoode/Daily/January 2026" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CSC-190 Object-Oriented Soft Dev/Self Study/New (Relearning)/Lesson 4 Polymorphism/Practice04 Object Arrays and Polymorphic Sorting" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CSC-190 Object-Oriented Soft Dev/Class" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/out" />
     <orderEntry type="inheritedJdk" />
