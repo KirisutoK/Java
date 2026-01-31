@@ -11,6 +11,10 @@ public class InventoryManager {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public ArrayList<Product> getInventory() {
+        return Inventory;
+    }
+
     public double getTotalInventoryValue() {
         double TotalValue = 0;
         for (Product i : Inventory) {
@@ -64,7 +68,19 @@ public class InventoryManager {
     public void removeProduct(Product product) {
         Inventory.remove(product);
     }
-    public void sortByPrice() { // ASCENDING ORDER
+    public void removeProductByID(String productid) {
+        int index = 0;
+
+        for (int i = 0; i < Inventory.size(); i++) {
+            if (Inventory.get(i).getProductID().equals(productid)) {
+                index = i;
+            }
+        }
+
+        Inventory.remove(index);
+    }
+    public void sortByPrice() {
+        // ASCENDING ORDER
         // ARRAYLIST INTO ARRAY
         Product[] TempArrayInventory = new Product[Inventory.size()];
 
@@ -90,7 +106,8 @@ public class InventoryManager {
         }
 
     }
-    public void soryByValue() { // DESCENDING ORDER
+    public void sortByValue() {
+        // DESCENDING ORDER
         // ARRAYLIST INTO ARRAY
         Product[] result = new Product[Inventory.size()];
 

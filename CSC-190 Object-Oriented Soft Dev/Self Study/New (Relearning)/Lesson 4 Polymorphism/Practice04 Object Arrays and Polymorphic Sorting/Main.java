@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         // CREATING OBJECTS or INSTANCES
@@ -26,21 +29,65 @@ public class Main {
 
         // DISPLAYING OBJECTS
         InvManager01.DisplayInventory();
-        System.out.println("Total Inventory Value: "+InvManager01.getTotalInventoryValue());
+        System.out.println("Total Inventory Value: " + InvManager01.getTotalInventoryValue());
 
         // SORT BY PRICE METHOD
         InvManager01.sortByPrice();
 
         // DISPLAYING OBJECTS
-        System.out.println(" SORTED BY PRICE: ");
+        System.out.println("=== SORTED BY PRICE ===");
         InvManager01.DisplayInventory();
 
         // SORT BY VALUE METHOD ---------------->>>> YOU LEFT HERE (FORGOT TO MAKE THE METHOD) [INVENTORY MANAGER]
-        System.out.println(" SORTED BY VALUE: ");
-        InvManager01.soryByValue();
+        System.out.println("=== SORTED BY VALUE ===");
+        InvManager01.sortByValue();
 
         // DISPLAYING OBJECTS
         InvManager01.DisplayInventory();
 
+        // MOST VALUABLE
+        System.out.println("=== MOST VALUABLE PRODUCT ===");
+        InvManager01.findMostValuableProduct().DisplayInfo();
+        System.out.println(" "); // Space for Readability
+
+        // FILTER BY TYPE
+        System.out.println("=== FILTER BY TYPE ===");
+        ArrayList<Product> ElectronicsList = InvManager01.filterbyType("Electronics");
+        for (Product i : ElectronicsList) {
+            i.DisplayInfo();
+            System.out.println(" "); // Space for readability
+        }
+
+        //  FILTER BY LOW STOCK
+        System.out.println("=== LOW STOCK PRODUCTS(LESS THAN 10) ===");
+        for (Product i : InvManager01.getInventory()) {
+            if (i.getStockQuantity() <= 10) {
+                i.DisplayInfo();
+                System.out.println(" "); // Space for Readability
+            }
+        }
+
+        // REMOVE PRODUCT BY ID
+        System.out.println("=== REMOVE PRODUCT BY ID ===");
+        InvManager01.removeProductByID("F003");
+
+        // RESTOCKING A CLOTHING
+        System.out.println("=== RESTOCKING A CLOTHING && EXTENDING ELECTRONICS WARRANTY ===");
+        int x = 1;
+        for (Product i : InvManager01.getInventory()) {
+            if (i instanceof Clothing) {
+                ((Clothing) i).restock(10);
+                System.out.println(i.getName() + "has been restocked.");
+                System.out.println(" "); // Space for Readability
+            }
+            if (i instanceof Electronics) {
+                ((Electronics) i).extendWarranty(12 * x);
+                x++;
+            }
+        }
+
+        // DISPLAYING OBJECTS
+        InvManager01.DisplayInventory();
+        System.out.println("Total Inventory Value: " + InvManager01.getTotalInventoryValue());
     }
 }
