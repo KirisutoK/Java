@@ -1,0 +1,34 @@
+
+Abstraction hides implementation details and shows only essential features.
+(Think: A blueprint - defines what to build, not how to build it)
+
+What is Abstraction?
+- Creates templates that subclasses must follow
+    → Abstract classes cannot be instantiated (can't create objects directly)
+    → Forces subclasses to implement certain methods
+    → Can have both complete methods and incomplete methods
+
+Key terminology:
+    • Abstract class: A template class that cannot be instantiated
+    • Abstract method: A method without a body (just declaration)
+    • Concrete method: A regular method with a body (has implementation)
+
+Common uses:
+→ Creating templates (Shape → Circle, Rectangle)
+→ Enforcing rules ("All vehicles MUST have a start() method")
+→ Sharing common code while forcing specific implementations
+
+Important Syntax:
+
+    javaabstract class ClassName                    → Declares abstract class
+    public abstract void methodName();              → Abstract method (no body, ends with ;)
+    class Child extends AbstractClass               → Must implement all abstract methods
+
+
+Key rules:
+
+Cannot create objects from abstract classes: Animal a = new Animal(); ❌
+Can use as reference: Animal a = new Dog(); ✅
+Subclasses MUST implement all abstract methods
+Abstract classes CAN have constructors, fields, and regular methods
+Abstract methods have NO body (just semicolon, no { })
