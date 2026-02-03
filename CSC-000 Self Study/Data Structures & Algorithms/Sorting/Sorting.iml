@@ -3,7 +3,8 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/Claude" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Bubble Sort" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Selection Sort" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
