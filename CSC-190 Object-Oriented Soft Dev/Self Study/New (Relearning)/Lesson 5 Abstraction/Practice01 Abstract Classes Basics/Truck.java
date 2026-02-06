@@ -22,4 +22,12 @@ public class Truck extends Vehicle{
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+
+    // @OVERRIDE
+    @Override
+    public void DisplayDetails() {
+        super.DisplayDetails();
+        System.out.println("Cargo Capacity: "+CargoCapacity);
+        System.out.println("Requires Commercial License: "+RequiresCommercialLicense);
+    }
 }
