@@ -52,7 +52,7 @@ public class Main {
         System.out.println("=== MOST EXPENSIVE VEHICLE TO RENT IN 10 DAYS ===");
         int MostExpensiveIndex = 0;
         for (int i = 0; i < Vehicles.length; i++) {
-            if (Vehicles[i].calculateRentalCost(10) > MostExpensiveIndex) {
+            if (Vehicles[i].calculateRentalCost(10) > Vehicles[MostExpensiveIndex].calculateRentalCost(10)) {
                 MostExpensiveIndex = i;
             }
         }
