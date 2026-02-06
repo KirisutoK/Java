@@ -51,10 +51,12 @@ public class Main {
         // MOST EXPENSIVE VEHICLE TO RENT IN 10 DAYS
         System.out.println("=== MOST EXPENSIVE VEHICLE TO RENT IN 10 DAYS ===");
         int MostExpensiveIndex = 0;
-        for (Vehicle i : Vehicles) { // THIS IS WHHERE YOU LEFT OFF, (CHANGE IT INTO STANDARD FOR LOOP
-            if (i.calculateRentalCost(10) > MostExpensiveIndex) {
-                MostExpensiveIndex.i
+        for (int i = 0; i < Vehicles.length; i++) {
+            if (Vehicles[i].calculateRentalCost(10) > MostExpensiveIndex) {
+                MostExpensiveIndex = i;
             }
         }
+        System.out.println("The most expensive vehicle to rent in 10 days is "+Vehicles[MostExpensiveIndex].getVehicleID());
+        System.out.println(" "); // Space for Readability
     }
 }
