@@ -2,7 +2,7 @@ public class TicTacToe {
     static char[][] TicTacToeBoard = { // Global Variable
             {'o', 'x', 'x'},
             {'x', 'x', 'x'},
-            {'x', 'o', 'o'}};
+            {'x', 'o', 'x'}};
 
     public static void main(String[] args) {
 
@@ -15,6 +15,7 @@ public class TicTacToe {
         VerticalCondition();
 
         // DIAGONAL
+        DiagonalCondition();
     }
 
 
