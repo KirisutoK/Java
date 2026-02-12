@@ -29,15 +29,15 @@ public class PearsonMarkov {
         for (int i = 0; i < arr[0].length; i++) { // each column (y axis)
             for (int j = 0; j < arr.length; j++) { // each row (x axis)
                 sum += arr[j][i];
-                if (sum < 1) {
-                    return false;
+                if (sum >= 1) {
+                    return true;
                 }
             }
             sum = 0;
         }
 
 
-        // CHECKS IF THE ARRAY HAS A NEGATIVE INT VALUE
+        // CHECKS IF THE ARRAY HAS A NEGATIVE INT VALUE //////// ------------------->>>>>>> LEFT HERE (SUPPOSED TO CHECK EACH COLLUMN TOO (SUM EACH COLLUMN CONDITION)
         for (int i = 0; i < arr.length; i++) { // Checks each row
             for (int j = 0; j < arr[i].length; j++) { // Checks each index in the row
                 if (arr[i][j] < 0); // if less than 0 (negative)
