@@ -20,7 +20,6 @@ public class Minesweeper {
         // CREATING 2D ARRAY
         int[][] Table = new int[5][5];
 
-        DisplayArray(Table);
         radRandy(Table);
         DisplayArray(Table);
     }
@@ -28,7 +27,15 @@ public class Minesweeper {
 
     // ===================== METHODS ======================= \\
     public static void DisplayArray(int[][] arr) { // changes the num
+        int cols = arr[0].length; // AUTOSCALE WITH ARRAY SIZE
+        String StraightLine = "═".repeat(cols*4); // *4 because each emoji takes ~4 chars width
+
+        // DISPLAY
+        System.out.println(" ".repeat(StraightLine.length() / 6) + "[ MINESWEEPER ]");
+        System.out.println("╔"+StraightLine+"╗");                           // TOP BORDER
         for (int i = 0; i < arr.length; i++) { // checks the row
+            System.out.print("║ ");                                                  // LEFT BORDER
+
             for (int j = 0; j < arr[i].length; j++) { // checks the column
                 if (arr[i][j]==0) {
                     System.out.print("❤️ ");
@@ -38,9 +45,10 @@ public class Minesweeper {
                     System.out.print("🌹 ");
                 }
             }
-            System.out.println(" ");
+            System.out.println("║");                                                 // RIGHT BORDER
         }
-    } // Displays Array
+        System.out.println("╚"+StraightLine+"╝");                           // BOTTOM BORDER
+    } // Displays Array [UNFINISHED]
     public static void UserInput(int[][] arr) {
         boolean boo = false;
 
@@ -67,7 +75,7 @@ public class Minesweeper {
                 System.out.println("Not a valid response. Please try again: ");
             }
         }
-    } // Changes the Class Variable (By Ava)
+    } // Changes the Class Variable (By Ava) [FINISHED]
     public static void ChangeTile(int[][] arr) {
         // CHECKS IF THE TABLE HAS NO MORE 0s
         int sum = 0;
@@ -89,18 +97,28 @@ public class Minesweeper {
         }
 
         sum = 0; // resets
-    } // Changes an index value
-    public static void radRandy(int[][] arr) {
+    } // Changes an index value [UNFINISHED
+    public static void radRandy(int[][] table) {
         Random randy = new Random();
 
         boolean oo = false;
 
-        System.out.println("Choose your difficulty: Easy(1), Hard(2), Nightmare(3), or Randy(4): ");
-        int difficulty = scanner.nextInt();
-        System.out.println(" ");
+        System.out.println("""
+                ╔═════════════════════════╗
+                ║ CHOOSE YOUR DIFFICULTY: ║
+                ║ 1. Easy                 ║
+                ║ 2. Hard                 ║
+                ║ 3. Nightmare            ║
+                ║ 4. Randy                ║
+                ╚═════════════════════════╝
+                """);
+
+        System.out.print("Answer: ");
+
         int difficultLevel = 0;
 
         while(oo == false) {
+            int difficulty = scanner.nextInt(); //i moved this because earlier it was not int the while loop
             if(difficulty == 1) {
                 difficultLevel = 1;
                 oo = true;
@@ -114,23 +132,24 @@ public class Minesweeper {
                 difficultLevel = 10;
                 oo = true;
             } else {
-                System.out.println("Anwser didn't match giving options. Try again.");
+                System.out.println("ERROR 67: Anwser didn't match giving options. Try again.");
             }
         }
 
+        System.out.println(" "); //prints empty line for spacing
 
         //table[randy.nextInt(0,5)][randy.nextInt(0,5)] = 1;
         int i = 0;
         while(i < difficultLevel) {
-            int randRow = randy.nextInt(0,5);
-            int randCol = randy.nextInt(0,5);
-            if(arr[randRow][randCol] != 1) {
-                arr[randRow][randCol] = 1;
+            int randRow = randy.nextInt(0, table.length);
+            int randCol = randy.nextInt(0,table.length);
+            if(table[randRow][randCol] != 1) {
+                table[randRow][randCol] = 1;
                 i++;
             }
         }
 
-    } // Randomiz the 2D Array (By Ava)
+    }  // Randomiz the 2D Array (By Ava) [FINISHED]
     public static void LoseMessage() {
         System.out.println("""
                                 *****   *******   **
@@ -181,5 +200,5 @@ public class Minesweeper {
                 /// ////////////// INSERT WHERE IT WILL LEAD TO
                 break;
         }
-    } // Displays score point and lose message
+    } // Displays score point and lose message [UNFINISHED]
 }
