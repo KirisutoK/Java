@@ -57,4 +57,8 @@ public class EachRowAndColumn {
             System.out.println(" ");
         }
     }
+
+    public static void RandomizeArray() {
+
+    }
 }

@@ -15,9 +15,9 @@ public class PearsonMarkov {
 
         // CHECKS IF MARKOV
        if (isMarkovMatrix(ThreeByThree)) {
-           System.out.println("It is not a Markov matrix");
-       } else {
            System.out.println("It is a Markov matrix");
+       } else {
+           System.out.println("It is not a Markov matrix");
        }
     }
 
@@ -25,26 +25,36 @@ public class PearsonMarkov {
 
     public static boolean isMarkovMatrix(double[][] arr) {
         // SUMS UP EACH COLUMN
-        int sum = 0;
-        for (int i = 0; i < arr[0].length; i++) { // each column (y axis)
-            for (int j = 0; j < arr.length; j++) { // each row (x axis)
+        boolean Col = false;
+        int ColCount = 0;
+
+        double sum = 0;
+        for (int i = 0; i < arr[0].length; i++) { // each column (y-axis)
+            for (int j = 0; j < arr.length; j++) { // each row (x-axis)
                 sum += arr[j][i];
-                if (sum >= 1) {
-                    return true;
-                }
+            }
+            if (sum >= 1) { // if the column is greater or equal to 1 then increment ColCOunt
+                ColCount++;
             }
             sum = 0;
         }
 
 
-        // CHECKS IF THE ARRAY HAS A NEGATIVE INT VALUE //////// ------------------->>>>>>> LEFT HERE (SUPPOSED TO CHECK EACH COLLUMN TOO (SUM EACH COLLUMN CONDITION)
+        // CHECKS IF THE ARRAY HAS A NEGATIVE INT VALUE
+        Boolean hasNegative = false;
         for (int i = 0; i < arr.length; i++) { // Checks each row
             for (int j = 0; j < arr[i].length; j++) { // Checks each index in the row
-                if (arr[i][j] < 0); // if less than 0 (negative)
-                return false;
+                if (arr[i][j] < 0) { // if less than 0 (negative)
+                    hasNegative=true;
+                }
             }
         }
-        return true;
+
+        if (ColCount==3 && !hasNegative) {
+            return true;
+        }
+
+        return false;
     }
 
     public static void Display(double[][] arr) {
