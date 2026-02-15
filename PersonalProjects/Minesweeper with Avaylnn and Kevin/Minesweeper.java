@@ -124,7 +124,7 @@ public class Minesweeper {
                 if (arr[i][j]==0) {
                     System.out.print("❤️ ");
                 } else if (arr[i][j]==1) {
-                    System.out.print("🗿 ");
+                    System.out.print("❤️ ");
                 } else if (arr[i][j]==2) {
                     System.out.print("🌹 ");
                 }
@@ -219,4 +219,8 @@ public class Minesweeper {
 
     // ===================== INITIAL METHODS ======================= \\
 
+
+
+    // ================= COMMENT ====================== \\
+    // CHRIST: HI KEVIN!
 }
