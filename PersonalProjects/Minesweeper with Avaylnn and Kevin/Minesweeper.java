@@ -1,8 +1,3 @@
-//PickTile(int[][] arr, int a, int b)
-//   -> takes an array, picks the index using the parameters (a and b) then change the value of that index to be 2, if the index is 0 or 1
-//   then change a global boolean Lose to true. each time the tile is showed up, increment a global variable called int points
-
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,84 +15,22 @@ public class Minesweeper {
         // CREATING 2D ARRAY
         int[][] Table = new int[5][5];
 
+        // RANDOMIZING 2D ARRAY BASED ON DIFFICULTY
         radRandy(Table);
+        DisplayArray(Table);
+
+        // PICKING A TILE
+        UserInput(Table);
+        System.out.println(" "); // Space for Readability
+        ChangeTile(Table);
+        System.out.println(" "); // Space for Readability
         DisplayArray(Table);
     }
 
 
     // ===================== METHODS ======================= \\
-    public static void DisplayArray(int[][] arr) { // changes the num
-        int cols = arr[0].length; // AUTOSCALE WITH ARRAY SIZE
-        String StraightLine = "═".repeat(cols*4); // *4 because each emoji takes ~4 chars width
 
-        // DISPLAY
-        System.out.println(" ".repeat(StraightLine.length() / 6) + "[ MINESWEEPER ]");
-        System.out.println("╔"+StraightLine+"╗");                           // TOP BORDER
-        for (int i = 0; i < arr.length; i++) { // checks the row
-            System.out.print("║ ");                                                  // LEFT BORDER
-
-            for (int j = 0; j < arr[i].length; j++) { // checks the column
-                if (arr[i][j]==0) {
-                    System.out.print("❤️ ");
-                } else if (arr[i][j]==1) {
-                    System.out.print("🗿 ");
-                } else if (arr[i][j]==2) {
-                    System.out.print("🌹 ");
-                }
-            }
-            System.out.println("║");                                                 // RIGHT BORDER
-        }
-        System.out.println("╚"+StraightLine+"╝");                           // BOTTOM BORDER
-    } // Displays Array [UNFINISHED]
-    public static void UserInput(int[][] arr) {
-        boolean boo = false;
-
-        System.out.println("Please choose your tile.");
-        System.out.print("Row: ");
-
-        while(boo == false) {
-            row = scanner.nextInt();
-            if (row <= 5) {
-                boo = true;
-            } else {
-                System.out.println("Not a valid response. Please try again: ");
-            }
-        }
-
-        boo = false;
-
-        System.out.print("Col: ");
-        while(boo == false) {
-            col = scanner.nextInt();
-            if (col <= 5) {
-                boo = true;
-            } else {
-                System.out.println("Not a valid response. Please try again: ");
-            }
-        }
-    } // Changes the Class Variable (By Ava) [FINISHED]
-    public static void ChangeTile(int[][] arr) {
-        // CHECKS IF THE TABLE HAS NO MORE 0s
-        int sum = 0;
-        for (int i = 0; i < arr.length; i++) { // each row
-            for (int j = 0; j < arr.length; j++) { // each column
-                if (arr[i][j] == 0) {
-                    sum++;
-                }
-            }
-        }
-
-        if (sum != 0) {
-            if (arr[row][col] == 0) {
-                arr[row][col] = 2;
-                score++;
-            } else if (arr[row][col] == 1) {
-                LoseMessage();
-            }
-        }
-
-        sum = 0; // resets
-    } // Changes an index value [UNFINISHED
+    // FINISHED
     public static void radRandy(int[][] table) {
         Random randy = new Random();
 
@@ -149,7 +82,60 @@ public class Minesweeper {
             }
         }
 
-    }  // Randomiz the 2D Array (By Ava) [FINISHED]
+    }  // Randomize the 2D Array (By Ava) [FINISHED]
+    public static void ChangeTile(int[][] arr) {
+        // CHECKS IF THE TABLE HAS NO MORE 0s
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) { // each row
+            for (int j = 0; j < arr.length; j++) { // each column
+                if (arr[i][j] == 0) {
+                    sum++;
+                }
+            }
+        }
+
+        // IF THERE IS STILL 0
+        if (sum != 0) {
+            if (arr[row][col] == 0) {
+                arr[row][col] = 2;
+                score++;
+            } else if (arr[row][col] == 1) {
+                LoseMessage();
+            }
+        } else {
+            WinMessage();
+        }
+
+        sum = 0; // resets
+    } // Changes an index value [FINISHED]
+
+    // UNFINISHED
+    public static void DisplayArray(int[][] arr) { // changes the num
+        int cols = arr[0].length; // AUTOSCALE WITH ARRAY SIZE
+        String StraightLine = "═".repeat(cols*4); // *4 because each emoji takes ~4 chars width
+
+        // DISPLAY
+        System.out.println(" ".repeat(StraightLine.length() / 6) + "[ MINESWEEPER ]");
+        System.out.println("╔"+StraightLine+"╗");                           // TOP BORDER
+        for (int i = 0; i < arr.length; i++) { // checks the row
+            System.out.print("║ ");                                                  // LEFT BORDER
+
+            for (int j = 0; j < arr[i].length; j++) { // checks the column
+                if (arr[i][j]==0) {
+                    System.out.print("❤️ ");
+                } else if (arr[i][j]==1) {
+                    System.out.print("🗿 ");
+                } else if (arr[i][j]==2) {
+                    System.out.print("🌹 ");
+                }
+            }
+            System.out.println("║");                                                 // RIGHT BORDER
+        }
+        System.out.println("╚"+StraightLine+"╝");                           // BOTTOM BORDER
+    } // Displays Array [UNFINISHED: NEEDS VISUAL INCREMENTATION]
+    public static void WinMessage() {
+        System.out.println("YOU HAVE WON!");
+    } // Displayers Win  message [UNFINISHED: NEEDS ASK RETRY AND VISUAL ENHANCMENT]
     public static void LoseMessage() {
         System.out.println("""
                                 *****   *******   **
@@ -200,5 +186,37 @@ public class Minesweeper {
                 /// ////////////// INSERT WHERE IT WILL LEAD TO
                 break;
         }
-    } // Displays score point and lose message [UNFINISHED]
+    } // Displays score point. lose message [UNFINISHED: NEED ASK RETRY]
+
+    public static void UserInput(int[][] arr) {
+        boolean boo = false;
+
+        System.out.println("Please choose your tile.");
+        System.out.print("Row: ");
+
+        while(boo == false) {
+            row = scanner.nextInt();
+            if (row <= 5) {
+                boo = true;
+            } else {
+                System.out.println("Not a valid response. Please try again: ");
+            }
+        }
+
+        boo = false;
+
+        System.out.print("Col: ");
+        while(boo == false) {
+            col = scanner.nextInt();
+            if (col <= 5) {
+                boo = true;
+            } else {
+                System.out.println("Not a valid response. Please try again: ");
+            }
+        }
+    } // Changes the Class Variable (By Ava) [UNFINISHED: NO INPUT LIMIT]
+
+
+    // ===================== INITIAL METHODS ======================= \\
+
 }
