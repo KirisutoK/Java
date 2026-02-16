@@ -1,13 +1,12 @@
-public interface Controllable { // A Template/Contract that gives requirements for a class
+public interface Dimmable { // A Template/Contract that gives requirements for a class
+
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    boolean isOn();
+    int getBrightness();
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-    void turnOn();
-    void turnOff();
+    void setBrightness(int level);
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
-
 }
 
 // Methods and Interface is static by default
