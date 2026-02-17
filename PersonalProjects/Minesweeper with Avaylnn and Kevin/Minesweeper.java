@@ -243,7 +243,7 @@ public class Minesweeper {
                 System.out.println("Not a valid response. Please try again: ");
             }
         }
-    } // Changes the Class Variable (By Ava) [UNFINISHED: NO INPUT LIMIT]
+    } // Changes the Class Variable (By Ava) [UNFINISHED: THERE'S A BUG HERE!]
     // ===================== INITIAL METHODS ======================= \\
 
     // ================= COMMENT ====================== \\

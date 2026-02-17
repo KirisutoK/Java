@@ -1,4 +1,4 @@
-public interface Controllable { // A Template/Contract that gives requirements for a class
+public interface Controllable { // A TEMPLATE/CONTRACT THAT GIVES REQUIREMENTS FOR A CLASS
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
     boolean isOn();
 

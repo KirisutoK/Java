@@ -11,8 +11,6 @@ public class flatten {
         for (int i:ConvertedArray) {
             System.out.print(i+", ");
         }
-
-
     }
 
     public static int[] flatten(int[][] arr) {
@@ -28,8 +26,8 @@ public class flatten {
         int[] result = new int[size];
         int OneD_index = 0;
 
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
+        for (int i = 0; i < arr.length; i++) { // for row
+            for (int j = 0; j < arr[i].length; j++) { // for column
                 result[OneD_index] = arr[i][j];
                 OneD_index++;
             }
@@ -37,5 +35,4 @@ public class flatten {
 
         return result;
     }
-
 }
