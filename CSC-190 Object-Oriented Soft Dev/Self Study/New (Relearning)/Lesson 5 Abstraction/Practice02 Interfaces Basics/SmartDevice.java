@@ -10,7 +10,7 @@ public abstract class SmartDevice { // ABSTRACTS ARE RULES TO ITS CHILDREN'S, (I
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    public abstract String getDeviceName();
+    public abstract String getDeviceType();
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
