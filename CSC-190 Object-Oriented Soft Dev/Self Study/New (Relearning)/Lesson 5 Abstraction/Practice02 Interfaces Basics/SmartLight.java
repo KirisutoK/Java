@@ -13,38 +13,27 @@ public class SmartLight
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-
-
     // --- @OVERRIDE ---
-    @Override
-    public String getDeviceType() {
+    @Override public String getDeviceType() {
         return "Smart Light";
     }
 
-    // CONTROLABLE <===== [INTERFACE]
-    @Override
-    public boolean isOn() {
+    // CONTROLLABLE <===== [INTERFACE]
+    @Override public boolean isOn() {
         return isOn;
     }
-
     // PROGRAMMABLE <===== [INTERFACE]
-    @Override
-    public String getSchedule() {
+    @Override public String getSchedule() {
         return Schedule;
     }
-
     // DIMMABLE <===== [INTERFACE]
-    @Override
-    public int getBrightness() {
+    @Override public int getBrightness() {
         return Brightness;
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-
-
     // CONTROLABLE <===== [INTERFACE]
-    @Override
-    public void turnOn() {
+    @Override public void turnOn() {
         if (isOn == true) {
             System.out.println(DeviceName+" has already been turned on.");
         } else {
@@ -52,8 +41,7 @@ public class SmartLight
             System.out.println(DeviceName+" has been turned on.");
         }
     }
-    @Override
-    public void turnOff() {
+    @Override public void turnOff() {
         if (isOn == false) {
             System.out.println(DeviceName+" is off");
         } else {
@@ -63,22 +51,19 @@ public class SmartLight
     }
 
     // PROGRAMMABLE <===== [INTERFACE]
-    @Override
-    public void setSchedule(String Schedule) {
+    @Override public void setSchedule(String Schedule) {
         this.Schedule = Schedule;
     }
 
     // DIMMABLE <===== [INTERFACE]
-    @Override
-    public void setBrightness(int Brightness) {
+    @Override public void setBrightness(int Brightness) {
         this.Brightness = Brightness;
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 
     // @OVERRIDE
-    @Override
-    public void DisplayInformation() {
+    @Override public void DisplayInformation() {
         super.DisplayInformation();
         System.out.println("Is On: "+isOn);
         System.out.println("Brightness: "+Brightness);
