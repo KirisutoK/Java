@@ -142,7 +142,6 @@ public class Minesweeper {
 
         for (int i = 0; i < Table.length; i++) { // checks the row
             System.out.print("║ ");                                                  // LEFT BORDER
-
             for (int j = 0; j < Table[i].length; j++) { // checks the column
                 if (Table[i][j]==0) { // EMPTY
                     System.out.print("❤️ ");
@@ -225,7 +224,7 @@ public class Minesweeper {
 
         while(boo == false) {
             row = scanner.nextInt();
-            if (row <= 4) {
+            if (row <= Table.length-1) {
                 boo = true;
             } else {
                 System.out.println("Not a valid response. Please try again: ");
@@ -237,7 +236,7 @@ public class Minesweeper {
         System.out.print("Col: ");
         while(boo == false) {
             col = scanner.nextInt();
-            if (col <= 4) {
+            if (col <= Table.length-1) {
                 boo = true;
             } else {
                 System.out.println("Not a valid response. Please try again: ");

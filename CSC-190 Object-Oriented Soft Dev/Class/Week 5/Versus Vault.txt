@@ -1,0 +1,53 @@
+[public vs private]
+
+--> public:
+    -makes a variable, method, or instances to be accessed from other files in your directories
+    -other classes can see this information
+    -makes data accessible
+--> private:
+    -makes a variable, method, or instances to be unaccessible from other files in your directors
+    -hides the data inside the classes
+
+
+[primitive vs reference]
+
+--> primitive:
+    -a variable that is the default data type of values such as int, boolean, float.
+    -holds data
+--> reference:
+    -a variable that is based from other data. this could be calling a variable from other files like string which is a method,
+    from objects.
+    -hold the memory address of where an object live.
+
+
+[static vs instance]
+
+--> static:
+    -belongs to the class (shared)
+    -usually used as a counter
+
+--> instance:
+    -belongs to the object
+
+
+[getter vs setter]
+
+--> getter:
+    -returns a data type
+    -gets information
+    -let you see the value
+    -also known as accessors
+
+--> setter:
+    -sets a data type
+    -changes a variable
+    -also known as mutators
+
+
+[anonymous vs named objects]
+
+--> anonymous:
+    -created and used immediately without a variable name
+
+--> named objects:
+    -stored in a variable name
