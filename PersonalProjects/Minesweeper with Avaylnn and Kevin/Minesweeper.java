@@ -1,6 +1,3 @@
-import com.sun.source.tree.WhileLoopTree;
-
-import java.lang.classfile.instruction.TableSwitchInstruction;
 import java.util.Random;
 import java.util.Scanner;
 
