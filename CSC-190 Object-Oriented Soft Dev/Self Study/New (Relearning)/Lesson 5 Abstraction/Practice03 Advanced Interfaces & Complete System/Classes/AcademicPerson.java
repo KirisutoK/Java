@@ -1,7 +1,7 @@
 package Classes;
 
 // Creation Date: February 27, 2026. at 9:19 PM
-// Last Modified: February 27, 2026. at 9:23 PM
+// Last Modified: February 27, 2026. at11:00 PM
 
 // ABSTRACTS ARE RULES TO ITS CHILDREN'S, (IT'S A KEY TERM OF "MUST HAVE")
 public abstract class AcademicPerson // This a person that is on an education
@@ -21,3 +21,6 @@ public abstract class AcademicPerson // This a person that is on an education
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 }
+
+
+/// <=================== YOU LEFT HERE!!!!!!!!!!!

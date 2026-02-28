@@ -1,7 +1,7 @@
 package Classes;
 
 // Creation Date: February 27, 2026. at 9:12 PM
-// Last Modified: February 27, 2026. at 9:23 PM
+// Last Modified: February 27, 2026. at11:01 PM
 
 // ABSTRACTS ARE RULES TO ITS CHILDREN'S, (IT'S A KEY TERM OF "MUST HAVE")
 public abstract class Person { // this is a normal person (Broad Category)
