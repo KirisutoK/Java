@@ -1,7 +1,9 @@
-package Classes;
+package Classes.Person.Academic;
 
 // Creation Date: February 27, 2026. at 9:19 PM
-// Last Modified: February 27, 2026. at11:00 PM
+// Last Modified: February 28, 2026. at 11:19 AM
+
+import Classes.Person.Person;
 
 // ABSTRACTS ARE RULES TO ITS CHILDREN'S, (IT'S A KEY TERM OF "MUST HAVE")
 public abstract class AcademicPerson // This a person that is on an education
@@ -16,11 +18,9 @@ public abstract class AcademicPerson // This a person that is on an education
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public abstract String getAcademicStatus(); // Its children's must have this method
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 }
-
-
-/// <=================== YOU LEFT HERE!!!!!!!!!!!

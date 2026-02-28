@@ -10,6 +10,9 @@ public class Format {
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 }
 
+// --- @OVERRIDE ---
+
+// INTERFACENAME <==== [INTERFACE]
 
 /*
 
