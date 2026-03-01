@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Practice01 {
+public class Array01 {
     public static void main(String[] args) {
         ArrayList<Integer> RandomNumbers = new ArrayList<>(); // Arraylist (not a regular array)
 

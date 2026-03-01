@@ -1,6 +1,6 @@
 import java.util.Arrays; // This is a regular array with multiple convenient methods. this can be such as toString()
 
-public class Practice01 {
+public class Array01 {
     public static void main(String[] args) {
         int[] RandomNumbers = {1, 3, 8, 21, 3}; // Array
 

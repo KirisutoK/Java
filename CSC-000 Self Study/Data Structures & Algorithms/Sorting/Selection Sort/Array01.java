@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Practice01 {
+public class Array01 {
     public static void main(String[] args) {
         int[] RandomNumbers = {3, 2, 6, 1, 2};
 
