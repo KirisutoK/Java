@@ -47,7 +47,7 @@ public class Course {
             System.out.println(studentname + " has successfully enrolled in " + CourseName);
         }
     }
-    public void dropStudent(String studentname) { // To Drop a Student
+    public void dropStudent(String studentname) { // To Drop a AP_Student
         if (EnrolledStudents <= 0) {
             System.out.println("There are no students in the course.");
         } else {
@@ -60,7 +60,7 @@ public class Course {
     public void DispalyCourseInformation() {
         System.out.println("Course: " + CourseName);
         System.out.println("Course Code: " + CourseCode);
-        System.out.println("Professor: " + Professor);
+        System.out.println("AP_Professor: " + Professor);
         System.out.println("Course: " + CourseName);
         System.out.println("Max Students: " + MaxStudents);
         System.out.println("Enrolled Students: " + EnrolledStudents);

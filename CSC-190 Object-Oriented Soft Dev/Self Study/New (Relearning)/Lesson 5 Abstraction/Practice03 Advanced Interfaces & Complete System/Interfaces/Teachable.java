@@ -1,7 +1,8 @@
 package Interfaces;
+import Classes.Course;
 
 // Creation Date: February 27, 2026. at 9:11 PM
-// Last Modified: February 27, 2026. at 9:26 PM
+// Last Modified: March 01, 2026. at 11:15 AM
 
 public interface Teachable { // A Template/Contract that gives requirements for a class
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES

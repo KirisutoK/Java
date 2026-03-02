@@ -28,10 +28,10 @@ public class Professor extends Person {
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void Teach() {
-        System.out.println("Professor " + Name + " is teaching " + Department);
+        System.out.println("AP_Professor " + Name + " is teaching " + Department);
     }
     public void adviseMenTee(GraduateStudent GradStudent) {
-        System.out.println("Professor " + Name + " is advising " + GradStudent.Name + " on " + GradStudent.getThesisTopic());
+        System.out.println("AP_Professor " + Name + " is advising " + GradStudent.Name + " on " + GradStudent.getThesisTopic());
     }
 
     // @OVERRIDE

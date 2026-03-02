@@ -30,7 +30,7 @@ public class About_Me {
                 System.out.println("\n====================================Summary====================================");
                 System.out.println("👨 Christ Aerjil C. Dampog | 19 | Pure Filipino | US Citizen");
                 System.out.println("📍 Waterloo, NY 13165 | 🎓 Computer Information Systems");
-                System.out.println("\n    I am a creative and solutions-driven FLCC Student with skills in digital design,");
+                System.out.println("\n    I am a creative and solutions-driven FLCC AP_Student with skills in digital design,");
                 System.out.println("web development, video/photo editing and hardware/software troubleshooting. ");
                 System.out.println("Experienced in customer service, eCommerce, and team collaboration. Bilingual, ");
                 System.out.println("adaptable, and detail -oriented, with a strong drive to contribute technical ");
@@ -204,7 +204,7 @@ public class About_Me {
                 System.out.println("1. Family              5. Classmates   ");
                 System.out.println("2. Best Friends        6. Co-Workers   ");
                 System.out.println("3. Friends             7. Neighbor     ");
-                System.out.println("4. Teacher/Professor   8. Crush        ");
+                System.out.println("4. Teacher/AP_Professor   8. Crush        ");
                 System.out.println("=======================================");
 
                 System.out.println("\nChoose which connection? (Pick a number from 1-8)");
@@ -251,9 +251,9 @@ public class About_Me {
 
                     case 4:
                         System.out.println("\n==============Teachers/Professors==============");
-                        System.out.println("◆ Professor Paige Labarr (CSC-115)");
-                        System.out.println("◆ Professor Will Mclaughlin (CSC-103)");
-                        System.out.println("◆ Professor Wendy Gray (CSC-142)");
+                        System.out.println("◆ AP_Professor Paige Labarr (CSC-115)");
+                        System.out.println("◆ AP_Professor Will Mclaughlin (CSC-103)");
+                        System.out.println("◆ AP_Professor Wendy Gray (CSC-142)");
                         System.out.println("◆ Soniely Rivera (Loo Brew Internship)");
                         System.out.println("◆ Ma'am Catherine Quiapo (Grade 11 Advisor)");
                         System.out.println("===============================================");
@@ -269,9 +269,9 @@ public class About_Me {
 
                     case 7:
                         System.out.println("\n==============Neighbor==============");
-                        System.out.println("◆ Professor Paige Labarr (CSC-115)");
-                        System.out.println("◆ Professor Will Mclaughlin (CSC-103)");
-                        System.out.println("◆ Professor Wendy Gray (CSC-142)");
+                        System.out.println("◆ AP_Professor Paige Labarr (CSC-115)");
+                        System.out.println("◆ AP_Professor Will Mclaughlin (CSC-103)");
+                        System.out.println("◆ AP_Professor Wendy Gray (CSC-142)");
                         System.out.println("◆ Soniely Rivera (Loo Brew Internship)");
                         System.out.println("◆ Ma'am Catherine Quiapo (Grade 11 Advisor)");
                         System.out.println("===============================================");

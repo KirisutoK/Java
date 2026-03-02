@@ -54,7 +54,7 @@ public class Student {
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void DisplayInfo() { 
         System.out.println("Name: " + Name);
-        System.out.println("Student ID: " + StudentID);
+        System.out.println("AP_Student ID: " + StudentID);
         System.out.println("GPA: " + GPA);
         System.out.println("Major: " + Major);
     }

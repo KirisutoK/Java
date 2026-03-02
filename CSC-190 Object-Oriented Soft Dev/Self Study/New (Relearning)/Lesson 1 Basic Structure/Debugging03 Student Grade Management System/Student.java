@@ -43,7 +43,7 @@ public class Student {
     }
 
     public void displayInfo() {
-        System.out.println("Student: " + name + " (ID: " + studentId + ")");
+        System.out.println("AP_Student: " + name + " (ID: " + studentId + ")");
         System.out.print("Grades: ");
 
         for (int i = 0; i < gradeCount; i++) {

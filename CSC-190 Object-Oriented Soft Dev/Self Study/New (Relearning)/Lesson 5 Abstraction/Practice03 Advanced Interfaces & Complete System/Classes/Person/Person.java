@@ -1,7 +1,7 @@
 package Classes.Person;
 
 // Creation Date: February 27, 2026. at 9:12 PM
-// Last Modified: February 28, 2026. at 11:09 AM
+// Last Modified: March 01, 2026. at 10:50 AM
 
 // ABSTRACTS ARE RULES TO ITS CHILDREN'S, (IT'S A KEY TERM OF "MUST HAVE")
 public abstract class Person { // this is a normal person (Broad Category)
@@ -18,7 +18,7 @@ public abstract class Person { // this is a normal person (Broad Category)
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    abstract String getRole(); // its children's must have this method
+    public abstract String getRole(); // its children's must have this method
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 

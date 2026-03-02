@@ -1,13 +1,12 @@
-package Classes.Person.Academic.People;
-import Classes.Person.Academic.AcademicPerson;
+package Classes.Person.Academic;
 import Classes.Course;
 import Interfaces.Enrollable;
 import Interfaces.Gradable;
 
 // Creation Date: February 28, 2026. at 10:37 AM
-// Last Modified: March 01, 2026. at 11:19 AM
+// Last Modified: March 02, 2026. at  1:35 PM
 
-public class Student
+public class AP_Student
         extends AcademicPerson
         implements Enrollable, Gradable {
     //=======VARIABLES=======//
@@ -16,7 +15,7 @@ public class Student
     private int CourseCount;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    public Student(String Name, String ID, int Age, String Department) {
+    public AP_Student(String Name, String ID, int Age, String Department) {
         super(Name, ID, Age, Department);
     }
 
@@ -43,11 +42,27 @@ public class Student
 
     // --- @OVERRIDE
     // ENROLLABLE <==== [INTERFACE]
-
     @Override
     public void enroll(Course course) {
-        
+        for (int i = 0; i < EnrolledCourses.length; i++) {
+            if (CourseCount <= 6) {
+                EnrolledCourses[CourseCount] = course;
+            } else {
+                System.out.println("You have exceeded the maximum amount of courses you can enroll.");
+            }
+        }
     }
+    public void drop(Course course) { /////// <======================== YOU LEFT HERE!!!!
+        for (int i = 0; i < CourseCount; i++) { // for every CourseCount
+            if (EnrolledCourses[i] == course) { // if it matches
+                for (int j = i; j < CourseCount; j++) { // for every CourseCount starting from where the course is found
+                    if (j != EnrolledCourses.length-1) {
+                        EnrolledCourses[j] = EnrolledCourses[j+1];
+                    }
+                }
+            }
+        }
+    } //////////////////// <<========================= TEST THIS IF THE SHIFTING WORKS!
 
     // TEACHABLE <==== [INTERFACE]
     //  ACADEMIC PERSON <==== [ABSTRACT]

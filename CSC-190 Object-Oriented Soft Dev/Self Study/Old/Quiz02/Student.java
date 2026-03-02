@@ -31,8 +31,8 @@ public class Student {
     }
 
     public void displayStudentInfo() {
-        System.out.println("Student: " + name);
-        System.out.println("Student ID: " + studentId);
+        System.out.println("AP_Student: " + name);
+        System.out.println("AP_Student ID: " + studentId);
         System.out.println("Grade: " + grade);
         System.out.println("Passed: " + isPassing());
     }

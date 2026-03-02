@@ -11,7 +11,7 @@ public class Student {
         StudentID = NextID;
         NextID ++;
         TotalStudents++;
-        System.out.println("Student Created");
+        System.out.println("AP_Student Created");
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
@@ -34,6 +34,6 @@ public class Student {
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void displayInfo() {
         System.out.println("Name: " + Name);
-        System.out.println("Student ID: " + StudentID);
+        System.out.println("AP_Student ID: " + StudentID);
     }
 }

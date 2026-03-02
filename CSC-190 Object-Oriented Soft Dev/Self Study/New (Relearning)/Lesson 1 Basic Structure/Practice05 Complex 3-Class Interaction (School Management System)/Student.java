@@ -70,8 +70,8 @@ public class Student {
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void DisplayStudentInformation() {
-        System.out.println("Student Name: " + StudentName);
-        System.out.println("Student ID: " + StudentID);
+        System.out.println("AP_Student Name: " + StudentName);
+        System.out.println("AP_Student ID: " + StudentID);
         System.out.print("Courses Enrolled: " );
         for (int i = 0; i < CourseCount; i++) {
             System.out.print(EnrolledCourse[i].getCourseName());

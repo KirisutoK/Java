@@ -24,7 +24,7 @@ public class School {
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
-    public void addStudent(Student student) { // Adds a Student into Students Array
+    public void addStudent(Student student) { // Adds a AP_Student into Students Array
         boolean isEnrolled = false;
 
         //Check if the student is already in the Students[]
@@ -38,7 +38,7 @@ public class School {
 
         //Triggers if it is not in the Students[]
         if (!isEnrolled) { // if it is not (false) then do this
-            if (StudentCount < Students.length) { // Student Array is 10 so StudentCOunt can only reach to 9
+            if (StudentCount < Students.length) { // AP_Student Array is 10 so StudentCOunt can only reach to 9
                 Students[StudentCount] = student;
                 StudentCount++;
                 System.out.println(student.getStudentName() + " Has successfully enrolled at " + SchoolName);
