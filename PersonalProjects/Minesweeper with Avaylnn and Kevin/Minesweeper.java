@@ -247,3 +247,20 @@ public class Minesweeper {
     // ava was here
     // CHRIST: HELLO
 }
+
+// KEVIN CODE:
+//public static void calculateHints(int[][] table) {
+//        for (int i = 0; i < SIZE; i++) { //Scan the table
+//            for (int j = 0; j < SIZE; j++) {
+//                if (table[i][j] == 9) continue; // "continue" this will skip everything in the condition if it is true
+//                int count = 0;
+//                for (int x = -1; x <= 1; x++) {
+//                    for (int y = -1; y <= 1; y++) {
+//                        int ni = i + x, nj = j + y;
+//                        if (ni >= 0 && ni < SIZE && nj >= 0 && nj < SIZE && table[ni][nj] == 9) count++;
+//                    }
+//                }
+//                table[i][j] = count;
+//            }
+//        }
+//    }
