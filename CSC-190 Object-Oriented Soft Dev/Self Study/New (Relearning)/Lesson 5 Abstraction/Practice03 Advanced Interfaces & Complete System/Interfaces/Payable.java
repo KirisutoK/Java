@@ -1,7 +1,7 @@
 package Interfaces;
 
 // Creation Date: February 27, 2026. at 9:11 PM
-// Last Modified: February 27, 2026. at11:01 PM
+// Last Modified: March 04, 2026. at  1:11 PM
 
 public interface Payable { // A Template/Contract that gives requirements for a class
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES

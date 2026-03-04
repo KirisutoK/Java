@@ -2,7 +2,7 @@ package Interfaces;
 import Classes.Course;
 
 // Creation Date: February 27, 2026. at 9:10 PM
-// Last Modified: March 01, 2026. at 11:05 AM
+// Last Modified: March 04, 2026. at  1:11 PM
 
 public interface Gradable { // A Template/Contract that gives requirements for a class
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
