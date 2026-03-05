@@ -1,5 +1,5 @@
 // Creation Date: March 05, 2026. at 9:59 AM
-// Last Modified: March 05, 2026. at 10:39 AM
+// Last Modified: March 05, 2026. at 11:09 AM
 
 public class Player {
     //=======VARIABLES=======//
@@ -63,6 +63,7 @@ public class Player {
         System.out.println("Age: "+age);
         System.out.println("Games Played: "+numGames);
         System.out.println("Wins: "+numWins);
+        System.out.println("Win Ratio: "+getWinRatio());
     }
 
 }
