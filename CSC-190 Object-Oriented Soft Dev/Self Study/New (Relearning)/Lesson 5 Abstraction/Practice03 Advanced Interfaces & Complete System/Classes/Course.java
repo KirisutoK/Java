@@ -2,7 +2,7 @@ package Classes;
 import Classes.Person.Academic.AP_Professor;
 
 // Creation Date: February 28, 2026. at 10:54 AM
-// Last Modified: March 04, 2026. at  1:25 PM
+// Last Modified: March 07, 2026. at 12:02 PM
 
 public class Course {
     //=======VARIABLES=======//
@@ -22,7 +22,15 @@ public class Course {
     public String getCourseName() {
         return CourseName;
     }
-
+    public AP_Professor getInstructor() {
+        return Instructor;
+    }
+    public int getCredits() {
+        return Credits;
+    }
+    public String getCourseCode() {
+        return CourseCode;
+    }
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void assignInstructor(AP_Professor Instructor) {
         this.Instructor = Instructor;

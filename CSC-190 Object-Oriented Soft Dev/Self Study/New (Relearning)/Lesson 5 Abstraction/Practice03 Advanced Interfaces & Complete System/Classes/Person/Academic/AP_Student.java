@@ -4,14 +4,14 @@ import Interfaces.Enrollable;
 import Interfaces.Gradable;
 
 // Creation Date: February 28, 2026. at 10:37 AM
-// Last Modified: March 04, 2026. at  1:49 PM
+// Last Modified: March 07, 2026. at 12:03 PM
 
 public class AP_Student
         extends AcademicPerson
-        implements Enrollable { // Add Gradeable
+        implements Enrollable, Gradable { // Add Gradeable
     //=======VARIABLES=======//
     private Course[] EnrolledCourses = new Course[6];
-    private double Grades;
+    private double[] Grades = new double[6];
     private int CourseCount;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
@@ -26,8 +26,14 @@ public class AP_Student
     @Override public int getEnrolledCount() {
         return CourseCount;
     }
-    // TEACHABLE <==== [INTERFACE]
     // GRADEABLE <==== [INTERFACE]
+    @Override public double getGPA() {
+        double temp = 0;
+        for (int i = 0; i < CourseCount; i++) {
+            temp += Grades[i];
+        }
+        return temp/CourseCount;
+    }
 
     //  ACADEMIC PERSON <==== [ABSTRACT]
     @Override public String getAcademicStatus() {
@@ -45,8 +51,7 @@ public class AP_Student
 
     // --- @OVERRIDE
     // ENROLLABLE <==== [INTERFACE]
-    @Override
-    public void enroll(Course course) { // ADD RESTRICTION IF COURSES IS ALREADY ADDED AND A LIMIT NOTIFICATION
+    @Override public void enroll(Course course) {
         // LIMIT NOTIFICATION
         if (CourseCount == EnrolledCourses.length) {
             System.out.println("You have reached the limit for registering courses");
@@ -62,35 +67,52 @@ public class AP_Student
         // ADDING COURSE INTO THE ARRAY
         EnrolledCourses[CourseCount] = course;
         CourseCount++;
+        System.out.println(Name+" has successfully enrolled in "+course.getCourseName());
     }
-    public void drop(Course course) { /////// <======================== YOU LEFT HERE!!!!
+    @Override public void drop(Course course) { /////// <======================== YOU LEFT HERE!!!!
         boolean hasCourse = false;
         // REMOVING THE COURSE
         for (int i = 0; i < CourseCount; i++) { // for every CourseCount
             if (EnrolledCourses[i] == course) { // if it matches
+                CourseCount--;
                 hasCourse = true;
                 for (int j = i; j < CourseCount; j++) { // for every CourseCount starting from where the course is found
                     if (j != EnrolledCourses.length-1) {
                         EnrolledCourses[j] = EnrolledCourses[j+1];
                     }
                 }
+                System.out.println(Name+" has dropped "+course.getCourseName());
             }
         }
         // NOTIFIES IF YOU ARE NOT ENROLLED IN THAT COURSE
         if (!hasCourse) {
-            System.out.println("You are not enrolled in "+course.getCourseName());
+            System.out.println(Name+" is not enrolled in "+course.getCourseName());
         }
-    } //////////////////// <<========================= TEST THIS IF THE SHIFTING WORKS!
-
-    // TEACHABLE <==== [INTERFACE]
+    }
     // GRADEABLE <==== [INTERFACE]
+    @Override public void assignGrade(Course course, double grade) {
+        for (int i = 0; i < CourseCount; i++) {
+            if (EnrolledCourses[i] == course) { // if it matches
+                Grades[i] = grade; // take the matched position and match it with grade
+            }
+        }
+    }
     //  ACADEMIC PERSON <==== [ABSTRACT]
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void displayCourses() {
-        System.out.print("Enrolled Courses:");
-        for (int i = 0; i < getEnrolledCount(); i++) {
+        System.out.print(Name+" Enrolled Courses:");
+        for (int i = 0; i < CourseCount; i++) {
             System.out.print(" "+EnrolledCourses[i].getCourseName()+" |");
         }
     }
+    public void displayInformation() {
+        System.out.println("Name: "+Name);
+        System.out.print("Enrolled Courses:"); for (int i = 0; i < CourseCount; i++) {System.out.print(" "+EnrolledCourses[i].getCourseName()+" |");}
+        System.out.println("Name: "+Name);
+        System.out.println("Name: "+Name);
+        System.out.println("Name: "+Name);
+    }
 }
+
+//// <================= YOU LEFT HERE (I THINK)
