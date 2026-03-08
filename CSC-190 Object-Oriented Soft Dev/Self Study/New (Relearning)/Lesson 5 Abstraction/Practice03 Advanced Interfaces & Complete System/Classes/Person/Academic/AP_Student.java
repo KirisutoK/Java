@@ -4,11 +4,11 @@ import Interfaces.Enrollable;
 import Interfaces.Gradable;
 
 // Creation Date: February 28, 2026. at 10:37 AM
-// Last Modified: March 07, 2026. at 12:03 PM
+// Last Modified: March 08, 2026. at 11:21 AM
 
 public class AP_Student
         extends AcademicPerson
-        implements Enrollable, Gradable { // Add Gradeable
+        implements Enrollable, Gradable { 
     //=======VARIABLES=======//
     private Course[] EnrolledCourses = new Course[6];
     private double[] Grades = new double[6];
@@ -54,13 +54,13 @@ public class AP_Student
     @Override public void enroll(Course course) {
         // LIMIT NOTIFICATION
         if (CourseCount == EnrolledCourses.length) {
-            System.out.println("You have reached the limit for registering courses");
+            System.out.println(Name+"have reached the limit for registering courses");
             return; // Stops the method here.
         }
         // DUPLICATION NOTIFICATION
         for (Course i:EnrolledCourses) {
             if (i == course) {
-                System.out.println("You are already registered on "+i.getCourseName());
+                System.out.println(Name+" is already registered on "+i.getCourseName());
                 return; // Stops the method here.
             }
         }
@@ -69,7 +69,7 @@ public class AP_Student
         CourseCount++;
         System.out.println(Name+" has successfully enrolled in "+course.getCourseName());
     }
-    @Override public void drop(Course course) { /////// <======================== YOU LEFT HERE!!!!
+    @Override public void drop(Course course) {
         boolean hasCourse = false;
         // REMOVING THE COURSE
         for (int i = 0; i < CourseCount; i++) { // for every CourseCount
@@ -77,8 +77,9 @@ public class AP_Student
                 CourseCount--;
                 hasCourse = true;
                 for (int j = i; j < CourseCount; j++) { // for every CourseCount starting from where the course is found
-                    if (j != EnrolledCourses.length-1) {
+                    if (j != EnrolledCourses.length-1) { // if the index is NOT in the last position of the array
                         EnrolledCourses[j] = EnrolledCourses[j+1];
+                        Grades[j] = Grades[j+1];
                     }
                 }
                 System.out.println(Name+" has dropped "+course.getCourseName());
@@ -106,13 +107,21 @@ public class AP_Student
             System.out.print(" "+EnrolledCourses[i].getCourseName()+" |");
         }
     }
-    public void displayInformation() {
-        System.out.println("Name: "+Name);
+    public void displayGrades() {
+        System.out.print(Name+" Enrolled Courses:");
+        for (int i = 0; i < CourseCount; i++) {
+            System.out.print(" "+Grades[i]+" |");
+        }
+    }
+
+    // --- @OVERRIDE
+    @Override public void displayInformation() {
+        super.displayInformation();
         System.out.print("Enrolled Courses:"); for (int i = 0; i < CourseCount; i++) {System.out.print(" "+EnrolledCourses[i].getCourseName()+" |");}
-        System.out.println("Name: "+Name);
-        System.out.println("Name: "+Name);
-        System.out.println("Name: "+Name);
+        System.out.print("\nGrades:"); for (int i = 0; i < CourseCount; i++) {System.out.print(" "+Grades[i]+" |");}
+        System.out.println("\nGPA: "+getGPA());
+
     }
 }
 
-//// <================= YOU LEFT HERE (I THINK)
+// <====================== YOU LEFT HERE (I THINK)
