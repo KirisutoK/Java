@@ -1,9 +1,10 @@
 // Creation Date: February 27, 2026. at 9:25 PM
-// Last Modified: March 08, 2026. at 11:40 PM
+// Last Modified: March 09, 2026. at  1:13 PM
 
 import Classes.Course;
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
+import Classes.Person.Academic.S_TeachingAssistant;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,10 +16,9 @@ public class Main {
 
         AP_Student Test01 = new AP_Student("Test01", "S01", 18, "Computer Science");
         AP_Professor TestProf01 = new AP_Professor("TestProf01", "P01", 36, "Computer Science", 60000, 10);
+        S_TeachingAssistant TestAs01 = new S_TeachingAssistant("TestAs01", "T01", 20, "Computer Science", 16.50, 15);
 
-        TestProf01.teach(Course01);
-
-        TestProf01.displayInformation();
+        TestAs01.displayInformation();
 
 
 
