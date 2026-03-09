@@ -1,7 +1,7 @@
 package Classes.Person.Academic;
 
 // Creation Date: February 27, 2026. at 9:19 PM
-// Last Modified: March 08, 2026. at 10:50 AM
+// Last Modified: March 08, 2026. at 11:30 PM
 
 import Classes.Person.Person;
 
@@ -23,8 +23,9 @@ public abstract class AcademicPerson // This a person that is on an education
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
-    public void displayInformation() {
+    @Override public void displayInformation() {
         System.out.println("Name: "+Name);
+        System.out.println("ID: "+ID);
         System.out.println("Age: "+Age);
         System.out.println("Department: "+Department);
     }
