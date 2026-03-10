@@ -1,7 +1,7 @@
 package Classes.Person.Academic;
 
 // Creation Date: March 01, 2026. at 11:11 AM
-// Last Modified: March 08, 2026. at 11:40 PM
+// Last Modified: March 10, 2026. at  9:58 AM
 
 import Interfaces.Payable;
 import Interfaces.Teachable;
@@ -105,5 +105,6 @@ public class AP_Professor
         System.out.println("Salary: "+calculateSalary());
         System.out.println("Years of Experience: "+YearsOfExperience);
         System.out.print("Teaching Courses: "); for (int i = 0; i < CourseCount; i++) {System.out.print(" "+ TeachingCourses[i].getCourseName()+" |");}
+        System.out.println(" "); // Space for Readability
     }
 }
