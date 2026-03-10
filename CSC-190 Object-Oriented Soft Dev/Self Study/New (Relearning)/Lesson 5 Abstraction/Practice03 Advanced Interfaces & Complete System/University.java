@@ -1,5 +1,5 @@
 // Creation Date: March 09, 2026. at 1:18 PM
-// Last Modified: March 10, 2026. at 10:00 AM
+// Last Modified: March 10, 2026. at 10:12 AM
 
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Person;
@@ -54,7 +54,7 @@ public class University {
         // ADDING COURSE INTO THE ARRAY
         Courses[CourseCount] = course;
         CourseCount++;
-        System.out.println(UniversityName+" has successfully added a new course: "+course.getCourseName());
+        System.out.println(UniversityName+" has successfully added a new course: "+course.getCourseName()+" ("+course.getCourseCode()+") "+"["+course.getCredits()+" Credits]");
     }
     
 
@@ -73,6 +73,12 @@ public class University {
     }
 
     public void displayAllCourses() {
-        
+        System.out.println("============ ALL COURSES ============");
+        for (Course i:Courses) {
+            if (i != null) { // if the position is not empty
+                i.displayInformation();
+                System.out.println(" "); // Space for Readability
+            }
+        }
     }
 }

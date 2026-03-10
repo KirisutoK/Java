@@ -2,7 +2,7 @@ package Classes;
 import Classes.Person.Academic.AP_Professor;
 
 // Creation Date: February 28, 2026. at 10:54 AM
-// Last Modified: March 07, 2026. at 12:02 PM
+// Last Modified: March 10, 2026. at 10:15 AM
 
 public class Course {
     //=======VARIABLES=======//
@@ -34,6 +34,7 @@ public class Course {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void assignInstructor(AP_Professor Instructor) {
         this.Instructor = Instructor;
+        Instructor.teach();
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
