@@ -1,7 +1,7 @@
 package Classes.Person.Academic;
 
 // Creation Date: March 01, 2026. at 11:19 AM
-// Last Modified: March 09, 2026. at  1:16 PM
+// Last Modified: March 11, 2026. at  7:03 PM
 
 import Classes.Course;
 import Interfaces.Payable;
@@ -82,6 +82,3 @@ public class S_TeachingAssistant
         displayPayInfo();
     }
 }
-
-
-// <======================== YOU LEFT HERE!!!!!

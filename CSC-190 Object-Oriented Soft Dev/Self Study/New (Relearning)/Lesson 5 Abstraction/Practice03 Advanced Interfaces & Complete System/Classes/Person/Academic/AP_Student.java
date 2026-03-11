@@ -4,7 +4,7 @@ import Interfaces.Enrollable;
 import Interfaces.Gradable;
 
 // Creation Date: February 28, 2026. at 10:37 AM
-// Last Modified: March 09, 2026. at  1:01 PM
+// Last Modified: March 11, 2026. at  7:06 PM
 
 public class AP_Student
         extends AcademicPerson
@@ -52,6 +52,11 @@ public class AP_Student
     // --- @OVERRIDE
     // ENROLLABLE <==== [INTERFACE]
     @Override public void enroll(Course course) {
+        // COURSE LIMIT NOTIFICATION
+        if (course.getTotalStudents() > course.getMaximumStudents()) {
+            System.out.println(course.getCourseName()+" ("+course.getCourseCode()+") "+"["+course.getCredits()+" Credits]"+" has no more open spots available");
+            return; // Stops the method here.
+        }
         // LIMIT NOTIFICATION
         if (AssistCount == EnrolledCourses.length) {
             System.out.println(Name+"have reached the limit for registering courses");
@@ -60,14 +65,15 @@ public class AP_Student
         // DUPLICATION NOTIFICATION
         for (Course i:EnrolledCourses) {
             if (i == course) {
-                System.out.println(Name+" is already registered on "+i.getCourseName());
+                System.out.println(Name+" is already registered on "+i.getCourseName()+" ("+i.getCourseCode()+") "+"["+i.getCredits()+" Credits]");
                 return; // Stops the method here.
             }
         }
         // ADDING COURSE INTO THE ARRAY
         EnrolledCourses[AssistCount] = course;
         AssistCount++;
-        System.out.println(Name+" has successfully enrolled in "+course.getCourseName());
+        course.StudentPlusPlus();
+        System.out.println(Name+" has successfully enrolled in "+course.getCourseName()+" ("+course.getCourseCode()+") "+"["+course.getCredits()+" Credits]");
     }
     @Override public void drop(Course course) {
         boolean hasCourse = false;

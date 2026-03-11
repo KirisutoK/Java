@@ -1,9 +1,10 @@
 // Creation Date: March 09, 2026. at 1:18 PM
-// Last Modified: March 10, 2026. at 10:12 AM
+// Last Modified: March 11, 2026. at  7:05 PM
 
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Person;
 import Classes.Course;
+import Interfaces.Payable;
 
 public class University {
     //=======VARIABLES=======//
@@ -20,6 +21,18 @@ public class University {
 
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public double calculateTotalPayroll() {
+        double total = 0;
+        for (Person i:People) {
+            if (i instanceof Payable) {
+                total += ((Payable)i).calculateSalary();
+            }
+        }
+        return total;
+    }
+    
+
+    //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void addPerson(Person person) {
         // LIMIT NOTIFICATION
         if (PeoplCount == People.length) {
@@ -56,9 +69,6 @@ public class University {
         CourseCount++;
         System.out.println(UniversityName+" has successfully added a new course: "+course.getCourseName()+" ("+course.getCourseCode()+") "+"["+course.getCredits()+" Credits]");
     }
-    
-
-    //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 
@@ -71,7 +81,6 @@ public class University {
             }
         }
     }
-
     public void displayAllCourses() {
         System.out.println("============ ALL COURSES ============");
         for (Course i:Courses) {
@@ -79,6 +88,13 @@ public class University {
                 i.displayInformation();
                 System.out.println(" "); // Space for Readability
             }
+        }
+    }
+    public void displayEnrollmentReport() {
+        System.out.println("============ ENROLLMENT REPORT ============");
+        for (int i = 0; i < CourseCount; i++) {  /// /////// <=============== LEFT HERE OR IS CURRENTLY WORKING HERE!!!!!!!!!!!!!
+            System.out.println("Course: "+Courses[i].getCourseName()+" ("+Courses[i].getCourseCode()+") ");
+
         }
     }
 }

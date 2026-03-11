@@ -1,7 +1,7 @@
 package Classes.Person.Academic;
 
 // Creation Date: March 01, 2026. at 11:11 AM
-// Last Modified: March 10, 2026. at  9:58 AM
+// Last Modified: March 11, 2026. at  7:03 PM
 
 import Interfaces.Payable;
 import Interfaces.Teachable;
@@ -92,6 +92,7 @@ public class AP_Professor
         }
         // ADDING COURSE INTO THE ARRAY
         TeachingCourses[CourseCount] = course;
+        course.setInstructor(this);
         CourseCount++;
         System.out.println(Name+" has started teaching "+course.getCourseName());
     }
@@ -108,3 +109,4 @@ public class AP_Professor
         System.out.println(" "); // Space for Readability
     }
 }
+
