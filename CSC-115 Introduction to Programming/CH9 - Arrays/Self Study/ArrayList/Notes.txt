@@ -14,10 +14,11 @@ Syntax:
     .add() -> adds a value inside an array
     .remove() -> removes a value inside an array
     .clear() -> remove all elements in an array
-    .get() -> gets the value of an array by indicating its position(index)
-    .set() -> changes the value of inside an array
+    .get() -> gets the value of an array by indicating its position/index
+    .set() -> changes the value of inside an array to a specific index
     .isEmpty() -> checks if the an array is empty
     .contains() -> checks if a specific value is in an array
     .indexOf() -> checks the position of a value inside an array
-    .toArray() -> converts an array into an array list
+    .toArray() -> converts an arraylist into an array
     .toString() -> converts an array into a string (Prints the array neatly) [Automatically called]
+    .sort()	-> Sorts the list naturally by using null. Comparator compare as an arg for non-primitive type.
