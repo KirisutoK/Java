@@ -1,5 +1,5 @@
 // Creation Date: February 27, 2026. at 9:25 PM
-// Last Modified: March 11, 2026. at  7:03 PM
+// Last Modified: March 14, 2026. at 12:11 AM
 
 import Classes.Course;
 import Classes.Person.Academic.AP_Professor;
@@ -35,8 +35,6 @@ public class Main {
         TestProf01.teach(Course01);
         System.out.println(" "); // Space for Readability
 
-        Course01.displayInformation();
-
         // [ADDING PEOPLE]
         FLCC.addPerson(Test01);
         FLCC.addPerson(TestProf01);
@@ -51,6 +49,7 @@ public class Main {
 
         FLCC.displayAllPeople();
         FLCC.displayAllCourses();
+        FLCC.displayEnrollmentReport();
 
 
 //        Test01.enroll(Course01);

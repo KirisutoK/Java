@@ -1,5 +1,5 @@
 // Creation Date: March 09, 2026. at 1:18 PM
-// Last Modified: March 11, 2026. at  7:05 PM
+// Last Modified: March 14, 2026. at 12:08 AM
 
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Person;
@@ -93,8 +93,10 @@ public class University {
     public void displayEnrollmentReport() {
         System.out.println("============ ENROLLMENT REPORT ============");
         for (int i = 0; i < CourseCount; i++) {  /// /////// <=============== LEFT HERE OR IS CURRENTLY WORKING HERE!!!!!!!!!!!!!
-            System.out.println("Course: "+Courses[i].getCourseName()+" ("+Courses[i].getCourseCode()+") ");
-
+            System.out.println("Course: "+Courses[i].getCourseName()+" ("+Courses[i].getCourseCode()+") ["+Courses[i].getCredits()+" Credits]");
+            if (Courses[i].getInstructor() != null) {System.out.println("Instructor : "+Courses[i].getInstructor().getName());} else {System.out.println("Instructor : N/A");}
+            System.out.println("Enrolled Student: "+Courses[i].getTotalStudents());
+            Courses[i].displayStudents();
         }
     }
 }

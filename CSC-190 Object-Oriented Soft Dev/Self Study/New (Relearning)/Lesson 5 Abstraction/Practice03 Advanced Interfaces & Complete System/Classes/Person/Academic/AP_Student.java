@@ -4,7 +4,7 @@ import Interfaces.Enrollable;
 import Interfaces.Gradable;
 
 // Creation Date: February 28, 2026. at 10:37 AM
-// Last Modified: March 11, 2026. at  7:06 PM
+// Last Modified: March 13, 2026. at 11:56 PM
 
 public class AP_Student
         extends AcademicPerson
@@ -12,7 +12,7 @@ public class AP_Student
     //=======VARIABLES=======//
     private Course[] EnrolledCourses = new Course[6];
     private double[] Grades = new double[6];
-    private int AssistCount;
+    private int CourseCount;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public AP_Student(String Name, String ID, int Age, String Department) {
@@ -24,15 +24,15 @@ public class AP_Student
     // --- @OVERRIDE
     // ENROLLABLE <==== [INTERFACE]
     @Override public int getEnrolledCount() {
-        return AssistCount;
+        return CourseCount;
     }
     // GRADEABLE <==== [INTERFACE]
     @Override public double getGPA() {
         double temp = 0;
-        for (int i = 0; i < AssistCount; i++) {
+        for (int i = 0; i < CourseCount; i++) {
             temp += Grades[i];
         }
-        return temp/ AssistCount;
+        return temp/ CourseCount;
     }
 
     //  ACADEMIC PERSON <==== [ABSTRACT]
@@ -48,6 +48,9 @@ public class AP_Student
 
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
+    public void addCourse(Course course) {
+        EnrolledCourses[CourseCount] = course;
+    }
 
     // --- @OVERRIDE
     // ENROLLABLE <==== [INTERFACE]
@@ -58,7 +61,7 @@ public class AP_Student
             return; // Stops the method here.
         }
         // LIMIT NOTIFICATION
-        if (AssistCount == EnrolledCourses.length) {
+        if (CourseCount == EnrolledCourses.length) {
             System.out.println(Name+"have reached the limit for registering courses");
             return; // Stops the method here.
         }
@@ -70,19 +73,19 @@ public class AP_Student
             }
         }
         // ADDING COURSE INTO THE ARRAY
-        EnrolledCourses[AssistCount] = course;
-        AssistCount++;
-        course.StudentPlusPlus();
+        EnrolledCourses[CourseCount] = course;
+        CourseCount++;
+        course.StudentCountPlusPLus();
         System.out.println(Name+" has successfully enrolled in "+course.getCourseName()+" ("+course.getCourseCode()+") "+"["+course.getCredits()+" Credits]");
     }
     @Override public void drop(Course course) {
         boolean hasCourse = false;
         // REMOVING THE COURSE
-        for (int i = 0; i < AssistCount; i++) { // for every CourseCount
+        for (int i = 0; i < CourseCount; i++) { // for every CourseCount
             if (EnrolledCourses[i] == course) { // if it matches
-                AssistCount--;
+                CourseCount--;
                 hasCourse = true;
-                for (int j = i; j < AssistCount; j++) { // for every CourseCount starting from where the course is found
+                for (int j = i; j < CourseCount; j++) { // for every CourseCount starting from where the course is found
                     if (j != EnrolledCourses.length-1) { // if the index is NOT in the last position of the array
                         EnrolledCourses[j] = EnrolledCourses[j+1];
                         Grades[j] = Grades[j+1];
@@ -98,7 +101,7 @@ public class AP_Student
     }
     // GRADEABLE <==== [INTERFACE]
     @Override public void assignGrade(Course course, double grade) {
-        for (int i = 0; i < AssistCount; i++) {
+        for (int i = 0; i < CourseCount; i++) {
             if (EnrolledCourses[i] == course) { // if it matches
                 Grades[i] = grade; // take the matched position and match it with grade
             }
@@ -109,13 +112,13 @@ public class AP_Student
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void displayCourses() {
         System.out.print(Name+" Enrolled Courses:");
-        for (int i = 0; i < AssistCount; i++) {
+        for (int i = 0; i < CourseCount; i++) {
             System.out.print(" "+EnrolledCourses[i].getCourseName()+" |");
         }
     }
     public void displayGrades() {
         System.out.print(Name+" Enrolled Courses:");
-        for (int i = 0; i < AssistCount; i++) {
+        for (int i = 0; i < CourseCount; i++) {
             System.out.print(" "+Grades[i]+" |");
         }
     }
@@ -123,8 +126,8 @@ public class AP_Student
     // --- @OVERRIDE
     @Override public void displayInformation() {
         super.displayInformation();
-        System.out.print("Enrolled Courses:"); for (int i = 0; i < AssistCount; i++) {System.out.print(" "+EnrolledCourses[i].getCourseName()+" |");}
-        System.out.print("\nGrades:"); for (int i = 0; i < AssistCount; i++) {System.out.print(" "+Grades[i]+" |");}
+        System.out.print("Enrolled Courses:"); for (int i = 0; i < CourseCount; i++) {System.out.print(" "+EnrolledCourses[i].getCourseName()+" |");}
+        System.out.print("\nGrades:"); for (int i = 0; i < CourseCount; i++) {System.out.print(" "+Grades[i]+" |");}
         System.out.println("\nGPA: "+getGPA());
 
     }
