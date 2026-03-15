@@ -21,7 +21,7 @@ Syntax:
     .indexOf(value)                                       -> checks the position of a value inside an array
     .toArray()                                            -> converts an arraylist into an array
     .toString()                                           -> converts an array into a string (Prints the array neatly) [Automatically called]
-    .sort()	                                              -> Sorts the list naturally by using null. Comparator compare as an arg for non-primitive type.
+    .sort(null) || .sort(Compartor compare)	              -> Sorts the list naturally by using null. Comparator compare as an arg for non-primitive type.
 
 
 ===Scanner===
