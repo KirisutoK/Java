@@ -25,7 +25,7 @@ Syntax:
     • .toString()   -> Prints out the array clean and neatly (Need to import Arrays)
 
 Array01.java:
-    • Adding values inside an array and printing one specific value inside an array.
+    • Add values inside an array and printing one specific value inside an array.
 
 Practice02.java:
     • Prints a randomized value from an array.

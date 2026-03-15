@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Concatenation {
+public class ArrayListToArray {
     public static void main(String[] args) {
         ArrayList<Integer> ArrayListRandomNumber = new ArrayList<>();
 
