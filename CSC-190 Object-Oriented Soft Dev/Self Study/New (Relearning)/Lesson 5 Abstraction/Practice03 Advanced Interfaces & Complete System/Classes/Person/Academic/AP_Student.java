@@ -4,7 +4,7 @@ import Interfaces.Enrollable;
 import Interfaces.Gradable;
 
 // Creation Date: February 28, 2026. at 10:37 AM
-// Last Modified: March 13, 2026. at 11:56 PM
+// Last Modified: March 16, 2026. at  1:13 PM
 
 public class AP_Student
         extends AcademicPerson
@@ -50,6 +50,7 @@ public class AP_Student
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void addCourse(Course course) {
         EnrolledCourses[CourseCount] = course;
+        CourseCount++;
     }
 
     // --- @OVERRIDE
@@ -75,7 +76,7 @@ public class AP_Student
         // ADDING COURSE INTO THE ARRAY
         EnrolledCourses[CourseCount] = course;
         CourseCount++;
-        course.StudentCountPlusPLus();
+        course.addStudents(this);
         System.out.println(Name+" has successfully enrolled in "+course.getCourseName()+" ("+course.getCourseCode()+") "+"["+course.getCredits()+" Credits]");
     }
     @Override public void drop(Course course) {

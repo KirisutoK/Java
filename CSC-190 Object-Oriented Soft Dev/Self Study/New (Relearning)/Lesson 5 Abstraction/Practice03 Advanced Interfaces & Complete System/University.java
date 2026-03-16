@@ -1,5 +1,5 @@
 // Creation Date: March 09, 2026. at 1:18 PM
-// Last Modified: March 14, 2026. at 12:08 AM
+// Last Modified: March 16, 2026. at  1:08 PM
 
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Person;
@@ -97,6 +97,7 @@ public class University {
             if (Courses[i].getInstructor() != null) {System.out.println("Instructor : "+Courses[i].getInstructor().getName());} else {System.out.println("Instructor : N/A");}
             System.out.println("Enrolled Student: "+Courses[i].getTotalStudents());
             Courses[i].displayStudents();
+            System.out.println(" "); // Space for readability
         }
     }
 }
