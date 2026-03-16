@@ -4,7 +4,7 @@ import Interfaces.Enrollable;
 import Interfaces.Gradable;
 
 // Creation Date: February 28, 2026. at 10:37 AM
-// Last Modified: March 16, 2026. at  1:13 PM
+// Last Modified: March 16, 2026. at  1:24 PM
 
 public class AP_Student
         extends AcademicPerson
@@ -57,7 +57,7 @@ public class AP_Student
     // ENROLLABLE <==== [INTERFACE]
     @Override public void enroll(Course course) {
         // COURSE LIMIT NOTIFICATION
-        if (course.getTotalStudents() > course.getMaximumStudents()) {
+        if (course.getTotalStudents() >= course.getMaximumStudents()) {
             System.out.println(course.getCourseName()+" ("+course.getCourseCode()+") "+"["+course.getCredits()+" Credits]"+" has no more open spots available");
             return; // Stops the method here.
         }
@@ -74,8 +74,6 @@ public class AP_Student
             }
         }
         // ADDING COURSE INTO THE ARRAY
-        EnrolledCourses[CourseCount] = course;
-        CourseCount++;
         course.addStudents(this);
         System.out.println(Name+" has successfully enrolled in "+course.getCourseName()+" ("+course.getCourseCode()+") "+"["+course.getCredits()+" Credits]");
     }
@@ -92,7 +90,9 @@ public class AP_Student
                         Grades[j] = Grades[j+1];
                     }
                 }
+                course.removeStudent(this);
                 System.out.println(Name+" has dropped "+course.getCourseName());
+                return;
             }
         }
         // NOTIFIES IF YOU ARE NOT ENROLLED IN THAT COURSE

@@ -3,7 +3,7 @@ import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
 
 // Creation Date: February 28, 2026. at 10:54 AM
-// Last Modified: March 16, 2026. at  1:07 PM
+// Last Modified: March 16, 2026. at  1:25 PM
 
 public class Course {
     //=======VARIABLES=======//
@@ -61,15 +61,36 @@ public class Course {
         for (int i = 0; i < StudentCount; i++) {
             if (EnrolledCourseStudent[i] == Student) {
                 System.out.println(Student.getName()+" is already enrolled in the course");
+                return; // Stops the method here.
             }
         }
         // ADDING COURSE INTO THE ARRAY
         EnrolledCourseStudent[StudentCount] = Student;
         StudentCount++;
+        Student.addCourse(this);
         System.out.println(Student.getName()+" successfully enrolled in "+CourseName);
     }
-    public void StudentCountPlusPLus() {
-        StudentCount++;
+    public void removeStudent(AP_Student Student) {
+        boolean hasStudent = false;
+        // REMOVING THE STUDENT
+        for (int i = 0; i < StudentCount; i++) {
+            if (EnrolledCourseStudent[i] == Student) {
+                StudentCount--;
+                hasStudent = true;
+                for (int j = i; j < StudentCount; j++) {
+                    if (j != EnrolledCourseStudent.length-1) {
+                        EnrolledCourseStudent[j] = EnrolledCourseStudent[j+1];
+                    }
+                }
+                EnrolledCourseStudent[StudentCount] = null; // clean last slot
+                System.out.println(Student.getName()+" has been removed from "+CourseName);
+            }
+        }
+        // NOTIFIES IF STUDENT IS NOT ENROLLED IN THAT COURSE
+        if (!hasStudent) {
+            System.out.println(Student.getName()+" is not enrolled in "+CourseName);
+            return; // Stops the method here
+        }
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS

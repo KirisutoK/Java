@@ -1,5 +1,5 @@
 // Creation Date: February 27, 2026. at 9:25 PM
-// Last Modified: March 14, 2026. at 12:11 AM
+// Last Modified: March 16, 2026. at  1:27 PM
 
 import Classes.Course;
 import Classes.Person.Academic.AP_Professor;
@@ -51,19 +51,8 @@ public class Main {
         FLCC.displayAllCourses();
         FLCC.displayEnrollmentReport();
 
-
-//        Test01.enroll(Course01);
-//        Test01.enroll(Course02);
-//        Test01.enroll(Course03);
-//        Test01.enroll(Course03);
-//
-//        Test01.assignGrade(Course01, 20);
-//        Test01.assignGrade(Course02, 30);
-//        Test01.assignGrade(Course03, 25);
-//
-//        Test01.drop(Course03);
-//
-//        Test01.displayInformation();
-//
     }
 }
+
+// NOTES:
+// <================================================================ YOU FINISHED THE ENROLLMENT REPORT DISPLAY, NOW YOU NEED TO DO WHATS NEXT AFTER THAT.
