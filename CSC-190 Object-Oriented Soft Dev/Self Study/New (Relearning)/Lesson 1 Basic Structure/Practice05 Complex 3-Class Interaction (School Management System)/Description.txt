@@ -37,7 +37,7 @@ Class 3: School
     • Method displayAllCourses() - displays info for all courses
 
 
-In Main:
+In ArrayListPractice:
     • Create a School
     • Create 3 courses with different max student limits (e.g., 2, 3, 2)
     • Add courses to the school

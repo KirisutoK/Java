@@ -1,4 +1,4 @@
-// Main.java
+// ArrayListPractice.java
 public class Main {
     public static void main(String[] args) {
         Payment[] payments = new Payment[4];

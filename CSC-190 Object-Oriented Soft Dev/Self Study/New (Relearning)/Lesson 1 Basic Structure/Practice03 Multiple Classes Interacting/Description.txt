@@ -26,7 +26,7 @@ Class 2: Member
 → Method returnBook() - returns the borrowed book (if they have one) and sets borrowedBook to null
 → Method to display member info including borrowed book details
 
-In Main:
+In ArrayListPractice:
     • Create 3 books
     • Create 2 members
     • Have member 1 borrow a book

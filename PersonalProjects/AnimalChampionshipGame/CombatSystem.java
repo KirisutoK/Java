@@ -144,7 +144,7 @@ public class CombatSystem {
         
         player.setHealth(-damage); // Subtract damage
     }
-    // Main combat loop
+    // ArrayListPractice combat loop
     public static boolean startCombat(Player player, Mob enemy) {
         showIntroduction(player, enemy);
         
