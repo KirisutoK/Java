@@ -1,10 +1,12 @@
 // Creation Date: February 27, 2026. at 9:25 PM
-// Last Modified: March 17, 2026. at 11:11 AM
+// Last Modified: March 17, 2026. at 11:26 AM
 
 import Classes.Course;
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
 import Classes.Person.Academic.S_TeachingAssistant;
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -52,9 +54,9 @@ public class Main {
         FLCC.displayEnrollmentReport();
 
         // GETTERS FOR STUDENTS, PROFESSORS, TEACHING ASSISTANTS
-        System.out.println("STUDENTS: "+FLCC.getAllStudents().toString());
-        System.out.println("PROFESSORS: "+FLCC.getAllProfessors().toString());
-        System.out.println("TEACHING ASSISTANTS: "+FLCC.getAllTeachingAssistant().toString());
+        System.out.println("STUDENTS: "+Arrays.toString(FLCC.getAllStudents()));
+        System.out.println("PROFESSORS: "+Arrays.toString(FLCC.getAllProfessors()));
+        System.out.println("TEACHING ASSISTANTS: "+Arrays.toString(FLCC.getAllTeachingAssistant()));
 
     }
 }

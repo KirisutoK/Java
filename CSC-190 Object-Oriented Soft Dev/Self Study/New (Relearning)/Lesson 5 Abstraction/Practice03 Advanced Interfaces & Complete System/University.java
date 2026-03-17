@@ -1,5 +1,5 @@
 // Creation Date: March 09, 2026. at 1:18 PM
-// Last Modified: March 17, 2026. at 11:10 AM
+// Last Modified: March 17, 2026. at 11:30 AM
 
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
@@ -37,7 +37,7 @@ public class University {
         // COUNT HOW MANY STUDENTS
         int StudentCount = 0;
         for (int i = 0; i < PeopleCount; i++) {
-            if (People[i] instanceof AP_Student) { // if the value[index] is AP_Student
+            if (People[i].getClass() == AP_Student.class) { // if the value[index] is AP_Student
                 StudentCount++;
             }
         }
@@ -96,7 +96,7 @@ public class University {
         // ADDING STUDENTS INSIDE STUDENT ARRAY [UNFINISHED]
         int tempCount = 0;
         for (int i = 0; i < tempArray.length; i++) {
-            if (People[i] instanceof S_TeachingAssistant) {
+            if (tempArray[i] instanceof S_TeachingAssistant) {
                 TempTeachingAssistant[tempCount] = (S_TeachingAssistant) tempArray[i]; // DOWNCASTING
                 tempCount++;
             }
