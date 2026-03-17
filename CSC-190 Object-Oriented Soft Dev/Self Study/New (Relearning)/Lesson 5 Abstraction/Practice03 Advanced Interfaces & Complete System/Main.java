@@ -1,5 +1,5 @@
 // Creation Date: February 27, 2026. at 9:25 PM
-// Last Modified: March 16, 2026. at  1:27 PM
+// Last Modified: March 17, 2026. at 11:11 AM
 
 import Classes.Course;
 import Classes.Person.Academic.AP_Professor;
@@ -51,8 +51,13 @@ public class Main {
         FLCC.displayAllCourses();
         FLCC.displayEnrollmentReport();
 
+        // GETTERS FOR STUDENTS, PROFESSORS, TEACHING ASSISTANTS
+        System.out.println("STUDENTS: "+FLCC.getAllStudents().toString());
+        System.out.println("PROFESSORS: "+FLCC.getAllProfessors().toString());
+        System.out.println("TEACHING ASSISTANTS: "+FLCC.getAllTeachingAssistant().toString());
+
     }
 }
 
 // NOTES:
-// <================================================================ YOU FINISHED THE ENROLLMENT REPORT DISPLAY, NOW YOU NEED TO DO WHATS NEXT AFTER THAT.
+// <================================================================ SOMETHING IS WRONG WITH THE PRINTING METHOD FOR GETTERS OF ALL STUDENTS, PROFESSORS, AND TEACHING ASSISTANT.

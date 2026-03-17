@@ -1,7 +1,9 @@
 // Creation Date: March 09, 2026. at 1:18 PM
-// Last Modified: March 16, 2026. at  1:08 PM
+// Last Modified: March 17, 2026. at 11:10 AM
 
 import Classes.Person.Academic.AP_Professor;
+import Classes.Person.Academic.AP_Student;
+import Classes.Person.Academic.S_TeachingAssistant;
 import Classes.Person.Person;
 import Classes.Course;
 import Interfaces.Payable;
@@ -10,7 +12,7 @@ public class University {
     //=======VARIABLES=======//
     private String UniversityName;
     private Person[] People = new Person[20];
-    private int PeoplCount;
+    private int PeopleCount;
     private Course[] Courses = new Course[10];
     private int CourseCount;
 
@@ -30,12 +32,84 @@ public class University {
         }
         return total;
     }
+    // UNFINISHED
+    public AP_Student[] getAllStudents() {
+        // COUNT HOW MANY STUDENTS
+        int StudentCount = 0;
+        for (int i = 0; i < PeopleCount; i++) {
+            if (People[i] instanceof AP_Student) { // if the value[index] is AP_Student
+                StudentCount++;
+            }
+        }
+
+        // CREATING A STUDENT ARRAY
+        AP_Student[] TempStudents = new AP_Student[StudentCount];
+
+        // ADDING STUDENTS INSIDE STUDENT ARRAY [UNFINISHED]
+        int tempCount = 0;
+        for (int i = 0; i < PeopleCount; i++) {
+            if (People[i] instanceof AP_Student) {
+                TempStudents[tempCount] = (AP_Student)People[i]; // DOWNCASTING
+                tempCount++;
+            }
+        }
+
+        return TempStudents;
+    }
+    public AP_Professor[] getAllProfessors() {
+        // COUNT HOW MANY STUDENTS
+        int ProfessorCount = 0;
+        for (int i = 0; i < PeopleCount; i++) {
+            if (People[i] instanceof AP_Professor) {
+                ProfessorCount++;
+            }
+        }
+
+        // CREATING A STUDENT ARRAY
+        AP_Professor[] TempStudents = new AP_Professor[ProfessorCount];
+
+        // ADDING STUDENTS INSIDE STUDENT ARRAY [UNFINISHED]
+        int tempCount = 0;
+        for (int i = 0; i < PeopleCount; i++) {
+            if (People[i] instanceof AP_Professor) {
+                TempStudents[tempCount] = (AP_Professor) People[i]; // DOWNCASTING
+                tempCount++;
+            }
+        }
+
+        return TempStudents;
+    }
+    public S_TeachingAssistant[] getAllTeachingAssistant() {
+        AP_Student[] tempArray = getAllStudents();
+
+        // COUNT HOW MANY STUDENTS
+        int TeachingAssistantCount = 0;
+        for (int i = 0; i < tempArray.length; i++) {
+            if (tempArray[i] instanceof S_TeachingAssistant) {
+                TeachingAssistantCount++;
+            }
+        }
+
+        // CREATING A STUDENT ARRAY
+        S_TeachingAssistant[] TempTeachingAssistant = new S_TeachingAssistant[TeachingAssistantCount];
+
+        // ADDING STUDENTS INSIDE STUDENT ARRAY [UNFINISHED]
+        int tempCount = 0;
+        for (int i = 0; i < tempArray.length; i++) {
+            if (People[i] instanceof S_TeachingAssistant) {
+                TempTeachingAssistant[tempCount] = (S_TeachingAssistant) tempArray[i]; // DOWNCASTING
+                tempCount++;
+            }
+        }
+
+        return TempTeachingAssistant;
+    }
     
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void addPerson(Person person) {
         // LIMIT NOTIFICATION
-        if (PeoplCount == People.length) {
+        if (PeopleCount == People.length) {
             System.out.println("There are no more open slots for "+UniversityName);
             return; // Stops the method here.
         }
@@ -47,8 +121,8 @@ public class University {
             }
         }
         // ADDING COURSE INTO THE ARRAY
-        People[PeoplCount] = person;
-        PeoplCount++;
+        People[PeopleCount] = person;
+        PeopleCount++;
         System.out.println(person.getName()+" is successfully enrolled at "+UniversityName);
     }
     public void addCourse(Course course) {
@@ -100,4 +174,6 @@ public class University {
             System.out.println(" "); // Space for readability
         }
     }
+
+   
 }
