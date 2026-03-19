@@ -14,6 +14,14 @@ public class Format {
 
 // INTERFACENAME <==== [INTERFACE]
 
+// TODO <================================ LEFT AT BLABLABLA
+
+// ! ERROR HERE
+
+// // THIS COMMENT IS IRRELEVANT
+
+// ? WHAT IS THIS
+
 /*
 
 public interface Format { // A Template/Contract that gives requirements for a class
