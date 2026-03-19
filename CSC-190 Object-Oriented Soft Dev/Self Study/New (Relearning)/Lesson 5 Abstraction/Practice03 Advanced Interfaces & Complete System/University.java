@@ -1,5 +1,5 @@
 // Creation Date: March 09, 2026. at 1:18 PM
-// Last Modified: March 18, 2026. at  8:39 PM
+// Last Modified: March 19, 2026. at 12:16 PM
 
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
@@ -23,6 +23,9 @@ public class University {
 
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public String getUniversityName() {
+        return UniversityName;
+    }
     public double calculateTotalPayroll() {
         double total = 0;
         for (Person i:People) {
@@ -31,6 +34,9 @@ public class University {
             }
         }
         return total;
+    }
+    public Person[] getPeople() {
+        return People;
     }
     public AP_Student[] getAllStudents() {
         // COUNT HOW MANY STUDENTS
@@ -54,6 +60,15 @@ public class University {
         }
 
         return TempStudents;
+    }
+    public int getStudentsCount() {
+        int StudentCount = 0;
+        for (int i = 0; i < PeopleCount; i++) {
+            if (People[i] instanceof AP_Student) {
+                StudentCount++;
+            }
+        }
+        return StudentCount;
     }
     public AP_Professor[] getAllProfessors() {
         // COUNT HOW MANY STUDENTS

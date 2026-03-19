@@ -1,20 +1,22 @@
 // Creation Date: February 27, 2026. at 9:25 PM
-// Last Modified: March 19, 2026. at 11:01 AM
+// Last Modified: March 19, 2026. at 12:18 PM
 
 import Classes.Course;
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
 import Classes.Person.Academic.S_TeachingAssistant;
 
-import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
         // ==================== CREATING INSTANCES OR OBJECTS ==================== \\
+        Random random = new Random();
+
         // [UNIVERSITY]
         University FLCC = new University("Finger Lakes Community College");
         // [COURSES]
-        Course Course01 = new Course("History", "HIS100", 3, 1);
+        Course Course01 = new Course("History", "HIS100", 3, 5);
         Course Course02 = new Course("Coding", "COD100", 4, 12);
         Course Course03 = new Course("English", "ENG100", 3, 20);
         // ========[PEOPLE]========
@@ -31,7 +33,6 @@ public class Main {
         S_TeachingAssistant TeachingAss02 = new S_TeachingAssistant("Wendy", "TA02", 65, "Business", 19.60, 20);
 
         // ==================== METHODS ==================== \\
-
         // ADDING PEOPLE TO UNIVERSITY
         System.out.println("=========== ADDING PEOPLE TO UNIVERSITY ===========");
         FLCC.addPerson(Prof01);
@@ -70,12 +71,77 @@ public class Main {
 
         Student04.enroll(Course01);
         Student04.enroll(Course03);
+        Student04.enroll(Course03);
         System.out.println(" "); // Space for Readability
 
+        // ENROLLING TEACHING ASSISTANTS TO COURSES
+        System.out.println("=========== ENROLLING TEACHING ASSISTANTS TO COURSES ===========");
+        TeachingAss01.enroll(Course01);
+        TeachingAss01.enroll(Course03);
+        System.out.println(" "); // Space for Readability
+
+        TeachingAss02.enroll(Course01);
+        TeachingAss02.enroll(Course02);
+        System.out.println(" "); // Space for Readability
+
+        // ASSIGNING TEACHING ASSISTANTS TO COURSES
+        System.out.println("=========== ASSIGNING TEACHING ASSISTANTS TO COURSES ===========");
+        TeachingAss01.teach(Course02);
+        TeachingAss02.teach(Course03);
+        System.out.println(" "); // Space for Readability
+
+        // ========[GRADING OPERATIONS]========
+        // ASSIGN GRADES TO STUDENTS
+        System.out.println("=========== ASSIGNING GRADES TO STUDENTS ===========");
+        Student01.assignGrade(Course01, random.nextDouble(4));
+        Student01.assignGrade(Course02, random.nextDouble(4));
+        Student01.assignGrade(Course03, random.nextDouble(4));
+        System.out.println(" "); // Space for Readability
+
+        Student02.assignGrade(Course01, random.nextDouble(4));
+        Student02.assignGrade(Course02, random.nextDouble(4));
+        Student02.assignGrade(Course03, random.nextDouble(4));
+        System.out.println(" "); // Space for Readability
+
+        Student03.assignGrade(Course01, random.nextDouble(4));
+        Student03.assignGrade(Course02, random.nextDouble(4));
+        Student03.assignGrade(Course03, random.nextDouble(4));
+        System.out.println(" "); // Space for Readability
+
+        Student04.assignGrade(Course01, random.nextDouble(4));
+        Student04.assignGrade(Course02, random.nextDouble(4));
+        Student04.assignGrade(Course03, random.nextDouble(4));
+        System.out.println(" "); // Space for Readability
+
+        // CALCULATE AND DISPLAY GPA
+        System.out.println("=========== CALCULATE AND DISPLAY GPA ===========");
+        System.out.println(Student01.getName()+" GPA: "+Student01.getGPA());
+        System.out.println(Student02.getName()+" GPA: "+Student02.getGPA());
+        System.out.println(Student03.getName()+" GPA: "+Student03.getGPA());
+        System.out.println(Student04.getName()+" GPA: "+Student04.getGPA());
+        System.out.println(" "); // Space for Readability
+
+        // ========[PAYMENT OPERATIONS]========
+        // CALCULATE AND DISPLAY PROFESSOR'S SALARY
+        System.out.println("=========== CALCULATE AND DISPLAY PROFESSOR'S SALARY ===========");
+        System.out.println(Prof01.getName()+" Salary: $"+Prof01.calculateSalary());
+        System.out.println(Prof02.getName()+" Salary: $"+Prof02.calculateSalary());
+        System.out.println(" "); // Space for Readability
+
+        // CALCULATE AND DISPLAY TEACHING ASSISTANTS SALARY
+        System.out.println("=========== CALCULATE AND DISPLAY TEACHING ASSISTANTS SALARY ===========");
+        System.out.println(TeachingAss01.getName()+" Salary: $"+TeachingAss01.calculateSalary());
+        System.out.println(TeachingAss02.getName()+" Salary: $"+TeachingAss02.calculateSalary());
+        System.out.println(" "); // Space for Readability
+
+        // DISPLAY TOTAL UNIVERSITY PAYROLL
+        System.out.println("=========== DISPLAY TOTAL UNIVERSITY PAYROLL ===========");
+        System.out.println(FLCC.getUniversityName()+" Total Payroll: $"+FLCC.calculateTotalPayroll());
+        System.out.println(" "); // Space for Readability
 
 
     }
 }
 
 // NOTES:
-// TODO <================================================================ YOU LEFT AT DOING THE MAIN STUFF METHODS
+// TODO <================================================================ POLYMORPHIC DEMONSTRATION
