@@ -1,5 +1,5 @@
 // Creation Date: March 09, 2026. at 1:18 PM
-// Last Modified: March 17, 2026. at 11:30 AM
+// Last Modified: March 18, 2026. at  8:39 PM
 
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
@@ -32,12 +32,11 @@ public class University {
         }
         return total;
     }
-    // UNFINISHED
     public AP_Student[] getAllStudents() {
         // COUNT HOW MANY STUDENTS
         int StudentCount = 0;
         for (int i = 0; i < PeopleCount; i++) {
-            if (People[i].getClass() == AP_Student.class) { // if the value[index] is AP_Student
+            if (People[i] instanceof AP_Student) { // if the value[index] is AP_Student
                 StudentCount++;
             }
         }
@@ -174,6 +173,5 @@ public class University {
             System.out.println(" "); // Space for readability
         }
     }
-
    
 }

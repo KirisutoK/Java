@@ -3,7 +3,7 @@ import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
 
 // Creation Date: February 28, 2026. at 10:54 AM
-// Last Modified: March 16, 2026. at  1:25 PM
+// Last Modified: March 18, 2026. at  9:00 PM
 
 public class Course {
     //=======VARIABLES=======//
@@ -52,23 +52,9 @@ public class Course {
         this.Instructor = Instructor;
     }
     public void addStudents(AP_Student Student) {
-        // LIMIT NOTIFICATION
-        if (StudentCount == EnrolledCourseStudent.length) {
-            System.out.println(CourseName+" has no more open slots");
-            return; // Stops the method here.
-        }
-        // DUPLICATION NOTIFICATION
-        for (int i = 0; i < StudentCount; i++) {
-            if (EnrolledCourseStudent[i] == Student) {
-                System.out.println(Student.getName()+" is already enrolled in the course");
-                return; // Stops the method here.
-            }
-        }
-        // ADDING COURSE INTO THE ARRAY
         EnrolledCourseStudent[StudentCount] = Student;
         StudentCount++;
         Student.addCourse(this);
-        System.out.println(Student.getName()+" successfully enrolled in "+CourseName);
     }
     public void removeStudent(AP_Student Student) {
         boolean hasStudent = false;
