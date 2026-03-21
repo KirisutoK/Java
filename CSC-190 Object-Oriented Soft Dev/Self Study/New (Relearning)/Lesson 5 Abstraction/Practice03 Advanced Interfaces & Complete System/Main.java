@@ -1,5 +1,5 @@
 // Creation Date: February 27, 2026. at 9:25 PM
-// Last Modified: March 20, 2026. at 10:51 PM
+// Last Modified: March 21, 2026. at 11:09 AM
 
 import Classes.Course;
 import Classes.Person.Academic.AP_Professor;
@@ -184,8 +184,32 @@ public class Main {
         // ==================== METHODS ==================== \\
         // ENROLLMENT REPORT FLCC
         FLCC.displayEnrollmentReport();
+
+        // STUDENT DROPPING A COURSE
+        System.out.println("=========== STUDENT DROPPING COURSES ===========");
+        Student01.displayInformation();
+        System.out.println("DROPS: ");
+        Student01.drop(Course01);
+        Student01.drop(Course02);
+        System.out.println(" "); // Space for Readability
+        Student02.displayInformation();
+        System.out.println(" "); // Space for Readability
+
+        Student02.displayInformation();
+        System.out.println("DROPS: ");
+        Student02.drop(Course03);
+        System.out.println(" "); // Space for Readability
+        Student02.displayInformation();
+        System.out.println(" "); // Space for Readability
+
+        Student03.displayInformation();
+        System.out.println("DROPS: ");
+        Student03.drop(Course03);
+        System.out.println(" "); // Space for Readability
+        Student02.displayInformation();
+        System.out.println(" "); // Space for Readability
+
+        // ENROLLMENT REPORT FLCC
+        FLCC.displayEnrollmentReport();
     }
 }
-
-// NOTES:
-// TODO <================================================================ Have a student drop a course, then display updated info
