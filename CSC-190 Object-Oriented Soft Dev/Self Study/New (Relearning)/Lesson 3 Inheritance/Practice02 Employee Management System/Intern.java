@@ -24,7 +24,7 @@ public class Intern extends Employee {
     @Override
     public void DisplayInfo() {
         super.DisplayInfo();
-        System.out.println("University: " + University);
+        System.out.println("Classes.University: " + University);
         System.out.println("Mentor: " + Mentor.Name);
     }
     @Override
