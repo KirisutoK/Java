@@ -1,5 +1,5 @@
 // Creation Date: March 09, 2026. at 1:18 PM
-// Last Modified: March 19, 2026. at 12:16 PM
+// Last Modified: March 20, 2026. at 10:22 PM
 
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
@@ -25,6 +25,9 @@ public class University {
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
     public String getUniversityName() {
         return UniversityName;
+    }
+    public Course[] getCourses() {
+        return Courses;
     }
     public double calculateTotalPayroll() {
         double total = 0;
@@ -180,7 +183,7 @@ public class University {
     }
     public void displayEnrollmentReport() {
         System.out.println("============ ENROLLMENT REPORT ============");
-        for (int i = 0; i < CourseCount; i++) {  /// /////// <=============== LEFT HERE OR IS CURRENTLY WORKING HERE!!!!!!!!!!!!!
+        for (int i = 0; i < CourseCount; i++) {
             System.out.println("Course: "+Courses[i].getCourseName()+" ("+Courses[i].getCourseCode()+") ["+Courses[i].getCredits()+" Credits]");
             if (Courses[i].getInstructor() != null) {System.out.println("Instructor : "+Courses[i].getInstructor().getName());} else {System.out.println("Instructor : N/A");}
             System.out.println("Enrolled Student: "+Courses[i].getTotalStudents());

@@ -1,7 +1,7 @@
 package Classes.Person.Academic;
 
 // Creation Date: March 01, 2026. at 11:11 AM
-// Last Modified: March 11, 2026. at  7:03 PM
+// Last Modified: March 20, 2026. at 10:35 PM
 
 import Interfaces.Payable;
 import Interfaces.Teachable;
@@ -78,6 +78,12 @@ public class AP_Professor
     // --- @OVERRIDE
     // TEACHABLE <==== [INTERFACE]
     @Override public void teach(Course course) {
+        // ALREADY FILLED IN NOTIFICATION
+        if (course.hasInstructor()) {
+            System.out.println(course.getCourseName()+" already has an instructor");
+            return; // stops the method here
+        }
+
         // LIMIT NOTIFICATION
         if (CourseCount == TeachingCourses.length) {
             System.out.println(Name+"have reached the limit for teaching courses");

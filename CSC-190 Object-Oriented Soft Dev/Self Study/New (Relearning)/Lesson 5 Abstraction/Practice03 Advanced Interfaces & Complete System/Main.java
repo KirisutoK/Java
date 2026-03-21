@@ -1,10 +1,14 @@
 // Creation Date: February 27, 2026. at 9:25 PM
-// Last Modified: March 19, 2026. at 12:18 PM
+// Last Modified: March 20, 2026. at 10:45 PM
 
 import Classes.Course;
 import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
 import Classes.Person.Academic.S_TeachingAssistant;
+import Classes.Person.Person;
+import Interfaces.Enrollable;
+import Interfaces.Payable;
+import Interfaces.Teachable;
 
 import java.util.Random;
 
@@ -90,6 +94,13 @@ public class Main {
         TeachingAss02.teach(Course03);
         System.out.println(" "); // Space for Readability
 
+        // ASSIGNING PROFESSORS TO COURSES
+        System.out.println("=========== ASSIGNING PROFESSORS TO COURSES ===========");
+        Prof01.teach(Course03);
+        Prof02.teach(Course03);
+        Prof02.teach(Course01);
+        Prof02.teach(Course02);
+
         // ========[GRADING OPERATIONS]========
         // ASSIGN GRADES TO STUDENTS
         System.out.println("=========== ASSIGNING GRADES TO STUDENTS ===========");
@@ -115,33 +126,65 @@ public class Main {
 
         // CALCULATE AND DISPLAY GPA
         System.out.println("=========== CALCULATE AND DISPLAY GPA ===========");
-        System.out.println(Student01.getName()+" GPA: "+Student01.getGPA());
-        System.out.println(Student02.getName()+" GPA: "+Student02.getGPA());
-        System.out.println(Student03.getName()+" GPA: "+Student03.getGPA());
-        System.out.println(Student04.getName()+" GPA: "+Student04.getGPA());
+        System.out.println(Student01.getName() + " GPA: " + Student01.getGPA());
+        System.out.println(Student02.getName() + " GPA: " + Student02.getGPA());
+        System.out.println(Student03.getName() + " GPA: " + Student03.getGPA());
+        System.out.println(Student04.getName() + " GPA: " + Student04.getGPA());
         System.out.println(" "); // Space for Readability
 
         // ========[PAYMENT OPERATIONS]========
         // CALCULATE AND DISPLAY PROFESSOR'S SALARY
         System.out.println("=========== CALCULATE AND DISPLAY PROFESSOR'S SALARY ===========");
-        System.out.println(Prof01.getName()+" Salary: $"+Prof01.calculateSalary());
-        System.out.println(Prof02.getName()+" Salary: $"+Prof02.calculateSalary());
+        System.out.println(Prof01.getName() + " Salary: $" + Prof01.calculateSalary());
+        System.out.println(Prof02.getName() + " Salary: $" + Prof02.calculateSalary());
         System.out.println(" "); // Space for Readability
 
         // CALCULATE AND DISPLAY TEACHING ASSISTANTS SALARY
         System.out.println("=========== CALCULATE AND DISPLAY TEACHING ASSISTANTS SALARY ===========");
-        System.out.println(TeachingAss01.getName()+" Salary: $"+TeachingAss01.calculateSalary());
-        System.out.println(TeachingAss02.getName()+" Salary: $"+TeachingAss02.calculateSalary());
+        System.out.println(TeachingAss01.getName() + " Salary: $" + TeachingAss01.calculateSalary());
+        System.out.println(TeachingAss02.getName() + " Salary: $" + TeachingAss02.calculateSalary());
         System.out.println(" "); // Space for Readability
 
         // DISPLAY TOTAL UNIVERSITY PAYROLL
         System.out.println("=========== DISPLAY TOTAL UNIVERSITY PAYROLL ===========");
-        System.out.println(FLCC.getUniversityName()+" Total Payroll: $"+FLCC.calculateTotalPayroll());
+        System.out.println(FLCC.getUniversityName() + " Total Payroll: $" + FLCC.calculateTotalPayroll());
         System.out.println(" "); // Space for Readability
 
+        // ========[PAYMENT OPERATIONS]========
+        // PERSON DISPLAY INFO
+        System.out.println("=========== PERSON DISPLAY INFO ===========");
+        for (Person i:FLCC.getPeople()) {
+            if (i != null) {
+                i.displayInformation();
+                System.out.println(" "); // Space for Readability
+            }
+        }
+        // INTERFACES COUNT
+        System.out.println("=========== INTERFACES COUNT ===========");
+        int EnrollableCount = 0;
+        int PayableCount = 0;
+        int TeachableCount = 0;
+        for (Person i:FLCC.getPeople()) {
+            if (i instanceof Enrollable) {
+                EnrollableCount++;
+            }
+            if (i instanceof Payable) {
+                PayableCount++;
+            }
+            if (i instanceof Teachable) {
+                TeachableCount++;
+            }
+        }
+        System.out.println("Enrollables: "+EnrollableCount);
+        System.out.println("Payable: "+PayableCount);
+        System.out.println("Teachable: "+TeachableCount);
+        System.out.println(" "); // Space for Readability
 
+        // ==================== METHODS ==================== \\
+        // ENROLLMENT REPORT FLCC
+        FLCC.displayEnrollmentReport();
     }
 }
 
 // NOTES:
-// TODO <================================================================ POLYMORPHIC DEMONSTRATION
+// TODO <================================================================ Have a student drop a course, then display updated info

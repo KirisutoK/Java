@@ -3,7 +3,7 @@ import Classes.Person.Academic.AP_Professor;
 import Classes.Person.Academic.AP_Student;
 
 // Creation Date: February 28, 2026. at 10:54 AM
-// Last Modified: March 18, 2026. at  9:00 PM
+// Last Modified: March 20, 2026. at 10:39 PM
 
 public class Course {
     //=======VARIABLES=======//
@@ -25,6 +25,13 @@ public class Course {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public boolean hasInstructor() {
+        boolean hasInstructor = false;
+        if (Instructor != null) {
+            hasInstructor = true;
+        }
+        return hasInstructor;
+    }
     public int getMaximumStudents() {
         return MaximumStudents;
     }
@@ -44,6 +51,13 @@ public class Course {
         return CourseCode;
     }
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
+    public void removeInstructor() {
+        if (Instructor != null) {
+            Instructor = null;
+        } else {
+            System.out.println(getCourseName()+" has no Instructor");
+        }
+    }
     public void assignInstructor(AP_Professor Instructor) {
         this.Instructor = Instructor;
         Instructor.teach(this);
