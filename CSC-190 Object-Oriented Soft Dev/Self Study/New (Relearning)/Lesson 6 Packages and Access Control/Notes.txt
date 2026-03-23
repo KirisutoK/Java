@@ -22,10 +22,10 @@ Common uses:
 → Controlling who can access what
 
 Important Syntax that I have learned:
-    package Classes.Person.Academic;    → Declares which package this file belongs to (MUST be first line)
-    import Classes.Course;              → Imports a single class from another package
-    import Classes.Person.*;            → Imports ALL classes from a package (wildcard)
-    import java.util.Random;            → Importing from Java's built-in packages
+    package ClassNameFolder.ClassName;                   → Declares which package this file belongs to (MUST be first line)
+    import ClassNameFolder.ClassName;                    → Imports a single class from another package
+    import ClassNameFolder.ClassNameFolder.*;            → Imports ALL classes from a package (wildcard)
+    import java.util.Random;                             → Importing from Java's built-in packages
 
 
 Key rules:
@@ -36,11 +36,9 @@ Key rules:
 - Wildcard import (*) imports all classes but NOT sub-packages
 
 
-===========================================================================
-
+=====================[ACCESS CONTROL]=====================
 
 What is Access Control?
-
 - Access Control determines which parts of your code can be seen and used by other classes
     → It protects data from being accidentally modified
     → It hides implementation details (encapsulation)
@@ -69,16 +67,6 @@ The 4 Access Modifiers (from most restrictive to least):
     • public    → Accessible from ANYWHERE
                   (used for constructors, getters, setters, methods other classes need)
 
-
-Important Syntax that I have learned:
-
-    private double HourlyRate;                  → Only S_TeachingAssistant can access this
-    protected String Name;                      → Child classes can access this directly
-    public String getName() { return Name; }    → Anyone can call this
-    public class AP_Student { }                 → Class visible to everyone
-    class Course { }                            → (default) Class visible only in same package
-
-
 Key rules:
 - Variables should almost always be private (use getters/setters to access them)
 - Methods that other classes need should be public
@@ -86,40 +74,13 @@ Key rules:
 - Constructors are usually public so other classes can create objects
 - A class itself can only be public or (default) - not private or protected
 
-
-===========================================================================
-
+=====================[PACKAGES + ACCESS CONTROL]=====================
 
 Packages + Access Control Working Together:
-
 - Packages group your classes, Access Control locks what they can see
     → A public class in a package can be used anywhere IF it's imported
     → A (default) class stays hidden inside its package
     → private members stay hidden even within the same package
-
-Real-world example from your project:
-
-    package Classes.Person.Academic;           → This file lives in this package
-
-    public class AP_Student                    → public = usable from Main.java
-        extends AP_Person {                    → inherits from same package, no import needed
-
-        private String Department;             → only AP_Student can touch this
-        protected String Name;                 → AP_Student AND its children (S_TeachingAssistant) can touch this
-
-        public String getDepartment() {        → anyone can call this
-            return Department;
-        }
-    }
-
-Why your project already uses this well:
-→ private variables + public getters/setters = proper encapsulation
-→ package structure (Classes.Person.Academic) = organized hierarchy
-→ protected on Name = lets child classes like S_TeachingAssistant access it directly
-
-
-===========================================================================
-
 
 Common Mistakes:
 
@@ -128,10 +89,6 @@ Common Mistakes:
 - Making everything public → breaks encapsulation, anything can modify your data
 - Using private on variables but trying to access them in a subclass → use protected instead
 - Putting package declaration AFTER imports → compile error
-
-
-===========================================================================
-
 
 Quick Reference Summary:
 
