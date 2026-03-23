@@ -1,0 +1,144 @@
+Packages organize related classes into groups, and Access Control determines who can see and use them.
+(Think: Packages = folders that organize files, Access Control = locks on those folders)
+
+What are Packages?
+
+- Packages are namespaces that group related classes and interfaces together
+    → They prevent naming conflicts (two classes can have the same name in different packages)
+    → They organize code into logical groups (like folders on your computer)
+    → They control access to classes and members
+    → Use the "package" keyword at the very top of your file
+
+Key terminology:
+    • Package: A namespace that organizes related classes
+    • Sub-package: A package inside a package (Classes.Person.Academic)
+    • Import: Bringing a class from another package into your file
+    • Fully qualified name: The full path of a class (Classes.Person.Academic.AP_Student)
+
+Common uses:
+→ Organizing code by feature (Classes, Interfaces, Utils)
+→ Avoiding name conflicts (two projects can both have a "Course" class)
+→ Grouping related things together (all interfaces in one package)
+→ Controlling who can access what
+
+Important Syntax that I have learned:
+    package Classes.Person.Academic;    → Declares which package this file belongs to (MUST be first line)
+    import Classes.Course;              → Imports a single class from another package
+    import Classes.Person.*;            → Imports ALL classes from a package (wildcard)
+    import java.util.Random;            → Importing from Java's built-in packages
+
+
+Key rules:
+- The package declaration must be the VERY FIRST line in your file (before imports)
+- The folder structure must match the package name (Classes/Person/Academic/AP_Student.java)
+- Classes in the same package don't need to import each other
+- java.lang package is automatically imported (String, System, Math, etc.)
+- Wildcard import (*) imports all classes but NOT sub-packages
+
+
+===========================================================================
+
+
+What is Access Control?
+
+- Access Control determines which parts of your code can be seen and used by other classes
+    → It protects data from being accidentally modified
+    → It hides implementation details (encapsulation)
+    → It defines the "visibility" of classes, variables, and methods
+
+The 4 Access Modifiers (from most restrictive to least):
+
+    +-----------+-------------+-------------+------------------+-----------------+
+    | Modifier  | Same Class  | Same Package| Subclass         | Everywhere      |
+    +-----------+-------------+-------------+------------------+-----------------+
+    | private   |     YES     |     NO      |       NO         |       NO        |
+    | (default) |     YES     |     YES     |       NO         |       NO        |
+    | protected |     YES     |     YES     |       YES        |       NO        |
+    | public    |     YES     |     YES     |       YES        |       YES       |
+    +-----------+-------------+-------------+------------------+-----------------+
+
+    • private   → Only accessible within the SAME class
+                  (used for variables like HourlyRate, Name, ID)
+
+    • (default) → Accessible within the SAME PACKAGE only (no keyword needed, just write nothing)
+                  (rarely used intentionally)
+
+    • protected → Accessible within the same package AND subclasses (even in other packages)
+                  (used when child classes need direct access to parent variables)
+
+    • public    → Accessible from ANYWHERE
+                  (used for constructors, getters, setters, methods other classes need)
+
+
+Important Syntax that I have learned:
+
+    private double HourlyRate;                  → Only S_TeachingAssistant can access this
+    protected String Name;                      → Child classes can access this directly
+    public String getName() { return Name; }    → Anyone can call this
+    public class AP_Student { }                 → Class visible to everyone
+    class Course { }                            → (default) Class visible only in same package
+
+
+Key rules:
+- Variables should almost always be private (use getters/setters to access them)
+- Methods that other classes need should be public
+- Use protected when a child class needs direct access to a parent variable
+- Constructors are usually public so other classes can create objects
+- A class itself can only be public or (default) - not private or protected
+
+
+===========================================================================
+
+
+Packages + Access Control Working Together:
+
+- Packages group your classes, Access Control locks what they can see
+    → A public class in a package can be used anywhere IF it's imported
+    → A (default) class stays hidden inside its package
+    → private members stay hidden even within the same package
+
+Real-world example from your project:
+
+    package Classes.Person.Academic;           → This file lives in this package
+
+    public class AP_Student                    → public = usable from Main.java
+        extends AP_Person {                    → inherits from same package, no import needed
+
+        private String Department;             → only AP_Student can touch this
+        protected String Name;                 → AP_Student AND its children (S_TeachingAssistant) can touch this
+
+        public String getDepartment() {        → anyone can call this
+            return Department;
+        }
+    }
+
+Why your project already uses this well:
+→ private variables + public getters/setters = proper encapsulation
+→ package structure (Classes.Person.Academic) = organized hierarchy
+→ protected on Name = lets child classes like S_TeachingAssistant access it directly
+
+
+===========================================================================
+
+
+Common Mistakes:
+
+- Forgetting to import a class from another package → "Cannot find symbol" error
+- Package name not matching folder structure → class won't compile
+- Making everything public → breaks encapsulation, anything can modify your data
+- Using private on variables but trying to access them in a subclass → use protected instead
+- Putting package declaration AFTER imports → compile error
+
+
+===========================================================================
+
+
+Quick Reference Summary:
+
+    package keyword     → Declares the package (first line of file)
+    import keyword      → Brings in a class from another package
+    private             → Same class only
+    (default)           → Same package only
+    protected           → Same package + subclasses
+    public              → Everywhere
+    Folder structure    → Must match package name exactly
