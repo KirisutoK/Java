@@ -5,11 +5,12 @@
     <option name="tags">
       <list>
         <CustomTag>
+          <option name="backgroundColor" value="#FF000028" />
           <option name="color" value="#FF2D00" />
           <option name="type" value="!" />
         </CustomTag>
         <CustomTag>
-          <option name="color" value="#3498DB" />
+          <option name="color" value="#345D19FF" />
           <option name="type" value="?" />
         </CustomTag>
         <CustomTag>

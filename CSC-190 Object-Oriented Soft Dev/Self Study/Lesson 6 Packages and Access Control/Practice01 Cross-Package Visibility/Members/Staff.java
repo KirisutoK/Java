@@ -1,13 +1,13 @@
-package management;
+package Members;
 
-// Creation Date: March 25, 2026. at 10:54 AM
-// Last Modified: March 25, 2026. at 10:54 AM
+// Creation Date: March 26, 2026. at 10:23 AM
+// Last Modified: March 26, 2026. at 10:23 AM
 
-public class Hospital {
+public class Staff {
     //=======VARIABLES=======//
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    public Hospital() {
+    public Staff() {
     
     }
 

@@ -1,13 +1,13 @@
-package patients;
+package Books;
 
-// Creation Date: March 25, 2026. at 10:53 AM
-// Last Modified: March 25, 2026. at 10:53 AM
+// Creation Date: March 26, 2026. at 10:22 AM
+// Last Modified: March 26, 2026. at 10:22 AM
 
-public class Patient {
+public class AudioBook {
     //=======VARIABLES=======//
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    public Patient() {
+    public AudioBook() {
 
     }
 

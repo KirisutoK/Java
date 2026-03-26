@@ -1,13 +1,13 @@
-package staff;
+package Members;
 
-// Creation Date: March 25, 2026. at 10:53 AM
-// Last Modified: March 25, 2026. at 10:53 AM
+// Creation Date: March 26, 2026. at 10:23 AM
+// Last Modified: March 26, 2026. at 10:23 AM
 
-public class Doctor {
+public class PremiumMember {
     //=======VARIABLES=======//
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    public Doctor() {
+    public PremiumMember() {
 
     }
 

@@ -1,14 +1,14 @@
-package patients;
+package Management;
 
-// Creation Date: March 25, 2026. at 10:53 AM
-// Last Modified: March 25, 2026. at 10:53 AM
+// Creation Date: March 26, 2026. at 10:23 AM
+// Last Modified: March 26, 2026. at 10:23 AM
 
-public class VIPPatient {
+public class Library {
     //=======VARIABLES=======//
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    public VIPPatient() {
-
+    public Library() {
+    
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
