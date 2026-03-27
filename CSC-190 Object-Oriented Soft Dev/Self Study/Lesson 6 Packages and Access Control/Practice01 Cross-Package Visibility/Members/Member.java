@@ -1,7 +1,7 @@
 package Members;
 
 // Creation Date: March 26, 2026. at 10:23 AM
-// Last Modified: March 26, 2026. at 10:59 AM
+// Last Modified: March 27, 2026. at  2:20 PM
 
 import Books.Book;
 
@@ -53,5 +53,5 @@ public class Member {
 //// Protected attributes: name (String), memberId (String)
 //// Private attributes: borrowedBooks (Book array, size 5), bookCount (int)
 //// Constructor takes name and memberId
-//Public method: borrowBook(Book book) — checks isAvailable (public so OK), sets it to false, adds to array
-//Inside borrowBook(), add commented-out lines showing what you CANNOT access from outside the package:
+// TODO: Public method: borrowBook(Book book) — checks isAvailable (public so OK), sets it to false, adds to array
+// Inside borrowBook(), add commented-out lines showing what you CANNOT access from outside the package:
