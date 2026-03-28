@@ -1,7 +1,7 @@
 package Books;
 
 // Creation Date: March 26, 2026. at 10:09 AM
-// Last Modified: March 27, 2026. at  2:08 PM
+// Last Modified: March 28, 2026. at 10:44 AM
 
 public class Book {
     //=======VARIABLES=======//
@@ -32,8 +32,6 @@ public class Book {
     protected String getBookType() {
         return "Physical Book";
     }
-
-
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     void applyDiscount(double percent) { // only accessible within the same package

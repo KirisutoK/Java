@@ -1,3 +1,5 @@
+// This format is based on Better Comments Plug-ins which is installed from IntelliJ IDEA to provide more friendly way to read the code.
+
 public class Format {
     //=======VARIABLES=======//
 
@@ -14,13 +16,15 @@ public class Format {
 
 // INTERFACENAME <==== [INTERFACE]
 
+// [CLASSES]
+
 // TODO <================================ LEFT AT BLABLABLA
 
 // ! ERROR HERE
 
 // // THIS COMMENT IS IRRELEVANT
 
-// ? WHAT IS THIS
+//? WHAT DOES THIS DO
 
 /*
 
