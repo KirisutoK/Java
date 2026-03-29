@@ -1,7 +1,7 @@
 package Members;
 
 // Creation Date: March 26, 2026. at 10:23 AM
-// Last Modified: March 28, 2026. at 11:00 AM
+// Last Modified: March 29, 2026. at 11:10 AM
 
 import Books.Book;
 
@@ -43,17 +43,18 @@ public class Member {
             System.out.println(Name+" has borrowed "+book.getTitle()+" ("+book.getAuthor()+")");
 
         } else { // if it's not available
-            System.out.println(book.getTitle()+" ("+book.getAuthor()+") is unavailable.");
+            System.out.println(book.getTitle() + " (" + book.getAuthor() + ") is unavailable.");
         }
 
-
+        // Comments:
+        // - book.isAvailable is public so we don't need to make a getter for it.
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 }
 
 //// Protected attributes: name (String), memberId (String)
-//// Private attributes: borrowedBooks (Book array, size 5), bookCount (int)
-//// Constructor takes name and memberId
+/// Private attributes: borrowedBooks (Book array, size 5), bookCount (int)
+/// Constructor takes name and memberId
 /// Public method: borrowBook(Book book) — checks isAvailable (public so OK), sets it to false, adds to array
-// TODO: Inside borrowBook(), add commented-out lines showing what you CANNOT access from outside the package:
+/// Inside borrowBook(), add commented-out lines showing what you CANNOT access from outside the package:

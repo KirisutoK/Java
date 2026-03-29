@@ -24,7 +24,8 @@
         </CustomTag>
         <CustomTag>
           <option name="color" value="#98C379" />
-          <option name="type" value="*" />
+          <option name="italic" value="true" />
+          <option name="type" value="Comments" />
         </CustomTag>
         <CustomTag>
           <option name="color" value="#009900FF" />
