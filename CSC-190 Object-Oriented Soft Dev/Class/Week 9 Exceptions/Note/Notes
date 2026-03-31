@@ -1,0 +1,17 @@
+Exceptions vs. Errors
+
+Exception
+ → Problem caused by or related to the program
+
+Error
+ → Problem outside of the program…
+ → System-level issue
+ → Something went wrong with the JVM
+
+Important Syntax:
+ try {}                                                → its like void in which it runs mainly
+ catch {}                                              → if it catches an error this runs
+ finally {}                                            → this always run mainly (This closes the exception handling)
+
+HONORABLE MENTIONS:
+    - Dividing any number with 0 as a double will return "Infinity"
