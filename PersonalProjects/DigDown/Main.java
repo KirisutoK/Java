@@ -1,5 +1,5 @@
 // Creation Date: March 31, 2026. at 10:55 AM
-// Last Modified: March 31, 2026. at 11:10 AM
+// Last Modified: March 31, 2026. at 11:24 AM
 
 import java.util.Random;
 
@@ -23,7 +23,7 @@ public class Main {
         for (int i = 0; i < height; i++) { // Height
             System.out.println();
             for (int j = 0; j < width; j++) { // Width
-                if (i == 0 && j == 2) { // Playposition
+                if (i == 0 && j == 2) { // Play position
                     System.out.print("⬇️");
                 } else {
                     System.out.print("🖼️");
@@ -33,6 +33,9 @@ public class Main {
         System.out.print("");
     }
 }
+
+
+
 
 // Methods to work on:
 // Generating random table

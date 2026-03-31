@@ -1,14 +1,18 @@
+// Creation Date: March 31, 2026. at 12:09 PM
+// Last Modified: March 31, 2026. at 12:16 PM
+
 import java.util.Scanner;
 
-public class Test {
+public class LoopingExceptions {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         boolean NotValidNumber = true;
 
         do {
             try {
-                System.out.print("\nInsert a Number: ");
+                System.out.println("Insert a Number: ");
                 int Number = input.nextInt();
+                System.out.println("The input is correct: "+Number);
                 NotValidNumber = false;
             } catch (Exception e) {
                 System.out.print("The input was not a number, try again.");
@@ -17,13 +21,3 @@ public class Test {
         } while (NotValidNumber);
     }
 }
-
-
-// Goal: Learn to handle exceptions.
-// Assignment: Write a complete program that prompts the user for a number. If the input is not a number, the program should display the error "The input was not a number, try again.", until a valid input is inserted. When a number is inserted, the message "The input is correct: ", followed by the number, is printed instead
-//  
-// Sample run:
-// Insert a number: [aa]
-// The input was not a number, try again.
-// Insert a number: [0]
-// The input is correct: 0
