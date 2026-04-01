@@ -11,11 +11,16 @@ Error
 Important Syntax:
  try {}                                                → its like void in which it runs mainly
  catch {}                                              → if it catches an error this runs
- finally {}                                            → this always run mainly (This closes the exception handling)
- System.exit(1)                                        → This stops the whole program OR class OR main
- throw                                                 → throws/creates an exception
- new exception                                         → creates a new exception object with a message
- do                                                    → no idea what this is but i saw it once
+ finally {}                                            → this always run mainly (This closes the 'try' like how we close scanner)
+ System.exit(1)                                        → stops the entire program with an error, not just a class or main with an error. (I DONT REALLY KNOW HOW THIS WORK)
+ System.exit(0)                                        → stops the entire program normally, not just a class or main. (I DONT REALLY KNOW HOW THIS WORK)
+ throw                                                 → throws/creates an exception or error
+ do                                                    → followed up by while, do runs first and then check the while loop at the end in order to continue or not.
+ .getMessage()                                         → gets the error message
+ .printStackTrace()                                    → prints where the error happened in the code
+ .getClass()                                           → gets the type of exception
+ .toString()                                           → returns the exception type + message combined
 
 HONORABLE MENTIONS:
+    - most custom exceptions are made by using an import called Throwable
     - Dividing any number with 0 as a double will return "Infinity"
