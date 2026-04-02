@@ -10,7 +10,7 @@ Error
 
 Important Syntax:
  try {}                                                → its like void in which it runs mainly
- catch {}                                              → if it catches an error this runs
+ catch (Exception e)                                   → if it catches an error this runs
  finally {}                                            → this always run mainly (This closes the 'try' like how we close scanner)
  System.exit(1)                                        → stops the entire program with an error, not just a class or main with an error. (I DONT REALLY KNOW HOW THIS WORK)
  System.exit(0)                                        → stops the entire program normally, not just a class or main. (I DONT REALLY KNOW HOW THIS WORK)

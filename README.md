@@ -5,7 +5,7 @@
   #### Just click a specific chapter down below
 
 ### Finger Lakes Community College: Computer Information Systems Major
-  #### ◆ CSC-115-02: Introduction to Programming: Professor Paige Labar | Fall 2025
+  #### ◆ CSC-115-02: Introduction to Programming: ProfessorPaige Labar | Fall 2025
     ● CH1 - Introduction
     ● CH2 - Basic Java && Variables
     ● CH3 - Math
@@ -15,6 +15,6 @@
     ● CH7 - Methods
     ● CH8 - Loops
     ● CH9 - Array
-  #### ◆ CSC-190-01: Object-Oriented Programming: Professor Paige Labar | Spring 2026
+  #### ◆ CSC-190-01: Object-Oriented Programming: ProfessorPaige Labar | Spring 2026
     ● CH1 - Array
 

@@ -1,9 +1,7 @@
-package Note;
+package ExceptionNotes;
 
 // Creation Date: March 31, 2026. at 11:27 AM
-// Last Modified: March 31, 2026. at 11:53 AM
-
-import java.util.Scanner;
+// Last Modified: April 02, 2026. at 10:30 AM
 
 public class InputMismatchException {
 //    public static void main(String[] args) {

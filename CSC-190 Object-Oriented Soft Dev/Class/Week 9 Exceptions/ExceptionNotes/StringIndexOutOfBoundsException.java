@@ -1,7 +1,7 @@
-package Note;
+package ExceptionNotes;
 
 // Creation Date: March 31, 2026. at 10:17 AM
-// Last Modified: April 01, 2026. at  8:51 PM
+// Last Modified: April 02, 2026. at 10:30 AM
 
 //| String Index Out of Bounds Exception => Similar to the array out of bounds but with a string - trying to access a character that doesn’t exist
 
