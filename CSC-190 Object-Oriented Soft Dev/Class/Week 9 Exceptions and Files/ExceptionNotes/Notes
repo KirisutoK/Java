@@ -24,3 +24,5 @@ Important Syntax:
 HONORABLE MENTIONS:
     - most custom exceptions are made by using an import called Throwable
     - Dividing any number with 0 as a double will return "Infinity"
+    - Exception Handling improves performance
+
