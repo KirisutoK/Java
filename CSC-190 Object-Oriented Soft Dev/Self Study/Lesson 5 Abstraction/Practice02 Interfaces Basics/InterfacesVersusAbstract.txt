@@ -18,7 +18,7 @@ Important Syntax:
     • void methodName();                   → Abstract method (no body)
     • class Name implements Interface      → Class adopts interface
     • class Name implements A, B, C        → Multiple interfaces
-    • default void method() { }            → Method with body (Java 8+)
+    • default void method() { }            → allows the Method to have a body
 
 Interface vs Abstract Class:
     • Abstract Class:
