@@ -1,5 +1,5 @@
 // Creation Date: April 08, 2026. at 12:10 PM
-// Last Modified: April 08, 2026. at 12:26 PM
+// Last Modified: April 09, 2026. at  1:18 AM
 
 import java.util.Scanner;
 import java.io.File;
@@ -29,6 +29,8 @@ public class FileTextCounter {
                 char character = fileReader.next().charAt(0);
                 System.out.println(character);
             }
+
+            // TODO: ADD WORD COUNTER, LINE COUNTER, CHAR COUNTER
 
             // Submits the readings
             fileReader.close();
