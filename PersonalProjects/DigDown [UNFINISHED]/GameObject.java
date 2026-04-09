@@ -1,5 +1,7 @@
 // Creation Date: April 09, 2026. at 1:05 PM
-// Last Modified: April 09, 2026. at  1:24 PM
+// Last Modified: April 09, 2026. at  3:10 PM
+
+import java.util.Random;
 
 public class GameObject {
     //=======VARIABLES=======//
@@ -27,6 +29,10 @@ public class GameObject {
             for (int j = 0; j < TableNumbers.length; j++) {
                 if (TableNumbers[j][i] == 0) {
                     System.out.print("🖼️");
+                } else if (TableNumbers[j][i] == 1) {
+                    System.out.print("⬇️");
+                } else if (TableNumbers[j][i] == 2) {
+                    System.out.print("💣");
                 }
             }
             System.out.println(" "); // Space for Readability
@@ -34,23 +40,38 @@ public class GameObject {
     }
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void generateTable() {
-        //? PLACING THE PLAYER
-        TableNumbers[TableNumbers[0].length][] = 1;
+        Random random = new Random();
 
-        //? FOR EVERY ROW
+        // PLACING THE PLAYER
+        TableNumbers[TableNumbers.length/2][0] = 1;
+
+        // FOR EVERY ROW
         for (int col = 0; col < TableNumbers[0].length; col++) {
-            //? FOR EVERY COLUMN
+            // FOR EVERY COLUMN
             for (int row = 0; row < TableNumbers.length; row++) {
-                // TODO: DO SOME MATH HERE TO SCALE WHERE THE PLAYER WILL BE (RULE IS THAT THE PLAYER MUST BE IN THE MIDDLE TOP OF THE TABLE WHICH IS AN ARROW)
                 if (TableNumbers[row][col] != 1) {
                     TableNumbers[row][col] = 0;
                 }
             }
         }
 
+        // TODO: RANDOMIZING DEATH POSITION
+
+        // if its 1 then throw an error
+
+        TableNumbers[random.nextInt(5)][random.nextInt(10)] = 2;
+        TableNumbers[random.nextInt(5)][random.nextInt(10)] = 2;
+        TableNumbers[random.nextInt(5)][random.nextInt(10)] = 2;
+        TableNumbers[random.nextInt(5)][random.nextInt(10)] = 2;
+        // generate 5 bombs in random
+
+        // as player moves down, generating new, the maximum bomb increases by 1
+
+
+        
+
         System.out.print("");
     }
-
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 }
