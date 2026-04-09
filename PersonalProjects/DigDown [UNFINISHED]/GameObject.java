@@ -34,13 +34,17 @@ public class GameObject {
     }
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void generateTable() {
+        //? PLACING THE PLAYER
+        TableNumbers[TableNumbers[0].length][] = 1;
+
         //? FOR EVERY ROW
         for (int col = 0; col < TableNumbers[0].length; col++) {
             //? FOR EVERY COLUMN
             for (int row = 0; row < TableNumbers.length; row++) {
                 // TODO: DO SOME MATH HERE TO SCALE WHERE THE PLAYER WILL BE (RULE IS THAT THE PLAYER MUST BE IN THE MIDDLE TOP OF THE TABLE WHICH IS AN ARROW)
-                if (TableNumbers[2][])
-                TableNumbers[row][col] = 0;
+                if (TableNumbers[row][col] != 1) {
+                    TableNumbers[row][col] = 0;
+                }
             }
         }
 
