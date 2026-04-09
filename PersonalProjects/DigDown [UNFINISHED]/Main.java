@@ -1,5 +1,5 @@
 // Creation Date: March 31, 2026. at 10:55 AM
-// Last Modified: April 07, 2026. at 11:49 AM
+// Last Modified: April 09, 2026. at 10:44 AM
 
 import java.util.Random;
 
@@ -13,23 +13,14 @@ public class Main {
     // FINISHED
 
     // UNFINISHED
-    public static void Table() {
-        int width = 5;
-        int height = 10;
+    public static void GenerateTable() {
+        int[][] TableNumbers = new int[5][10];
 
-        int Background = 0;
-        int PlayerPosition = 0;
+        // Generating 0s to the table
+        for (int i = 0; i < TableNumbers.length; i++) {
 
-        for (int i = 0; i < height; i++) { // Height
-            System.out.println();
-            for (int j = 0; j < width; j++) { // Width
-                if (i == 0 && j == 2) { // Play position
-                    System.out.print("⬇️");
-                } else {
-                    System.out.print("🖼️");
-                }
-            }
         }
+
         System.out.print("");
     }
 }
