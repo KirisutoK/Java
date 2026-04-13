@@ -1,5 +1,5 @@
 // Creation Date: April 09, 2026. at 1:05 PM
-// Last Modified: April 13, 2026. at 12:32 PM
+// Last Modified: April 13, 2026. at 12:50 PM
 
 import java.util.Random;
 
@@ -8,13 +8,14 @@ public class GameObject {
 
     //=======VARIABLES=======//
     private int[][] TableNumbers;
-    private int PlayerPosition = getTableColumn()/2;
+    private int PlayerPosition;
     private int MaximumBombs = 5;
     private int BombsPlaced = 0;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public GameObject() {
         TableNumbers = new int[10][5]; // there is 10 of a collection of 5 (Row: 10, Col: 5)
+        PlayerPosition = getTableColumn()/2;
     }
     public GameObject(int row, int col) {
         TableNumbers = new int[row][col];
@@ -89,21 +90,24 @@ public class GameObject {
         System.out.println("Maximum Bombs: "+MaximumBombs);
 
         // MOVING THE BACKGROUND
+        int[] NewRandomizedRow = new int[getTableColumn()]; //| NOTE: THE TEMPORARY ARRAY HAS 0 AS DEFAULT VALUES WHEN CREATING
         for (int i = 0; i < getTableRow()-1; i++) { // From 0 to TableRow-1
             if (i != getTableRow()) {
                 result = TableNumbers[i+1];
                 TableNumbers[i] = result;
             }
         }
+        TableNumbers[getTableRow()-1] = NewRandomizedRow; // PLACING AN EMPTY ARRAY AT THE LAST ROW
         
-        // GENERATING THE NEW ROW (BACKGROUND)
-        int[] NewRandomizedRow = new int[getTableColumn()]; //| NOTE: THE TEMPORARY ARRAY HAS 0 AS DEFAULT VALUES WHEN CREATING
+        // RANDOMIZING THE NEW ROW (BACKGROUND)
         while (!BombisFull()) { // while it's not full
             int RandomPosition = random.nextInt(getTableColumn()); // Randomized position on where the bomb should be placed
-            NewRandomizedRow[RandomPosition] = 2;
+            if (NewRandomizedRow[RandomPosition] != 2) {
+                NewRandomizedRow[RandomPosition] = 2;
+            }
 
             // PLACING THE NEW GENERATED ARRAY INTO THE TABLE
-            TableNumbers[getTableColumn()] = NewRandomizedRow;
+            TableNumbers[getTableRow()-1] = NewRandomizedRow; // PLACES THE NEW RANDOMIZED ARRAY INTO THE LAST ROW (TableRow - 10 = 9) Note: 0-9 = 10 Rows
             BombsPlaced++;
         }
 
@@ -139,6 +143,8 @@ public class GameObject {
         return result;
     }
 }
+
+// TODO: SOMETHING IS WRONG WITH THE TABLE WHEN A BOMB IS REMOVED FROM THE TABLE
 
 // NOTES:
 // 2dArray[row][col] <- THIS IS BASIC TERMS
