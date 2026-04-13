@@ -1,5 +1,5 @@
 // Creation Date: April 09, 2026. at 1:05 PM
-// Last Modified: April 12, 2026. at 11:48 PM
+// Last Modified: April 13, 2026. at 12:32 PM
 
 import java.util.Random;
 
@@ -8,6 +8,7 @@ public class GameObject {
 
     //=======VARIABLES=======//
     private int[][] TableNumbers;
+    private int PlayerPosition = getTableColumn()/2;
     private int MaximumBombs = 5;
     private int BombsPlaced = 0;
 
@@ -70,16 +71,53 @@ public class GameObject {
     // [TEST PURPOSES]
     // TODO: YOU WERE TRYIGN TO SASVE AN ARRAY FROM BELOW IN ORDER TO MOVE THE BACKGROUND
     // TODO: YOU ALREADY CREATED THE COPY ARRAY, NOW YOU JUST NEED TO IMPLEMENT ON HOW TO MOVE IT FOR THE REST OF THE OTHER ROWS
-    public void copyTableArrayRow() {
-        int[] TestArray = TableNumbers[1];
-
-        for (int i:TestArray) {
-            System.out.print(i);
-        }
-    }
     public void moveMiddle() {
-        int[] result = TableNumbers[1];
-        TableNumbers[0] = result;
+        int [] result;
+
+        // TEST
+        System.out.println("Bombs Placed: "+BombsPlaced);
+        System.out.println("Maximum Bombs: "+MaximumBombs);
+        // CHECKING IF THE BOMB IS REMOVED OR NOT
+        for (int i = 0; i < getTableColumn(); i++) {
+            //? DECREASE BOMBS PLACED IF THERE IS A BOMB THAT IS REMOVED
+            if (TableNumbers[0][i] == 2) {
+                BombsPlaced--;
+            }
+        }
+        // TEST
+        System.out.println("Bombs Placed: "+BombsPlaced);
+        System.out.println("Maximum Bombs: "+MaximumBombs);
+
+        // MOVING THE BACKGROUND
+        for (int i = 0; i < getTableRow()-1; i++) { // From 0 to TableRow-1
+            if (i != getTableRow()) {
+                result = TableNumbers[i+1];
+                TableNumbers[i] = result;
+            }
+        }
+        
+        // GENERATING THE NEW ROW (BACKGROUND)
+        int[] NewRandomizedRow = new int[getTableColumn()]; //| NOTE: THE TEMPORARY ARRAY HAS 0 AS DEFAULT VALUES WHEN CREATING
+        while (!BombisFull()) { // while it's not full
+            int RandomPosition = random.nextInt(getTableColumn()); // Randomized position on where the bomb should be placed
+            NewRandomizedRow[RandomPosition] = 2;
+
+            // PLACING THE NEW GENERATED ARRAY INTO THE TABLE
+            TableNumbers[getTableColumn()] = NewRandomizedRow;
+            BombsPlaced++;
+        }
+
+
+        //! PLACING THE PLAYER ======>>> THE HITTING THE BOMB DID NOT ACTIVATE.
+        if (TableNumbers[0][getTableColumn()/2] == 1) {
+            System.out.println("You hit a bomb");
+            return; //! breaks the method (NOT SURE)
+        } else {
+            TableNumbers[0][getTableColumn()/2] = 1;
+        }
+
+//        int[] result = TableNumbers[1];
+//        TableNumbers[0] = result;
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
@@ -103,7 +141,7 @@ public class GameObject {
 }
 
 // NOTES:
-// 2dArray[col][row] <- THIS IS BASIC TERMS
+// 2dArray[row][col] <- THIS IS BASIC TERMS
 // Creating an empty array have a default values of 0
 //
 // CODING POSITIONS:
