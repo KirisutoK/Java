@@ -1,5 +1,5 @@
 // Creation Date: April 09, 2026. at 1:05 PM
-// Last Modified: April 12, 2026. at 11:43 PM
+// Last Modified: April 12, 2026. at 11:48 PM
 
 import java.util.Random;
 
@@ -69,6 +69,7 @@ public class GameObject {
 
     // [TEST PURPOSES]
     // TODO: YOU WERE TRYIGN TO SASVE AN ARRAY FROM BELOW IN ORDER TO MOVE THE BACKGROUND
+    // TODO: YOU ALREADY CREATED THE COPY ARRAY, NOW YOU JUST NEED TO IMPLEMENT ON HOW TO MOVE IT FOR THE REST OF THE OTHER ROWS
     public void copyTableArrayRow() {
         int[] TestArray = TableNumbers[1];
 
