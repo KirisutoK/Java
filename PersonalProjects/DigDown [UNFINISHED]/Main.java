@@ -1,5 +1,5 @@
 // Creation Date: March 31, 2026. at 10:55 AM
-// Last Modified: April 09, 2026. at  1:20 PM
+// Last Modified: April 12, 2026. at 11:41 PM
 
 import java.util.Random;
 
@@ -16,6 +16,14 @@ public class Main {
         System.out.println(" "); // Space for Readability
 
         DigDown01.printTable();
+        System.out.println(" ");
+        DigDown01.copyTableArrayRow();
+        System.out.println(" ");
+        DigDown01.moveMiddle();
+        System.out.println(" ");
+        DigDown01.printTable();
+        
+
     }
 
     // ============ METHODS TO WORK ON ============ \\
