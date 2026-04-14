@@ -1,5 +1,5 @@
 // Creation Date: March 31, 2026. at 10:55 AM
-// Last Modified: April 13, 2026. at 11:20 PM
+// Last Modified: April 14, 2026. at  1:37 AM
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         // ============ CREATING OBJECTS OR INSTANCES ============ \\
-        GameObject DigDown01 = new GameObject(5,5); // default is Row:[5] Column:[10]
+        GameObject DigDown01 = new GameObject(); // default is Row:[5] Column:[10]
 
         // ============ METHODS ============ \\
         System.out.println("Table Height: "+DigDown01.getTableRow());
