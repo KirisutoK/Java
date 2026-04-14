@@ -1,24 +1,28 @@
 // Creation Date: April 09, 2026. at 1:05 PM
-// Last Modified: April 13, 2026. at 12:50 PM
+// Last Modified: April 14, 2026. at 12:32 AM
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class GameObject {
     static Random random = new Random();
+    static Scanner input = new Scanner(System.in);
 
     //=======VARIABLES=======//
     private int[][] TableNumbers;
-    private int PlayerPosition;
+    private int PlayerPosition; // Default 0
     private int MaximumBombs = 5;
     private int BombsPlaced = 0;
+    private boolean Playing; // Default False
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public GameObject() {
         TableNumbers = new int[10][5]; // there is 10 of a collection of 5 (Row: 10, Col: 5)
-        PlayerPosition = getTableColumn()/2;
+        Playing = true;
     }
     public GameObject(int row, int col) {
         TableNumbers = new int[row][col];
+        Playing = true;
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
@@ -31,7 +35,7 @@ public class GameObject {
     public boolean BombisFull() {
         return BombsPlaced == MaximumBombs;
     }
-    public void printTable() {
+    private void printTable() {
         //? PRINTS EVERY COLUMN
         for (int i = 0; i < getTableRow(); i++) {
             //? PRINTS EVERY ROW
@@ -48,11 +52,12 @@ public class GameObject {
         }
     }
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-    public void generateTable() {
+    private void generateTable() {
         // 0 IS DEFAULT EMPTY ARRAY
 
         // PLACING THE PLAYER
-        TableNumbers[0][getTableColumn()/2] = 1;
+        PlayerPosition = getTableColumn()/2; // Updates Player Position (Column Position)
+        TableNumbers[0][PlayerPosition] = 1;
 
         // BOMB PLACEMENT
         while (!BombisFull()) { // if bomb is not full
@@ -68,26 +73,65 @@ public class GameObject {
 
         System.out.print("");
     }
+    private void gameOver() {
+        System.out.println("""
+                ╔════════════════╗
+                ║   GAME OVER!   ║
+                ╚════════════════╝
+                """);
+        Playing = false;
 
-    // [TEST PURPOSES]
-    // TODO: YOU WERE TRYIGN TO SASVE AN ARRAY FROM BELOW IN ORDER TO MOVE THE BACKGROUND
-    // TODO: YOU ALREADY CREATED THE COPY ARRAY, NOW YOU JUST NEED TO IMPLEMENT ON HOW TO MOVE IT FOR THE REST OF THE OTHER ROWS
-    public void moveMiddle() {
-        int [] result;
+        // ASKING IF WANNA PLAY AGAIN
+        System.out.println(" Would you like to play again? ");
+        boolean ValidAnswer = false;
+        do {
+            try {
+                // ASKING FOR INPUT
+                System.out.println("1. Yes");
+                System.out.println("2. No");
+                System.out.print("\nChoice Box: ");
+                int Answer = input.nextInt();
 
-        // TEST
-        System.out.println("Bombs Placed: "+BombsPlaced);
-        System.out.println("Maximum Bombs: "+MaximumBombs);
-        // CHECKING IF THE BOMB IS REMOVED OR NOT
+                // CHECK IF ANSWER IS ON RANGE
+                if (Answer > 0 && Answer < 3) {
+                    ValidAnswer = true;
+                } else {
+                    throw new Exception();
+                }
+
+                // IF RESULTS
+                if (Answer == 1) { // TODO: EVERYTIME WE TOUCH A BOMB, WE EITHER DECREASE THE MAXIMUM BOMB FOREVER OR IT JUST GETS MESSY (DOES NOT MEET MAXIMUM BOMB)
+                    Playing = true;
+                    BombsPlaced = 0;
+                    MaximumBombs = 5;
+                    playGame();
+                } else if (Answer == 2) {
+                    System.out.println("""
+                            ╔═════════════════════════╗
+                            ║   THANKS FOR PLAYING!   ║
+                            ╚═════════════════════════╝
+                            """);
+                }
+            } catch (Exception e) {
+                System.out.println("Please choose between 1 or 2");
+                input.nextLine();
+            }
+        } while (!ValidAnswer);
+    }
+
+    // [UNFINISHED]
+    private void Move() {
+        int[] result;
+
+        System.out.println("Player Position: "+PlayerPosition);
+
+        // CHECKING THE FIRST ROW IF THERE IS A BOMB OR NOT
         for (int i = 0; i < getTableColumn(); i++) {
-            //? DECREASE BOMBS PLACED IF THERE IS A BOMB THAT IS REMOVED
+            //? DECREASE BOMBS PLACED IF THERE IS A BOMB
             if (TableNumbers[0][i] == 2) {
                 BombsPlaced--;
             }
         }
-        // TEST
-        System.out.println("Bombs Placed: "+BombsPlaced);
-        System.out.println("Maximum Bombs: "+MaximumBombs);
 
         // MOVING THE BACKGROUND
         int[] NewRandomizedRow = new int[getTableColumn()]; //| NOTE: THE TEMPORARY ARRAY HAS 0 AS DEFAULT VALUES WHEN CREATING
@@ -104,47 +148,98 @@ public class GameObject {
             int RandomPosition = random.nextInt(getTableColumn()); // Randomized position on where the bomb should be placed
             if (NewRandomizedRow[RandomPosition] != 2) {
                 NewRandomizedRow[RandomPosition] = 2;
+                BombsPlaced++;
             }
 
             // PLACING THE NEW GENERATED ARRAY INTO THE TABLE
             TableNumbers[getTableRow()-1] = NewRandomizedRow; // PLACES THE NEW RANDOMIZED ARRAY INTO THE LAST ROW (TableRow - 10 = 9) Note: 0-9 = 10 Rows
-            BombsPlaced++;
         }
 
+        // ASKING WHICH WAY (RIGHT, MIDDLE, LEFT)
+        boolean ValidAnswer = false;
+        do {
+            try {
+                System.out.println("Choose a path:");
+                if (PlayerPosition == 0) { // IF THE PLAYER IS IN THE LEFT WALL
+                    System.out.println("1. Right");
+                    System.out.println("2. Middle");
+                } else if (PlayerPosition == getTableColumn()-1) { // IF THE PLAYER IS IN THE RIGHT WALL
+                    System.out.println("2. Middle");
+                    System.out.println("3. Left");
+                } else {
+                    System.out.println("1. Right");
+                    System.out.println("2. Middle");
+                    System.out.println("3. Left");
+                }
+                System.out.print("\nCHOICE: ");
 
-        //! PLACING THE PLAYER ======>>> THE HITTING THE BOMB DID NOT ACTIVATE.
-        if (TableNumbers[0][getTableColumn()/2] == 1) {
-            System.out.println("You hit a bomb");
-            return; //! breaks the method (NOT SURE)
-        } else {
-            TableNumbers[0][getTableColumn()/2] = 1;
+                // ASKS FOR INPUT
+                int Answer = input.nextInt();
+
+                // CHECKS IF IT IS A VALID ANSWER
+                // TODO: I AM A BIT WORRIED ABOUT THE EXCEPTIONS BECAUSE EACH IF STATEMENT HAS DIFFERENT SCENARIOS OF PROBLEMS SUCH AS FIRST IF STATEMENT CANNOT GO TO BEYOND 0 WHILE THE SECOND ONE CANNOT EXCEED.
+                if (PlayerPosition == 0) { // IF THE PLAYER IS IN THE LEFT WALL
+                    if (Answer > 0 && Answer < 3) {
+                        ValidAnswer = true;
+                    } else {
+                        throw new Exception(); // TODO: CREATE A CUSTOM EXCEPTION
+                    }
+                } else if (PlayerPosition == getTableColumn()-1) { // IF THE PLAYER IS IN THE RIGHT WALL
+                    if (Answer > 1 && Answer < 4) {
+                        ValidAnswer = true;
+                    } else {
+                        throw new Exception();
+                    }
+                } else {
+                    if (Answer > 0 && Answer < 4) { // IF ITS IN BETWEEN
+                        ValidAnswer = true;
+                    } else {
+                        throw new Exception();
+                    }
+                }
+                    
+
+                // UPDATING POSITION
+                // TODO: 
+                switch (Answer) {
+                    case 1:
+                        if (PlayerPosition-1 >= (0)) {
+                            PlayerPosition = PlayerPosition-1;
+                        } else {
+                            System.out.println("Yo");
+                        }
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                }
+            } catch (Exception e) { // IF THERE IS AN ERROR WHILE DOING THOSE PROCESS
+                System.out.println("\nPlease choose between 1, 2, or 3");
+                input.nextLine();
+            }
+        } while (!ValidAnswer);
+
+        // CHECKS IF THE PLAYER TOUCHES A BOMB
+        if (TableNumbers[0][PlayerPosition] == 2) {
+            gameOver();
         }
 
-//        int[] result = TableNumbers[1];
-//        TableNumbers[0] = result;
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
-    public int[] generateTableArrayRow() {
-        int[] result = new int[getTableRow()]; // Creating a new 1D Array
-
-        // CHECK IF WE HAVE ENOUGH BOMB
-        while (!BombisFull()) { // WHILE IT'S NOT FULL
-            int RandomPosition = random.nextInt(TableNumbers.length);
-
-            // CHECK IF IT'S ALREADY A BOMB
-            if (result[RandomPosition] != 2) {
-                result[RandomPosition] = 2;
-                BombsPlaced++;
-            }
+    public void playGame() {
+        while (Playing) {
+            generateTable();
+            System.out.println(" "); // Space for Readability
+            printTable();
+            System.out.println(" "); // Space for Readability
+            Move();
         }
-
-
-        return result;
     }
 }
-
-// TODO: SOMETHING IS WRONG WITH THE TABLE WHEN A BOMB IS REMOVED FROM THE TABLE
 
 // NOTES:
 // 2dArray[row][col] <- THIS IS BASIC TERMS
@@ -152,5 +247,6 @@ public class GameObject {
 //
 // CODING POSITIONS:
 // 0 -> SAFE
-// 1 -> PLAYER
+// 1 -> PLAYER (ALWAYS AT ROW 0)
 // 2 -> BOMB
+//
