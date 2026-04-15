@@ -1,5 +1,5 @@
 // Creation Date: April 09, 2026. at 1:05 PM
-// Last Modified: April 14, 2026. at  1:43 AM
+// Last Modified: April 14, 2026. at 10:37 PM
 
 import java.util.Random;
 import java.util.Scanner;
@@ -15,7 +15,14 @@ public class GameObject {
     private int BombsPlaced = 0;
     private boolean Playing; // Default False
 
+    // PREVENTIONS
     private boolean isNew = true; // THIS IS TO STOP OVERWRITING THE DATA POSITION EVERY TIME WE GENERATE A TABLE
+
+    // FUTURE VARIABLES
+    int Score = 0;
+    double Multiplier = 0;
+    int Speed = 0;
+
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public GameObject() {
@@ -78,6 +85,17 @@ public class GameObject {
 
         System.out.print("");
     }
+    private void resetTable() {
+        //? Resets tables into all 0s
+        for (int i = 0; i < getTableRow(); i++) {
+            for (int j = 0; j < getTableColumn(); j++) {
+                TableNumbers[i][j] = 0;
+            }
+        }
+        BombsPlaced = 0; //? Resets bombs placed
+        MaximumBombs = 5; //? Resets maximum bomb
+        PlayerPosition = getTableColumn()/2; //? Resets player position
+    }
     private void gameOver() {
         System.out.println("""
                 ╔════════════════╗
@@ -96,6 +114,7 @@ public class GameObject {
                 System.out.println("2. No");
                 System.out.print("\nChoice Box: ");
                 int Answer = input.nextInt();
+                input.nextLine();
 
                 // CHECK IF ANSWER IS ON RANGE
                 if (Answer > 0 && Answer < 3) {
@@ -159,6 +178,7 @@ public class GameObject {
 
         // ASKING WHICH WAY (RIGHT, MIDDLE, LEFT)
         boolean ValidAnswer = false;
+        int Answer = 0;
         do {
             try {
                 System.out.println("Choose a path:");
@@ -176,69 +196,55 @@ public class GameObject {
                 System.out.print("\nCHOICE: ");
 
                 // ASKS FOR INPUT
-                int Answer = input.nextInt();
+                Answer = input.nextInt();
+                input.nextLine(); // THIS CLOSES THE SCANNER
 
-                // CHECKS IF IT IS A VALID ANSWER
-                // TODO: I AM A BIT WORRIED ABOUT THE EXCEPTIONS BECAUSE EACH IF STATEMENT HAS DIFFERENT SCENARIOS OF PROBLEMS SUCH AS FIRST IF STATEMENT CANNOT GO TO BEYOND 0 WHILE THE SECOND ONE CANNOT EXCEED.
+                //... CHECKS IF IT IS A VALID ANSWER
                 if (PlayerPosition == 0) { // IF THE PLAYER IS IN THE LEFT WALL
-                    if (Answer == 1 || Answer == 2) { // if 2 or 3
+                    if (Answer == 1 || Answer == 2) { //? if 2 or 3
                         ValidAnswer = true;
                     } else {
-                        throw new Exception(); // TODO: CREATE A CUSTOM EXCEPTION
+                        throw new Exception();
                     }
                 } else if (PlayerPosition == getTableColumn()-1) { // IF THE PLAYER IS IN THE RIGHT WALL
-                    if (Answer == 2 || Answer == 3) { // if 2 or 3
+                    if (Answer == 2 || Answer == 3) { //? if 2 or 3
                         ValidAnswer = true;
                     } else {
                         throw new Exception();
                     }
                 } else {
-                    if (Answer > 0 && Answer < 4) { // IF ITS IN BETWEEN
+                    if (Answer > 0 && Answer < 4) { //? IF ITS IN BETWEEN
                         ValidAnswer = true;
                     } else {
                         throw new Exception();
                     }
                 }
-
-                // UPDATING POSITION
-                int PlayerPositionMinusOne = PlayerPosition-1; // THIS IS TO AVOID APPLYING CHANGES TO THE PLAYERPOSITION VARIABLE
-                int PlayerPositionPlusOne = PlayerPosition+1; // THIS IS TO AVOID APPLYING CHANGES TO THE PLAYERPOSITION VARIABLE
-
-                if (Answer == 1) { // 1. RIGHT
-                    PlayerPosition++;
-                    if (TableNumbers[0][PlayerPosition] != 2) { // IF IT IS NOT A BOMB
-                        TableNumbers[0][PlayerPosition] = 1; // PLACES THE PLAYER
-                    } else {
-                        gameOver();
-                    }
-                } else if (Answer == 3) { // 2. LEFT
-                    PlayerPosition--;
-                    if (TableNumbers[0][PlayerPosition] != 2) { // IF IT IS NOT A BOMB
-                        TableNumbers[0][PlayerPosition] = 1; // PLACES THE PLAYER
-                    } else {
-                        gameOver();
-                    }
-                }
-
             } catch (Exception e) { // IF THERE IS AN ERROR WHILE DOING THOSE PROCESS
-                System.out.println("\nPlease choose between 1, 2, or 3");
+                if (PlayerPosition == 0) {
+                    System.out.println("\nPlease choose between 1, or 2");
+                } else if (PlayerPosition == getTableColumn()-1) {
+                    System.out.println("\nPlease choose between 2, or 3");
+                } else {
+                    System.out.println("\nPlease choose between 1, 2, or 3");
+                }
                 input.nextLine();
             }
         } while (!ValidAnswer);
+
+        // UPDATING POSITION
+        int PlayerPositionMinusOne = PlayerPosition-1; //? THIS IS TO AVOID APPLYING CHANGES TO THE PLAYERPOSITION VARIABLE
+        int PlayerPositionPlusOne = PlayerPosition+1; //? THIS IS TO AVOID APPLYING CHANGES TO THE PLAYERPOSITION VARIABLE
+
+        if (Answer == 1) { // 1. RIGHT
+            PlayerPosition++;
+        } else if (Answer == 3) { // 2. LEFT
+            PlayerPosition--;
+        }
 
         // CHECKS IF THE PLAYER TOUCHES A BOMB
         if (TableNumbers[0][PlayerPosition] == 2) {
             gameOver();
         }
-    }
-    private void resetTable() { // Makes Table turn into 0s
-        for (int i = 0; i < getTableRow(); i++) {
-            for (int j = 0; j < getTableColumn(); j++) {
-                TableNumbers[i][j] = 0;
-            }
-        }
-        BombsPlaced = 0;
-        MaximumBombs = 5;
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
@@ -253,9 +259,6 @@ public class GameObject {
         }
     }
 }
-
-// TODO: BUG WITH BOMB DETECTION
-
 
 // NOTES:
 // 2dArray[row][col] <- THIS IS BASIC TERMS
