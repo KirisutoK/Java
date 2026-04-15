@@ -1,5 +1,5 @@
 // Creation Date: April 09, 2026. at 1:05 PM
-// Last Modified: April 14, 2026. at 10:37 PM
+// Last Modified: April 14, 2026. at 10:47 PM
 
 import java.util.Random;
 import java.util.Scanner;
@@ -17,12 +17,6 @@ public class GameObject {
 
     // PREVENTIONS
     private boolean isNew = true; // THIS IS TO STOP OVERWRITING THE DATA POSITION EVERY TIME WE GENERATE A TABLE
-
-    // FUTURE VARIABLES
-    int Score = 0;
-    double Multiplier = 0;
-    int Speed = 0;
-
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public GameObject() {
@@ -62,16 +56,16 @@ public class GameObject {
     }
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     private void generateTable() {
-        // 0 IS DEFAULT EMPTY ARRAY
+        //... 0 IS DEFAULT EMPTY ARRAY
 
-        // PLACING THE PLAYER
+        //... PLACING THE PLAYER
         while (isNew) {
             PlayerPosition = getTableColumn()/2; // Updates Player Position (Column Position)
             isNew = false;
         }
         TableNumbers[0][PlayerPosition] = 1;
 
-        // BOMB PLACEMENT
+        //... BOMB PLACEMENT
         while (!BombisFull()) { // if bomb is not full
             int randomX = random.nextInt(getTableRow()); // Row
             int randomY = random.nextInt(getTableColumn()); // Column
@@ -104,26 +98,26 @@ public class GameObject {
                 """);
         Playing = false;
 
-        // ASKING IF WANNA PLAY AGAIN
+        //... ASKING IF WANNA PLAY AGAIN
         System.out.println(" Would you like to play again? ");
         boolean ValidAnswer = false;
         do {
             try {
-                // ASKING FOR INPUT
+                //... ASKING FOR INPUT
                 System.out.println("1. Yes");
                 System.out.println("2. No");
                 System.out.print("\nChoice Box: ");
                 int Answer = input.nextInt();
                 input.nextLine();
 
-                // CHECK IF ANSWER IS ON RANGE
+                //... CHECK IF ANSWER IS ON RANGE
                 if (Answer > 0 && Answer < 3) {
                     ValidAnswer = true;
                 } else {
                     throw new Exception();
                 }
 
-                // IF RESULTS
+                //... IF RESULTS
                 if (Answer == 1) { // TODO: EVERYTIME WE TOUCH A BOMB, WE EITHER DECREASE THE MAXIMUM BOMB FOREVER OR IT JUST GETS MESSY (DOES NOT MEET MAXIMUM BOMB)
                     Playing = true;
                     resetTable();
@@ -146,7 +140,7 @@ public class GameObject {
     private void Move() {
         int[] result;
 
-        // CHECKING THE FIRST ROW IF THERE IS A BOMB OR NOT
+        //... CHECKING THE FIRST ROW IF THERE IS A BOMB OR NOT
         for (int i = 0; i < getTableColumn(); i++) {
             //? DECREASE BOMBS PLACED IF THERE IS A BOMB
             if (TableNumbers[0][i] == 2) {
@@ -154,7 +148,7 @@ public class GameObject {
             }
         }
 
-        // MOVING THE BACKGROUND
+        //... MOVING THE BACKGROUND
         int[] NewRandomizedRow = new int[getTableColumn()]; //| NOTE: THE TEMPORARY ARRAY HAS 0 AS DEFAULT VALUES WHEN CREATING
         for (int i = 0; i < getTableRow()-1; i++) { // From 0 to TableRow-1
             if (i != getTableRow()) {
@@ -164,7 +158,7 @@ public class GameObject {
         }
         TableNumbers[getTableRow()-1] = NewRandomizedRow; // PLACING AN EMPTY ARRAY AT THE LAST ROW
         
-        // RANDOMIZING THE NEW ROW (BACKGROUND)
+        //... RANDOMIZING THE NEW ROW (BACKGROUND)
         while (!BombisFull()) { // while it's not full
             int RandomPosition = random.nextInt(getTableColumn()); // Randomized position on where the bomb should be placed
             if (NewRandomizedRow[RandomPosition] != 2) {
@@ -176,7 +170,7 @@ public class GameObject {
             TableNumbers[getTableRow()-1] = NewRandomizedRow; // PLACES THE NEW RANDOMIZED ARRAY INTO THE LAST ROW (TableRow - 10 = 9) Note: 0-9 = 10 Rows
         }
 
-        // ASKING WHICH WAY (RIGHT, MIDDLE, LEFT)
+        //... ASKING WHICH WAY (RIGHT, MIDDLE, LEFT)
         boolean ValidAnswer = false;
         int Answer = 0;
         do {
@@ -259,6 +253,10 @@ public class GameObject {
         }
     }
 }
+
+// TODO: add a randomized chance of spawning an event
+// TODO: add scores
+// TODO: difficulty
 
 // NOTES:
 // 2dArray[row][col] <- THIS IS BASIC TERMS
