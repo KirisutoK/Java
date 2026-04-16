@@ -1,5 +1,5 @@
 // Creation Date: April 09, 2026. at 1:05 PM
-// Last Modified: April 14, 2026. at 10:47 PM
+// Last Modified: April 15, 2026. at  9:21 PM
 
 import java.util.Random;
 import java.util.Scanner;
@@ -35,7 +35,7 @@ public class GameObject {
     public int getTableColumn() {
         return TableNumbers[0].length;
     }
-    public boolean BombisFull() {
+    private boolean BombisFull() {
         return BombsPlaced == MaximumBombs;
     }
     private void printTable() {
@@ -177,37 +177,36 @@ public class GameObject {
             try {
                 System.out.println("Choose a path:");
                 if (PlayerPosition == 0) { // IF THE PLAYER IS IN THE LEFT WALL
-                    System.out.println("1. Right");
                     System.out.println("2. Middle");
+                    System.out.println("3. Right");
                 } else if (PlayerPosition == getTableColumn()-1) { // IF THE PLAYER IS IN THE RIGHT WALL
+                    System.out.println("1. Left");
                     System.out.println("2. Middle");
-                    System.out.println("3. Left");
                 } else {
-                    System.out.println("1. Right");
+                    System.out.println("1. Left");
                     System.out.println("2. Middle");
-                    System.out.println("3. Left");
+                    System.out.println("3. Right");
                 }
                 System.out.print("\nCHOICE: ");
 
                 // ASKS FOR INPUT
                 Answer = input.nextInt();
-                input.nextLine(); // THIS CLOSES THE SCANNER
 
                 //... CHECKS IF IT IS A VALID ANSWER
                 if (PlayerPosition == 0) { // IF THE PLAYER IS IN THE LEFT WALL
-                    if (Answer == 1 || Answer == 2) { //? if 2 or 3
+                    if (Answer == 2 || Answer == 3) { //? if MIDDLE(2) or RIGHT(3)
                         ValidAnswer = true;
                     } else {
                         throw new Exception();
                     }
                 } else if (PlayerPosition == getTableColumn()-1) { // IF THE PLAYER IS IN THE RIGHT WALL
-                    if (Answer == 2 || Answer == 3) { //? if 2 or 3
+                    if (Answer == 1 || Answer == 2) { //? if LEFT(1) or MIDDLE(2)
                         ValidAnswer = true;
                     } else {
                         throw new Exception();
                     }
-                } else {
-                    if (Answer > 0 && Answer < 4) { //? IF ITS IN BETWEEN
+                } else { // IF THE PLAYER IS IN BETWEEN
+                    if (Answer > 0 && Answer < 4) {
                         ValidAnswer = true;
                     } else {
                         throw new Exception();
@@ -229,9 +228,9 @@ public class GameObject {
         int PlayerPositionMinusOne = PlayerPosition-1; //? THIS IS TO AVOID APPLYING CHANGES TO THE PLAYERPOSITION VARIABLE
         int PlayerPositionPlusOne = PlayerPosition+1; //? THIS IS TO AVOID APPLYING CHANGES TO THE PLAYERPOSITION VARIABLE
 
-        if (Answer == 1) { // 1. RIGHT
+        if (Answer == 3) { // 3. RIGHT
             PlayerPosition++;
-        } else if (Answer == 3) { // 2. LEFT
+        } else if (Answer == 1) { // 1. LEFT
             PlayerPosition--;
         }
 
@@ -254,9 +253,8 @@ public class GameObject {
     }
 }
 
-// TODO: add a randomized chance of spawning an event
-// TODO: add scores
-// TODO: difficulty
+// TODO: CHANGING THE TABLE TO HAVE AN ARRAY OF Tile(Class) instead of int(PrimitiveDataType)
+// TODO: ADDING CONSUMABLES, SCORES, AND HEALTH
 
 // NOTES:
 // 2dArray[row][col] <- THIS IS BASIC TERMS
