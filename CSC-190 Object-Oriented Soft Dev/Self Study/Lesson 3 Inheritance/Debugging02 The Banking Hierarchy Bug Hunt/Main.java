@@ -17,7 +17,7 @@ public class Main {
         System.out.println("\n--- Apply Interest ---");
         savings.applyInterest();
 
-        System.out.println("\n--- Overdraft Test ---");
+        System.out.println("\n--- Overdraft com.example.Test ---");
         checking.withdraw(2000.0);
 
         System.out.println("\nFinal balances:");

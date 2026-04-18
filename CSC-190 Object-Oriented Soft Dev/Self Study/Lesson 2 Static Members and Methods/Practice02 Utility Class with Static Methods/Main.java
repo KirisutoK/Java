@@ -11,7 +11,7 @@ public class Main {
 
         // CREATING MATH HELPER(MathHelper) OBJECT
         /*
-        MathHelper Test = new MathHelper();                 <------------ DOES NOT WORK BECAUSE THE CONSTRUCTOR IS SET TO PRIVATE
+        MathHelper com.example.Test = new MathHelper();                 <------------ DOES NOT WORK BECAUSE THE CONSTRUCTOR IS SET TO PRIVATE
         Why do we have a constructor in the MathHelper class and set it to private if we are not going to use it?
         A: It is to prevent the class from being able to create an object. encoding private constructor makes the class unable to create an object outside from other files
         */

@@ -6,7 +6,7 @@ public class Delay {
 
         try {
             Thread.sleep(3000);
-            System.out.println("Test 1");
+            System.out.println("com.example.Test 1");
             Thread.sleep(3000);
             System.out.println("6 Seconds had passed");
         } catch (InterruptedException e) {
