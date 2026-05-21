@@ -1,7 +1,7 @@
 package Members;
 
 // Creation Date: March 26, 2026. at 10:23 AM
-// Last Modified: March 30, 2026. at 12:39 PM
+// Last Modified: May 21, 2026. at 12:05 AM
 
 import Books.Book;
 
@@ -19,6 +19,12 @@ public class Member {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public String getName() {
+        return Name;
+    }
+    public String getMemberID() {
+        return MemberID;
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void borrowBook(Book book) {
