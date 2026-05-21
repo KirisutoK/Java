@@ -10,17 +10,20 @@ public class Format {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+
 }
 
-// [{ABSTRACT}]
+// +[CATEGORY]+
+
+// ----> [ABSTRACT] <----
 
 // --- @OVERRIDE ---
 
-// INTERFACENAME <==== [INTERFACE]
+// {INTERFACE}
 
 // [CLASSES]
 
-// TODO <================================ LEFT AT BLABLABLA
+// TODO: LEFT AT BLABLABLA
 
 // ! ERROR HERE
 

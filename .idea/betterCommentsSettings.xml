@@ -47,6 +47,19 @@
           <option name="italic" value="true" />
           <option name="type" value="..." />
         </CustomTag>
+        <CustomTag>
+          <option name="color" value="#999900FF" />
+          <option name="type" value="{" />
+        </CustomTag>
+        <CustomTag>
+          <option name="bold" value="true" />
+          <option name="color" value="#009900FF" />
+          <option name="type" value="----&gt;" />
+        </CustomTag>
+        <CustomTag>
+          <option name="color" value="#006666FF" />
+          <option name="type" value="+[" />
+        </CustomTag>
       </list>
     </option>
   </component>
