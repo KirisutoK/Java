@@ -1,7 +1,7 @@
 package Members;
 
 // Creation Date: March 26, 2026. at 10:23 AM
-// Last Modified: March 30, 2026. at 12:39 PM
+// Last Modified: May 22, 2026. at  1:00 AM
 
 import Books.Book;
 
@@ -19,12 +19,33 @@ public class Staff {
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
+    public void processReturn(Book b) {
+        //? CHECK IF IT'S A BOOK
+        if (b == null) {
+            System.out.println("Book is null");
+            return;
+        }
+
+        //? CHECK IF THE BOOK HAS BEEN BORROWED
+        if (b.isAvailable) { // if the Book is available
+            System.out.println(b.getTitle()+" ("+b.getAuthor()+") has already been returned.");
+            return;
+        }
+
+        //? RETURN THE BOOK
+        b.isAvailable = true;
+        System.out.println(b.getTitle()+" ("+b.getAuthor()+") has been returned.");
+    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+    public void displayInformation() {
+        System.out.println("Name: "+StaffName);
+        System.out.println("Role: "+Role);
+    }
 }
 
 
 //// Private attributes: staffName (String), role (String)
 /// Constructor takes staffName and role
-// Public method: displayInfo() — shows staff name and role
-// Public method: processReturn(Book book) — sets book.isAvailable to true and prints confirmation
+/// Public method: displayInfo() — shows staff name and role
+/// Public method: processReturn(Book book) — sets book.isAvailable to true and prints confirmation

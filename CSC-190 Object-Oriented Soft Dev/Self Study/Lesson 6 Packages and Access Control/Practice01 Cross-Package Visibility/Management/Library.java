@@ -1,7 +1,7 @@
 package Management;
 
 // Creation Date: March 26, 2026. at 10:23 AM
-// Last Modified: May 21, 2026. at 12:39 AM
+// Last Modified: May 22, 2026. at  1:03 AM
 
 import Books.Book;
 import Members.Member;
@@ -25,9 +25,26 @@ public class Library {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public int countAvailableBooks() {
+        int TotalAvailableBooks = 0;
+
+        for (int i = 0; i < BookCount; i++) {
+            if (Books[i].isAvailable) { // if Index of Book Array has its value of isAvailable to true
+                TotalAvailableBooks++;
+            }
+        }
+
+        return TotalAvailableBooks;
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void addBook(Book b) {
+        //? CHECK IF IT'S A BOOK
+        if (b == null) {
+            System.out.println("Book is null");
+            return;
+        }
+        
         //? CHECK LIMIT
         if (BookCount >= Books.length) {
             System.out.println(LibraryName+" is full!");
@@ -48,6 +65,12 @@ public class Library {
         System.out.println(b.getTitle()+" ("+b.getAuthor()+") has been added into "+LibraryName);
     }
     public void addMember(Member m) {
+        //? CHECK IF IT'S A MEMBER
+        if (m == null) {
+            System.out.println("Member is null");
+            return; // stops the whole method here
+        }
+
         //? CHECK LIMIT
         if (MemberCount >= Members.length) { // if MemberCount is greater than or equal to Members
             System.out.println(LibraryName+" is full!");
@@ -86,8 +109,11 @@ public class Library {
         }
     }
     public void displayAllMembers() {
-
+        System.out.println("| "+LibraryName+" ALL MEMBERS  |");
+        System.out.println(" "); // Space for Readability
+        for (int i = 0; i < MemberCount; i++) {
+            Members[i].displayInformation();
+            System.out.println(" "); // Space for Readability
+        }
     }
 }
-
-// TODO: YOU LEFT AT displayAllMembers();

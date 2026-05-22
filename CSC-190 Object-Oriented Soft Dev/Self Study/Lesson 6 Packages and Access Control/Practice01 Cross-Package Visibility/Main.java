@@ -1,5 +1,5 @@
 // Creation Date: March 25, 2026. at 10:54 AM
-// Last Modified: March 28, 2026. at 11:00 AM
+// Last Modified: May 22, 2026. at  1:07 AM
 
 import Books.*;
 import Members.*;
@@ -24,7 +24,6 @@ public class Main {
     }
 }
 
-// TODO: Create a Library
 // Create 1 Book, 1 EBook, 1 AudioBook — add all to library
 // Create 1 Member, 1 PremiumMember, 1 Staff — add members to library
 // Have Member borrow the Book
@@ -34,3 +33,5 @@ public class Main {
 // Display all books and all members
 // Call countAvailableBooks() and display the result
 // In the access modifier test section, demonstrate with comments what IS and IS NOT accessible from outside packages
+
+// TODO: DO THE MAIN STUFF THAT PROFESSOR CLAUDE HAS GIVEN US...
