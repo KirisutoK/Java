@@ -1,7 +1,7 @@
 package Books;
 
 // Creation Date: March 26, 2026. at 10:17 AM
-// Last Modified: March 27, 2026. at  2:19 PM
+// Last Modified: May 24, 2026. at 10:41 AM
 
 public class EBook extends Book {
     //=======VARIABLES=======//
@@ -31,7 +31,7 @@ public class EBook extends Book {
     @Override public void displayInformation() {
         super.displayInformation();
         System.out.println("File Format: "+FileFormat);
-        System.out.println("File Size: "+FileFormat);
+        System.out.println("File Size: "+FileSize);
     }
 
 

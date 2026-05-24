@@ -1,7 +1,7 @@
 package Members;
 
 // Creation Date: March 26, 2026. at 10:23 AM
-// Last Modified: May 22, 2026. at  1:00 AM
+// Last Modified: May 23, 2026. at  9:26 AM
 
 import Books.Book;
 
@@ -17,6 +17,12 @@ public class Staff {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public String getStaffName() {
+        return StaffName;
+    }
+    public String getRole() {
+        return Role;
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void processReturn(Book b) {
