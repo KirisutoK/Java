@@ -1,7 +1,7 @@
 package Core;
 
 // Creation Date: May 24, 2026. at 11:05 AM
-// Last Modified: May 24, 2026. at  6:39 PM
+// Last Modified: May 25, 2026. at  5:50 PM
 
 class Account {
     //=======VARIABLES=======//
@@ -26,9 +26,13 @@ class Account {
         System.out.println("Account Type: "+AccountType);
     }
 
+
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-    void updateBalance(double amount) {
+    void addBalance(double amount) {
         Balance = Balance+amount;
+    }
+    void subtractBalance(double amount) {
+        Balance = Balance-amount;
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS

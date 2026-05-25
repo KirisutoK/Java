@@ -59,6 +59,6 @@ public class Customers {
         System.out.println("Customer Name: " + CustomerName);
         System.out.println("Customer ID: " + CustomerID);
         System.out.println("Primary Account: " + hasPrimaryAccount);
-        System.out.println("Savings Accounts: " + hasSavingsAccount);
+        System.out.println("Savings Core.Accounts: " + hasSavingsAccount);
     }
 }

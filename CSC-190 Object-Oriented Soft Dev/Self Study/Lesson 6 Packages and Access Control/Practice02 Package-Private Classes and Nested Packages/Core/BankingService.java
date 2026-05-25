@@ -1,10 +1,7 @@
 package Core;
 
 // Creation Date: May 24, 2026. at 6:44 PM
-// Last Modified: May 24, 2026. at  7:03 PM
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+// Last Modified: May 25, 2026. at  5:50 PM
 
 public class BankingService {
     //=======VARIABLES=======//
@@ -26,8 +23,27 @@ public class BankingService {
         boolean AccountExists = false;
         for (int i = 0; i < AccountCount; i++) {
             if (AccountNumber.equals(Accounts[i].AccountNumber)) {
-                Transactions deposit = new Transactions("Deposit123", Amount, "Deposit");
+                Transactions deposit = new Transactions("D"+AccountNumber+AccountCount, Amount, "Deposit");
+                deposit.processTransaction(Accounts[i]);
                 AccountExists = true;
+                System.out.println(Amount+"$ has been deposited to "+AccountNumber);
+            }
+        }
+
+        //? IF THE ACCOUNT NUMBER CANT BE FOUND
+        if (!AccountExists) {
+            System.out.println("Account Number invalid!");
+        }
+    }
+    public void withdraw(String AccountNumber, double Amount) {
+        //? FINDING THE ACCOUNT
+        boolean AccountExists = false;
+        for (int i = 0; i < AccountCount; i++) {
+            if (AccountNumber.equals(Accounts[i].AccountNumber)) {
+                Transactions withdraw = new Transactions("W"+AccountNumber+AccountCount, Amount, "Withdraw");
+                withdraw.processTransaction(Accounts[i]);
+                AccountExists = true;
+                System.out.println(Amount+"$ has been withdraw from "+AccountNumber);
             }
         }
 

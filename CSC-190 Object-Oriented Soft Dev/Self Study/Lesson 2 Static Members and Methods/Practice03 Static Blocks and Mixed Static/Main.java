@@ -16,7 +16,7 @@ public class Main {
 
         // DISPLAY BANK COUNTS
         System.out.println("Bank Name: " + BankAccount.getBankName());
-        System.out.println("Total Accounts: " + BankAccount.getTotalAccounts());
+        System.out.println("Total Core.Accounts: " + BankAccount.getTotalAccounts());
         System.out.println("Total Balance: " + BankAccount.getTotalBalance());
         System.out.println("Interest Rate: " + BankAccount.getInterestRate() * 100 + "%");
         System.out.println(" "); // Space for Readability
@@ -55,7 +55,7 @@ public class Main {
 
         // DISPLAY BANK COUNTS
         System.out.println("Bank Name: " + BankAccount.getBankName());
-        System.out.println("Total Accounts: " + BankAccount.getTotalAccounts());
+        System.out.println("Total Core.Accounts: " + BankAccount.getTotalAccounts());
         System.out.println("Total Balance: " + BankAccount.getTotalBalance());
         System.out.println("Interest Rate: " + BankAccount.getInterestRate() * 100 + "%");
         System.out.println(" "); // Space for Readability
