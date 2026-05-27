@@ -1,5 +1,5 @@
 // Creation Date: May 24, 2026. at 11:03 AM
-// Last Modified: May 25, 2026. at  5:53 PM
+// Last Modified: May 26, 2026. at 10:46 PM
 
 public class Main {
     public static void main(String[] args) {
@@ -11,10 +11,10 @@ public class Main {
 //  ├── core/
 //  │   ├── Account.java (package-private! no public keyword))
 //  │   ├── Transaction.java (package-private!)
-//  │   └── BankingService.java (public) <============== (CURRENTLY HERE
+//  │   └── BankingService.java (public)
 //  ├── accounts/ <=============== MOVED THE ACCOUNTS CONTENTS INSIDE CORE
 //  │   ├── SavingsAccount.java (public)
-//  │   ├── CheckingAccount.java (public)
+//  │   ├── CheckingAccount.java (public) <============== (CURRENTLY HERE
 //  │   └── AccountValidator.java (package-private!)
 //  ├── customers/
 //  │   ├── Customer.java (public)

@@ -1,7 +1,7 @@
 package Core;
 
 // Creation Date: May 24, 2026. at 6:44 PM
-// Last Modified: May 25, 2026. at  5:50 PM
+// Last Modified: May 26, 2026. at 10:46 PM
 
 public class BankingService {
     //=======VARIABLES=======//
@@ -16,6 +16,16 @@ public class BankingService {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public double getAccountBalance(String accountNumber) {
+        //? FINDING THE ACCOUNT
+        for (int i = 0; i < AccountCount; i++) {
+            if (accountNumber.equals(Accounts[i].AccountNumber)) {
+                return Accounts[i].getBalance();
+            }
+        }
+
+        return -1; // if it's not found
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void deposit(String AccountNumber, double Amount) {
@@ -37,19 +47,37 @@ public class BankingService {
     }
     public void withdraw(String AccountNumber, double Amount) {
         //? FINDING THE ACCOUNT
+        Account TargetAccount = null;
         boolean AccountExists = false;
+        boolean ValidAmount = false;
         for (int i = 0; i < AccountCount; i++) {
             if (AccountNumber.equals(Accounts[i].AccountNumber)) {
-                Transactions withdraw = new Transactions("W"+AccountNumber+AccountCount, Amount, "Withdraw");
-                withdraw.processTransaction(Accounts[i]);
+                TargetAccount = Accounts[i];
                 AccountExists = true;
-                System.out.println(Amount+"$ has been withdraw from "+AccountNumber);
+                if (Accounts[i].getBalance() >= Amount) { // if the balance is greater than the Amount
+                    ValidAmount = true;
+                }
             }
+        }
+
+        //? PROCESSING THE TRANSACTION
+        if (AccountExists && ValidAmount) { // <============================================================================================ LEFT HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+            Transactions withdraw = new Transactions("W"+AccountNumber+AccountCount, Amount, "Withdraw");
+            if (TargetAccount instanceof CheckingAccount) {
+                if (!((CheckingAccount) TargetAccount).canWithdraw(Amount)) { // True by default (no need to add equals)
+                    System.out.println("Transaction Denied: Taking more money will hit "+AccountNumber+"'s the overdraft limit");
+                }
+            }
+            withdraw.processTransaction(TargetAccount);
+            System.out.println(Amount+"$ has been withdraw from "+AccountNumber);
+            return; // Stops the whole method here
         }
 
         //? IF THE ACCOUNT NUMBER CANT BE FOUND
         if (!AccountExists) {
             System.out.println("Account Number invalid!");
+        } else if (!ValidAmount) {
+            System.out.println(AccountNumber+" does not have the valid amount to withdraw $"+Amount);
         }
     }
 

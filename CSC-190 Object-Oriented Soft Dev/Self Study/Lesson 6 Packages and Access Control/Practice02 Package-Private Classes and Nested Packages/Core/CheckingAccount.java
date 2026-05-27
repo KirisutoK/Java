@@ -1,7 +1,7 @@
 package Core;
 
 // Creation Date: May 25, 2026. at 5:37 PM
-// Last Modified: May 25, 2026. at  5:38 PM
+// Last Modified: May 26, 2026. at 10:45 PM
 
 public class CheckingAccount extends Account {
     //=======VARIABLES=======//
@@ -13,8 +13,14 @@ public class CheckingAccount extends Account {
         this.OverdraftLimit = OverdraftLimit;
     }
 
-
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    @Override protected void getAccountSummary() {
+        super.getAccountSummary();
+        System.out.println("Overdraft Limit: "+OverdraftLimit+"$");
+    }
+    public boolean canWithdraw(double amount) {
+        return (Balance-amount) >= OverdraftLimit; // if the amount of money taken from balance is greater than or equal to OverdraftLimit, return true
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 

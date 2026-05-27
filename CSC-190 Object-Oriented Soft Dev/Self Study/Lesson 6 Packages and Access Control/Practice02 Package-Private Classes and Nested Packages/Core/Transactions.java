@@ -1,7 +1,7 @@
 package Core;
 
 // Creation Date: May 24, 2026. at 6:35 PM
-// Last Modified: May 25, 2026. at  5:50 PM
+// Last Modified: May 26, 2026. at 10:09 PM
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,9 +36,9 @@ class Transactions {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     void processTransaction(Account account) {
         if (Type.equalsIgnoreCase("DEPOSIT")) {
-            account.addBalance(Amount);
+            account.updateBalance(account.getBalance() + Amount); // Adds up Balance
         } else if (Type.equalsIgnoreCase("Withdraw")) {
-            account.subtractBalance(Amount);
+            account.updateBalance(account.getBalance() - Amount); // Subtracts Balance
         }
     }
 
