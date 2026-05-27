@@ -1,7 +1,7 @@
 package Core;
 
 // Creation Date: May 24, 2026. at 6:44 PM
-// Last Modified: May 26, 2026. at 10:46 PM
+// Last Modified: May 27, 2026. at  2:58 PM
 
 public class BankingService {
     //=======VARIABLES=======//
@@ -54,7 +54,14 @@ public class BankingService {
             if (AccountNumber.equals(Accounts[i].AccountNumber)) {
                 TargetAccount = Accounts[i];
                 AccountExists = true;
-                if (Accounts[i].getBalance() >= Amount) { // if the balance is greater than the Amount
+                if (Accounts[i] instanceof CheckingAccount) { // if its a checking account
+                    if (!((CheckingAccount) TargetAccount).canWithdraw(Amount)) { // if it cant withdraw
+                        System.out.println("Transaction Denied: Taking more money will hit "+AccountNumber+"'s the overdraft limit");
+                        return; // stops the whole method here
+                    } else { // if it can withdraw
+                        ValidAmount = true;
+                    }
+                } else if (Accounts[i].getBalance() >= Amount) { // if the balance is greater than the Amount
                     ValidAmount = true;
                 }
             }
@@ -63,11 +70,6 @@ public class BankingService {
         //? PROCESSING THE TRANSACTION
         if (AccountExists && ValidAmount) { // <============================================================================================ LEFT HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
             Transactions withdraw = new Transactions("W"+AccountNumber+AccountCount, Amount, "Withdraw");
-            if (TargetAccount instanceof CheckingAccount) {
-                if (!((CheckingAccount) TargetAccount).canWithdraw(Amount)) { // True by default (no need to add equals)
-                    System.out.println("Transaction Denied: Taking more money will hit "+AccountNumber+"'s the overdraft limit");
-                }
-            }
             withdraw.processTransaction(TargetAccount);
             System.out.println(Amount+"$ has been withdraw from "+AccountNumber);
             return; // Stops the whole method here
@@ -79,6 +81,16 @@ public class BankingService {
         } else if (!ValidAmount) {
             System.out.println(AccountNumber+" does not have the valid amount to withdraw $"+Amount);
         }
+    }
+    public void openAccount(String AccountType) {
+        //? CHECK IF IT'S ALREADY FULL
+        if (AccountCount > Accounts.length) {
+            System.out.println(BankingServiceName+" is currently full!");
+            return; // stops the whole method here
+        }
+
+        //? CREATES AN ACCOUNT
+        Accounts[AccountCount] = new Account("00"+AccountCount, 0, AccountType);
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
