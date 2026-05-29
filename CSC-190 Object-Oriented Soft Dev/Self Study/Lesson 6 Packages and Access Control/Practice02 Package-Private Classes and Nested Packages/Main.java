@@ -1,5 +1,5 @@
 // Creation Date: May 24, 2026. at 11:03 AM
-// Last Modified: May 27, 2026. at  2:42 PM
+// Last Modified: May 29, 2026. at  3:29 AM
 
 public class Main {
     public static void main(String[] args) {
@@ -23,4 +23,4 @@ public class Main {
 //     ├── Authenticator.java (public)
 //     └── EncryptionHelper.java (package-private!)
 //
-//
+// TODO: MOST OF THE PROMPTS OR ACTIVITIES FOR THIS PRACTICE IS CONFUSING AND DOES NOT MAKE SENSE WHEN IT COMES TO REAL LIFE.

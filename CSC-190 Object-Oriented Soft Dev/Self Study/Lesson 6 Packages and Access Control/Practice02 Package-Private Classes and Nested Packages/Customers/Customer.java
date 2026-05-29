@@ -1,7 +1,7 @@
 package Customers;
 
 // Creation Date: May 27, 2026. at 2:49 PM
-// Last Modified: May 28, 2026. at 10:33 PM
+// Last Modified: May 29, 2026. at  3:31 AM
 
 import Core.BankingService;
 
@@ -20,8 +20,18 @@ public class Customer {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public String getCustomerID() {
+        return CustomerID;
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
+    private void setPrimaryAccountNumber(String PrimaryAccountNumber) {
+        this.PimaryAccountNumber = PrimaryAccountNumber;
+    }
+    void openAccount(BankingService bank, double balance, String accountType) {
+        bank.createAccount(balance, accountType);
+        setPrimaryAccountNumber("00"+ Bank.getAccountCount());
+    }
 
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS

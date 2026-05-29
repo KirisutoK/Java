@@ -1,7 +1,7 @@
 package Core;
 
 // Creation Date: May 24, 2026. at 6:44 PM
-// Last Modified: May 27, 2026. at  2:58 PM
+// Last Modified: May 29, 2026. at  3:20 AM
 
 public class BankingService {
     //=======VARIABLES=======//
@@ -16,16 +16,35 @@ public class BankingService {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    public double getAccountBalance(String accountNumber) {
-        //? FINDING THE ACCOUNT
+    public int getAccountCount() {
+        return AccountCount;
+    }
+    public Account getAccount(String accountNumber) {
         for (int i = 0; i < AccountCount; i++) {
             if (accountNumber.equals(Accounts[i].AccountNumber)) {
-                return Accounts[i].getBalance();
+                return Accounts[i];
             }
+        }
+
+        System.out.println("Invalid Account Number!");
+        return null;
+    }
+    public boolean isFull() {
+        if (AccountCount > Accounts.length) {
+            System.out.println(BankingServiceName+" is full: ["+AccountCount+"/10]");
+            return true;
+        }
+        return false;
+    }
+    public double getAccountBalance(String accountNumber) {
+        //? FINDING THE ACCOUNT
+        if (getAccount(accountNumber) != null) { // if the result of the method is not a null
+            return getAccount(accountNumber).Balance;
         }
 
         return -1; // if it's not found
     }
+
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void deposit(String AccountNumber, double Amount) {
@@ -82,22 +101,11 @@ public class BankingService {
             System.out.println(AccountNumber+" does not have the valid amount to withdraw $"+Amount);
         }
     }
-    public void openAccount(String AccountType) {
-        //? CHECK IF IT'S ALREADY FULL
-        if (AccountCount > Accounts.length) {
-            System.out.println(BankingServiceName+" is currently full!");
-            return; // stops the whole method here
-        }
-
-        //? CREATES AN ACCOUNT
-        Accounts[AccountCount] = new Account("00"+AccountCount, 0, AccountType);
-    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
-    public void createAccount(String AccountNumber, double Balance, String AccountType) {
+    public void createAccount(double Balance, String AccountType) {
         //? CHECK IF ACCOUNTS ARRAY IS FULL
-        if (AccountCount > Accounts.length) {
-            System.out.println(BankingServiceName+" is full: ["+AccountCount+"/10]");
+        if (isFull()) { // if it's full
             return; // Stops the whole method here
         }
         
@@ -108,6 +116,7 @@ public class BankingService {
         }
 
         //? CREATES AND ADD NEW ACCOUNT TO THE ARRAY
-        Accounts[AccountCount] = new Account(AccountNumber, Balance, AccountType);
+        Accounts[AccountCount] = new Account("Number00"+AccountCount, Balance, AccountType);
+        AccountCount++;
     }
 }
