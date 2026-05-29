@@ -1,7 +1,7 @@
 package Customers;
 
 // Creation Date: May 27, 2026. at 2:49 PM
-// Last Modified: May 27, 2026. at  3:01 PM
+// Last Modified: May 28, 2026. at 10:33 PM
 
 import Core.BankingService;
 
@@ -29,3 +29,4 @@ public class Customer {
 
 // TODO: LEFT HERE ON THIS CLASS
 // TODO: DID NOT KNOW HOW TO CREATE AN ACCOUNT FOR A SPECIFIC BANK
+// TODO: TOO MUCH STUFF TO DO
