@@ -1,9 +1,9 @@
 // Creation Date: May 24, 2026. at 11:03 AM
-// Last Modified: May 31, 2026. at 11:03 PM
+// Last Modified: June 01, 2026. at 11:21 PM
 
 public class Main {
     public static void main(String[] args) {
-
+        System.out.println("Since the activity and prompt was too confusing and it was pretty hard understanding it... there will be no main");
     }
 }
 
