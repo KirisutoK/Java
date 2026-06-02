@@ -1,5 +1,5 @@
 // Creation Date: June 01, 2026. at 11:28 PM
-// Last Modified: June 02, 2026. at  1:46 AM
+// Last Modified: June 02, 2026. at  1:58 PM
 
 import Core.*;
 import Report.*;
@@ -7,7 +7,7 @@ import Report.*;
 public class Main {
     public static void main(String[] args) {
         // ==================== CREATING INSTANCES OR OBJECTS ==================== \\
-        ReportCard reportCard = new ReportCard();
+        ReportCard reportCard = new ReportCard(); // This only consists of methods
         GradeBook Student01 = new GradeBook("Christ Aerjil Dampog");
         GradeBook Student02 = new GradeBook("Zhiannelle Gravino");
 
@@ -24,8 +24,7 @@ public class Main {
         Student02.addGrade(60.67);
         Student02.addGrade(75.55);
         Student02.addGrade(96.27);
-
-
+        
         // ==================== REPORT CARD ==================== \\
         reportCard.printReport(Student01);
         System.out.println(" "); // Space for Readability
