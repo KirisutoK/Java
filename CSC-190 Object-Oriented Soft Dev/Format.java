@@ -21,7 +21,7 @@ public class Format {
 
 // {INTERFACE}
 
-// [CLASSES]
+// [CLASSES/METHODS OF WHATEVER]
 
 // TODO: LEFT AT BLABLABLA
 
