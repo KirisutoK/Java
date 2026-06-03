@@ -1,20 +1,55 @@
 // Creation Date: June 02, 2026. at 2:13 PM
-// Last Modified: June 02, 2026. at  3:41 PM
+// Last Modified: June 02, 2026. at 10:12 PM
 
-import Family.FamilyMember;
+import Family.*;
 import Rules.*;
 
 public class Main {
     public static void main(String[] args) {
         //=======CREATING CLASSES=======//
         FamilyMember FMember01 = new FamilyMember("Christ", "Son", 19);
+        FamilyMember FMember02 = new FamilyMember("Bella", "Mother", 36);
 
         //=======FAMILY STUFF=======//
-        FMember01.displayInformation();
 
         // [ADDING RULES]
-        Rule Rule01 = new Rule(FMember01, "WASH THE DISHES PLEASE!", "UNTIL THERE IS NO MORE DISHES IN THE SINK!");
-        Rule01.displayInformation();
+        FMember01.addRules("PLEASE WASH THE DISH!", "UNTIL THERE IS NO MORE DISHES IN THE SINK");
+        FMember01.addRules("Wipe the mirrors", "until is shiny and shimmering");
+        FMember01.addRules("Clean the toilet", "after using it");
+        FMember01.addRules("Take the dog out", 1.3);
+        FMember02.addRules("NO COMPUTER!", 24);
+        System.out.println(); // Space for Readability
+
+        DatabaseManager.displayRules();
+        System.out.println(); // Space for Readability
+
+        // [REMOVING RULES]
+        FMember02.removeRules(3);
+        FMember02.removeRules(1);
+        FMember02.removeRules(0);
+        System.out.println(); // Space for Readability
+
+        DatabaseManager.displayRules();
+
+        //=======RELATIVE STUFF=======//
+        Relative Relative01 = new Relative("Carlo", "Cousin", 24, "Male", 1);
+
+        // [ADDING RULES]
+        Relative01.addRules("No Playing"); // AddRules() automatically sorts it into TempRules since most Relatives just visits temporarily
+        Relative01.addRules("Relax", 67); // AddRules() automatically sorts it into TempRules since most Relatives just visits temporarily
+        System.out.println(); // Space for Readability
+
+        DatabaseManager.displayTempRules();
+        System.out.println(); // Space for Readability
+
+        // [REMOVING RULES]
+        Relative01.removeRules(0);
+        Relative01.removeTempRules(1);
+
+        DatabaseManager.displayTempRules();
+        System.out.println(); // Space for Readability
+        DatabaseManager.displayRules();
+
     }
 }
 
@@ -30,4 +65,12 @@ public class Main {
 // TODO: The system must make real-world logical sense — classes and their relationships should feel natural
 
 
-// TODO: YOU LEFT ON RELATIVES (TRYING TO THINK WHAT SHOULD BE DIFFERENT TO A FAMILY MEMBER AND A RELATIVE
+// MY MISTAKES:
+// SHOULD HAVE THOUGHT THAT DATABASE ONLY HAS DATAS
+// SHOULD HAVE THOUGHT THAT IF THERE IS A DATABASE, IT SHOULD BE PACKAGE-PRIVATE OR PRIVATE AND LET ANOTHER CLASS (DATABASEMANAGEMENT) TO HANDLE ALL THE ADDING/REMOVING/CHANGING OF THE DATAS TO MAKE IT EXTRA SECURE
+//
+// TAKEAWAY:
+// it was a good project for 2 days. it definetely had learning alot with this lesson and i did not regret anything to what i said to professor claude about my complaints about the last activity.
+// I am very happy and satisfied with all of this activities so far and i would like to do more.
+//
+ // Thank you, Professor Claude!

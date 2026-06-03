@@ -1,16 +1,16 @@
 package Family;
 
 // Creation Date: June 02, 2026. at 2:42 PM
-// Last Modified: June 02, 2026. at  3:05 PM
+// Last Modified: June 02, 2026. at 10:06 PM
 
 import Rules.*;
 
 public class FamilyMember {
     //=======VARIABLES=======//
-    private String Name;
-    private String Role;
-    private int Age;
-    private String Gender;
+    protected String Name;
+    protected String Role;
+    protected int Age;
+    protected String Gender;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public FamilyMember(String Name, String Role, int Age, String Gender) {
@@ -39,19 +39,29 @@ public class FamilyMember {
     public String getRole() {
         return Role;
     }
-    public int getAge() {
-        return Age;
-    }
-    public String getGender() {
-        return Gender;
-    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-    public void addRules(String text, int Duration) {
-
+    public void addRules(String text, double Duration) {
+        Rule rule = new Rule(this, text, Duration);
+        rule.addRule();
+        System.out.println(Name+" has added a rule!");
     }
     public void addRules(String text, String Conditions) {
-
+        Rule rule = new Rule(this, text, Conditions);
+        rule.addRule();
+        System.out.println(Name+" has added a rule!");
+    }
+    public void removeRules(int position) {
+        DatabaseManager.removeRule(this, position);
+    }
+    public void removeRules(Rule r) {
+        DatabaseManager.removeRule(this, r);
+    }
+    public void removeTempRules(int position) {
+        DatabaseManager.removeTempRule(this, position);
+    }
+    public void removeTempRules(Rule r) {
+        DatabaseManager.removeTempRule(this, r);
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
