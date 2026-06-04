@@ -1,5 +1,5 @@
 // Creation Date: June 02, 2026. at 2:13 PM
-// Last Modified: June 02, 2026. at 10:12 PM
+// Last Modified: June 02, 2026. at 10:13 PM
 
 import Family.*;
 import Rules.*;
@@ -71,6 +71,6 @@ public class Main {
 //
 // TAKEAWAY:
 // it was a good project for 2 days. it definetely had learning alot with this lesson and i did not regret anything to what i said to professor claude about my complaints about the last activity.
-// I am very happy and satisfied with all of this activities so far and i would like to do more.
+// I am very happy and satisfied with all of this activities.
 //
  // Thank you, Professor Claude!
