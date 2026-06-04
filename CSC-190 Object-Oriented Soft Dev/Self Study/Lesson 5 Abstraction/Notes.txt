@@ -1,4 +1,3 @@
-
 Abstraction hides implementation details and shows only essential features.
 (Think: A blueprint - defines what to build, not how to build it)
 
@@ -19,7 +18,7 @@ Common uses:
 → Sharing common code while forcing specific implementations
 
 Important Syntax:
-    java abstract class ClassName                    → Declares abstract class
+    java abstract class ClassName                   → Declares abstract class
     public abstract void methodName();              → Abstract method (no body, ends with ;)
     class Child extends AbstractClass               → Must implement all abstract methods
 

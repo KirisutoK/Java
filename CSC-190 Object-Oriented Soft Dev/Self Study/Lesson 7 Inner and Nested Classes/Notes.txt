@@ -1,1 +1,65 @@
-Inner and Nested Classes
+Inner and Nested Classes are classes defined inside another class.
+(Think: A wallet inside a bag — the wallet belongs to the bag)
+
+What are Inner and Nested Classes?
+
+-There are 4 Types of Classes:
+    1. Static Nested Class (The Outer Class)
+    2. Inner Class (An Outer Object)
+    3. Local Class (A Method)
+    4. Anonymous Class (A single expression)
+
+1. Static Nested Class
+    • Belongs to the outer class itself, not an object
+    • Can be created without creating the outer class first
+    • Cannot access outer class instance variables directly
+
+    // ==== Example: ==== \\
+    public class Outer {
+        static class Nested { }
+    }
+
+    // Creating it:
+    Outer.Nested obj = new Outer.Nested();
+
+2. Inner Class (Non-Static)
+    • Belongs to an instance of the outer class
+    • Can access outer class variables and methods directly
+    • Needs an outer object to exist first
+
+    // ==== Example: ==== \\
+    public class Outer {
+        class Inner { }
+    }
+
+    // Creating it:
+    Outer outer = new Outer();
+    Outer.Inner inner = outer.new Inner();
+
+3. Local Class
+    • Defined inside a method
+    • Only exists and is usable within that method
+
+    // ==== Example: ==== \\
+    public void myMethod() {
+        class Local { }
+        Local obj = new Local();
+    }
+
+4. Anonymous Class
+    • A class with no name, created and used instantly
+    • Used when you need a one-time implementation
+
+    // ==== Example: ==== \\
+    Animal a = new Animal() {
+        public void makeSound() {
+            System.out.println("...");
+        }
+    };
+
+Key Rules:
+• Static nested → no outer object needed
+• Inner class → needs outer object to exist
+• Inner class can access outer class private members directly
+• Static nested class cannot access outer instance variables
+• Local and anonymous classes are rare but useful for one-time use
