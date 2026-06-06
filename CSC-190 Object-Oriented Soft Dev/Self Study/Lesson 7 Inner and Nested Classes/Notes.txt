@@ -49,13 +49,12 @@ What are Inner and Nested Classes?
 4. Anonymous Class
     • A class with no name, created and used instantly
     • Used when you need a one-time implementation
+    • Created on a single line
 
     // ==== Example: ==== \\
-    Animal a = new Animal() {
-        public void makeSound() {
-            System.out.println("...");
-        }
-    };
+    service.sendCustom(new Notifiable() { // Anonymous class
+        // no name, created and used instantly
+    }, "Your order has arrived!");
 
 Key Rules:
 • Static nested → no outer object needed
