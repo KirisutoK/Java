@@ -1,0 +1,85 @@
+Question 1: What is the correct way to instantiate a static nested class called Engine inside a class called Car?
+
+A) Car.Engine e = new Car.Engine();
+B) Car c = new Car(); Car.Engine e = c.new Engine();
+C) Engine e = new Engine();
+D) Car.Engine e = Car.new Engine();
+
+Question 2: What makes an inner class different from a static nested class?
+
+A) Inner classes can only have private members
+B) Inner classes require an instance of the outer class to be created
+C) Inner classes cannot implement interfaces
+D) Inner classes are defined outside the outer class
+
+
+Question 3: Which of the following can an inner class do that a static nested class CANNOT?
+
+A) Implement an interface
+B) Have a constructor
+C) Directly access the outer class's instance variables
+D) Be declared public
+
+
+Question 4: Where does a local class exist?
+
+A) Inside a package
+B) Inside an interface
+C) Inside a method
+D) Inside a static nested class
+
+
+Question 5: What is an anonymous class?
+
+A) A class with no methods
+B) A class defined inside a package with no name
+C) A class created and used instantly with no name
+D) A class that cannot be instantiated
+
+
+Question 6: What will this code print?
+public class Outer {
+    private String message = "Hello!";
+
+    class Inner {
+        public void display() {
+            System.out.println(message);
+        }
+    }
+}
+
+// In Main:
+Outer outer = new Outer();
+Outer.Inner inner = outer.new Inner();
+inner.display();
+
+A) Compilation error — Inner cannot access message
+B) null
+C) Hello!
+D) Compilation error — wrong instantiation syntax
+
+
+Question 7: Which statement about local classes is TRUE?
+
+A) Local classes can be accessed from anywhere in the program
+B) Local classes can only be used within the method they are defined in
+C) Local classes must be static
+D) Local classes cannot implement interfaces
+
+
+Question 8: When would you use an anonymous class over a local class?
+
+A) When you need to reuse the class multiple times in the same method
+B) When you need a one-time implementation that won't be reused
+C) When you need to access private members of the outer class
+D) When you need the class to be visible across packages
+
+MY ANSWERS: 8/8
+1. A ✅
+2. B ✅
+3. C ✅
+4. C ✅
+5. C ✅
+6. C ✅
+7. B ✅
+8. B ✅
