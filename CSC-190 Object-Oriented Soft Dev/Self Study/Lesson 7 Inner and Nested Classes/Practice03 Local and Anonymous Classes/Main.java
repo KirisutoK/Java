@@ -1,5 +1,5 @@
 // Creation Date: June 05, 2026. at 9:23 PM
-// Last Modified: June 06, 2026. at 10:52 PM
+// Last Modified: June 07, 2026. at  3:24 PM
 
 public class Main {
     public static void main(String[] args) {
@@ -11,6 +11,8 @@ public class Main {
         System.out.println(); // Space for Readability
         NotifService01.sendSMS("Something");
         System.out.println(); // Space for Readability
+
+        // +[ANONYMOUS CLASS]+
         NotifService01.sendCustom(new Notifiable() {
             public String getType() {
                 return "PUSH NOTIFICATION";
