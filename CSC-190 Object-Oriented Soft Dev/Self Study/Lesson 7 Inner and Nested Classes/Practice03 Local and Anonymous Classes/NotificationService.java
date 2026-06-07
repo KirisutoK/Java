@@ -1,5 +1,5 @@
 // Creation Date: June 05, 2026. at 9:26 PM
-// Last Modified: June 05, 2026. at 10:00 PM
+// Last Modified: June 05, 2026. at 10:09 PM
 
 public class NotificationService {
     //=======VARIABLES=======//
@@ -10,10 +10,11 @@ public class NotificationService {
         this.ServiceName = ServiceName;
     }
 
-
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
+
+    //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void sendEmail(String message) {
         //? CLASS (METHODS REQUIREMENTS)
         class EmailNotification implements Notifiable{
@@ -24,14 +25,13 @@ public class NotificationService {
             @Override public void sendNotification(String message) {
                 System.out.println("EMAIL: "+message);
             }
-        }
+        } //... <========== THIS ARE CALLED LOCAL CLASS
 
         //? THE OUTPUT
         EmailNotification TempEmailNotification = new EmailNotification();
         TempEmailNotification.sendNotification(message);
         System.out.println("TYPE: "+TempEmailNotification.getType());
     }
-
     public void sendSMS(String message) {
         //? CLASS (METHODS REQUIREMENTS)
         class SMSNotification implements Notifiable {
@@ -42,24 +42,19 @@ public class NotificationService {
             @Override public void sendNotification(String message) {
                 System.out.println("SMS: "+message);
             }
-        }
+        } //... <========== THIS ARE CALLED LOCAL CLASS
 
         //? THE OUTPUT
         SMSNotification TempSMSNotification = new SMSNotification();
         TempSMSNotification.sendNotification(message);
         System.out.println("TYPE: "+TempSMSNotification.getType());
     }
-
     public void sendCustom(Notifiable notifiable, String message) {
         System.out.print(notifiable.getType()+": ");
         notifiable.sendNotification(message);
         System.out.println("TYPE: "+notifiable.getType());
     }
-
-
-    //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     
-
 
     // ================================================== OTHER CLASSES ================================================== \\
 }
