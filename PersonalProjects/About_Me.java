@@ -201,7 +201,7 @@ public class About_Me {
 
             case 12:
                 System.out.println("\n==============Connections==============");
-                System.out.println("1. Family              5. Classmates   ");
+                System.out.println("1. Cat              5. Classmates   ");
                 System.out.println("2. Best Friends        6. Co-Workers   ");
                 System.out.println("3. Friends             7. Neighbor     ");
                 System.out.println("4. Teacher/AP_Professor   8. Crush        ");
@@ -212,7 +212,7 @@ public class About_Me {
 
                 switch(CASE12CHOICE) {
                     case 1:
-                        System.out.println("\n====================Family====================");
+                        System.out.println("\n====================Cat====================");
                         System.out.println("◆ (Grandmother) Zelda Calapre Dampog ");
                         System.out.println("◆ (Grandfather) Jevier Calapre Dampog ");
                         System.out.println("◆ (Mother) Arrah Villa Calapre Walsh");      
