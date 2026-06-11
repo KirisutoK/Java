@@ -1,11 +1,12 @@
 // Creation Date: June 08, 2026. at 11:15 AM
-// Last Modified: June 10, 2026. at  9:24 PM
+// Last Modified: June 11, 2026. at  3:22 PM
 
 public class Main {
     public static void main(String[] args) {
         // ============= CREATING OBJECT ============= \\
         Cat Cat01 = new Cat("Sheila");
         Cat.Accessories CatAccessory01 = Cat01.new Accessories("Collar", "Shiela's Special Collar");
+        // ! Cat.VaccinationRecord VaccinationRecord01 = Cat.VaccinationRecord();              <================================= I AM CONFUSED ON HOW I SHOULD INSTANTIATE MY STATIC CLASS
 
         // [ANONYMOUS CLASS]
         Cat Cat02 = new Cat("Ginger") {

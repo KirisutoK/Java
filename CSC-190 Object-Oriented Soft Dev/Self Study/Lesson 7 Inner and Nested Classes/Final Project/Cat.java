@@ -1,8 +1,7 @@
 // Creation Date: June 08, 2026. at 11:28 AM
-// Last Modified: June 10, 2026. at  9:06 PM
+// Last Modified: June 11, 2026. at  3:22 PM
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Cat {
@@ -52,15 +51,30 @@ public class Cat {
         }
 
         //? CREATE A FORMATED RECORD CLASS
+        class getVaccinationDate {
+            String Month;
+            String Day;
+            String Year;
 
-        class VaccinationTimeRecord {
-            S
+            public getVaccinationDate() {
+                LocalDate Today = LocalDate.now();
+                Month = Today.getMonth().toString();        // Month
+                Day = String.valueOf(Today.getDayOfMonth()); // Day
+                Year = String.valueOf(Today.getYear());   // Year
+            }
+
+            public String getFormattedInformation() {
+                return "Month: "+Month+
+                        "Day: "+Day+
+                        "Year: "+Year;
+            }
         }
+        getVaccinationDate Today = new getVaccinationDate();
 
-
+        //? APPLYING THE STUFF
         System.out.println(Name+" has been vaccinated!");
         isVaccinated = true;
-        String VaccinationTime = "";
+        VaccinationRecord.VaccinationVisits.add(Today.getFormattedInformation());
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
@@ -76,11 +90,19 @@ public class Cat {
     // [STATIC CLASS]
     public static class VaccinationRecord {
         //=======VARIABLES=======//
-        ArrayList<String> VaccinationVisits = new ArrayList<>();
+        static ArrayList<String> VaccinationVisits = new ArrayList<>();
+        private String HealthProvider;
 
         //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
+        public VaccinationRecord(String healthProvider) {
+            HealthProvider = healthProvider;
+        }
+
 
         //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+        public String getHealthProvider() {
+            return HealthProvider;
+        }
 
         //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
         public void addVisit(String VisitRecord) {
