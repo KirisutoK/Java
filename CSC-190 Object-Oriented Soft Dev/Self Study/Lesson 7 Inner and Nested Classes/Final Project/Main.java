@@ -1,5 +1,5 @@
 // Creation Date: June 08, 2026. at 11:15 AM
-// Last Modified: June 11, 2026. at  3:22 PM
+// Last Modified: June 12, 2026. at 12:27 PM
 
 public class Main {
     public static void main(String[] args) {
@@ -38,3 +38,4 @@ public class Main {
 // 7. Must demonstrate that you understand when and why to use each type — the choice of which class gets which type should make sense
 
 // TODO: I LEFT AT MAKING A LOCAL CLASS FOR THE METHOD getVaccinated() FOR THE CAT CLASS
+// STREKA
