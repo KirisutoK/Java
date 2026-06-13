@@ -1,5 +1,5 @@
 // Creation Date: June 08, 2026. at 11:28 AM
-// Last Modified: June 11, 2026. at  3:22 PM
+// Last Modified: June 12, 2026. at  8:11 PM
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -44,14 +44,14 @@ public class Cat {
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-    public void getVaccinated() {
+    public String getVaccinated() {
         if (isVaccinated) {
             System.out.println(Name+" has been vaccinated already");
-            return; // stops the whole method here
+            return null; // stops the whole method here
         }
 
         //? CREATE A FORMATED RECORD CLASS
-        class getVaccinationDate {
+        class getVaccinationDate { //... <======================= THIS IS A LOCAL CLASS
             String Month;
             String Day;
             String Year;
@@ -64,9 +64,7 @@ public class Cat {
             }
 
             public String getFormattedInformation() {
-                return "Month: "+Month+
-                        "Day: "+Day+
-                        "Year: "+Year;
+                return Month+" "+Day+" "+Year;
             }
         }
         getVaccinationDate Today = new getVaccinationDate();
@@ -74,7 +72,7 @@ public class Cat {
         //? APPLYING THE STUFF
         System.out.println(Name+" has been vaccinated!");
         isVaccinated = true;
-        VaccinationRecord.VaccinationVisits.add(Today.getFormattedInformation());
+        return Today.getFormattedInformation();
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
@@ -90,14 +88,16 @@ public class Cat {
     // [STATIC CLASS]
     public static class VaccinationRecord {
         //=======VARIABLES=======//
+        static String Type = "Cat";
         static ArrayList<String> VaccinationVisits = new ArrayList<>();
         private String HealthProvider;
+        private String CatName;
 
         //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-        public VaccinationRecord(String healthProvider) {
-            HealthProvider = healthProvider;
+        public VaccinationRecord(String HealthProvider, String CatName) {
+            this.HealthProvider = HealthProvider;
+            this.CatName = CatName;
         }
-
 
         //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
         public String getHealthProvider() {
@@ -111,10 +111,9 @@ public class Cat {
 
         //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
         public void displayVaccinationVisits() {
-            System.out.println("========================================= VACCINATION VISITS =========================================");
-            for (int i = 0; i <VaccinationVisits.size(); i++) {
-                System.out.println(VaccinationVisits);
-                System.out.println(); // Space for Readability
+            System.out.println("---------------------- VACCINATION VISITS ----------------------");
+            for (int i = 0; i < VaccinationVisits.size(); i++) {
+                System.out.println((i+1)+". "+VaccinationVisits.get(i));
             }
         }
     }
@@ -144,7 +143,7 @@ public class Cat {
 
         //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
         public void displayInformation() {
-            System.out.println("------- ACCESSORIES INFORMATION -------");
+            System.out.println("------- "+Name+"'s Accessory Information -------");
             System.out.println("Accessories Type: "+AccessoriesType);
             System.out.println("Accessories Name: "+AccessoriesName);
             System.out.println("Value: "+Value);
