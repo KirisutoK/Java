@@ -1,5 +1,5 @@
 // Creation Date: June 08, 2026. at 11:28 AM
-// Last Modified: June 12, 2026. at  8:11 PM
+// Last Modified: June 12, 2026. at  8:29 PM
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -89,7 +89,7 @@ public class Cat {
     public static class VaccinationRecord {
         //=======VARIABLES=======//
         static String Type = "Cat";
-        static ArrayList<String> VaccinationVisits = new ArrayList<>();
+        private ArrayList<String> VaccinationVisits = new ArrayList<>();
         private String HealthProvider;
         private String CatName;
 

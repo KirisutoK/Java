@@ -1,0 +1,67 @@
+Exception Handling is how Java deals with errors that happen while a program is running.
+(Think: A safety net — instead of crashing, your program catches the problem and responds)
+
+What is an Exception?
+An exception is an event that disrupts the normal flow of a program.
+→ Without handling, the program crashes
+→ With handling, the program can respond gracefully instead of crashing
+
+Key Terminology:
+• Exception: An object representing an error that occurred
+• Throw: To signal that an error has occurred
+• Catch: To handle an error that was thrown
+• Stack trace: The list of method calls that led to the error
+
+
+========= The try-catch Block =========
+    try {
+        // code that might cause an error
+    } catch (ExceptionType e) {
+        // code that runs if that error happens
+    }
+
+• Code in try runs normally
+• If an error occurs, Java jumps straight to catch
+• If no error occurs, catch is skipped entirely
+
+
+========= finally Block (Optional): =========
+    try {
+        // risky code
+    } catch (ExceptionType e) {
+        // handle error
+    } finally {
+        // ALWAYS runs, error or not
+    }
+
+• Used for cleanup code (closing files, releasing resources)
+
+
+Common Built-in Exceptions:
+• ArithmeticException                                              → Dividing by Zero
+• NullPointerException                                             → Using an object that is null
+• ArrayIndexOutOfBoundsException                                   → Accessing an invalid array index
+• NumberFormatException                                            → Converting invalid text to a number
+• ClassCastException                                               → Invalid downcasting
+
+throw versus throws:
+    throw new Exception("message");   // Actually creates and throws an exception
+    public void method() throws Exception { }  // Declares method MIGHT throw one
+
+Checked versus Unchecked Exceptions:
+• Checked: Must be handled or declared (IOException, Exception)
+• Unchecked: Don't have to be handled (RuntimeException and its subclasses — NullPointerException, ArithmeticException, etc.)
+
+Custom Exceptions:
+• You can create your own exception by extending Exception:
+    public class InvalidAgeException extends Exception {
+        public InvalidAgeException(String message) {
+            super(message);
+        }
+    }
+
+Key Rules:
+• A try block must have at least one catch or finally
+• Multiple catch blocks can handle different exception types
+• finally always runs — even if there's a return in try or catch
+• Custom exceptions should extend Exception (checked) or RuntimeException (unchecked)
