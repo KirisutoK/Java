@@ -1,5 +1,5 @@
 // Creation Date: June 13, 2026. at 11:14 AM
-// Last Modified: June 13, 2026. at 11:28 AM
+// Last Modified: June 14, 2026. at  1:38 AM
 
 public class SafeCalculator {
     //=======VARIABLES=======//
@@ -23,7 +23,7 @@ public class SafeCalculator {
         try {
             return arr[index];
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid index: [index]");
+            System.out.println("Invalid index: "+index);
             return -1;
         }
     }
