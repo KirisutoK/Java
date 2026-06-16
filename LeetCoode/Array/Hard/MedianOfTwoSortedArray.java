@@ -1,10 +1,10 @@
 // Creation Date: June 14, 2026. at 11:46 PM
-// Last Modified: June 14, 2026. at 11:50 PM
+// Last Modified: June 16, 2026. at 12:20 AM
 
 public class MedianOfTwoSortedArray {
     public static void main(String[] args) {
-        int[] nums1 = {};
-        int[] nums2 = {};
+        int[] nums1 = {1, 2, 3, 4, 5};
+        int[] nums2 = {9, 9, 9, 1, 2, 3};
 
         System.out.println(findMedianSortedArrays(nums1, nums2));
     }
@@ -13,12 +13,12 @@ public class MedianOfTwoSortedArray {
         //? MERGE ALL THE ARRAYS
         int[] mergedArr = new int[nums1.length + nums2.length];
 
-        if (nums1.length != 0) { // SECURITY MEASURES (IF IT'S NOT EMPTY)
+        if (nums1.length != 0) { // SECURITY MEASURES (IF ITS NOT EMPTY)
             for (int i = 0; i < nums1.length; i++) {  // <======== ADDING NUMS1[]
                 mergedArr[i] = nums1[i];
             }
         }
-        if (nums2.length != 0) { // SECURITY MEASURES (IF IT'S NOT EMPTY)
+        if (nums2.length != 0) { // SECURITY MEASURES (IF ITS NOT EMPTY)
             for (int i = 0; i < nums2.length; i++ ) { // <======== ADDING NUMS2[]
                 mergedArr[nums1.length+i] = nums2[i];
             }
@@ -37,26 +37,16 @@ public class MedianOfTwoSortedArray {
             }
         }
 
-        //? CALCULATE MEDIAN (From 2nd Array into 2nd to the last Array)
-        double numerator = 0;
-        double denominator = 0;
-        if (mergedArr.length < 2) { // SAFETY MEASURES!
+        //? CALCULATE MEDIAN
+        if (mergedArr.length < 2) { // if it is less than 2
             return mergedArr[0];
         }
-        for (int i = 1; i < mergedArr.length-1; i++) {
-            numerator += mergedArr[i];
-            denominator++;
+        if (mergedArr.length % 2 == 0) { // if it is even
+            return (double)(mergedArr[(mergedArr.length/2)-1] + mergedArr[((mergedArr.length/2)+1)-1]) /2;
         }
 
         //? OUTPUT
-        System.out.println("ARRAY");
-        for (int i = 0; i < mergedArr.length; i++) {
-            System.out.println(mergedArr[i]);
-        }
-        System.out.println("NUMERATOR/DENOMINATOR");
-        System.out.println(numerator);
-        System.out.println(denominator);
-        return numerator/denominator;
+        return mergedArr[mergedArr.length/2];
     }
 }
 
@@ -69,5 +59,5 @@ public class MedianOfTwoSortedArray {
 //      → In order to find the median, I have to pick the middle (if the array.length is odd)
 //      → In order to find the median, I have to pick the middle and add next to it and divide by 2
 //
-// SUGGESTION: REWRITE THE WHOLE ENTIRE THING
-// LINK: https://leetcode.com/problems/median-of-two-sorted-arrays
+// POST-NOTES: This was a fun leetcode problem. I am thinking of how to improve its runtime into 1ms (hopefully i can achieve it.)
+// LINK: https://leetcode.com/problems/median-of-two-sorted-arrays/
