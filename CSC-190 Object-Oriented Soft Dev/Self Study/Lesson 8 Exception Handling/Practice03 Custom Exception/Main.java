@@ -1,5 +1,5 @@
 // Creation Date: June 14, 2026. at 2:31 AM
-// Last Modified: June 17, 2026. at  4:53 PM
+// Last Modified: June 18, 2026. at 12:38 AM
 
 import Exceptions.AccountFrozenException;
 import Exceptions.InsufficientFundsException;
@@ -14,23 +14,25 @@ public class Main {
         try {
             // [DEPOSIT]
             BankAccount01.deposit(10);
-            // BankAccount01.deposit(-1);          // <============ ERROR
+            // BankAccount01.deposit(-1);          //... <============ ERROR
             // [WITHDRAW]
-            BankAccount01.withdraw(10);
-            // BankAccount01.withdraw(100);           // <============ ERROR
+            BankAccount01.withdraw(100);
+            // BankAccount01.withdraw(100);           //... <============ ERROR
             BankAccount01.freezeAcount();
-            // BankAccount01.deposit(10);      // <============ ERROR
-            // BankAccount01.withdraw(999); // <============ ERROR
+            // BankAccount01.deposit(10);      //... <============ ERROR
+            // BankAccount01.withdraw(999); //... <============ ERROR
 
             BankAccount01.displayInfo();
         } catch (AccountFrozenException e) {
-            System.out.println("Error: "+e);
+            // e.getMessage(); //... <========= THIS RETURNS A STRING
+            System.out.println(e.getMessage());
         } catch (InsufficientFundsException e) {
-            System.out.println("Error: "+e);
+            // e.getMessage(); //... <========= THIS RETURNS A STRING
+            System.out.println(e.getMessage());
         } catch (InvalidDepositException e) {
-            System.out.println("Error: "+e);
+            // e.getMessage(); //... <========= THIS RETURNS A STRING
+            System.out.println(e.getMessage());
         }catch (Exception e) {
-            System.out.println("Unexpected Error: "+e);
         }
     }
 }

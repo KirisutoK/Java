@@ -1,5 +1,5 @@
 // Creation Date: June 17, 2026. at 9:13 AM
-// Last Modified: June 17, 2026. at  4:47 PM
+// Last Modified: June 18, 2026. at 12:37 AM
 
 import Exceptions.*;
 
@@ -35,7 +35,7 @@ public class BankAccount {
         if (isFrozen) {
             throw new AccountFrozenException();
         } else if (amount > Balance) {
-            throw new InsufficientFundsException(amount);
+            throw new InsufficientFundsException(amount-Balance);
         } else {
             Balance = Balance - amount;
         }
@@ -50,7 +50,6 @@ public class BankAccount {
         System.out.println("Balance: "+Balance);
         System.out.println("Is Frozen: "+isFrozen);
     }
-
 
     // ================================================== OTHER CLASSES ================================================== \\
 }
