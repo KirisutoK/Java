@@ -1,7 +1,23 @@
 // Creation Date: June 19, 2026. at 12:32 PM
-// Last Modified: June 19, 2026. at 12:33 PM
+// Last Modified: June 20, 2026. at 11:09 PM
 
 public class Main {
+    public static void main(String[] args) {
+        registerVoter("Alice", 25);
+        registerVoter("Bob", 15);
+    }
+
+    public static void registerVoter(String name, int age) {
+        try {
+            if (age < 18 || age > 120) {
+                throw new InvalidVoterAgeException(name, age);
+            } else {
+                System.out.println(name+" has been registered!");
+            }
+        } catch (InvalidVoterAgeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
 
 
