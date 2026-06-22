@@ -1,11 +1,12 @@
 // Creation Date: June 20, 2026. at 11:29 PM
-// Last Modified: June 21, 2026. at 12:00 AM
+// Last Modified: June 21, 2026. at 11:39 PM
 
 public class Main {
     public static void main(String[] args) {
-        double[] RandomStudentGrades = {85.0, 90.0, 78.0};
-        double[] RandomStudentGrades =
-        addGrades(RandomStudentGrades);
+        double[] RandomStudentGrades01 = {85.0, 90.0, 78.0};
+        double[] RandomStudentGrades02 = {85.0, 110.0, 78.0};
+        addGrades(RandomStudentGrades01);
+        addGrades(RandomStudentGrades02);
     }
 
     public static void addGrades(double[] grades) {
@@ -29,5 +30,3 @@ public class Main {
 
 }
 
-
-// TODO: YOU WERE LEFT ON TRYING TO FIGURE OUT HOW TO PREVIEW MD FILES IN INTELLIJI IDEA
