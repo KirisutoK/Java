@@ -1,5 +1,5 @@
 // Creation Date: June 24, 2026. at 10:16 PM
-// Last Modified: June 24, 2026. at 10:53 PM
+// Last Modified: June 24, 2026. at 11:40 PM
 
 import Exceptions.CloseAndOpenBarException;
 import Exceptions.CollectionFullException;
@@ -26,7 +26,11 @@ public class Bar {
     public int getAlcoholCollectionCount() {
         return AlcoholCollectionCount;
     }
-    public Alcohol getAlcohol(Alcohol a) throws DataNotFoundException {
+    public Alcohol getAlcohol(Alcohol a) throws DataNotFoundException, EmptyException {
+        if (a == null) {
+            throw new EmptyException();
+        }
+
         for (int i = 0; i < AlcoholCollectionCount; i++) {
             if (a.equals(AlcoholCollections[i])) {
                 return AlcoholCollections[i];
@@ -34,6 +38,15 @@ public class Bar {
         }
 
         throw new DataNotFoundException();
+    }
+    public Alcohol getAlcohol(int Index) {
+        if (Index >= AlcoholCollectionCount) {
+            throw new IndexOutOfBoundsException("We only have "+AlcoholCollectionCount+" in the "+Name+"'s collection");
+        } else if (Index < 0) {
+            throw new IndexOutOfBoundsException("You can't choose an index below 0!");
+        }
+
+        return AlcoholCollections[Index];
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
@@ -52,31 +65,51 @@ public class Bar {
         }
     }
     public void addAlcohol(Alcohol a) throws EmptyException, CollectionFullException {
-        if (a.equals(null)) {
+        if (a == null) {
             throw new EmptyException();
         } else if (AlcoholCollectionCount == AlcoholCollections.length) {
             throw new CollectionFullException();
         }
 
         AlcoholCollections[AlcoholCollectionCount] = a;
+        AlcoholCollectionCount++;
     }
     public void removeAlcohol(Alcohol a) throws EmptyException, DataNotFoundException {
-        if (a.equals(null)) {
+        if (a == null) {
             throw new EmptyException();
         }
 
         for (int i = 0; i < AlcoholCollectionCount; i++) {
             if (a.equals(AlcoholCollections[i])) {
                 AlcoholCollections[i] = null;
+                AlcoholCollectionCount--;
                 return; // STOPS THE WHOLE METHOD HERE
             }
         }
 
         throw new DataNotFoundException();
+    }
+    public void removeAlcohol(int Index) throws IndexOutOfBoundsException {
+        if (Index >= AlcoholCollectionCount) {
+            throw new IndexOutOfBoundsException("We only have "+AlcoholCollectionCount+" in the "+Name+"'s collection");
+        } else if (Index < 0) {
+            throw new IndexOutOfBoundsException("You can't choose an index below 0!");
+        }
 
+        AlcoholCollections[Index] = null;
+        AlcoholCollectionCount--;
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+    public void displayAlcoholCollections() {
+        System.out.println("====================================== "+Name+" Collections ======================================");
+        for (int i = 0; i < AlcoholCollectionCount; i++) {
+            System.out.println("Name: "+AlcoholCollections[i].getName());
+            System.out.println("Age: "+AlcoholCollections[i].getAge());
+            System.out.println("Percentage: %"+AlcoholCollections[i].getPercentage());
+            System.out.println("---------------------------------------------------------------------------");
+        }
+    }
 
 
     // ================================================== OTHER CLASSES ================================================== \\
