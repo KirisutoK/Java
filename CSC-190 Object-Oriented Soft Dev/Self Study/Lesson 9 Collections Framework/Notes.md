@@ -63,6 +63,7 @@ set.add("Apple");           // ignored — already exists!
 set.contains("Apple");      // check if exists
 set.remove("Apple");        // remove item
 set.size();                 // how many items
+set.addAll(v);              // adds all items from another item 
 ```
 
 ---
