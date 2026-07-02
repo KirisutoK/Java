@@ -1,8 +1,18 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 01, 2026. at  2:44 AM
+// Last Modified: July 02, 2026. at 12:47 AM
 
 public class Main {
     public static void main(String[] args) {
+        //======= CREATING OBJECTS =======//
+        AgeSorter AgeSorter01 = new AgeSorter();
+
+        //======= ADDING =======//
+        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 19));
+        System.out.println("");
+        //! <===================================== YOU LEFT HERE: YOU WERE SUPPOSED TO KNOW WHY IS IT NOT SHOWING ANY PRINTING RESULTS WHEN IT WAS IN THE PROGRAM!
+
+        AgeSorter01.displayInformation();
+        System.out.println();
 
     }
 }

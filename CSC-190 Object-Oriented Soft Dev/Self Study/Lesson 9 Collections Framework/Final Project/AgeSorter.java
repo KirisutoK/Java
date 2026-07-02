@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 01, 2026. at  2:04 PM
+// Last Modified: July 02, 2026. at 12:46 AM
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,17 +9,17 @@ public class AgeSorter {
     //=======VARIABLES=======//
     //... REMOVED THE NAMES ARRAYLIST HERE BECAUSE IT WILL BE INSIDE THE HASHMAP
     private HashMap<Group, ArrayList<Profile>> Groups; // This is what binds both the Key(GroupName) and Value(Names)
-    private HashSet<Group> GroupName;  // This is the Key
+    private HashSet<Group> GroupNames;  // This is the Key
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public AgeSorter() {
         Groups = new HashMap<>();
-        GroupName = new HashSet<>();
+        GroupNames = new HashSet<>();
 
         // DEFAULT GROUP (CANT BE DELETED)
-        Group DefaultGroup = new Group("Does not belong to a Group", 0, 200);
-        GroupName.add(DefaultGroup);
-        Groups.put(DefaultGroup, new ArrayList<Profile>());
+//        Group DefaultGroup = new Group("Does not belong to a Group", 0, 200);
+//        GroupNames.add(DefaultGroup);
+//        Groups.put(DefaultGroup, new ArrayList<Profile>());
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
@@ -27,39 +27,53 @@ public class AgeSorter {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void addProfile(Profile p) {
         // CHECK IF IT ALREADY EXISTS
-        if (Groups.containsValue(p)) {
-            System.out.println(p.getName()+" ["+p.getAge()+"] already exist!");
-            return; // Stops the whole method here
-        } else if (p.getAge() < 0) { // CHECK IF AGE IS VALID
+        for (ArrayList<Profile> i:Groups.values()) {
+            if (i.contains(p)) {
+                System.out.println(p.getFullInformation()+" already exists!");
+                return;
+            }
+        }
+
+        if (p.getAge() < 0) { // CHECK IF AGE IS VALID
             System.out.println(p.getName()+" can not have an age less than 0!");
             return; // Stops the whole method here
         } else if (p.equals(null)) { // CHECK IF IT IS NOT EMPTY
             System.out.println("Profile can not be null!");
             return; // Stops the whole method here
+        } else if (GroupNames.size() < 0) {
+            System.out.println("There are no groups currently that exists!");
+            return; // Stops the whole method here
         }
 
-        // ADDING AND ASSIGNING THE PROFILE TO A GROUP
-        //! <======================================================================   YOU LEFT HERE
-
+        // [ADDING AND ASSIGNING THE PROFILE TO A GROUP]
+        // CHECKS WHAT AGE GROUP BELONGS INTO
+        for (Group i:GroupNames) { // Check each index of GroupNames
+            if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE
+                Groups.get(i).add(p);
+            }
+        }
     }
-
-
-
-
-
-
 
 
 
     public void updateAgeSorter() { // This rearranges the profiles to their respective age group
 
     }
-
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+    public void displayInformation() {
+        for (Group i:Groups.keySet()) { //
+            i.displayInformation();
+            System.out.println("Profiles:");
+            int count = 1;
+            for (Profile j: Groups.get(i)) { // Checks every profile in the ArrayList
+                System.out.println(count+". "+j.getFullInformation());
+            }
+        }
+    }
 
 
     // ================================================== OTHER CLASSES ================================================== \\
-    public class Profile {
+    public static class Profile {
         //=======VARIABLES=======//
         private String Name;
         private int Age;
@@ -88,7 +102,7 @@ public class AgeSorter {
 
         //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     }
-    public class Group {
+    public static class Group {
         //=======VARIABLES=======//
         private String GroupName;
         private int GroupRangeStart;
