@@ -1,5 +1,5 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 02, 2026. at 12:47 AM
+// Last Modified: July 02, 2026. at 10:19 PM
 
 public class Main {
     public static void main(String[] args) {
@@ -7,9 +7,18 @@ public class Main {
         AgeSorter AgeSorter01 = new AgeSorter();
 
         //======= ADDING =======//
-        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 19));
+        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 5));
         System.out.println("");
-        //! <===================================== YOU LEFT HERE: YOU WERE SUPPOSED TO KNOW WHY IS IT NOT SHOWING ANY PRINTING RESULTS WHEN IT WAS IN THE PROGRAM!
+
+        AgeSorter01.addGroup(new AgeSorter.Group("Idiot Age", 0, 10));
+        System.out.println();
+
+        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 5));
+        System.out.println("");
+
+
+        AgeSorter01.updateAgeSorter();
+
 
         AgeSorter01.displayInformation();
         System.out.println();
