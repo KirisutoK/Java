@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 02, 2026. at 10:30 PM
+// Last Modified: July 03, 2026. at  1:27 PM
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,24 +40,30 @@ public class AgeSorter {
             return; // Stops the whole method here
         }
 
-        // CHECK IF IT ALREADY EXISTS
-        for (ArrayList<Profile> i:Groups.values()) {
-            if (i.contains(p)) { //! THIS HAS A BIG FLAW WITH COMPARISON OF OBJECTS SINCE IT IS NOT COMPARING THE ACTUAL DETAILS, BUT ACTUALLY COMPARING THE MEMORY OF IT (IF IT HAS THE SAME NAME BUT DIFFERENT OBJECTS, IT WILL RETURN FALSE)
-                System.out.println(p.getFullInformation()+" already exists!");
-                return;
+        //! CHECK IF IT ALREADY EXISTS
+        for (ArrayList<Profile> i:Groups.values()) { // FOR EVERY ARRAYLIST IN A GROUP
+            System.out.println("test");
+            for (int a = 0; a < i.size(); a++) { // FOR EVERY PROFILE IN AN ARRAYLIST OF PROFILE
+                if (p.getAge() == i.get(a).getAge() && p.getName().equalsIgnoreCase(i.get(a).getName())) {
+                    System.out.println(p.getFullInformation()+" already exists!");
+                    return;
+                }
             }
         }
 
-        // [ADDING AND ASSIGNING THE PROFILE TO A GROUP]
         // CHECKS WHAT AGE GROUP BELONGS INTO
         for (Group i:Groups.keySet()) { // Check each index of Group Keys
             if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE AND IF IT FALLS UNDER A GROUP
                 Groups.get(i).add(p);
                 System.out.println(p.getFullInformation()+" has successfully been added into "+i.getGroupName()+". ");
+                return; // stops the whole method here;
             }
         }
 
-        System.out.println("YOU LEFT HERE: LINE 60");
+        // IF DID NOT GET ADDED IN A GROUP
+        System.out.println(p.getFullInformation()+" does not belong in any existing group!");
+
+
     }
     public void addGroup(Group groupParameter) {
         // CHECK IF ITS EMPTY
@@ -225,7 +231,7 @@ public class AgeSorter {
     }
 }
 
-// TODO: YOU CURRENTLY LEFT AT LINE 45 TO FIX THE ISSUES WITH CONTAINS OR EQUALS SINE DOES METHODS ONLY CHECK FOR MEMORY, NOT CONTENTS OF THE OBJECT. (SAME CONTENT BUT DIFFERENT OBJECT WILL RETURN FALSE)
+// TODO: YOU CURRENTLY LEFT AT LINE 45 TO FIX THE ISSUES WITH CONTAINS OR EQUALS SINCE DOES METHODS ONLY CHECK FOR MEMORY, NOT CONTENTS OF THE OBJECT. (SAME CONTENT BUT DIFFERENT OBJECT WILL RETURN FALSE)
 // TODO: In order to show the data of the group, you must have to create a customize displayInformation(); instead of printing it in one line.
 // TODO: you left at the adding the profile into the perspective group
 // TODO: the DefaultGroup is dynamic, profiles are only assigned in the Default group when they dont belong in one.
