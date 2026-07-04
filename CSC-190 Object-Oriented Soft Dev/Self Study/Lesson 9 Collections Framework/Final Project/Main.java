@@ -1,40 +1,111 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 04, 2026. at  2:07 AM
+// Last Modified: July 04, 2026. at  6:59 PM
+
+import java.util.Scanner;
 
 public class Main {
+    static Scanner input = new Scanner(System.in); //... CLASS OBJECT
+    static AgeSorter AgeSorterObject = new AgeSorter(); //... CLASS OBJECT
+
     public static void main(String[] args) {
-        //======= CREATING OBJECTS =======//
-        AgeSorter AgeSorter01 = new AgeSorter();
+        Introduction();
+        Options();
 
-        //======= ADDING =======//
-        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 5));
-        System.out.println();
 
-        AgeSorter01.addGroup(new AgeSorter.Group("Idiot Age", 0, 10));
-        System.out.println();
-
-        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 100));
-        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 5));
-        System.out.println();
-
-        AgeSorter01.addGroup(new AgeSorter.Group("Braindead Age", 11, 18));
-        System.out.println();
-
-        //======= GETTING =======//
-
-        //======= UPDATING =======//
-
-        AgeSorter01.displayInformation();
-        System.out.println();
-
-        AgeSorter01.updateAgeSorter();
-        System.out.println();
-
-        AgeSorter01.displayInformation();
+//        //======= ADDING =======//
+//        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 5));
+//        System.out.println();
+//
+//        AgeSorter01.addGroup(new AgeSorter.Group("Idiot Age", 0, 10));
+//        System.out.println();
+//
+//        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 100));
+//        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 5));
+//        System.out.println();
+//
+//        AgeSorter01.addGroup(new AgeSorter.Group("Braindead Age", 11, 18));
+//        System.out.println();
+//
+//        //======= CHANGING AGE =======//
+//
+//        //======= UPDATING =======//
+//
+//        AgeSorter01.displayInformation();
+//        System.out.println();
+//
+//        AgeSorter01.updateAgeSorter();
+//        System.out.println();
+//
+//        AgeSorter01.displayInformation();
+//
+//        AgeSorter01.addProfile(new AgeSorter.Profile("Shan",  16));
+//
+//        AgeSorter01.displayInformation();
 
 
     }
+
+    public static void Options() {
+        // DISPLAY THE OPTIONS
+        System.out.println("╔══════════════════════════════════════════════════════╗");
+        System.out.println("║ 1. Create Profile          5. Change Profile Age     ║");
+        System.out.println("║ 2. Remove Profile          6. Change Group Range     ║");
+        System.out.println("║ 3. Create Group                                      ║");
+        System.out.println("║ 4. Remove Group                                      ║");
+        System.out.println("╚══════════════════════════════════════════════════════╝");
+        System.out.println();
+        System.out.print("Choice: ");
+
+        // GRAB THE INPUT
+
+        int Choice = input.nextInt();
+        while (Choice < 1 || Choice > 6) {
+            System.out.println("Please choose from 1 to 6");
+            Choice = input.nextInt();
+        }
+
+
+        switch (Choice) {
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                break;
+            case 6:
+
+                break;
+        }
+    }
+    public static void Introduction() {
+        System.out.println("╔══════════════════════════════════════════════════════╗");
+        System.out.println("║    AGE SORTER BY CHRIST AERJIL C. DAMPOG             ║");
+        System.out.println("╚══════════════════════════════════════════════════════╝");
+        System.out.println();
+        System.out.println("Java Techniques in this program include:");
+        System.out.println("1. Collections Framework");
+        System.out.println("2. Inner Classes");
+        System.out.println("3. Enhanced For Loops");
+        System.out.println("4. Object-Oriented Programming");
+        System.out.println("5. Switches");
+        System.out.println();
+        System.out.println("Author: Have Fun!");
+        System.out.println();
+    }
 }
+
+
+
+
 
 // Requirements:
 // 1. Must use all 3 collections — ArrayList, HashMap, and HashSet — each serving a meaningful and logical purpose

@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 04, 2026. at  2:20 AM
+// Last Modified: July 04, 2026. at  7:01 PM
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,9 +77,7 @@ public class AgeSorter {
 
 
     }
-    public void changeProfileAge(String name, int age) {  //! <========================= YOU LEFT HERE (WAS JUST ADDING A SIMPLE CHANGE AGE METHOD WHERE IT DECLINES IF AGE)
-
-
+    public void changeProfileAge(String name, int age) {
         getProfile(name).changeAge(age);
     }
 
@@ -137,6 +135,7 @@ public class AgeSorter {
                 System.out.println(count+". "+j.getFullInformation());
                 count++;
             }
+            System.out.println();
         }
     }
     public void updateAgeSorter() { // This rearranges the profiles to their respective age group
