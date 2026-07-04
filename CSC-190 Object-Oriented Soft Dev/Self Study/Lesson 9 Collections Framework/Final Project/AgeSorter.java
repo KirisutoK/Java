@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 04, 2026. at 12:27 AM
+// Last Modified: July 04, 2026. at  2:20 AM
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,8 +18,21 @@ public class AgeSorter {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public Profile getProfile(String name) {
+        for (Group g:Groups.keySet()) { // FOR EVERY GROUPS
+            for (Profile p:Groups.get(g)) { // FOR EVERY PROFILE INSIDE ARRAYLIST OF GROUPS
+                if (p.getName().equals(name)) {
+                    return p;
+                }
+            }
+        }
+
+        System.out.println(name+" does not exist!");
+        return null;
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
+    // [PROFILE]
     public void addProfile(Profile p) {
         // CHECK IF ITS EMPTY
         if (p == null) {
@@ -64,6 +77,13 @@ public class AgeSorter {
 
 
     }
+    public void changeProfileAge(String name, int age) {  //! <========================= YOU LEFT HERE (WAS JUST ADDING A SIMPLE CHANGE AGE METHOD WHERE IT DECLINES IF AGE)
+
+
+        getProfile(name).changeAge(age);
+    }
+
+    // [GROUP]
     public void addGroup(Group groupParameter) {
         // CHECK IF ITS EMPTY
         if (groupParameter == null) {
@@ -174,7 +194,11 @@ public class AgeSorter {
 
         //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
         public void changeAge(int age) {
-            Age = age;
+            if (age < 0) {
+                System.out.println(Name+" cannot have an age less than 0!");
+            } else {
+                Age = age;
+            }
         }
 
         //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
