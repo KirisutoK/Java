@@ -1,7 +1,5 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 03, 2026. at  1:20 PM
-
-import java.util.HashSet;
+// Last Modified: July 04, 2026. at 12:25 AM
 
 public class Main {
     public static void main(String[] args) {
@@ -10,18 +8,27 @@ public class Main {
 
         //======= ADDING =======//
         AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 5));
-        System.out.println("");
+        System.out.println();
 
         AgeSorter01.addGroup(new AgeSorter.Group("Idiot Age", 0, 10));
         System.out.println();
 
+        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 100));
         AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 5));
-        System.out.println("");
+        System.out.println();
 
-        AgeSorter01.updateAgeSorter();
+        AgeSorter01.addGroup(new AgeSorter.Group("Braindead Age", 11, 18));
+        System.out.println();
+
+        //======= UPDATING =======//
 
         AgeSorter01.displayInformation();
         System.out.println();
+
+        AgeSorter01.updateAgeSorter();
+        System.out.println();
+
+        AgeSorter01.displayInformation();
 
 
     }

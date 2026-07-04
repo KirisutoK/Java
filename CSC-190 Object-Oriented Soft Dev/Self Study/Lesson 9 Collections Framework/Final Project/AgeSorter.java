@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 03, 2026. at  1:27 PM
+// Last Modified: July 04, 2026. at 12:27 AM
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,11 +40,10 @@ public class AgeSorter {
             return; // Stops the whole method here
         }
 
-        //! CHECK IF IT ALREADY EXISTS
+        // CHECK IF IT ALREADY EXISTS
         for (ArrayList<Profile> i:Groups.values()) { // FOR EVERY ARRAYLIST IN A GROUP
-            System.out.println("test");
             for (int a = 0; a < i.size(); a++) { // FOR EVERY PROFILE IN AN ARRAYLIST OF PROFILE
-                if (p.getAge() == i.get(a).getAge() && p.getName().equalsIgnoreCase(i.get(a).getName())) {
+                if (p.getName().equalsIgnoreCase(i.get(a).getName())) {
                     System.out.println(p.getFullInformation()+" already exists!");
                     return;
                 }
@@ -96,7 +95,7 @@ public class AgeSorter {
             // [SECOND ARRAY (NEW GROUP)] <============= THIS WILL LET US KNOW IF THE NUMBERS COLLIDE WITH THE OTHER ARRAY
             for (int b = 0; b < groupParameter.GroupRange.length; b++) {
                 if (!(Comparison.add(groupParameter.GroupRange[b]))) {
-                    System.out.println("Unable to create a new Group: "+GroupNames+" has a collision with "+i.getGroupName()+" Age Range ["+i.getGroupRangeStart()+" - "+i.GroupRangeEnd+"] ");
+                    System.out.println(groupParameter.getFullInformation()+" cannot be created because it has a collision with "+i.getFullInformation());
                     return; // stops the whole method here
                 }
             }
@@ -108,9 +107,19 @@ public class AgeSorter {
         Groups.put(groupParameter, new ArrayList<Profile>());
     }
 
+    //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+    public void displayInformation() {
+        for (Group i:Groups.keySet()) { //
+            System.out.println("Group: "+i.getFullInformation());
+            System.out.println("Profiles:");
+            int count = 1;
+            for (Profile j: Groups.get(i)) { // Checks every profile in the ArrayList
+                System.out.println(count+". "+j.getFullInformation());
+                count++;
+            }
+        }
+    }
     public void updateAgeSorter() { // This rearranges the profiles to their respective age group
-
-
         ArrayList<Profile> TempProfiles = new ArrayList<>();
 
         // GRAB ALL THE PROFILES
@@ -122,27 +131,21 @@ public class AgeSorter {
         Groups.clear();
 
         // ADD THE HASHSET(GROUPNAMES) INTO THE HASHMAP KEY
-        for (Group GpNames:GroupNames) {
-            Groups.put(GpNames, new ArrayList<Profile>());
+        for (Group g:GroupNames) {
+            Groups.put(g, new ArrayList<Profile>());
         }
 
         // ADD THE ARRAYLIST(PROFILE) INTO THE HASHMAP VALUE
-        for (Profile tpiles: TempProfiles) {
-            addProfile(tpiles);
-        }
-
-    }
-    //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
-    public void displayInformation() {
-        for (Group i:Groups.keySet()) { //
-            i.displayInformation();
-            System.out.println("Profiles:");
-            int count = 1;
-            for (Profile j: Groups.get(i)) { // Checks every profile in the ArrayList
-                System.out.println(count+". "+j.getFullInformation());
-                count++;
+        for (Group i:Groups.keySet()) { // Check each index of Group Key
+            for (Profile p: TempProfiles) { // Checks every profile in TempProfiles ArrayList
+                if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE AND IF IT FALLS UNDER A GROUP
+                    Groups.get(i).add(p);
+                }
             }
         }
+
+        System.out.println(getClass().getName()+" has been successfully updated!");
+
     }
 
 
@@ -210,6 +213,9 @@ public class AgeSorter {
         public int[] getGroupRange() {
             return GroupRange;
         }
+        public String getFullInformation() {
+            return GroupName+" ["+GroupRangeStart+" - "+GroupRangeEnd+"] ";
+        }
 
 
         //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
@@ -225,16 +231,11 @@ public class AgeSorter {
         }
 
         //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
-        private void displayInformation() {
-            System.out.println("Group Name: "+GroupName+" ["+GroupRangeStart+" - "+GroupRangeEnd+"] ");
-        }
     }
 }
 
-// TODO: YOU CURRENTLY LEFT AT LINE 45 TO FIX THE ISSUES WITH CONTAINS OR EQUALS SINCE DOES METHODS ONLY CHECK FOR MEMORY, NOT CONTENTS OF THE OBJECT. (SAME CONTENT BUT DIFFERENT OBJECT WILL RETURN FALSE)
-// TODO: In order to show the data of the group, you must have to create a customize displayInformation(); instead of printing it in one line.
-// TODO: you left at the adding the profile into the perspective group
-// TODO: the DefaultGroup is dynamic, profiles are only assigned in the Default group when they dont belong in one.
+// TODO: you left at the part where you wanted to create a changeAge(String name, int age)
+
 
 // INITIAL IDEAS:
 //
