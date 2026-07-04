@@ -1,5 +1,5 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 04, 2026. at  6:59 PM
+// Last Modified: July 04, 2026. at  7:19 PM
 
 import java.util.Scanner;
 
@@ -48,10 +48,9 @@ public class Main {
     public static void Options() {
         // DISPLAY THE OPTIONS
         System.out.println("╔══════════════════════════════════════════════════════╗");
-        System.out.println("║ 1. Create Profile          5. Change Profile Age     ║");
-        System.out.println("║ 2. Remove Profile          6. Change Group Range     ║");
-        System.out.println("║ 3. Create Group                                      ║");
-        System.out.println("║ 4. Remove Group                                      ║");
+        System.out.println("║ 1. Create Profile          4. Create Group           ║");
+        System.out.println("║ 2. Remove Profile          5. Remove Group           ║");
+        System.out.println("║ 3. Change Profile Age      6. Change Group Range     ║");
         System.out.println("╚══════════════════════════════════════════════════════╝");
         System.out.println();
         System.out.print("Choice: ");
@@ -59,29 +58,48 @@ public class Main {
         // GRAB THE INPUT
 
         int Choice = input.nextInt();
+        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
         while (Choice < 1 || Choice > 6) {
-            System.out.println("Please choose from 1 to 6");
+            System.out.println();
+            System.out.println("ERROR: Please choose from 1 to 6");
+            System.out.println();
+            System.out.print("Choice: ");
             Choice = input.nextInt();
         }
+        System.out.println();
+        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
+
 
 
         switch (Choice) {
-            case 1:
+            case 1: //... CREATING A PROFILE
+                System.out.println("╔══════════════════════════╗");
+                System.out.println("║  CREATING  A PROFILE...  ║");
+                System.out.println("╚══════════════════════════╝");
+
+                System.out.print("Name: ");
+                String Name = input.nextLine();
+                System.out.print("Age: ");
+                int Age = input.nextInt();
+                input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
+                System.out.println();
+                AgeSorterObject.addProfile(new AgeSorter.Profile(Name, Age));
+                System.out.println();
+                Options();
+                break;
+            case 2: //... REMOVE PROFILE
 
                 break;
-            case 2:
+            case 3: //... CHANGE PROFILE AGE
 
                 break;
-            case 3:
+            case 4: //... CREATE GROUP
 
                 break;
-            case 4:
+            case 5: //... REMOVE GROUP
 
                 break;
-            case 5:
-
-                break;
-            case 6:
+            case 6: //... CHANGE GROUP AGE
 
                 break;
         }
