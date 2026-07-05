@@ -1,5 +1,5 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 04, 2026. at  7:19 PM
+// Last Modified: July 05, 2026. at 12:59 AM
 
 import java.util.Scanner;
 
@@ -47,6 +47,9 @@ public class Main {
 
     public static void Options() {
         // DISPLAY THE OPTIONS
+        System.out.println("+======================================================+");
+        AgeSorterObject.displayInformation();
+
         System.out.println("╔══════════════════════════════════════════════════════╗");
         System.out.println("║ 1. Create Profile          4. Create Group           ║");
         System.out.println("║ 2. Remove Profile          5. Remove Group           ║");
@@ -58,8 +61,8 @@ public class Main {
         // GRAB THE INPUT
 
         int Choice = input.nextInt();
-        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
         while (Choice < 1 || Choice > 6) {
+            input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
             System.out.println();
             System.out.println("ERROR: Please choose from 1 to 6");
             System.out.println();
@@ -83,8 +86,10 @@ public class Main {
                 int Age = input.nextInt();
                 input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
                 System.out.println();
+
                 AgeSorterObject.addProfile(new AgeSorter.Profile(Name, Age));
                 System.out.println();
+
                 Options();
                 break;
             case 2: //... REMOVE PROFILE
@@ -94,7 +99,23 @@ public class Main {
 
                 break;
             case 4: //... CREATE GROUP
+                System.out.println("╔════════════════════════╗");
+                System.out.println("║  CREATING  A GROUP...  ║");
+                System.out.println("╚════════════════════════╝");
 
+                System.out.print("Group Name: ");
+                String GroupName = input.nextLine();
+                System.out.print("Start Age: ");
+                int GroupStartAge = input.nextInt();
+                System.out.print("End Age: ");
+                int GroupEndAge = input.nextInt();
+                input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
+                System.out.println();
+
+                AgeSorterObject.addGroup(new AgeSorter.Group(GroupName, GroupStartAge, GroupEndAge));
+                System.out.println();
+
+                Options();
                 break;
             case 5: //... REMOVE GROUP
 
@@ -122,8 +143,7 @@ public class Main {
 }
 
 
-
-
+// TODO: check AgeSorter class and then add it here in the main
 
 // Requirements:
 // 1. Must use all 3 collections — ArrayList, HashMap, and HashSet — each serving a meaningful and logical purpose

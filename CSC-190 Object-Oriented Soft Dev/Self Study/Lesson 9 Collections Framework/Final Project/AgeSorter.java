@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 04, 2026. at  7:01 PM
+// Last Modified: July 05, 2026. at 12:43 AM
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,6 +86,18 @@ public class AgeSorter {
         // CHECK IF ITS EMPTY
         if (groupParameter == null) {
             System.out.println("Group can not be null!");
+            return; // stops the whole method here
+        }
+
+        // CHECK IF THE STARTING AGE AND ENDING AGE IS VALID
+        if (groupParameter.GroupRangeStart < 0) { // IF STARTING AGE IS LESS THAN 0
+            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's Starting Age can not be less than 0!");
+            return; // stops the whole method here
+        } else if (groupParameter.GroupRangeEnd < groupParameter.GroupRangeStart) { // IF STARTING AGE IS GREATER THAN THE ENDING
+            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's Ending Age can not be less than the Group's Starting Age!");
+            return; // stops the whole method here
+        } else if (groupParameter.GroupRangeEnd == groupParameter.GroupRangeStart) {
+            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's Starting age can not be the same as Group's Ending Age!");
             return; // stops the whole method here
         }
 
@@ -257,8 +269,8 @@ public class AgeSorter {
     }
 }
 
-// TODO: you left at the part where you wanted to create a changeAge(String name, int age)
 
+// TODO: you left at the part where you wanted to create a changeAge(String name, int age)
 
 // INITIAL IDEAS:
 //
