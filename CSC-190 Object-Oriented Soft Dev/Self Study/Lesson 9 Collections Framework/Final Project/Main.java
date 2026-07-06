@@ -1,50 +1,40 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 05, 2026. at 12:59 AM
+// Last Modified: July 06, 2026. at  1:45 AM
 
+import Exceptions.ChoiceOutOfBoundsException;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+    // =========================== CLASS VARIABLES =========================== \\
     static Scanner input = new Scanner(System.in); //... CLASS OBJECT
     static AgeSorter AgeSorterObject = new AgeSorter(); //... CLASS OBJECT
 
+    // =========================== MAIN =========================== \\ 
     public static void main(String[] args) {
         Introduction();
         Options();
 
-
-//        //======= ADDING =======//
-//        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 5));
-//        System.out.println();
-//
-//        AgeSorter01.addGroup(new AgeSorter.Group("Idiot Age", 0, 10));
-//        System.out.println();
-//
-//        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 100));
-//        AgeSorter01.addProfile(new AgeSorter.Profile("Christ", 5));
-//        System.out.println();
-//
-//        AgeSorter01.addGroup(new AgeSorter.Group("Braindead Age", 11, 18));
-//        System.out.println();
-//
-//        //======= CHANGING AGE =======//
-//
-//        //======= UPDATING =======//
-//
-//        AgeSorter01.displayInformation();
-//        System.out.println();
-//
-//        AgeSorter01.updateAgeSorter();
-//        System.out.println();
-//
-//        AgeSorter01.displayInformation();
-//
-//        AgeSorter01.addProfile(new AgeSorter.Profile("Shan",  16));
-//
-//        AgeSorter01.displayInformation();
-
-
     }
 
+    // =========================== OTHER METHODS =========================== \\
+    public static void Introduction() {
+        System.out.println("╔═════════════════════════════════════════════╗");
+        System.out.println("║    AGE SORTER BY CHRIST AERJIL C. DAMPOG    ║");
+        System.out.println("╚═════════════════════════════════════════════╝");
+        System.out.println();
+        System.out.println("Java Techniques in this program include:");
+        System.out.println("1. Collections Framework");
+        System.out.println("2. Inner Classes");
+        System.out.println("3. Enhanced For Loops");
+        System.out.println("4. Object-Oriented Programming");
+        System.out.println("5. Switches");
+        System.out.println("6. Exceptions");
+        System.out.println();
+        System.out.println("Author: Have Fun!");
+        System.out.println();
+    }
     public static void Options() {
         // DISPLAY THE OPTIONS
         System.out.println("+======================================================+");
@@ -59,86 +49,177 @@ public class Main {
         System.out.print("Choice: ");
 
         // GRAB THE INPUT
+        boolean ValidInput = false;
+        int Choice = 0;
+        while (!ValidInput) { // While the validInput is false
+            try {
+                Choice = input.nextInt();
 
-        int Choice = input.nextInt();
-        while (Choice < 1 || Choice > 6) {
-            input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
-            System.out.println();
-            System.out.println("ERROR: Please choose from 1 to 6");
-            System.out.println();
-            System.out.print("Choice: ");
-            Choice = input.nextInt();
+                if (Choice < 1 || Choice > 6) {
+                    throw new ChoiceOutOfBoundsException();
+                }
+
+                System.out.println();
+                input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
+                ValidInput = true;
+            } catch (ChoiceOutOfBoundsException e) {
+                System.out.println();
+                System.out.println(e);
+                System.out.println();
+                System.out.print("Choice: ");
+            } catch (InputMismatchException e) {
+                System.out.println();
+                System.out.println(e+": Please choose a number of integer!");
+                System.out.println();
+                System.out.print("Choice: ");
+                input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
+            } catch (Exception e) {
+                System.out.println("Unexpected Error: "+e);
+                System.out.println();
+                System.out.print("Choice: ");
+            }
         }
-        System.out.println();
-        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
 
-
-
+        // OUTPUT OF THE INPUT
+        boolean ValidInputChoices = false;
         switch (Choice) {
             case 1: //... CREATING A PROFILE
-                System.out.println("╔══════════════════════════╗");
-                System.out.println("║  CREATING  A PROFILE...  ║");
-                System.out.println("╚══════════════════════════╝");
+                System.out.println("╔═════════════════════════╗");
+                System.out.println("║  CREATING A PROFILE...  ║");
+                System.out.println("╚═════════════════════════╝");
 
-                System.out.print("Name: ");
-                String Name = input.nextLine();
-                System.out.print("Age: ");
-                int Age = input.nextInt();
-                input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
-                System.out.println();
+                while (!ValidInputChoices) {
+                    try {
+                        System.out.print("Name: ");
+                        String Name01 = input.nextLine();
+                        System.out.print("Age: ");
+                        int Age01 = input.nextInt();
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
+                        System.out.println();
 
-                AgeSorterObject.addProfile(new AgeSorter.Profile(Name, Age));
-                System.out.println();
+                        AgeSorterObject.addProfile(new AgeSorter.Profile(Name01, Age01));
+                        System.out.println();
 
-                Options();
+                        ValidInputChoices = true;
+                        Options();
+                    } catch (InputMismatchException e) {
+                        System.out.println();
+                        System.out.println(e+": Please choose a number of integer for both Start Age and End Age!");
+                        System.out.println();
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
+                    }
+                }
+
                 break;
             case 2: //... REMOVE PROFILE
+                System.out.println("╔══════════════════════════╗");
+                System.out.println("║  REMOVING A PROFILE...  ║");
+                System.out.println("╚══════════════════════════╝");
+
+                while (!ValidInputChoices) {
+                    try {
+                        //... PUT THE OPERATIONS HERE
+                    } catch (InputMismatchException e) {
+                        System.out.println();
+                        System.out.println(e+": Please choose a number of integer!");
+                        System.out.println();
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
+                    }
+                }
 
                 break;
             case 3: //... CHANGE PROFILE AGE
+                System.out.println("╔═══════════════════════════════╗");
+                System.out.println("║  CHANGING A PROFILE'S AGE...  ║");
+                System.out.println("╚═══════════════════════════════╝");
 
+                while (!ValidInputChoices) {
+                    try {
+                        System.out.print("Name: ");
+                        String Name02 = input.nextLine();
+                        System.out.print("Age: ");
+                        int Age02 = input.nextInt();
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
+                        System.out.println();
+
+                        AgeSorterObject.changeProfileAge(Name02, Age02);
+                        System.out.println();
+
+                        ValidInputChoices = true;
+                        Options();
+                    } catch (InputMismatchException e) {
+                        System.out.println();
+                        System.out.println(e+": Please choose a number of integer for both Start Age and End Age!");
+                        System.out.println();
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
+                    }
+                }
                 break;
             case 4: //... CREATE GROUP
-                System.out.println("╔════════════════════════╗");
-                System.out.println("║  CREATING  A GROUP...  ║");
-                System.out.println("╚════════════════════════╝");
+                System.out.println("╔═══════════════════════╗");
+                System.out.println("║  CREATING A GROUP...  ║");
+                System.out.println("╚═══════════════════════╝");
 
-                System.out.print("Group Name: ");
-                String GroupName = input.nextLine();
-                System.out.print("Start Age: ");
-                int GroupStartAge = input.nextInt();
-                System.out.print("End Age: ");
-                int GroupEndAge = input.nextInt();
-                input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
-                System.out.println();
+                while (!ValidInputChoices) {
+                    try {
+                        System.out.print("Group Name: ");
+                        String GroupName = input.nextLine();
+                        System.out.print("Start Age: ");
+                        int GroupStartAge = input.nextInt();
+                        System.out.print("End Age: ");
+                        int GroupEndAge = input.nextInt();
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
+                        System.out.println();
 
-                AgeSorterObject.addGroup(new AgeSorter.Group(GroupName, GroupStartAge, GroupEndAge));
-                System.out.println();
+                        AgeSorterObject.addGroup(new AgeSorter.Group(GroupName, GroupStartAge, GroupEndAge));
+                        System.out.println();
 
-                Options();
+                        ValidInputChoices =  true;
+                        Options();
+                    } catch (InputMismatchException e) {
+                        System.out.println();
+                        System.out.println(e+": Please choose a number of integer for both Start Age and End Age!");
+                        System.out.println();
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
+                    }
+                }
                 break;
             case 5: //... REMOVE GROUP
+                System.out.println("╔═══════════════════════╗");
+                System.out.println("║  REMOVING A GROUP...  ║");
+                System.out.println("╚═══════════════════════╝");
+
+                while (!ValidInputChoices) {
+                    try {
+
+                    } catch (InputMismatchException e) {
+                        System.out.println();
+                        System.out.println(e+": Please choose a number of integer!");
+                        System.out.println();
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
+                    }
+                }
 
                 break;
             case 6: //... CHANGE GROUP AGE
+                System.out.println("╔══════════════════════════════╗");
+                System.out.println("║  CHANGING A GROUPS RANGE...  ║");
+                System.out.println("╚══════════════════════════════╝");
+
+                while (!ValidInputChoices) {
+                    try {
+
+                    } catch (InputMismatchException e) {
+                        System.out.println();
+                        System.out.println(e+": Please choose a number of integer!");
+                        System.out.println();
+                        System.out.print("Choice: ");
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
+                    }
+                }
 
                 break;
         }
-    }
-    public static void Introduction() {
-        System.out.println("╔══════════════════════════════════════════════════════╗");
-        System.out.println("║    AGE SORTER BY CHRIST AERJIL C. DAMPOG             ║");
-        System.out.println("╚══════════════════════════════════════════════════════╝");
-        System.out.println();
-        System.out.println("Java Techniques in this program include:");
-        System.out.println("1. Collections Framework");
-        System.out.println("2. Inner Classes");
-        System.out.println("3. Enhanced For Loops");
-        System.out.println("4. Object-Oriented Programming");
-        System.out.println("5. Switches");
-        System.out.println();
-        System.out.println("Author: Have Fun!");
-        System.out.println();
     }
 }
 

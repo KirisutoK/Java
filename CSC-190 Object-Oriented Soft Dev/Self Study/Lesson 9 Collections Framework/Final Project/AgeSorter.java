@@ -1,9 +1,10 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 05, 2026. at 12:43 AM
+// Last Modified: July 06, 2026. at  1:12 AM
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class AgeSorter {
     //=======VARIABLES=======//
@@ -78,7 +79,31 @@ public class AgeSorter {
 
     }
     public void changeProfileAge(String name, int age) {
-        getProfile(name).changeAge(age);
+        Profile p = getProfile(name);
+        if (p.changeAge(age)) { // IF AGE HAS CHANGED THEN
+
+            // REMOVE FROM THE CURRENT LIST
+            Group OriginalGroup = null;
+            for (Map.Entry<Group, ArrayList<Profile>> entry: Groups.entrySet()) { //...  <============ THIS WAS NOT TAUGHT IN THE PRACTICES NOR QUIZZES SO BE MIND OF THAT (THIS IS SIMILAR TO keySet() and values()
+                ArrayList<Profile> profileList = entry.getValue(); //... <================== THIS WAS NOT TAUGHT IN THE PRACTICES NOR QUIZZES SO BE MIND OF THAT (THIS IS NOT A METHOD VARIABLE, IT IS POINTING TO THE CLASS VARIABLE SO ANY CHANGES OF THIS VARIABLE WILL DIRECTLY CHANGE THE CLASS VARIABLE)
+                if (profileList.contains(p)) {
+                    OriginalGroup = entry.getKey();
+                    profileList.remove(p); // removes the profile to the temp Arraylist
+                }
+            }
+
+            // CHECKS WHAT AGE GROUP BELONGS INTO
+            for (Group i:Groups.keySet()) { // Check each index of Group Keys
+                if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE AND IF IT FALLS UNDER A GROUP
+                    Groups.get(i).add(p);
+                    System.out.println(p.getFullInformation()+" has successfully been moved from "+OriginalGroup.getFullInformation()+" into "+i.getGroupName()+". ");
+                    return; // stops the whole method here;
+                }
+            }
+
+            // IF IT DOES NOT BELONG IN ANY GROUP
+            System.out.println(p.getFullInformation()+" does not belong an any group!");
+        }
     }
 
     // [GROUP]
@@ -204,11 +229,13 @@ public class AgeSorter {
         }
 
         //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-        public void changeAge(int age) {
+        public boolean changeAge(int age) {
             if (age < 0) {
                 System.out.println(Name+" cannot have an age less than 0!");
+                return false;
             } else {
                 Age = age;
+                return true;
             }
         }
 
@@ -269,7 +296,7 @@ public class AgeSorter {
     }
 }
 
-
+// TODO: add
 // TODO: you left at the part where you wanted to create a changeAge(String name, int age)
 
 // INITIAL IDEAS:

@@ -50,6 +50,9 @@ map.get("Alice");           // get value by key → 95
 map.containsKey("Alice");   // check if key exists
 map.remove("Alice");        // remove by key
 map.size();                 // how many pairs
+map.keySet();               // returns all the keys             
+map.values();               // returns all the values
+map.entrySet();             // returns both the keys and values 
 ```
 
 ---
