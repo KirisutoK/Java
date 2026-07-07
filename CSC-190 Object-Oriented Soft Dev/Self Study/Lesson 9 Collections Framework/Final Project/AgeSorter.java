@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 07, 2026. at  4:08 AM
+// Last Modified: July 07, 2026. at  7:54 PM
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -177,18 +177,29 @@ public class AgeSorter {
             return; // stops the whole method here
         }
 
-
-        // CHECKING IF IT EXISTS
-        for (Group i:Groups.keySet()) { // FOR EVERY GROUP IN GROUPS<K>
-            if (i.getGroupName().equals(name)) { // IF THE NAME MATCHES WITH THE CURRENT SELECTED GROUPNAME
-                i.changeGroupRange(startage, endage);
-                updateAgeSorter();
-                return; // stops the whole method here
-            }
-        }
-
-        // IF NOTHING CAME UP
-        System.out.println(name+" does not exist!");
+        // TODO: SO CURRENTLY I HAVE A BUG WHERE WHEN A USER CHANGE A GROUP RANGE (START, END), IT COLLIDES WITH AN EXISTING GROUP'S RANGE WHICH WE MUST AVOID!
+//!       // [CREATING TEMP INT ARRAY]
+//        int[] intTempArr = new int[startage-endage];
+//        int Values = startage;
+//        for (int a = 0; a < intTempArr.length+1; a++) { // from 0 to how many times it need to iterate
+//            intTempArr[a] = Values++;
+//        }
+//
+//!        // CHECKING IF IT EXISTS
+//        HashSet<Integer> Comparison = new HashSet<>();
+//        for (Group i:Groups.keySet()) { // FOR EVERY GROUP IN GROUPS<K>
+//            if (i.getGroupName().equals(name)) { // IF THE NAME MATCHES WITH THE CURRENT SELECTED GROUPNAME
+//
+//                i.changeGroupRange(startage, endage);
+//                updateAgeSorter();
+//                return; // stops the whole method here
+//            } else {
+//
+//            }
+//        }
+//
+// !       // IF NOTHING CAME UP
+//        System.out.println(name+" does not exist!");
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
