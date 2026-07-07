@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 06, 2026. at  1:12 AM
+// Last Modified: July 07, 2026. at  4:08 AM
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -161,6 +161,35 @@ public class AgeSorter {
         System.out.println(groupParameter.getGroupName()+" has been added!");
         Groups.put(groupParameter, new ArrayList<Profile>());
     }
+    public void removeGroup() {
+
+    }
+    public void changeGroupRange(String name, int startage, int endage) {
+        // SECURITY MEASURES
+        if (startage < 0) { // If start is less than 0, end less than or equal to smart, if end is greater than 20
+            System.out.println("Starting age can not be less than 0!");
+            return; // stops the whole method here
+        } else if (endage <= startage) {
+            System.out.println("Ending age can not be the same as Starting Age!");
+            return; // stops the whole method here
+        } else if (endage > 200) {
+            System.out.println("Ending age can not reach pass 200!");
+            return; // stops the whole method here
+        }
+
+
+        // CHECKING IF IT EXISTS
+        for (Group i:Groups.keySet()) { // FOR EVERY GROUP IN GROUPS<K>
+            if (i.getGroupName().equals(name)) { // IF THE NAME MATCHES WITH THE CURRENT SELECTED GROUPNAME
+                i.changeGroupRange(startage, endage);
+                updateAgeSorter();
+                return; // stops the whole method here
+            }
+        }
+
+        // IF NOTHING CAME UP
+        System.out.println(name+" does not exist!");
+    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void displayInformation() {
@@ -203,7 +232,6 @@ public class AgeSorter {
         System.out.println(getClass().getName()+" has been successfully updated!");
 
     }
-
 
     // ================================================== OTHER CLASSES ================================================== \\
     public static class Profile {
@@ -279,25 +307,25 @@ public class AgeSorter {
             return GroupName+" ["+GroupRangeStart+" - "+GroupRangeEnd+"] ";
         }
 
-
         //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
         public void changeGroupRange(int start, int end) {
+            // ORIGINAL GROUP AGE
+            String OriginalStart = GroupRangeStart+"";
+            String OriginalEnd = GroupRangeEnd+"";
+
+            // CHANGING GROUP AGE
             GroupRangeStart = start;
             GroupRangeEnd = end;
 
-            GroupRange = new int[GroupRangeEnd-GroupRangeStart];
-            int Values = GroupRangeStart;
-            for (int i = 0; i < GroupRangeEnd-GroupRangeStart; i++) { // from 0 to how many times it need to iterate
-                GroupRange[i] = Values++;
-            }
+            System.out.println(GroupName+" ["+OriginalStart+" - "+OriginalEnd+"] has changed into "+getFullInformation());
         }
 
         //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     }
 }
 
-// TODO: add
-// TODO: you left at the part where you wanted to create a changeAge(String name, int age)
+// TODO: THERE IS A BUG WITH THE COMPARISON OF GROUP NAMES INSIDE GROUP CHANGE RANGE
+// TODO: CHANGE THE COMPARE METHOD INTO ACTUAL DATA INSTEAD OF MEMORY COMPARISON
 
 // INITIAL IDEAS:
 //

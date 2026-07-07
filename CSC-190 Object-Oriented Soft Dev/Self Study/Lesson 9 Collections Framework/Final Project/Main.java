@@ -1,5 +1,5 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 06, 2026. at  1:45 AM
+// Last Modified: July 07, 2026. at  4:06 AM
 
 import Exceptions.ChoiceOutOfBoundsException;
 
@@ -208,7 +208,20 @@ public class Main {
 
                 while (!ValidInputChoices) {
                     try {
+                        System.out.print("Group Name: ");
+                        String GroupName = input.nextLine();
+                        System.out.print("New Start Age: ");
+                        int GroupStartAge = input.nextInt();
+                        System.out.print("New End Age: ");
+                        int GroupEndAge = input.nextInt();
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
+                        System.out.println();
 
+                        AgeSorterObject.changeGroupRange(GroupName, GroupStartAge, GroupEndAge);
+                        System.out.println();
+
+                        ValidInputChoices =  true;
+                        Options();
                     } catch (InputMismatchException e) {
                         System.out.println();
                         System.out.println(e+": Please choose a number of integer!");
