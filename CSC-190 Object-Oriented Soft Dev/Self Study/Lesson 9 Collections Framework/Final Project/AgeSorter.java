@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 07, 2026. at  7:54 PM
+// Last Modified: July 08, 2026. at  7:15 PM
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +29,16 @@ public class AgeSorter {
         }
 
         System.out.println(name+" does not exist!");
+        return null;
+    }
+    public Group getGroup(String gname) {
+        for (Group i:Groups.keySet()) { // FOR EVERY GROUP IN GROUPS<K>
+            if (i.getGroupName().equals(gname)) {
+                return i;
+            }
+        }
+
+        System.out.println(gname+" does not exist!");
         return null;
     }
 
@@ -149,7 +159,7 @@ public class AgeSorter {
             }
             // [SECOND ARRAY (NEW GROUP)] <============= THIS WILL LET US KNOW IF THE NUMBERS COLLIDE WITH THE OTHER ARRAY
             for (int b = 0; b < groupParameter.GroupRange.length; b++) {
-                if (!(Comparison.add(groupParameter.GroupRange[b]))) {
+                if (!(Comparison.add(groupParameter.GroupRange[b]))) { // ADDS AND CHECKS IF IT RUN
                     System.out.println(groupParameter.getFullInformation()+" cannot be created because it has a collision with "+i.getFullInformation());
                     return; // stops the whole method here
                 }
@@ -166,7 +176,9 @@ public class AgeSorter {
     }
     public void changeGroupRange(String name, int startage, int endage) {
         // SECURITY MEASURES
-        if (startage < 0) { // If start is less than 0, end less than or equal to smart, if end is greater than 20
+        if (getGroup(name) == null) {
+            return; // stops the whole method here
+        } else if (startage < 0) { // If start is less than 0, end less than or equal to smart, if end is greater than 20
             System.out.println("Starting age can not be less than 0!");
             return; // stops the whole method here
         } else if (endage <= startage) {
@@ -177,29 +189,32 @@ public class AgeSorter {
             return; // stops the whole method here
         }
 
-        // TODO: SO CURRENTLY I HAVE A BUG WHERE WHEN A USER CHANGE A GROUP RANGE (START, END), IT COLLIDES WITH AN EXISTING GROUP'S RANGE WHICH WE MUST AVOID!
-//!       // [CREATING TEMP INT ARRAY]
-//        int[] intTempArr = new int[startage-endage];
-//        int Values = startage;
-//        for (int a = 0; a < intTempArr.length+1; a++) { // from 0 to how many times it need to iterate
-//            intTempArr[a] = Values++;
-//        }
-//
-//!        // CHECKING IF IT EXISTS
-//        HashSet<Integer> Comparison = new HashSet<>();
-//        for (Group i:Groups.keySet()) { // FOR EVERY GROUP IN GROUPS<K>
-//            if (i.getGroupName().equals(name)) { // IF THE NAME MATCHES WITH THE CURRENT SELECTED GROUPNAME
-//
-//                i.changeGroupRange(startage, endage);
-//                updateAgeSorter();
-//                return; // stops the whole method here
-//            } else {
-//
-//            }
-//        }
-//
-// !       // IF NOTHING CAME UP
-//        System.out.println(name+" does not exist!");
+        // CHECKING IF IT EXISTS
+        HashSet<Integer> Comparison = new HashSet<>();
+        Group TargetGroup = getGroup(name);
+       // [CREATING TEMP INT ARRAY] <================= THIS IS TO CHECK IF IT COLLIDES WITH ANY OTHER VALUES OF GROUPS
+        int[] intTempArr = new int[endage-startage];
+        int Values = startage;
+        for (int a = 0; a < intTempArr.length; a++) { // from 0 to how many times it need to iterate
+            intTempArr[a] = Values++;
+            Comparison.add(intTempArr[a]);
+        }
+        // [FIRST ARRAY (OLD/EXISTING ARRAY)]
+        for (Group i:Groups.keySet()) { // FOR EVERY GROUP IN GROUPS<K>
+            if (!TargetGroup.getGroupName().equals(i.getGroupName())) { // IF IT'S NOT THE SELECTED GROUP
+                // ADDING ALL THE VALUES THAT WE CURRENTLY HAVE
+                for (int a = 0; a < i.GroupRange.length; a++) {
+                    if(!Comparison.add(i.GroupRange[a])) {
+                        System.out.println(TargetGroup.getFullInformation()+"cannot be changed into "+TargetGroup.getGroupName()+" ["+TargetGroup.GroupRangeStart+" - "+TargetGroup.GroupRangeEnd+"] because it has a collision with "+i.getFullInformation());
+                        return; // stops the whole method here
+                    }
+                }
+            }
+        }
+
+        // CHANGING THE AGE
+        TargetGroup.changeGroupRange(startage, endage);
+        updateAgeSorter(); // THIS WILL REARRANGE THE PROFILES TO THEIR RESPECTIVE GROUP
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS

@@ -1,5 +1,5 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 07, 2026. at  4:06 AM
+// Last Modified: July 08, 2026. at  7:15 PM
 
 import Exceptions.ChoiceOutOfBoundsException;
 
@@ -18,13 +18,13 @@ public class Main {
 
     }
 
-    // =========================== OTHER METHODS =========================== \\
+    // =========================== USER INTERFACE METHODS (PRINTING VISUALS) =========================== \\
     public static void Introduction() {
         System.out.println("╔═════════════════════════════════════════════╗");
         System.out.println("║    AGE SORTER BY CHRIST AERJIL C. DAMPOG    ║");
         System.out.println("╚═════════════════════════════════════════════╝");
         System.out.println();
-        System.out.println("Java Techniques in this program include:");
+        System.out.println("Java Skills in this program include:");
         System.out.println("1. Collections Framework");
         System.out.println("2. Inner Classes");
         System.out.println("3. Enhanced For Loops");
@@ -226,7 +226,6 @@ public class Main {
                         System.out.println();
                         System.out.println(e+": Please choose a number of integer!");
                         System.out.println();
-                        System.out.print("Choice: ");
                         input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
                     }
                 }
