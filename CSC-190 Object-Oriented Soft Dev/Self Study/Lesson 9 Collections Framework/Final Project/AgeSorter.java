@@ -1,6 +1,7 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 08, 2026. at  7:15 PM
+// Last Modified: July 09, 2026. at  7:52 PM
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,33 +46,9 @@ public class AgeSorter {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     // [PROFILE]
     public void addProfile(Profile p) {
-        // CHECK IF ITS EMPTY
-        if (p == null) {
-            System.out.println("Profile can not be null");
-            return; // Stops the whole method here
-        }
-
-        // CHECK IF THERE ARE NO GROUPS AVAILABLE
-        if (GroupNames.isEmpty()) {
-            System.out.println("There are no groups currently that exists!");
-            System.out.println("Please create a group first before adding a profile.");
-            return; // Stops the whole method here
-        }
-
-        // CHECK IF AGE IS VALID
-        if (p.getAge() < 0) {
-            System.out.println(p.getName()+" can not have an age less than 0!");
-            return; // Stops the whole method here
-        }
-
-        // CHECK IF IT ALREADY EXISTS
-        for (ArrayList<Profile> i:Groups.values()) { // FOR EVERY ARRAYLIST IN A GROUP
-            for (int a = 0; a < i.size(); a++) { // FOR EVERY PROFILE IN AN ARRAYLIST OF PROFILE
-                if (p.getName().equalsIgnoreCase(i.get(a).getName())) {
-                    System.out.println(p.getFullInformation()+" already exists!");
-                    return;
-                }
-            }
+        // SECURITY MEASURES
+        if (!securityCheck(p)) { // IF IT RETURNS FALSE
+            return; // stops the whole method here
         }
 
         // CHECKS WHAT AGE GROUP BELONGS INTO
@@ -85,8 +62,6 @@ public class AgeSorter {
 
         // IF DID NOT GET ADDED IN A GROUP
         System.out.println(p.getFullInformation()+" does not belong in any existing group!");
-
-
     }
     public void changeProfileAge(String name, int age) {
         Profile p = getProfile(name);
@@ -118,38 +93,28 @@ public class AgeSorter {
 
     // [GROUP]
     public void addGroup(Group groupParameter) {
-        // CHECK IF ITS EMPTY
-        if (groupParameter == null) {
-            System.out.println("Group can not be null!");
-            return; // stops the whole method here
-        }
-
-        // CHECK IF THE STARTING AGE AND ENDING AGE IS VALID
-        if (groupParameter.GroupRangeStart < 0) { // IF STARTING AGE IS LESS THAN 0
-            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's Starting Age can not be less than 0!");
-            return; // stops the whole method here
-        } else if (groupParameter.GroupRangeEnd < groupParameter.GroupRangeStart) { // IF STARTING AGE IS GREATER THAN THE ENDING
-            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's Ending Age can not be less than the Group's Starting Age!");
-            return; // stops the whole method here
-        } else if (groupParameter.GroupRangeEnd == groupParameter.GroupRangeStart) {
-            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's Starting age can not be the same as Group's Ending Age!");
+        // SECURITY MEASURES
+        if (!securityCheck(groupParameter)) { // if this returns false
             return; // stops the whole method here
         }
 
         // CHECK IF GROUPNAMES IS EMPTY
         if (GroupNames.isEmpty()) {
-            if (GroupNames.add(groupParameter)) {
-                Groups.put(groupParameter, new ArrayList<Profile>());
-                System.out.println(groupParameter.getGroupName()+" has been added!");
-                return; // stops the whole method here
-            } else {
+            GroupNames.add(groupParameter);
+            Groups.put(groupParameter, new ArrayList<Profile>());
+            System.out.println(groupParameter.getGroupName()+" has been added!");
+            return; // stops the whole method here
+        }
+
+        // CHECK IF IT COLLIDES WITH ANY OTHER GROUP AND IF IT ALREADY EXISTS
+        for (Group i:GroupNames) { // FOR EVERY GROUP
+            // CHECK IF IT EXISTS
+            if (i.getGroupName().equals(groupParameter.getGroupName())) {
                 System.out.println(groupParameter.getGroupName()+" already exists!");
                 return; // stops the whole method here
             }
-        }
 
-        // CHECK IF IT COLLIDES WITH ANY OTHER GROUP
-        for (Group i:GroupNames) { // FOR EVERY GROUP
+            // CHECK AGE RANGE COLLISION
             HashSet<Integer> Comparison = new HashSet<>();
 
             // ADD ALL THE VALUES INSIDE THE HASHSET
@@ -205,7 +170,7 @@ public class AgeSorter {
                 // ADDING ALL THE VALUES THAT WE CURRENTLY HAVE
                 for (int a = 0; a < i.GroupRange.length; a++) {
                     if(!Comparison.add(i.GroupRange[a])) {
-                        System.out.println(TargetGroup.getFullInformation()+"cannot be changed into "+TargetGroup.getGroupName()+" ["+TargetGroup.GroupRangeStart+" - "+TargetGroup.GroupRangeEnd+"] because it has a collision with "+i.getFullInformation());
+                        System.out.println(TargetGroup.getFullInformation()+"cannot be changed into "+TargetGroup.getGroupName()+" ["+startage+" - "+endage+"] because it has a collision with "+i.getFullInformation());
                         return; // stops the whole method here
                     }
                 }
@@ -258,6 +223,59 @@ public class AgeSorter {
         System.out.println(getClass().getName()+" has been successfully updated!");
 
     }
+    public boolean securityCheck(Group gp) {
+        if (gp == null) { // CHECK IF ITS EMPTY
+            System.out.println("Group can not be null!");
+            return false; // stops the whole method here
+        } else if (gp.GroupRangeStart < 0) { // IF STARTING AGE IS LESS THAN 0
+            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's Starting Age can not be less than 0!");
+            return false; // stops the whole method here
+        } else if (gp.GroupRangeEnd < gp.GroupRangeStart) { // IF STARTING AGE IS GREATER THAN THE ENDING
+            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's Ending Age can not be less than the Group's Starting Age!");
+            return false; // stops the whole method here
+        } else if (gp.GroupRangeEnd == gp.GroupRangeStart) {
+            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's Starting age can not be the same as Group's Ending Age!");
+            return false; // stops the whole method here
+        } else if (gp.GroupRangeEnd > 200) {
+            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's maximum age can only reach 200!");
+            return false;
+        }
+
+        return true;
+    }
+    public boolean securityCheck(Profile p) {
+        // CHECK IF ITS EMPTY
+        if (p == null) {
+            System.out.println("Profile can not be null");
+            return false; // Stops the whole method here
+        }
+
+        // CHECK IF THERE ARE NO GROUPS AVAILABLE
+        if (GroupNames.isEmpty()) {
+            System.out.println("There are no groups currently that exists!");
+            System.out.println("Please create a group first before adding a profile.");
+            return false; // Stops the whole method here
+        }
+
+        // CHECK IF AGE IS VALID
+        if (p.getAge() < 0) {
+            System.out.println(p.getName()+" can not have an age less than 0!");
+            return false; // Stops the whole method here
+        }
+
+        // CHECK IF IT ALREADY EXISTS
+        for (ArrayList<Profile> i:Groups.values()) { // FOR EVERY ARRAYLIST IN A GROUP
+            for (int a = 0; a < i.size(); a++) { // FOR EVERY PROFILE IN AN ARRAYLIST OF PROFILE
+                if (p.getName().equalsIgnoreCase(i.get(a).getName())) {
+                    System.out.println(p.getFullInformation()+" already exists!");
+                    return false;
+                }
+            }
+        }
+
+        // IF CHECKS HAD PASSED THEN RETURN TRUE
+        return true;
+    }
 
     // ================================================== OTHER CLASSES ================================================== \\
     public static class Profile {
@@ -307,13 +325,7 @@ public class AgeSorter {
             this.GroupName = GroupName;
             this.GroupRangeStart = GroupRangeStart;
             this.GroupRangeEnd = GroupRangeEnd;
-
-            // INITIALIZING THE GROUP RANGE
-            GroupRange = new int[(GroupRangeEnd-GroupRangeStart)+1];
-            int Values = GroupRangeStart; // Minus 1 because it will add up 6 first if not
-            for (int i = 0; i < (GroupRangeEnd-GroupRangeStart)+1; i++) { // from 0 to how many times it need to iterate
-                GroupRange[i] = Values++;
-            }
+            GroupRange = generateGroupRange(GroupRangeStart, GroupRangeEnd);
         }
 
         //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
@@ -343,15 +355,28 @@ public class AgeSorter {
             GroupRangeStart = start;
             GroupRangeEnd = end;
 
+            // GENERATE THE ARRAY
+            GroupRange = generateGroupRange(start, end);
+
+            // PRINT
             System.out.println(GroupName+" ["+OriginalStart+" - "+OriginalEnd+"] has changed into "+getFullInformation());
         }
 
         //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+        public int[] generateGroupRange(int start, int end) {
+            int[] tempGroupRange = new int[(end-start)+1];
+            // filling out the empty slots
+            int Value = start;
+            for (int i = 0; i < tempGroupRange.length; i++) {
+                tempGroupRange[i] = Value++;
+            }
+            return tempGroupRange;
+        }
     }
 }
 
-// TODO: THERE IS A BUG WITH THE COMPARISON OF GROUP NAMES INSIDE GROUP CHANGE RANGE
-// TODO: CHANGE THE COMPARE METHOD INTO ACTUAL DATA INSTEAD OF MEMORY COMPARISON
+// TODO: I LEFT AT FIXING THE GROUP COMPARISON AND I ALREADY FIXED THE FEATURE, I SOMEHOW GOT SOME WEIRD ISSUE WHEN RUNNING THE PROGRAM AND I DO NOT KNOW EXACTLY WHAT IT IS.
+// TODO: IF YOU  THINK THERE ARE NO MORE FIXING NEEDED TO DO, PLEASE MOVE FORWARING INTO BOTH THE REMOVING METHODS
 
 // INITIAL IDEAS:
 //
