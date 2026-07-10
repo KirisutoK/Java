@@ -1,5 +1,5 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 08, 2026. at  7:15 PM
+// Last Modified: July 10, 2026. at  5:51 PM
 
 import Exceptions.ChoiceOutOfBoundsException;
 
@@ -14,7 +14,9 @@ public class Main {
     // =========================== MAIN =========================== \\ 
     public static void main(String[] args) {
         Introduction();
-        Options();
+        while (true) { //... THIS WAS ADDED BECAUSE MY LAST WAY OF CALLING OPTIONS WAS RECURRSIVE (CALLING OPTIONS() INSIDE OF OPTIONS() WHICH POTENTIALLY CAN LEAD INTO A STACKOVERFLOW ERROR).
+            Options();
+        }
 
     }
 
@@ -101,7 +103,6 @@ public class Main {
                         System.out.println();
 
                         ValidInputChoices = true;
-                        Options();
                     } catch (InputMismatchException e) {
                         System.out.println();
                         System.out.println(e+": Please choose a number of integer for both Start Age and End Age!");
@@ -146,7 +147,6 @@ public class Main {
                         System.out.println();
 
                         ValidInputChoices = true;
-                        Options();
                     } catch (InputMismatchException e) {
                         System.out.println();
                         System.out.println(e+": Please choose a number of integer for both Start Age and End Age!");
@@ -175,7 +175,6 @@ public class Main {
                         System.out.println();
 
                         ValidInputChoices =  true;
-                        Options();
                     } catch (InputMismatchException e) {
                         System.out.println();
                         System.out.println(e+": Please choose a number of integer for both Start Age and End Age!");
@@ -221,7 +220,6 @@ public class Main {
                         System.out.println();
 
                         ValidInputChoices =  true;
-                        Options();
                     } catch (InputMismatchException e) {
                         System.out.println();
                         System.out.println(e+": Please choose a number of integer!");
@@ -229,7 +227,6 @@ public class Main {
                         input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
                     }
                 }
-
                 break;
         }
     }

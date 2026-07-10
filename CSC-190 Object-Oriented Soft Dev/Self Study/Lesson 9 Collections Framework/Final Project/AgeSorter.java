@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 09, 2026. at  7:52 PM
+// Last Modified: July 10, 2026. at  5:55 PM
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -65,6 +65,9 @@ public class AgeSorter {
     }
     public void changeProfileAge(String name, int age) {
         Profile p = getProfile(name);
+        if (p == null) {
+            return; // stops the whole method here
+        }
         if (p.changeAge(age)) { // IF AGE HAS CHANGED THEN
 
             // REMOVE FROM THE CURRENT LIST
@@ -375,8 +378,7 @@ public class AgeSorter {
     }
 }
 
-// TODO: I LEFT AT FIXING THE GROUP COMPARISON AND I ALREADY FIXED THE FEATURE, I SOMEHOW GOT SOME WEIRD ISSUE WHEN RUNNING THE PROGRAM AND I DO NOT KNOW EXACTLY WHAT IT IS.
-// TODO: IF YOU  THINK THERE ARE NO MORE FIXING NEEDED TO DO, PLEASE MOVE FORWARING INTO BOTH THE REMOVING METHODS
+// TODO: FIXED ALL THE CHECK BUGS, JUST HAVE TO CREATE THE OTHER 2 METHODS WHICH IS REMOVE PROFILE AND REMOVE GROUP.
 
 // INITIAL IDEAS:
 //
