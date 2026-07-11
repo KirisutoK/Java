@@ -1,5 +1,5 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 10, 2026. at  5:51 PM
+// Last Modified: July 10, 2026. at 11:37 PM
 
 import Exceptions.ChoiceOutOfBoundsException;
 
@@ -33,6 +33,7 @@ public class Main {
         System.out.println("4. Object-Oriented Programming");
         System.out.println("5. Switches");
         System.out.println("6. Exceptions");
+        System.out.println("7. Scanner");
         System.out.println();
         System.out.println("Author: Have Fun!");
         System.out.println();
@@ -40,6 +41,10 @@ public class Main {
     public static void Options() {
         // DISPLAY THE OPTIONS
         System.out.println("+======================================================+");
+
+        if (!AgeSorterObject.hasNoGroup()) { // IF WE HAVE NOT MADE A GROUP YET
+            AgeSorterObject.displayGrouplessProfilesInformation();
+        }
         AgeSorterObject.displayInformation();
 
         System.out.println("╔══════════════════════════════════════════════════════╗");

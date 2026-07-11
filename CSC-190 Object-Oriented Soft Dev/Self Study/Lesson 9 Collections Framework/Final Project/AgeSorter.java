@@ -1,7 +1,6 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 10, 2026. at  5:55 PM
+// Last Modified: July 11, 2026. at 12:28 AM
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,11 +11,13 @@ public class AgeSorter {
     //... REMOVED THE NAMES ARRAYLIST HERE BECAUSE IT WILL BE INSIDE THE HASHMAP
     private HashMap<Group, ArrayList<Profile>> Groups; // This is what binds both the Key(GroupName) and Value(Names)
     private HashSet<Group> GroupNames;  // This is the Key
+    private ArrayList<Profile> GrouplessProfiles;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public AgeSorter() {
         Groups = new HashMap<>();
         GroupNames = new HashSet<>();
+        GrouplessProfiles = new ArrayList<>();
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
@@ -26,6 +27,11 @@ public class AgeSorter {
                 if (p.getName().equals(name)) {
                     return p;
                 }
+            }
+        }
+        for (Profile p:GrouplessProfiles) {
+            if (p.getName().equals(name)) {
+                return p;
             }
         }
 
@@ -39,8 +45,11 @@ public class AgeSorter {
             }
         }
 
-        System.out.println(gname+" does not exist!");
+        System.out.println("Group "+gname+" does not exist!");
         return null;
+    }
+    public boolean hasNoGroup() {
+        return GroupNames.isEmpty();
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
@@ -55,20 +64,23 @@ public class AgeSorter {
         for (Group i:Groups.keySet()) { // Check each index of Group Keys
             if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE AND IF IT FALLS UNDER A GROUP
                 Groups.get(i).add(p);
+                p.hasGroup = true;
                 System.out.println(p.getFullInformation()+" has successfully been added into "+i.getGroupName()+". ");
                 return; // stops the whole method here;
             }
         }
 
         // IF DID NOT GET ADDED IN A GROUP
-        System.out.println(p.getFullInformation()+" does not belong in any existing group!");
+        GrouplessProfiles.add(p);
+        System.out.println(p.getFullInformation()+" has successfully been added into Groupless");
     }
     public void changeProfileAge(String name, int age) {
         Profile p = getProfile(name);
         if (p == null) {
             return; // stops the whole method here
         }
-        if (p.changeAge(age)) { // IF AGE HAS CHANGED THEN
+        // IF THE PROFILE HAS CHANGED AGE AND IS CURRENTLY IN A GROUP
+        if (p.changeAge(age) && p.hasGroup) {
 
             // REMOVE FROM THE CURRENT LIST
             Group OriginalGroup = null;
@@ -90,7 +102,22 @@ public class AgeSorter {
             }
 
             // IF IT DOES NOT BELONG IN ANY GROUP
-            System.out.println(p.getFullInformation()+" does not belong an any group!");
+            GrouplessProfiles.add(p);
+            System.out.println(p.getFullInformation()+" has successfully been added into Groupless");
+        }
+        // IF THE PROFILE HAS CHANGED AGE IS NOT IN A GROUP
+        if (p.changeAge(age) && !p.hasGroup) {
+            GrouplessProfiles.remove(p); // SINCE THE PROFILE DOES NOT BELONG IN A GROUP, IT IS AUTOMATICALLY INSIDE GROUPLESS PROFILE (THIS ENABLES TO STOP DUPLICATING PROFILES)
+
+            // CHECKS WHAT AGE GROUP BELONGS INTO
+            for (Group i:Groups.keySet()) { // Check each index of Group Keys
+                if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE AND IF IT FALLS UNDER A GROUP
+                    Groups.get(i).add(p);
+                    System.out.println(p.getFullInformation()+" has successfully been moved from Groupless into "+i.getGroupName()+". ");
+                    p.hasGroup = true;
+                    return; // stops the whole method here;
+                }
+            }
         }
     }
 
@@ -138,9 +165,7 @@ public class AgeSorter {
         GroupNames.add(groupParameter);
         System.out.println(groupParameter.getGroupName()+" has been added!");
         Groups.put(groupParameter, new ArrayList<Profile>());
-    }
-    public void removeGroup() {
-
+        updateAgeSorter();
     }
     public void changeGroupRange(String name, int startage, int endage) {
         // SECURITY MEASURES
@@ -198,6 +223,16 @@ public class AgeSorter {
             System.out.println();
         }
     }
+    public void displayGrouplessProfilesInformation() {
+        System.out.println("Group: Groupless");
+        System.out.println("Profiles: ");
+        int count = 1;
+        for (Profile p:GrouplessProfiles) {
+            System.out.println(count+". "+p.getFullInformation());
+            count++;
+        }
+        System.out.println();
+    }
     public void updateAgeSorter() { // This rearranges the profiles to their respective age group
         ArrayList<Profile> TempProfiles = new ArrayList<>();
 
@@ -205,6 +240,14 @@ public class AgeSorter {
         for (Group g:Groups.keySet()) { // FOR EVERY GROUP FROM THE HASHMAP(Groups)
             TempProfiles.addAll(Groups.get(g)); // GET ALL THE VALUES OF G (THIS LINE OF CODE ONLY WORKS WHEN THE PARAMETER IS A COLLECTION SUCH AS ARRAYLISTS
         }
+        
+        // GRAB ALL THE GROUPLESS PROFILES
+        for (Profile p:GrouplessProfiles) { // FOR EVERY PROFILE IN GROUPLESS PROFILES
+            TempProfiles.add(p); // ADD THE PROFILE INTO THE TEMP ARRAYLIST
+        }
+
+        // CLEAR ALL THE GROUPLESS PROFILES
+        GrouplessProfiles.clear();
 
         // CLEAR ALL THE HASHMAP
         Groups.clear();
@@ -217,11 +260,21 @@ public class AgeSorter {
         // ADD THE ARRAYLIST(PROFILE) INTO THE HASHMAP VALUE
         for (Group i:Groups.keySet()) { // Check each index of Group Key
             for (Profile p: TempProfiles) { // Checks every profile in TempProfiles ArrayList
+                p.hasGroup = false;
                 if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE AND IF IT FALLS UNDER A GROUP
                     Groups.get(i).add(p);
+                    p.hasGroup = true;
                 }
             }
         }
+
+        // IF THE PROFILE DOES NOT BELONG IN A GROUP
+        for (Profile p: TempProfiles) {
+            if (!p.hasGroup) {
+                GrouplessProfiles.add(p);
+            }
+        }
+
 
         System.out.println(getClass().getName()+" has been successfully updated!");
 
@@ -285,11 +338,13 @@ public class AgeSorter {
         //=======VARIABLES=======//
         private String Name;
         private int Age;
+        private boolean hasGroup; // THIS IS FOR A SPECIFIC INDICATOR TO TELL IF THIS PROFILE WILL BELONG INTO THE GROUPLESS OR NOT
 
         //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
         public Profile(String Name, int Age) {
             this.Name = Name;
             this.Age = Age;
+            hasGroup = false;
         }
 
         //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
@@ -378,7 +433,8 @@ public class AgeSorter {
     }
 }
 
-// TODO: FIXED ALL THE CHECK BUGS, JUST HAVE TO CREATE THE OTHER 2 METHODS WHICH IS REMOVE PROFILE AND REMOVE GROUP.
+// TODO: ADDED A DEFAULT GROUP FOR THE GROUPLESS PROFILE (PLEASE CHECK BUG LISTS IN CLAUDE)
+// TODO: ADD REMOVE PROFILE AND REMOVE GROUP
 
 // INITIAL IDEAS:
 //
