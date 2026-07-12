@@ -1,5 +1,5 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 10, 2026. at 11:37 PM
+// Last Modified: July 12, 2026. at 12:22 AM
 
 import Exceptions.ChoiceOutOfBoundsException;
 
@@ -124,7 +124,15 @@ public class Main {
 
                 while (!ValidInputChoices) {
                     try {
-                        //... PUT THE OPERATIONS HERE
+                        System.out.print("Name: ");
+                        String Name02 = input.nextLine();
+                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
+                        System.out.println();
+
+                        AgeSorterObject.removeProfile(Name02);
+                        System.out.println();
+                        
+                        ValidInputChoices = true;
                     } catch (InputMismatchException e) {
                         System.out.println();
                         System.out.println(e+": Please choose a number of integer!");
