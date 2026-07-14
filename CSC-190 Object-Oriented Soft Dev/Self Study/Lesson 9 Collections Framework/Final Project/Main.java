@@ -1,5 +1,5 @@
 // Creation Date: June 30, 2026. at 3:13 AM
-// Last Modified: July 12, 2026. at 12:22 AM
+// Last Modified: July 13, 2026. at  8:01 PM
 
 import Exceptions.ChoiceOutOfBoundsException;
 
@@ -110,7 +110,7 @@ public class Main {
                         ValidInputChoices = true;
                     } catch (InputMismatchException e) {
                         System.out.println();
-                        System.out.println(e+": Please choose a number of integer for both Start Age and End Age!");
+                        System.out.println(e+": Please choose a number of integer!");
                         System.out.println();
                         input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
                     }
@@ -123,22 +123,14 @@ public class Main {
                 System.out.println("╚══════════════════════════╝");
 
                 while (!ValidInputChoices) {
-                    try {
-                        System.out.print("Name: ");
-                        String Name02 = input.nextLine();
-                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n
-                        System.out.println();
+                    System.out.print("Name: ");
+                    String Name02 = input.nextLine();
+                    System.out.println();
 
-                        AgeSorterObject.removeProfile(Name02);
-                        System.out.println();
-                        
-                        ValidInputChoices = true;
-                    } catch (InputMismatchException e) {
-                        System.out.println();
-                        System.out.println(e+": Please choose a number of integer!");
-                        System.out.println();
-                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
-                    }
+                    AgeSorterObject.removeProfile(Name02);
+                    System.out.println();
+
+                    ValidInputChoices = true;
                 }
 
                 break;
@@ -202,14 +194,14 @@ public class Main {
                 System.out.println("╚═══════════════════════╝");
 
                 while (!ValidInputChoices) {
-                    try {
+                    System.out.print("Name: ");
+                    String GroupName = input.nextLine();
+                    System.out.println();
 
-                    } catch (InputMismatchException e) {
-                        System.out.println();
-                        System.out.println(e+": Please choose a number of integer!");
-                        System.out.println();
-                        input.nextLine(); // THIS CONSUMES THE LEFTOVER MADE FROM THE LAST SCANNER WHICH IS \n (THIS PREVENTS FROM THE WHILE LOOP TO TRIGGER AUTOMATICALLY RECIEVING THE SAME INPUT FROM THE PREVIOUS INPUT)
-                    }
+                    AgeSorterObject.removeGroup(GroupName);
+                    System.out.println();
+
+                    ValidInputChoices = true;
                 }
 
                 break;

@@ -1,5 +1,5 @@
 // Creation Date: July 01, 2026. at 12:50 PM
-// Last Modified: July 12, 2026. at 12:32 AM
+// Last Modified: July 13, 2026. at  8:08 PM
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +12,7 @@ public class AgeSorter {
     private HashMap<Group, ArrayList<Profile>> Groups; // This is what binds both the Key(GroupName) and Value(Names)
     private HashSet<Group> GroupNames;  // This is the Key
     private ArrayList<Profile> GrouplessProfiles;
+    public static final int MaxAge = 200;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public AgeSorter() {
@@ -115,6 +116,7 @@ public class AgeSorter {
                     if (profileList.contains(p)) {
                         OriginalGroup = entry.getKey();
                         profileList.remove(p); // removes the profile to the temp Arraylist
+                        break; // stops the iteration process
                     }
                 }
 
@@ -122,7 +124,7 @@ public class AgeSorter {
                 for (Group i:Groups.keySet()) { // Check each index of Group Keys
                     if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE AND IF IT FALLS UNDER A GROUP
                         Groups.get(i).add(p);
-                        System.out.println(p.getFullInformation()+" has successfully been moved from "+OriginalGroup.getFullInformation()+" into "+i.getGroupName()+". ");
+                        System.out.println(p.getFullInformation()+" has successfully been moved from "+OriginalGroup.getFullInformation()+" into "+i.getFullInformation()+". ");
                         return; // stops the whole method here;
                     }
                 }
@@ -135,7 +137,6 @@ public class AgeSorter {
             // IF PROFILE IS NOT IN A GROUP
             else {
                 GrouplessProfiles.remove(p); // SINCE THE PROFILE DOES NOT BELONG IN A GROUP, IT IS AUTOMATICALLY INSIDE GROUPLESS PROFILE (THIS ENABLES TO STOP DUPLICATING PROFILES)
-
                 // CHECKS WHAT AGE GROUP BELONGS INTO
                 for (Group i:Groups.keySet()) { // Check each index of Group Keys
                     if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE AND IF IT FALLS UNDER A GROUP
@@ -196,33 +197,47 @@ public class AgeSorter {
         updateAgeSorter();
     }
     public void removeGroup(String name) {
-        ArrayList<Profile> TempArr = new ArrayList<>(); // THIS WILL HOLD THE VALUES OF A GROUP WHEN A SPECIFIC GROUP IS ABOUT TO BE DELETED
-
-        // FIND THE GROUP
-        Group DeletedGroup = new Group("", 1, 2); // THIS IS JUST TO INITIALIZE SINCE JAVA NEEDS IT TO BE INITIALIZED IN ORDER TO RUN.
-        for (Group g:Groups.keySet()) { // FOR EVERY GROUP IN GROUPS<K>
-            if (g.getGroupName().equals(name)) {
-                TempArr.addAll(Groups.get(g)); // adds all the values of x group into TempArr
-                DeletedGroup = g;
-                Groups.remove(g); // removes the group
-                return;
+        // SECURITY MEASURE
+        if (getGroup(name) == null) {
+            if (name.equalsIgnoreCase("Groupless")) {
+                System.out.println(name+" as because it is a default group, it has no age range.");
             }
+            return; // stops the whole method here
+        }
+        Group TargetGroup = getGroup(name);
+
+        ArrayList<Profile> TempArr = new ArrayList<>(); // THIS WILL HOLD THE VALUES OF A GROUP WHEN A SPECIFIC GROUP IS ABOUT TO BE DELETED
+        // FIND THE GROUP
+        String DeletedGroup = TargetGroup.getFullInformation(); // THIS IS JUST TO INITIALIZE SINCE JAVA NEEDS IT TO BE INITIALIZED IN ORDER TO RUN.
+        for (Profile p:Groups.get(TargetGroup)) {
+            TempArr.add(p);
+            p.hasGroup = false;
         }
 
-        //! YOU LEFT ON THIS PART, NOTE: I AM GOING TO SLEEP LMAO
+        // REMOVE THE GROUP
+        Groups.remove(TargetGroup);
+        GroupNames.remove(TargetGroup);
+
         // CHECKS WHAT AGE GROUP BELONGS INTO
         for (Profile p:TempArr) {
-            for (Group i:Groups.keySet()) { // Check each index of Group Keys
-                if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE AND IF IT FALLS UNDER A GROUP
-                    Groups.get(i).add(p);
-                    System.out.println(p.getFullInformation()+" has successfully been moved from "+DeletedGroup.getFullInformation()+" into "+i.getGroupName()+". ");
-                    return; // stops the whole method here;
+            if (!p.hasGroup) { // THIS IS TO SORT OUT ANY PROFILES THAT IS IN A GROUP (REDUCING ITERATION)
+                for (Group i:Groups.keySet()) { // Check each index of Group Keys
+                    if (p.getAge() >= i.getGroupRangeStart() && p.getAge() <= i.getGroupRangeEnd()) { // CHECK AGE RANGE AND IF IT FALLS UNDER A GROUP
+                        Groups.get(i).add(p); // ADDS THE PROFILE INTO THE SELECTED GROUP
+                        p.hasGroup = true; // MAKES THE PROFILE VALUE HASAGROUP INTO TRUE
+                        System.out.println(p.getFullInformation()+" has successfully been moved from "+DeletedGroup+" into "+i.getGroupName()+". ");
+                        break; // this exits the iteration process and goes forward to the next loop
+                    }
                 }
             }
         }
 
-        // IF NOTHING HAPPENED
-        System.out.println("[G] "+name+" does not exist!");
+        // FOR THE LEFTOVER PROFILE
+       for (Profile p:TempArr) {
+           if (!p.hasGroup) {
+               GrouplessProfiles.add(p);
+           }
+       }
     }
     public void changeGroupRange(String name, int startage, int endage) {
         // SECURITY MEASURES
@@ -243,7 +258,7 @@ public class AgeSorter {
         HashSet<Integer> Comparison = new HashSet<>();
         Group TargetGroup = getGroup(name);
        // [CREATING TEMP INT ARRAY] <================= THIS IS TO CHECK IF IT COLLIDES WITH ANY OTHER VALUES OF GROUPS
-        int[] intTempArr = new int[endage-startage];
+        int[] intTempArr = new int[(endage-startage)+1];
         int Values = startage;
         for (int a = 0; a < intTempArr.length; a++) { // from 0 to how many times it need to iterate
             intTempArr[a] = Values++;
@@ -352,8 +367,8 @@ public class AgeSorter {
         } else if (gp.GroupRangeEnd == gp.GroupRangeStart) {
             System.out.println("[ERROR] GROUP CREATION DECLINED: Group's Starting age can not be the same as Group's Ending Age!");
             return false; // stops the whole method here
-        } else if (gp.GroupRangeEnd > 200) {
-            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's maximum age can only reach 200!");
+        } else if (gp.GroupRangeEnd > MaxAge) {
+            System.out.println("[ERROR] GROUP CREATION DECLINED: Group's maximum age can only reach "+MaxAge+"!");
             return false;
         }
 
@@ -377,15 +392,24 @@ public class AgeSorter {
         if (p.getAge() < 0) {
             System.out.println(p.getName()+" can not have an age less than 0!");
             return false; // Stops the whole method here
+        } else if (p.getAge() > MaxAge) {
+            System.out.println(p.getName()+" can not have an age greater than "+MaxAge+"!");
+            return false;
         }
 
         // CHECK IF IT ALREADY EXISTS
         for (ArrayList<Profile> i:Groups.values()) { // FOR EVERY ARRAYLIST IN A GROUP
             for (int a = 0; a < i.size(); a++) { // FOR EVERY PROFILE IN AN ARRAYLIST OF PROFILE
-                if (p.getName().equalsIgnoreCase(i.get(a).getName())) {
+                if (p.getName().equals(i.get(a).getName())) {
                     System.out.println(p.getFullInformation()+" already exists!");
                     return false;
                 }
+            }
+        }
+        for (Profile P:GrouplessProfiles) {
+            if (P.getName().equals(p.getName())) {
+                System.out.println(p.getFullInformation()+" already exists!");
+                return false;
             }
         }
 
