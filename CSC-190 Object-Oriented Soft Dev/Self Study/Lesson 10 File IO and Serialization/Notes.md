@@ -30,6 +30,23 @@ import java.nio.*;      // modern File I/O (we'll focus on java.io)
 | `BufferedReader` | Reads text efficiently line by line |
 | `PrintWriter` | Writes formatted text to a file |
 
+## **Writer Classes:**
+
+| Class              | Purpose                                           |
+|--------------------|---------------------------------------------------|
+| `FileWriter`       | Good for small or medium-sized text files         |
+| `BufferedWriter`   | Better performance for large amounts of text      |
+| `PrintWriter`      | Best for structured data, like reports or logs    |
+| `FileOutputStream` | Best for binary files (e.g., images, audio files) |
+
+## **Reader Classes:**
+
+| Class                         | Purpose                                               |
+|-------------------------------|-------------------------------------------------------|
+| `BufferedReader`+`FileReader` | Best for reading text files line-by-line              |
+| `FileInputStream`             | Best for binary files (e.g., images, audio files)     |
+| `RandomAccessFile`            | Best for read/write specific portions of a large file |
+
 ---
 
 ## **Writing to a File:**
