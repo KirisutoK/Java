@@ -1,0 +1,3 @@
+This lessons are supposed to be studied before taking Oracle Programmer Certificate.
+
+Initially planning to study this after Lesson 10 of Java OOP Self Stud.
