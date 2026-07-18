@@ -109,6 +109,8 @@ file.getName();         // returns "myfile.txt"
 file.length();          // returns file size in bytes
 file.isFile();          // returns true if it's a file
 file.isDirectory();     // returns true if it's a folder
+file.mkdir();           // creates ONE folder
+file.mkdirs();          // creates the folder AND all missing parent folders
 ```
 
 ---
