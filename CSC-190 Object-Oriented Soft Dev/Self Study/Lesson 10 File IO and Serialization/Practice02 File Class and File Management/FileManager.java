@@ -1,8 +1,9 @@
 // Creation Date: July 17, 2026. at 9:47 PM
-// Last Modified: July 18, 2026. at  9:39 AM
+// Last Modified: July 18, 2026. at 10:12 PM
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.SocketHandler;
 
 public class FileManager {
     //=======VARIABLES=======//
@@ -18,7 +19,6 @@ public class FileManager {
             WorkingDirectory = FolderPath;
         }
     }
-
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
     public void listFiles() {
@@ -37,7 +37,22 @@ public class FileManager {
             System.out.println("Working Directory is Null or does not exists!");
         }
     }
-    //! public void getFileInfo(String filename) {};
+    public void getFileInfo(String filename) {
+        File file = new File(WorkingDirectory, filename);
+
+        if (file.exists()) {
+            System.out.println("Name: "+file.getName());
+            System.out.println("Size: "+file.length()+" Bytes");
+            System.out.println("File: "+file.isFile());
+            System.out.println("Directory: "+file.isDirectory());
+            System.out.println();
+        } else if (file.isDirectory()) {
+            System.out.println(filename+" is a directory, not a file!");
+        } else {
+            System.out.println(filename+" does not exists!");
+            System.out.println();
+        }
+    };
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     public void createFile(String filename) {
@@ -64,7 +79,16 @@ public class FileManager {
             System.out.println(filename+" does not exists!");
         }
     }
-    //! public void renameFile(String oldname, String newname) {};
+    public void renameFile(String oldname, String newname) {
+        File oldfile = new File(oldname);
+        File newfile = new File(newname);
+
+        if (oldfile.exists()) {
+            oldfile.renameTo(newfile);
+        } else {
+            System.out.println(oldname+" does not exists!");
+        }
+    };
     
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
