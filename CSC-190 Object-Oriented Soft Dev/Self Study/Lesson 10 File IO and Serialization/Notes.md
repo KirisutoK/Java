@@ -169,6 +169,7 @@ ois.close();
 - Serialization requires the class to `implement Serializable`
 - The `.ser` extension is convention for serialized files (not required)
 - If a class has a field you DON'T want serialized, mark it `transient`
+- Deserializer must match with the `SerialVersionUID` in order to deserialize it (Exactly same class as the one you saved on).
 
 ```java
 private transient String password;  // this field won't be saved to file
