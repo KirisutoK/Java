@@ -1,5 +1,5 @@
 // Creation Date: July 20, 2026. at 6:41 PM
-// Last Modified: July 21, 2026. at  8:39 PM
+// Last Modified: July 22, 2026. at  7:12 PM
 
 import java.io.*;
 import java.util.ArrayList;
@@ -16,9 +16,8 @@ public class ContactBook {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    public void saveToFile() {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FilePath));
+    public void saveToFile() { // THIS IS SERIALIZATION
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FilePath))) {
             oos.writeObject(Contacts);
             oos.close();
             System.out.println("Contacts has been successfully saved into the File!");
@@ -26,10 +25,16 @@ public class ContactBook {
             System.out.println("ERROR: "+e.getMessage());
         }
     }
-    public void findContact() {
+    public void findContact(String name) {
         for (Contact c:Contacts) {
-            c.displayInfo();
+            if (c.getName().equals(name)) {
+                c.displayInfo();
+                return; // stops the whole method here
+            }
         }
+
+        System.out.println(name+" does not exists!");
+        return;
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
@@ -64,17 +69,16 @@ public class ContactBook {
 
         System.out.println("ERROR: "+n+" does not exists!");
     }
-    public void loadFromFile() {
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FilePath));
+    public void loadFromFile() { // THIS IS DESERIALIZATION
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FilePath))) {
             Contacts = (ArrayList<Contact>) ois.readObject();
             ois.close();
 
             System.out.println("Contacts has been successfully loaded from the File!");
         } catch (IOException e) {
-            System.out.println("EROR: "+e.getMessage());
+            System.out.println("ERROR: "+e.getMessage());
         } catch (ClassNotFoundException e) {
-            System.out.println("No Saved Contact File found!");;
+            System.out.println("ERROR: "+e.getMessage());
         }
     }
 

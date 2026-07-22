@@ -1,5 +1,5 @@
 // Creation Date: July 20, 2026. at 6:41 PM
-// Last Modified: July 20, 2026. at  9:25 PM
+// Last Modified: July 22, 2026. at  7:01 PM
 
 public class Main {
     // =========================== CLASS VARIABLES =========================== \\
@@ -39,6 +39,9 @@ public class Main {
         // [DISPLAY]
         CBook01.displayAllContacts();
         System.out.println();
+
+        // [FIND CONTACT]
+        CBook01.findContact("Tester01");
     }
 
     // =========================== OTHER METHODS =========================== \\
