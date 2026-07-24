@@ -1,5 +1,5 @@
 // Creation Date: July 17, 2026. at 9:47 PM
-// Last Modified: July 19, 2026. at 10:59 AM
+// Last Modified: July 23, 2026. at  8:25 PM
 
 public class Main {
     // =========================== CLASS VARIABLES =========================== \\
@@ -10,10 +10,10 @@ public class Main {
         FileManager FManager = new FileManager("C:\\Users\\kiris\\OneDrive - Finger Lakes Community College\\Documents\\FLCC\\Coding\\Java\\CSC-190 Object-Oriented Soft Dev\\Self Study\\Lesson 10 File IO and Serialization\\Practice02 File Class and File Management\\FileSandBox");
 
         //======= METHODS =======//
-        // FManager.createFile("Test.txt");
+        // FManager.createFile("poem.txt");
         // FManager.deleteFile("Test");
         // FManager.listFiles();
-        // FManager.renameFile("Test", "Test.txt");
+        // FManager.renameFile("Test", "poem.txt");
 
 
         //======= CLAUDE =======//
