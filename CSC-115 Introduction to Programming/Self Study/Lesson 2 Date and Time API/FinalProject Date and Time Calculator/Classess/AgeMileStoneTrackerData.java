@@ -1,15 +1,19 @@
 package Classess;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 07, 2026. at  1:29 PM
+// Last Modified: September 08, 2026. at 12:25 PM
 
 import Misc.ReuseableMethods;
 
 import java.io.File;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class AgeMileStoneTrackerData implements Serializable {
     //=======VARIABLES=======//
@@ -55,7 +59,7 @@ public class AgeMileStoneTrackerData implements Serializable {
         LocalDate nextBirthday = LocalDate.of(Today.getYear(), Birthday.getMonth(), Birthday.getDayOfMonth());
 
         if (nextBirthday.isBefore(Today)) {
-            nextBirthday.plusYears(1);
+            nextBirthday = nextBirthday.plusYears(1);
         }
 
         return nextBirthday.getMonth()+" "+nextBirthday.getDayOfMonth()+" "+nextBirthday.getYear();
@@ -154,6 +158,14 @@ public class AgeMileStoneTrackerData implements Serializable {
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void viewData(File CurrentFile) { //! <========================================================= YOU LEFT AT THIS METHOD!!!!!!!!!!!!!!!! (NEED TO WORK ON HOW TO SORT OUT THE DAYS IN ORDER AND AGE TOO)
+
+        // [SORTING]   <============== THANKS TO PROFESSOR CLAUDE FOR SUGGESTING ME THIS METHOD
+        ArrayList<Integer> sortedDays = new ArrayList<>(DayBasedMilestone.keySet());
+        Collections.sort(sortedDays);
+        ArrayList<Integer> sortedAge = new ArrayList<>(AgeBasedMilestone.keySet());
+        Collections.sort(sortedAge);
+
+        // [PRINT]
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println(ReuseableMethods.lineAutoSpacing("║ File Name: "+ReuseableMethods.fileNameOnly(CurrentFile, 10)+((AgeBasedMilestone.isEmpty()&&DayBasedMilestone.isEmpty())? " (EMPTY)":""), 67));
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
@@ -165,8 +177,8 @@ public class AgeMileStoneTrackerData implements Serializable {
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
             System.out.println("║                         DAY MILESTONES                          ║");
             System.out.println("╟─────────────────────────────────────────────────────────────────╢");
-            for (int d: DayBasedMilestone.keySet()) {
-                System.out.println(ReuseableMethods.lineAutoSpacing("║ (Day: "+d+") {Message: "+DayBasedMilestone.get(d)+"} ", 67));
+            for (int d: sortedDays) {
+                System.out.println(ReuseableMethods.softWrapping("║ (Day: "+d+") {Message: "+DayBasedMilestone.get(d)+"} ", 67));
             }
             System.out.println("║                                                                 ║");
         }
@@ -174,8 +186,8 @@ public class AgeMileStoneTrackerData implements Serializable {
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
             System.out.println("║                         AGE MILESTONES                          ║");
             System.out.println("╟─────────────────────────────────────────────────────────────────╢");
-            for (int a: AgeBasedMilestone.keySet()) {
-                System.out.println(ReuseableMethods.lineAutoSpacing("║ (Age: "+a+") {Message: "+DayBasedMilestone.get(a)+"} ", 67));
+            for (int a: sortedAge) {
+                System.out.println(ReuseableMethods.lineAutoSpacing("║ (Age: "+a+") {Message: "+AgeBasedMilestone.get(a)+"} ", 67));
             }
             System.out.println("║                                                                 ║");
         }

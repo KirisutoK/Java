@@ -1,7 +1,7 @@
 package Classess;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 07, 2026. at  2:09 PM
+// Last Modified: September 08, 2026. at 12:09 PM
 
 import Misc.ReuseableMethods;
 
@@ -436,7 +436,9 @@ public class AgeMileStoneTracker {
                         ValidInput = CurrentAMST_Data.addAgeBasedMilestone(age, message);
 
                     } catch (InputMismatchException e) {
-                        System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
+                        System.out.println("[ERROR: InputMismatchException] age must not be a letter, it must be a number or integer.");
+                        System.out.println();
+                        ReuseableMethods.input.nextLine(); // this refreshes buffer
                     }
                 }
 
@@ -458,6 +460,8 @@ public class AgeMileStoneTracker {
                         ValidInput = CurrentAMST_Data.addDayBasedMilestone(day, message); // returns a boolean and processes data at the same time
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
+                        System.out.println();
+                        ReuseableMethods.input.nextLine(); // this refreshes buffer
                     }
                 }
 
@@ -502,11 +506,18 @@ public class AgeMileStoneTracker {
                         int age = ReuseableMethods.input.nextInt();
                         ReuseableMethods.input.nextLine(); // this refreshes buffer
 
+                        if (age == -1) {
+                            System.out.println();
+                            break;
+                        }
+
                         ValidInput = CurrentAMST_Data.removeAgeBasedMilestone(age);
                         System.out.println();
 
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
+                        System.out.println();
+                        ReuseableMethods.input.nextLine(); // this refreshes buffer
                     }
                 }
 
@@ -525,14 +536,23 @@ public class AgeMileStoneTracker {
                 while (!ValidInput) {
                     try {
                         //... a. Processing Input
+                        System.out.println("input \"-1\" to exit. ");
                         System.out.print("Please enter a day: ");
                         int day = ReuseableMethods.input.nextInt();
                         ReuseableMethods.input.nextLine(); // this refreshes buffer
 
+                        if (day == -1) {
+                            System.out.println();
+                            break;
+                        }
+
                         ValidInput = CurrentAMST_Data.removeDayBasedMilestone(day);
                         System.out.println();
+                        
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
+                        System.out.println();
+                        ReuseableMethods.input.nextLine(); // this refreshes buffer
                     }
                 }
 

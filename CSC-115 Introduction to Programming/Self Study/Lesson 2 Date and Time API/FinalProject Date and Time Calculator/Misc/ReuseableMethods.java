@@ -1,5 +1,5 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 07, 2026. at  1:57 PM
+// Last Modified: September 08, 2026. at 12:25 PM
 
 import Classess.AgeMileStoneTrackerData;
 
@@ -53,6 +53,34 @@ public class ReuseableMethods {
         String padding = " ".repeat(spacesNeeded);
 
         return line + padding + line.toCharArray()[0];
+    }
+    public static String softWrapping(String line, int width) { // NOTE: THIS IS METHOD IS ENTIRELY MADE BY CLAUADE
+        if (line.length() + 1 <= width) { // +1 for the closing ║
+            return lineAutoSpacing(line, width);
+        }
+
+        StringBuilder result = new StringBuilder();
+        String continuationPrefix = "║   "; // indent for wrapped lines
+
+        // split at the threshold
+        String firstChunk = line.substring(0, width - 2); // -2 for closing ║ and space
+        String remainder = line.substring(width - 2).trim();
+
+        result.append(lineAutoSpacing(firstChunk, width)).append("\n");
+
+        // handle remainder in chunks
+        while (!remainder.isEmpty()) {
+            if (continuationPrefix.length() + remainder.length() + 1 <= width) {
+                result.append(lineAutoSpacing(continuationPrefix + remainder, width));
+                remainder = "";
+            } else {
+                int space = width - continuationPrefix.length() - 2;
+                result.append(lineAutoSpacing(continuationPrefix + remainder.substring(0, space), width)).append("\n");
+                remainder = remainder.substring(space).trim();
+            }
+        }
+
+        return result.toString();
     }
     public static boolean passwordValidation(String Password, int minimum, int maximum, int specialCharacters, int Numbers){
 
