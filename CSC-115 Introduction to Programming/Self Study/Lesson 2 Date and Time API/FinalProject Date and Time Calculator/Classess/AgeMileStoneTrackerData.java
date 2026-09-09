@@ -1,19 +1,17 @@
 package Classess;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 08, 2026. at 12:34 PM
+// Last Modified: September 09, 2026. at 12:32 PM
 
 import Misc.ReuseableMethods;
 
 import java.io.File;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 public class AgeMileStoneTrackerData implements Serializable {
     //=======VARIABLES=======//
@@ -132,7 +130,7 @@ public class AgeMileStoneTrackerData implements Serializable {
         }
 
         // [PRINT]
-        if (DayBasedMilestone.containsKey(age)) {
+        if (AgeBasedMilestone.containsKey(age)) {
             System.out.println("(Age: "+age+") {Message: "+message+"} has been successfully overwritten!");
         } else {
             System.out.println("(Age: "+age+") {Message: "+message+"} has been successfully added!");
@@ -157,7 +155,42 @@ public class AgeMileStoneTrackerData implements Serializable {
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
-    public void viewData(File CurrentFile) { //! <========================================================= YOU LEFT AT THIS METHOD!!!!!!!!!!!!!!!! (NEED TO WORK ON HOW TO SORT OUT THE DAYS IN ORDER AND AGE TOO)
+    public void printDayMilestones() {
+        // [SORTING]
+        ArrayList<Integer> sortedDays = new ArrayList<>(DayBasedMilestone.keySet());
+        Collections.sort(sortedDays);
+
+        // [PRINT]
+        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                         DAY MILESTONES                          ║");
+        System.out.println("╟─────────────────────────────────────────────────────────────────╢");
+        for (int d: sortedDays) {
+            System.out.println(ReuseableMethods.softWrapping("║ (Day: "+d+") {Message: "+DayBasedMilestone.get(d)+"} ", 67));
+        }
+        System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+        System.out.println("║[NOTE] Input \"-1\" to exit.                                       ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+    }
+    public void printAgeMilestones() {
+        // [SORTING]
+        ArrayList<Integer> sortedAges = new ArrayList<>(AgeBasedMilestone.keySet());
+        Collections.sort(sortedAges);
+
+        // [PRINT]
+        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                         AGE MILESTONES                          ║");
+        System.out.println("╟─────────────────────────────────────────────────────────────────╢");
+        for (int a: sortedAges) {
+            System.out.println(ReuseableMethods.softWrapping("║ (Age: "+a+") {Message: "+AgeBasedMilestone.get(a)+"} ", 67));
+        }
+        System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+        System.out.println("║[NOTE] Input \"-1\" to exit.                                       ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+    }
+    public void viewData(File CurrentFile) {
+
 
         // [SORTING]   <============== THANKS TO PROFESSOR CLAUDE FOR SUGGESTING ME THIS METHOD
         ArrayList<Integer> sortedDays = new ArrayList<>(DayBasedMilestone.keySet());
@@ -167,13 +200,13 @@ public class AgeMileStoneTrackerData implements Serializable {
 
         // [PRINT]
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println(ReuseableMethods.lineAutoSpacing("║ File Name: "+ReuseableMethods.fileNameOnly(CurrentFile, 10)+((AgeBasedMilestone.isEmpty()&&DayBasedMilestone.isEmpty())? " (EMPTY)":""), 67));
+        System.out.println(ReuseableMethods.softWrapping("║ File Name: "+ReuseableMethods.fileNameOnly(CurrentFile, 10)+((AgeBasedMilestone.isEmpty()&&DayBasedMilestone.isEmpty())? " (EMPTY)":""), 67));
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
-        System.out.println(ReuseableMethods.lineAutoSpacing("║ Username: "+Username, 67));
-        System.out.println(ReuseableMethods.lineAutoSpacing("║ Age: "+Age, 67));
-        System.out.println(ReuseableMethods.lineAutoSpacing("║ Next Birthday: "+getNextBirthday(), 67));
-        System.out.println(ReuseableMethods.lineAutoSpacing("║ Total Days Alive: "+getTotalDaysAlive(), 67));
-        if (!DayBasedMilestone.isEmpty()) {
+        System.out.println(ReuseableMethods.softWrapping("║ Username: "+Username, 67));
+        System.out.println(ReuseableMethods.softWrapping("║ Age: "+Age, 67));
+        System.out.println(ReuseableMethods.softWrapping("║ Next Birthday: "+getNextBirthday(), 67));
+        System.out.println(ReuseableMethods.softWrapping("║ Total Days Alive: "+getTotalDaysAlive(), 67));
+        if (!DayBasedMilestone.isEmpty()) { 
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
             System.out.println("║                         DAY MILESTONES                          ║");
             System.out.println("╟─────────────────────────────────────────────────────────────────╢");
@@ -187,7 +220,7 @@ public class AgeMileStoneTrackerData implements Serializable {
             System.out.println("║                         AGE MILESTONES                          ║");
             System.out.println("╟─────────────────────────────────────────────────────────────────╢");
             for (int a: sortedAge) {
-                System.out.println(ReuseableMethods.lineAutoSpacing("║ (Age: "+a+") {Message: "+AgeBasedMilestone.get(a)+"} ", 67));
+                System.out.println(ReuseableMethods.softWrapping("║ (Age: "+a+") {Message: "+AgeBasedMilestone.get(a)+"} ", 67));
             }
             System.out.println("║                                                                 ║");
         }

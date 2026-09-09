@@ -1,7 +1,7 @@
 package Classess;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 04, 2026. at 12:45 PM
+// Last Modified: September 09, 2026. at 12:39 PM
 
 import java.time.LocalDate;
 
@@ -57,7 +57,9 @@ public class Menu {
         // PROCESSING OUTPUTS
         switch (Answer) {
             case 1:
-                AMST = new AgeMileStoneTracker(Username, UserBirthday);
+                if (AMST == null) { //... this is to avoid having to re-enter credentials again
+                    AMST = new AgeMileStoneTracker(Username, UserBirthday);
+                }
 
                 boolean FeatureRunning = true;
                 while (FeatureRunning) {

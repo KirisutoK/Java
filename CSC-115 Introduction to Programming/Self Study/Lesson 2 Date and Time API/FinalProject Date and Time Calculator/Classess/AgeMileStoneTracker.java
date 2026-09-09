@@ -1,7 +1,7 @@
 package Classess;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 08, 2026. at 12:09 PM
+// Last Modified: September 09, 2026. at 12:30 PM
 
 import Misc.ReuseableMethods;
 
@@ -187,7 +187,7 @@ public class AgeMileStoneTracker {
 
             for (File f : SavedFiles) {
                 if (f.getName().equals(ChosenFile.getName())) {
-                    if (ChosenFile.getName().equals(CurrentFile.getName())) {
+                    if (CurrentFile != null && ChosenFile.getName().equals(CurrentFile.getName())) {
                         if (ReuseableMethods.Confirmation("Delete Current File")) { // if it returned true
                             deleteCurrentFile();
                         }
@@ -223,12 +223,12 @@ public class AgeMileStoneTracker {
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println("║               AGE MILESTONE TRACKER [Main Menu]                 ║");
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-        System.out.println(ReuseableMethods.lineAutoSpacing("║ Username: " + Username, 67));
-        System.out.println(ReuseableMethods.lineAutoSpacing("║ Age: " + ReuseableMethods.getAge(UserBirthday), 67));
+        System.out.println(ReuseableMethods.softWrapping("║ Username: " + Username, 67));
+        System.out.println(ReuseableMethods.softWrapping("║ Age: " + ReuseableMethods.getAge(UserBirthday), 67));
         if (CurrentFile == null) {
             System.out.println(ReuseableMethods.lineAutoSpacing("║ Current File: NULL", 67));
         } else {
-            System.out.println(ReuseableMethods.lineAutoSpacing("║ Current File: "+ReuseableMethods.fileNameOnly(CurrentFile, 10), 67));
+            System.out.println(ReuseableMethods.softWrapping("║ Current File: "+ReuseableMethods.fileNameOnly(CurrentFile, 10), 67));
         }
         System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢");
         System.out.println("║ 1. Create File                                                  ║");
@@ -309,11 +309,11 @@ public class AgeMileStoneTracker {
             System.out.println("╔═════════════════════════════════════════════════════════════════╗");
             System.out.println("║                AGE MILESTONE TRACKER [FILE MENU]                ║");
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-            System.out.println(ReuseableMethods.lineAutoSpacing("║ Author: " + CurrentAMST_Data.getUsername(), 67));
-            System.out.println(ReuseableMethods.lineAutoSpacing("║ Current File: " + ReuseableMethods.fileNameOnly(CurrentFile, 10), 67));
-            System.out.println(ReuseableMethods.lineAutoSpacing("║ File Size: " + CurrentFile.length(), 67));
-            System.out.println(ReuseableMethods.lineAutoSpacing("║ Date Created: " + DateCreation, 67));
-            System.out.println(ReuseableMethods.lineAutoSpacing("║ Last Modified: " + LastModified, 67));
+            System.out.println(ReuseableMethods.softWrapping("║ Author: " + CurrentAMST_Data.getUsername(), 67));
+            System.out.println(ReuseableMethods.softWrapping("║ Current File: " + ReuseableMethods.fileNameOnly(CurrentFile, 10), 67));
+            System.out.println(ReuseableMethods.softWrapping("║ File Size: " + CurrentFile.length(), 67));
+            System.out.println(ReuseableMethods.softWrapping("║ Date Created: " + DateCreation, 67));
+            System.out.println(ReuseableMethods.softWrapping("║ Last Modified: " + LastModified, 67));
             System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢ ");
             System.out.println("║ 1. View MileStones                                              ║");
             System.out.println("║ 2. Add MileStones                                               ║");
@@ -501,7 +501,10 @@ public class AgeMileStoneTracker {
                 // [PROCESS]
                 while (!ValidInput) {
                     try {
-                        //... a. Processing Input
+                        //... a. showing display
+                        CurrentAMST_Data.printAgeMilestones();
+
+                        //... b. Processing Input
                         System.out.print("Please enter a age: ");
                         int age = ReuseableMethods.input.nextInt();
                         ReuseableMethods.input.nextLine(); // this refreshes buffer
@@ -535,8 +538,10 @@ public class AgeMileStoneTracker {
                 // [PROCESS]
                 while (!ValidInput) {
                     try {
-                        //... a. Processing Input
-                        System.out.println("input \"-1\" to exit. ");
+                        //... a. Showing display
+                        CurrentAMST_Data.printDayMilestones();
+
+                        //... b. Processing Input   
                         System.out.print("Please enter a day: ");
                         int day = ReuseableMethods.input.nextInt();
                         ReuseableMethods.input.nextLine(); // this refreshes buffer
