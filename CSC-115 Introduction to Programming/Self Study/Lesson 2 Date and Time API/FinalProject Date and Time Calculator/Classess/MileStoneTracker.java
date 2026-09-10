@@ -1,7 +1,7 @@
 package Classess;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 09, 2026. at 12:30 PM
+// Last Modified: September 10, 2026. at 12:25 PM
 
 import Misc.ReuseableMethods;
 
@@ -10,7 +10,7 @@ import java.nio.file.NoSuchFileException;
 import java.time.*;
 import java.util.InputMismatchException;
 
-public class AgeMileStoneTracker {
+public class MileStoneTracker {
     //=======VARIABLES=======//
     private String Username;
     private LocalDate UserBirthday;
@@ -18,7 +18,7 @@ public class AgeMileStoneTracker {
     // [MISC]
 
     // [DYNAMIC VARIABLE]
-    private AgeMileStoneTrackerData CurrentAMST_Data; // This will be the current selected object or data (Object)
+    private MileStoneTrackerData CurrentAMST_Data; // This will be the current selected object or data (Object)
     private File CurrentFile; // This will be the holder or container of that selected object or data (File)
 
     // [SECURITY]
@@ -28,7 +28,7 @@ public class AgeMileStoneTracker {
     private final int numbersPassword = 1; // must have at least 1 int characters
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    AgeMileStoneTracker(String Username, LocalDate UserBirthday) {
+    MileStoneTracker(String Username, LocalDate UserBirthday) {
         this.Username = Username;
         this.UserBirthday = UserBirthday;
     }
@@ -43,14 +43,14 @@ public class AgeMileStoneTracker {
             SavesFolder.mkdir();
         }
 
-        //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `AgeMileStoneTracker`
-        File AgeMileStoneTrackerFolder = new File(SavesFolder, "AgeMileStoneTracker");
-        if (!AgeMileStoneTrackerFolder.exists() || AgeMileStoneTrackerFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
-            AgeMileStoneTrackerFolder.mkdir();
+        //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `MileStoneTracker`
+        File MileStoneTrackerFolder = new File(SavesFolder, "MileStoneTracker");
+        if (!MileStoneTrackerFolder.exists() || MileStoneTrackerFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
+            MileStoneTrackerFolder.mkdir();
         }
 
-        //... UNDER `AgeMileStoneTracker`, Check if it already exists in the list.
-        File SaveFile = new File(AgeMileStoneTrackerFolder, FileName + ".AMST_Data"); // NOTE: `.AMST_Data` append so that every file will be a `.AMST_Data` file
+        //... UNDER `MileStoneTracker`, Check if it already exists in the list.
+        File SaveFile = new File(MileStoneTrackerFolder, FileName + ".AMST_Data"); // NOTE: `.AMST_Data` append so that every file will be a `.AMST_Data` file
         if (!SaveFile.exists() || SaveFile.isDirectory()) { // if the SaveFile does not exist or is currently a directory then.
             //... b. Create the password for the file.
             String Password = " "; // `" "` is just a placeholder
@@ -64,7 +64,7 @@ public class AgeMileStoneTracker {
 
             //... c. Create the file and return true.
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SaveFile))) { // NOTE: WE WILL BE USING `.AMST_Data` for the file name of our datas
-                CurrentAMST_Data = new AgeMileStoneTrackerData(Username, Password, UserBirthday);
+                CurrentAMST_Data = new MileStoneTrackerData(Username, Password, UserBirthday);
                 oos.writeObject(CurrentAMST_Data); // grab the file and put the object in that file
                 CurrentFile = SaveFile;
                 CurrentAMST_Data.logIn(Password); // this auto logIn's the current selected object as it is created
@@ -84,7 +84,7 @@ public class AgeMileStoneTracker {
     }
     public boolean loadFile() {
         //... a. Print existing Saved Files
-        File[] SavedFiles = ReuseableMethods.getSaveFiles("AgeMileStoneTracker");
+        File[] SavedFiles = ReuseableMethods.getSaveFiles("MileStoneTracker");
         if (SavedFiles == null) {
             return false;
         }
@@ -119,7 +119,7 @@ public class AgeMileStoneTracker {
                     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ChosenFile))) {
 
                         //... d. Must log-in in order for the data to load
-                        AgeMileStoneTrackerData Temp = (AgeMileStoneTrackerData) ois.readObject();
+                        MileStoneTrackerData Temp = (MileStoneTrackerData) ois.readObject();
                         boolean ValidPassword = false;
                         while (!ValidPassword) {
                             System.out.print("Enter Password: ");
@@ -141,7 +141,7 @@ public class AgeMileStoneTracker {
                         return true; // true means that it has successfully loaded
                     } catch (FileNotFoundException e) {
                         System.out.println("[ERROR: " + e.getClass().getSimpleName() + "] " + e.getMessage());
-                        SavedFiles = ReuseableMethods.getSaveFiles("AgeMileStoneTracker");
+                        SavedFiles = ReuseableMethods.getSaveFiles("MileStoneTracker");
                         if (SavedFiles == null) {
                             return false; // false means that it did not successfully load
                         }
@@ -165,7 +165,7 @@ public class AgeMileStoneTracker {
     }
     private void deleteSelectedFile() {
         //... a. Print existing Saved Files
-        File[] SavedFiles = ReuseableMethods.getSaveFiles("AgeMileStoneTracker");
+        File[] SavedFiles = ReuseableMethods.getSaveFiles("MileStoneTracker");
         if (SavedFiles == null) {
             return;
         }
@@ -193,9 +193,12 @@ public class AgeMileStoneTracker {
                         }
                     } else {
                         if (ReuseableMethods.Confirmation("Delete Selected File (" + ReuseableMethods.fileNameOnly(f, 10) + ")")) { // if it returned true
-                            System.out.println(ReuseableMethods.fileNameOnly(f, 10) + " has been successfully deleted!");
+                            if (f.delete()) { // if the deletion is successful
+                                System.out.println(ReuseableMethods.fileNameOnly(f, 10) + " has been successfully deleted!");
+                            } else {
+                                System.out.println("[ERROR] "+ReuseableMethods.fileNameOnly(f, 10) + " did not get deleted!");
+                            }
                             System.out.println();
-                            f.delete();
                         }
                     }
                     return;
@@ -208,11 +211,14 @@ public class AgeMileStoneTracker {
     private void deleteCurrentFile() {
         String CurrentFileName = ReuseableMethods.fileNameOnly(CurrentFile, 10);
 
-        CurrentFile.delete();
+        if (CurrentFile.delete()) { // if the deletion is successful
+            System.out.println(CurrentFileName + " has been successfully deleted!");
+        } else {
+            System.out.println("[ERROR] "+CurrentFileName+ " did not get deleted!");
+        }
         CurrentFile = null;
         CurrentAMST_Data = null;
 
-        System.out.println(CurrentFileName + " has been successfully deleted!");
         System.out.println();
     }
 
@@ -284,7 +290,7 @@ public class AgeMileStoneTracker {
                 }
                 break;
             case 4:
-                if (ReuseableMethods.getSaveFiles("AgeMileStoneTracker") != null) {
+                if (ReuseableMethods.getSaveFiles("MileStoneTracker") != null) {
                     deleteFileConfirmation();
                 }
 
@@ -311,7 +317,7 @@ public class AgeMileStoneTracker {
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
             System.out.println(ReuseableMethods.softWrapping("║ Author: " + CurrentAMST_Data.getUsername(), 67));
             System.out.println(ReuseableMethods.softWrapping("║ Current File: " + ReuseableMethods.fileNameOnly(CurrentFile, 10), 67));
-            System.out.println(ReuseableMethods.softWrapping("║ File Size: " + CurrentFile.length(), 67));
+            System.out.println(ReuseableMethods.softWrapping("║ File Size: " + ReuseableMethods.formatFileSize(CurrentFile.length()), 67));
             System.out.println(ReuseableMethods.softWrapping("║ Date Created: " + DateCreation, 67));
             System.out.println(ReuseableMethods.softWrapping("║ Last Modified: " + LastModified, 67));
             System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢ ");
@@ -386,15 +392,19 @@ public class AgeMileStoneTracker {
                 break;
             case 3:
                 System.out.println("Note: `Delete All Saved File` will not delete your current File.");
-                File[] SavedFiles = ReuseableMethods.getSaveFiles("AgeMileStoneTracker");
+                File[] SavedFiles = ReuseableMethods.getSaveFiles("MileStoneTracker");
                 if (SavedFiles != null && ReuseableMethods.Confirmation("Delete All Saved File")) {
                     for (File f : SavedFiles) {
-                        if (CurrentFile != null) { // if it exist
+                        if (CurrentFile != null) { // if we currently have a file
                             if (!(f.getName().equals(CurrentFile.getName()))) { // if the f is equal to the current file
-                                f.delete();
+                                if (!f.delete()) { // if it did not get deleted
+                                    System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
+                                }
                             }
                         } else { // If there is no current file yet.
-                            f.delete();
+                            if (!f.delete()) { // if it did not get deleted
+                                System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
+                            }
                         }
                     }
                 }
@@ -576,12 +586,3 @@ public class AgeMileStoneTracker {
 
     // ================================================== OTHER CLASSES ================================================== \\
 }
-
-// INITIAL IDEAS: 1.0
-// Given a birthdate, calculates age, next birthday, and upcoming life milestones (e.g. 10,000th day alive, retirement age, etc.)
-// with countdowns to each. Reusable in any profile or personal dashboard feature.
-//
-//
-
-// TODO: YOU ARE CURRENTLY ADDING THE FEATURES FOR DATA MANAGEMENT SINCE YOU HAVE FINISH WITH FILE MANAGEMENT
-// BUG: MILESTONE MESSAGES ARE PASSED AS 'NULL' WHEN CREATED

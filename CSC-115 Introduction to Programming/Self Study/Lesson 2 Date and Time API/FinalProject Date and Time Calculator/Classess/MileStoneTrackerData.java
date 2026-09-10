@@ -1,7 +1,7 @@
 package Classess;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 09, 2026. at 12:32 PM
+// Last Modified: September 10, 2026. at 12:19 PM
 
 import Misc.ReuseableMethods;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class AgeMileStoneTrackerData implements Serializable {
+public class MileStoneTrackerData implements Serializable {
     //=======VARIABLES=======//
     // [Class Data]
     private static final long serialVersionUID = 1L; // this is for serialization versions of the class
@@ -33,7 +33,7 @@ public class AgeMileStoneTrackerData implements Serializable {
     private HashMap<Integer, String> DayBasedMilestone; // Day, Message
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    AgeMileStoneTrackerData(String Username, String Password, LocalDate Birthday) {
+    MileStoneTrackerData(String Username, String Password, LocalDate Birthday) {
         this.Username = Username;
         this.Password = Password;
         this.Birthday = Birthday;
@@ -246,4 +246,3 @@ public class AgeMileStoneTrackerData implements Serializable {
 }
 
 // TODO: WE NEED TO ENCRYPT THIS! in the object file, it shows the password.
-// TODO: REMOVE THIS TODO

@@ -1,7 +1,7 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 08, 2026. at 12:25 PM
+// Last Modified: September 10, 2026. at 12:19 PM
 
-import Classess.AgeMileStoneTrackerData;
+import Classess.MileStoneTrackerData;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -173,13 +173,13 @@ public class ReuseableMethods {
             SavesFolder.mkdir();
         }
 
-        //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `AgeMileStoneTracker`
+        //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `MileStoneTracker`
         File ApplicationSavesFolder = new File(SavesFolder, ApplicationSavesFolderName);
         if (!ApplicationSavesFolder.exists() || ApplicationSavesFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
             ApplicationSavesFolder.mkdir();
         }
 
-        //... UNDER `AgeMileStoneTracker`.
+        //... UNDER `MileStoneTracker`.
         File[] SaveFiles = ApplicationSavesFolder.listFiles();
         //... If it has no contents or files in the folder
         if (SaveFiles == null || SaveFiles.length < 1) {
@@ -199,7 +199,7 @@ public class ReuseableMethods {
             return String.format("%.2f MB", FileSize / (1024.0 * 1024.0));
         }
     }
-    public static void serializeFile(AgeMileStoneTrackerData AMST_Data, File SaveFile) {
+    public static void serializeFile(MileStoneTrackerData AMST_Data, File SaveFile) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SaveFile))) { // enabling serialization to a file (Output)
             oos.writeObject(AMST_Data); // serialize the object into the file
         } catch (IOException e) {

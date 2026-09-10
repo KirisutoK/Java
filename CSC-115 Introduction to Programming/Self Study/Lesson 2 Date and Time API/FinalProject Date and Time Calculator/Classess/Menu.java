@@ -1,7 +1,7 @@
 package Classess;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 09, 2026. at 12:39 PM
+// Last Modified: September 10, 2026. at 12:19 PM
 
 import java.time.LocalDate;
 
@@ -15,7 +15,7 @@ public class Menu {
     // TODO: I WILL BE MOVING THE BIRTHDAY VARIABLES INTO THE MENU IN ORDER FOR IT TO BE REUSABLE FOR EACH FEATURE.
 
     // [CLASSES OR APPLICATIONS]
-    private static AgeMileStoneTracker AMST;
+    private static MileStoneTracker AMST;
     private static DayPlanner DP;
     private static MultiTimeZoneMeetingPlanner MTZMP;
     private static SubscriptionTracker ST;
@@ -44,7 +44,7 @@ public class Menu {
         System.out.println(ReuseableMethods.lineAutoSpacing("║ Username: "+Username, 74));
         System.out.println(ReuseableMethods.lineAutoSpacing("║ Birthday: "+ReuseableMethods.toStringBirthday(UserBirthday), 74));
         System.out.println("╟──[APPLICATIONS]────────────────────────────────────────────────────────╢");
-        System.out.println("║ 1. Age MileStone Tracker             4. Subscription Tracker (WIP)     ║");
+        System.out.println("║ 1. MileStone Tracker                 4. Subscription Tracker (WIP)     ║");
         System.out.println("║ 2. Day Planner (WIP)                 5. Work Hours Tracker (WIP)       ║");
         System.out.println("║ 3. Multi-TimeZone Tracker (WIP)      6. Change Profile                 ║");
         System.out.println("╚════════════════════════════════════════════════════════════════════════╝");
@@ -58,7 +58,7 @@ public class Menu {
         switch (Answer) {
             case 1:
                 if (AMST == null) { //... this is to avoid having to re-enter credentials again
-                    AMST = new AgeMileStoneTracker(Username, UserBirthday);
+                    AMST = new MileStoneTracker(Username, UserBirthday);
                 }
 
                 boolean FeatureRunning = true;
@@ -92,7 +92,7 @@ public class Menu {
     }
 
 
-    // [AgeMileStoneTracker Methods]
+    // [MileStoneTracker Methods]
     // [DayPlanner Methods]
     // [MultiTimeZoneMeetingPlanner Methods]
     // [SubscriptionTracker Methods]
