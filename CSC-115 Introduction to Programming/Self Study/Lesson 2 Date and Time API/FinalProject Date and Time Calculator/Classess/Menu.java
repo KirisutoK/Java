@@ -1,7 +1,7 @@
 package Classess;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 10, 2026. at 12:19 PM
+// Last Modified: September 11, 2026. at  9:32 AM
 
 import java.time.LocalDate;
 
@@ -12,7 +12,6 @@ public class Menu {
     // [USER DATA]
     private String Username;
     private LocalDate UserBirthday;
-    // TODO: I WILL BE MOVING THE BIRTHDAY VARIABLES INTO THE MENU IN ORDER FOR IT TO BE REUSABLE FOR EACH FEATURE.
 
     // [CLASSES OR APPLICATIONS]
     private static MileStoneTracker AMST;
@@ -57,10 +56,32 @@ public class Menu {
         // PROCESSING OUTPUTS
         switch (Answer) {
             case 1:
+                // [SECURITY]
                 if (AMST == null) { //... this is to avoid having to re-enter credentials again
                     AMST = new MileStoneTracker(Username, UserBirthday);
+                } else if( AMST.getCurrentAMST_Data() != null && !(AMST.getCurrentAMST_Data().getPasswordPassed()) ) { // if the currentASMT_Data is not null and that the password is not passed (not logged in)
+                    //... this is so that unauthorized users will not be able to see the file without having to log in again.
+                    System.out.println("You currently have a file open in the Milestone Tracker Program, you will have to enter your password again for "+AMST.getCurrentFile().getName()+".");
+                    System.out.println("[NOTE] input \"e\" to load the application with no current files open.");
+                    System.out.println();
+                    boolean ValidPassword = false;
+                    while (!ValidPassword) {
+                        System.out.print("Enter Password: ");
+                        String UserInputPassword = ReuseableMethods.input.nextLine();
+                        ValidPassword = AMST.getCurrentAMST_Data().logIn(UserInputPassword);
+
+                        if (UserInputPassword.equals("e")) { // NOTE: Lowky dont know how to deal with this, initially planning to go back to selecting files but dont know how
+                            AMST.resetCurrentFileData();
+                            ValidPassword = true;
+                        }
+                    }
                 }
 
+                // [PROCESS] We need to add this so that every time a user changes their username/birthday in the main menu, it will also apply into AMST.
+                AMST.setUsername(Username);
+                AMST.setUserBirthday(UserBirthday);
+
+                // [DISPLAY]
                 boolean FeatureRunning = true;
                 while (FeatureRunning) {
                     FeatureRunning = AMST.AMST_Menu(); //... This runs multiple process

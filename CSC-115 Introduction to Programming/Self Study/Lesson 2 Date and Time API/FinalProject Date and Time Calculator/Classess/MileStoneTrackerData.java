@@ -1,7 +1,7 @@
 package Classess;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 10, 2026. at 12:19 PM
+// Last Modified: September 11, 2026. at  9:40 AM
 
 import Misc.ReuseableMethods;
 
@@ -64,6 +64,9 @@ public class MileStoneTrackerData implements Serializable {
     }
     public long getTotalDaysAlive() {
         return ChronoUnit.DAYS.between(Birthday, Today);
+    }
+    public boolean getPasswordPassed() {
+        return passwordPassed;
     }
 
     public boolean DayMilestoneIsEmpty() {
@@ -246,3 +249,4 @@ public class MileStoneTrackerData implements Serializable {
 }
 
 // TODO: WE NEED TO ENCRYPT THIS! in the object file, it shows the password.
+// TODO: WE SHOULD ADD A LAST MODIFIED BY AUTHOR IF AUTHOR IS A DIFFERENT PERSON THEN ADD IF NOT THEN NO.

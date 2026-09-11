@@ -1,5 +1,5 @@
 // Creation Date: August 21, 2026. at 12:02 AM
-// Last Modified: September 10, 2026. at 12:48 PM
+// Last Modified: September 11, 2026. at  9:05 AM
 
 import Classess.Menu;
 import Misc.ReuseableMethods;
@@ -122,5 +122,3 @@ public class Main {
 // Add AES Encryption, Hashing Password
 // I am currently using a raw password string and users are able to see it throught the object file.
 // This whole cryptography thing will be a whole entire different thing so I am planning to learn it after i finish this project.
-
-// TODO: Remove this todo

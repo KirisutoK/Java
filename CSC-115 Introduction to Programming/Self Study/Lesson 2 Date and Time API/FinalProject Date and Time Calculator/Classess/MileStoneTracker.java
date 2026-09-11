@@ -1,7 +1,7 @@
 package Classess;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 10, 2026. at 12:25 PM
+// Last Modified: September 11, 2026. at  9:35 AM
 
 import Misc.ReuseableMethods;
 
@@ -34,8 +34,20 @@ public class MileStoneTracker {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public MileStoneTrackerData getCurrentAMST_Data() {
+        return CurrentAMST_Data;
+    }
+    public File getCurrentFile() {
+        return CurrentFile;
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
+    public void setUsername(String Username) {
+        this.Username = Username;
+    }
+    public void setUserBirthday(LocalDate Userbirthday) {
+        this.UserBirthday = UserBirthday;
+    }
     public boolean createFile(String FileName) {
         //... CHECK THE DIRECTORY OF `Saves`
         File SavesFolder = new File("Saves");
@@ -102,8 +114,7 @@ public class MileStoneTracker {
                 if (CurrentFile != null) { // If its not null
                     if (f.getName().equals(ChosenFile.getName()) && ChosenFile.getName().equals(CurrentFile.getName())) {
                         if (!CurrentFile.exists()) {
-                            CurrentFile = null;
-                            CurrentAMST_Data = null;
+                            resetCurrentFileData(); // turns currentfile and currentdata into null
 
                             System.out.println("[ERROR] Current File has been either deleted or moved.");
                         } else {
@@ -221,6 +232,10 @@ public class MileStoneTracker {
 
         System.out.println();
     }
+    public void resetCurrentFileData() {
+        CurrentAMST_Data = null;
+        CurrentFile = null;
+    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     // [MENUS]
@@ -328,8 +343,7 @@ public class MileStoneTracker {
             System.out.println("╚═════════════════════════════════════════════════════════════════╝");
             System.out.println();
         } catch (NoSuchFileException e) {
-            CurrentAMST_Data = null;
-            CurrentFile = null;
+            resetCurrentFileData(); // turns currentfile and currentdata into null
 
             System.out.println("[ERROR] Current File has been either deleted or moved.");
             System.out.println();
@@ -374,6 +388,7 @@ public class MileStoneTracker {
         System.out.println("║ 1. Delete Current File                                            ║");
         System.out.println("║ 2. Delete Selected File                                           ║");
         System.out.println("║ 3. Delete All Saved Files                                         ║");
+        System.out.println("║ 4. Go Back                                                        ║");
         System.out.println("╚═══════════════════════════════════════════════════════════════════╝");
         System.out.println();
 
@@ -410,6 +425,8 @@ public class MileStoneTracker {
                 }
                 System.out.println("Delete All Saved File has successfully completed!");
                 System.out.println();
+                break;
+            case 4:
                 break;
         }
     }
