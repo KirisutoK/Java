@@ -1,5 +1,5 @@
 // Creation Date: August 21, 2026. at 12:02 AM
-// Last Modified: September 11, 2026. at  9:05 AM
+// Last Modified: September 11, 2026. at  9:51 AM
 
 import Classess.Menu;
 import Misc.ReuseableMethods;
@@ -113,12 +113,15 @@ public class Main {
     }
 }
 
-// INITIAL IDEA 1.2:
+// [INITIAL IDEA 1.2:]
 // Add an exception if a user decides to exit the application because our application is running in an infinite while lopp.
-// INITIAL IDEA 1.3:
+// [INITIAL IDEA 1.3:]
 // Add AES Encryption, Hashing Password
 // I am currently using a raw password string and users are able to see it throught the object file.
 // This whole cryptography thing will be a whole entire different thing so I am planning to learn it after i finish this project.
 // Add AES Encryption, Hashing Password
 // I am currently using a raw password string and users are able to see it throught the object file.
 // This whole cryptography thing will be a whole entire different thing so I am planning to learn it after i finish this project.
+// [INITIAL IDEA 1.4:]
+// turn this application into JavaFX so that non-technical people are able to navigate freely and easily with just a click of a button.
+// Keep this CLI application as it is and replicate another one to convert it into JavaFX.
