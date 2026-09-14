@@ -82,6 +82,8 @@ while ((line = br.readLine()) != null) {  // reads line by line until end of fil
 }
 br.close();             // ALWAYS close when done!
 ```
+**NEW** 
+> `Files.readString(Path.of(FilePath)));`
 
 ---
 

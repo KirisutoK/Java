@@ -1,14 +1,14 @@
 // Creation Date: September 12, 2026. at 3:32 PM
-// Last Modified: September 12, 2026. at  3:37 PM
+// Last Modified: September 13, 2026. at  8:59 PM
 
 import java.util.ArrayList;
 
 public class Person {
     //=======VARIABLES=======//
-    public String Name;
-    public int Age;
-    public ArrayList<String> Hobbies;
-    public boolean Employment;
+    private String Name;
+    private int Age;
+    private ArrayList<String> Hobbies;
+    private boolean Employment;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public Person(String Name, int Age, boolean Employment) {
@@ -27,6 +27,12 @@ public class Person {
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+    public void displayInformation() {
+        System.out.println("Name: "+Name);
+        System.out.println("Age: "+Age);
+        System.out.println("Hobbies: "+Hobbies.toString());
+        System.out.println("Employment: "+Employment);
+    }
 
 
     // ================================================== OTHER CLASSES ================================================== \\
