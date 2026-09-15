@@ -129,14 +129,16 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public static Student loadFromFile(String filename) {
-    Gson gson = new Gson();
-
-    try (FileReader fr = new FileReader(filename)) {
-        return gson.fromJson(fr, Student.class);
+    Gson gson = new Gson(); // Creates the object in order to use the method
+    
+    String JSON_Data; // Get the data of the JSON file and put it into a string.
+    try {
+        JSON_Data = Files.readString(Path.of(File.getpath));
     } catch (IOException e) {
-        System.out.println("Error loading file: " + e.getMessage());
-        return null;
+        System.out.println(e.getMessage());
     }
+    
+    return gson.fromJson(JSON_Data, Student.class); // Use the string to make the object.
 }
 ```
 

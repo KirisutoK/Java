@@ -1,5 +1,5 @@
 // Creation Date: September 14, 2026. at 12:28 PM
-// Last Modified: September 14, 2026. at 12:34 PM
+// Last Modified: September 15, 2026. at  3:27 PM
 
 public class Clothes {
     //=======VARIABLES=======//
@@ -19,6 +19,18 @@ public class Clothes {
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
+    public void changeColor(String Color) {
+        this.Color = Color;
+    }
+    public void changeBrand(String Brand) {
+        this.Brand = Brand;
+    }
+    public void changeType(String Type) {
+        this.Type = Type;
+    }
+    public void changeSize(String Size) {
+        this.Size = Size;
+    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void dispalyInformation() {
