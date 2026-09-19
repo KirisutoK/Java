@@ -1,7 +1,7 @@
 package Classess.MileStoneTracker;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 18, 2026. at  8:43 PM
+// Last Modified: September 18, 2026. at 10:53 PM
 
 import Misc.ReuseableMethods;
 
@@ -20,7 +20,7 @@ public class MileStoneTrackerData implements Serializable {
 
     // [Security]
     private String Password; // TODO: WE NEED TO ENCRYPT THIS! in the object file, it shows the password. (DO THIS AFTER LEARNING HOW TO ENCRYPT AND HASHING [Cryptography Lessons: Not OOP])
-    private boolean passwordPassed = false;
+    private boolean LoggedIn = false;
 
     // [Basic Data]
     private String Username;
@@ -47,11 +47,11 @@ public class MileStoneTrackerData implements Serializable {
 
     // [Basic Getters]
     public int getAge() {
-        if (!passwordPassed) System.out.println("[ERROR] User is not logged in!");
-        return (passwordPassed) ? Age: 0;
+        if (!LoggedIn) System.out.println("[ERROR] User is not logged in!");
+        return (LoggedIn) ? Age: 0;
     }
     public String getUsername() {
-        return (passwordPassed) ? Username: "[ERROR] User is not logged in!";
+        return (LoggedIn) ? Username: "[ERROR] User is not logged in!";
     }
     public String getNextBirthday() {
         LocalDate nextBirthday = LocalDate.of(Today.getYear(), Birthday.getMonth(), Birthday.getDayOfMonth());
@@ -65,8 +65,8 @@ public class MileStoneTrackerData implements Serializable {
     public long getTotalDaysAlive() {
         return ChronoUnit.DAYS.between(Birthday, Today);
     }
-    public boolean getPasswordPassed() {
-        return passwordPassed;
+    public boolean getLoggedIn() {
+        return LoggedIn;
     }
 
     public boolean DayMilestoneIsEmpty() {
@@ -81,7 +81,7 @@ public class MileStoneTrackerData implements Serializable {
     // [SECURITY]
     public boolean logIn(String input) {
         if (Password.equals(input)) {
-            passwordPassed = true;
+            LoggedIn = true;
             return true;
         }
 
@@ -90,7 +90,7 @@ public class MileStoneTrackerData implements Serializable {
         return false;
     }
     public void logOut() {
-        passwordPassed = false;
+        LoggedIn = false;
     }
 
     // [MILESTONES]
@@ -203,7 +203,7 @@ public class MileStoneTrackerData implements Serializable {
 
         // [PRINT]
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println(ReuseableMethods.softWrapping("║ File Name: "+ReuseableMethods.fileNameOnly(CurrentFile, 10)+((AgeBasedMilestone.isEmpty()&&DayBasedMilestone.isEmpty())? " (EMPTY)":""), 67));
+        System.out.println(ReuseableMethods.softWrapping("║ File Name: "+ReuseableMethods.fileNameOnly(CurrentFile, 5)+((AgeBasedMilestone.isEmpty()&&DayBasedMilestone.isEmpty())? " (EMPTY)":""), 67));
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
         System.out.println(ReuseableMethods.softWrapping("║ Username: "+Username, 67));
         System.out.println(ReuseableMethods.softWrapping("║ Age: "+Age, 67));

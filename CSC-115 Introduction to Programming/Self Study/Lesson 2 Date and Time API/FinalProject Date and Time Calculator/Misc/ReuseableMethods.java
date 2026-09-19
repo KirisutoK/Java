@@ -1,15 +1,14 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 18, 2026. at  9:37 PM
+// Last Modified: September 18, 2026. at 10:52 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.*;
 
-import javax.swing.text.DateFormatter;
 import java.io.*;
-import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.security.MessageDigest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -83,6 +82,11 @@ public class ReuseableMethods {
 
         return result.toString();
     }
+    public static String fileNameOnly(File file, int TypeWidth) {
+        return file.getName().substring(0, file.getName().length() - TypeWidth);
+    }
+
+    // [SECURITY]
     public static boolean passwordValidation(String Password, int minimum, int maximum, int specialCharacters, int Numbers){
 
         // Count how many Characters, how many special characters, and numbers
@@ -116,8 +120,20 @@ public class ReuseableMethods {
 
         return true;
     }
-    public static String fileNameOnly(File file, int TypeWidth) {
-        return file.getName().substring(0, file.getName().length() - TypeWidth);
+    public static String hashPassword(String password) { // NOTE: THIS IS METHOD IS ENTIRELY MADE BY CLAUADE
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashed = md.digest(password.getBytes());
+
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashed) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            System.out.println("[ERROR: " + e.getClass().getSimpleName() + "] " + e.getMessage());
+            return null;
+        }
     }
     public static boolean Confirmation(String process) {
         // DISPLAY
@@ -149,9 +165,9 @@ public class ReuseableMethods {
         System.out.println("╒══════════[AGE MILESTONE TRACKER SAVES]════════════╕");
         for (File f:savedFiles) {
             if (currentFile != null) {
-                System.out.println(ReuseableMethods.lineAutoSpacing("│ Name: "+ReuseableMethods.fileNameOnly(f, 10)+((f.getName().equals(currentFile.getName())) ? " (CURRENT FILE)":""), 53)); // The extra methods are meant to remove the `.txt
+                System.out.println(ReuseableMethods.lineAutoSpacing("│ Name: "+ReuseableMethods.fileNameOnly(f, 5)+((f.getName().equals(currentFile.getName())) ? " (CURRENT FILE)":""), 53)); // The extra methods are meant to remove the `.txt
             } else {
-                System.out.println(ReuseableMethods.lineAutoSpacing("│ Name: "+ReuseableMethods.fileNameOnly(f, 10), 53)); // The extra methods are meant to remove the `.txt`
+                System.out.println(ReuseableMethods.lineAutoSpacing("│ Name: "+ReuseableMethods.fileNameOnly(f, 5), 53)); // The extra methods are meant to remove the `.txt`
             }
             try {
                 System.out.println(ReuseableMethods.lineAutoSpacing("│ Size: "+ReuseableMethods.formatFileSize(f.length()), 53));
@@ -191,8 +207,13 @@ public class ReuseableMethods {
 
         return SaveFiles;
     }
-    public static void updateJsonFile(Object obj, FileWriter file) {
-        gson.toJson(obj, file);
+    public static void updateJsonFile(Object obj, File file) {
+        // NOTE: I feel like this might cause an error issue if something wrongs with any of the methods this method had been used on
+        try (FileWriter fw = new FileWriter(file)) {
+            gson.toJson(obj, fw);
+        } catch (IOException e) {
+            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+        }
     }
 
     // [BIRTHDAYS]

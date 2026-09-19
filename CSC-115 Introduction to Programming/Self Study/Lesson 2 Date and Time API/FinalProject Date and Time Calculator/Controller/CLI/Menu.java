@@ -1,7 +1,7 @@
-package Classess;
+package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 18, 2026. at  8:43 PM
+// Last Modified: September 18, 2026. at 11:58 PM
 
 import java.time.LocalDate;
 
@@ -43,7 +43,7 @@ public class Menu {
     public boolean MainMenu() {
         // DISPLAY
         System.out.println("╔════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║                      DATE AND TIME CALCULATOR 1.0                      ║");
+        System.out.println("║                            ChronoSuite 1.0                             ║");
         System.out.println("╠════════════════════════════════════════════════════════════════════════╣");
         System.out.println(ReuseableMethods.lineAutoSpacing("║ Username: "+Username, 74));
         System.out.println(ReuseableMethods.lineAutoSpacing("║ Birthday: "+ReuseableMethods.toStringBirthday(UserBirthday), 74));
@@ -64,7 +64,7 @@ public class Menu {
                 // [SECURITY]
                 if (AMST == null) { //... this is to avoid having to re-enter credentials again
                     AMST = new MileStoneTracker(Username, UserBirthday);
-                } else if( AMST.getCurrentAMST_Data() != null && !(AMST.getCurrentAMST_Data().getPasswordPassed()) ) { // if the currentASMT_Data is not null and that the password is not passed (not logged in)
+                } else if( AMST.getCurrentAMST_Data() != null && !(AMST.getCurrentAMST_Data().getLoggedIn()) ) { // if the currentASMT_Data is not null and that the password is not passed (not logged in)
                     //... this is so that unauthorized users will not be able to see the file without having to log in again.
                     System.out.println("You currently have a file open in the Milestone Tracker Program, you will have to enter your password again for "+AMST.getCurrentFile().getName()+".");
                     System.out.println("[NOTE] input \"e\" to load the application with no current files open.");
