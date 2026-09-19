@@ -1,5 +1,5 @@
 // Creation Date: August 21, 2026. at 12:02 AM
-// Last Modified: September 18, 2026. at 11:58 PM
+// Last Modified: September 19, 2026. at 12:10 AM
 
 import Controller.CLI.Menu;
 import Misc.ReuseableMethods;
@@ -132,3 +132,5 @@ public class Launcher {
 // The new structure will consist of [Classes(ProgramHandler, ProgramData)],
 // the Classes will be used for manipulating data through a Controller called [UI(CLI/JavaFX)]
 // where we call the methods of the classes and then run it through either CLI or JavaFX depending on user preferences.
+// A
+// I will be making another repo for future
