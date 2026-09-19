@@ -1,5 +1,5 @@
 // Creation Date: September 15, 2026. at 3:29 PM
-// Last Modified: September 16, 2026. at  5:47 PM
+// Last Modified: September 18, 2026. at  8:25 PM
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -62,7 +62,7 @@ public class Main {
     // =========================== METHODS =========================== \\
     public static void saveToJson(Class c, String filename) {
         //... FIND DIRECTORY ON WHERE TO SAVE
-        File JSON_Files = new File("JSON_Files");
+        File JSON_Files = new File("json_Files");
         if (!JSON_Files.exists() || !JSON_Files.isDirectory()) {
             JSON_Files.mkdir();
         }
@@ -81,7 +81,7 @@ public class Main {
     }
     public static Class loadtoJson(String filename) {
         // [FIND THE FILE]
-        File JSON_Files = new File("JSON_Files");
+        File JSON_Files = new File("json_Files");
         if (!JSON_Files.exists() || !JSON_Files.isDirectory()) {
             JSON_Files.mkdir();
             System.out.println("The file does not exist!");
@@ -108,7 +108,7 @@ public class Main {
     }
     public static void removeFile(String filename) {
         //... FIND DIRECTORY ON WHERE TO SAVE
-        File JSON_Files = new File("JSON_Files");
+        File JSON_Files = new File("json_Files");
         if (!JSON_Files.exists() || !JSON_Files.isDirectory()) {
             JSON_Files.mkdir();
         }

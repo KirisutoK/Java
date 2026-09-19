@@ -1,5 +1,5 @@
 // Creation Date: September 12, 2026. at 3:32 PM
-// Last Modified: September 13, 2026. at  9:08 PM
+// Last Modified: September 18, 2026. at  8:25 PM
 
 import com.google.gson.Gson;         // the core class you'll use
 import com.google.gson.GsonBuilder; // needs this for pretty printing
@@ -43,7 +43,7 @@ public class Main {
 
         try {
             // [FILE CREATION] ...We need a file to save the string JSON into.
-            File SavedFile = new File("JSON_Files", filename+".JSON"); // We will be creating files
+            File SavedFile = new File("json_Files", filename+".JSON"); // We will be creating files
             if (!SavedFile.exists()) {
                 SavedFile.createNewFile();
             }
@@ -66,7 +66,7 @@ public class Main {
 
         try {
             // [FILE CREATION] ...We need a file to save the string JSON into.
-            File SavedFile = new File("JSON_Files", filename+".JSON"); // We will be creating files
+            File SavedFile = new File("json_Files", filename+".JSON"); // We will be creating files
             if (!SavedFile.exists()) {
                 SavedFile.createNewFile();
             }
@@ -92,7 +92,7 @@ public class Main {
 
         try {
             // [FINDING THE FILE]
-            File SavedFolders = new File("JSON_Files");
+            File SavedFolders = new File("json_Files");
             File SavedFile = null;
             filename = filename+".JSON";
 

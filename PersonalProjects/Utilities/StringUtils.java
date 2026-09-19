@@ -1,13 +1,13 @@
 // Creation Date: August 14, 2026. at 7:33 PM
-// Last Modified: August 21, 2026. at  9:20 PM
+// Last Modified: September 18, 2026. at  9:04 PM
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class StringUtils {
     // =========================== CLASS VARIABLES =========================== \\
-
-    // =========================== CONSTRUCTOR =========================== \\
-
+    static Scanner input = new Scanner(System.in);
 
     // =========================== METHODS =========================== \\
     // [STRING MODIFICATION]
@@ -46,7 +46,45 @@ public class StringUtils {
 
         return sb.toString();
     }
+    public static String lineAutoSpacing(String line, int width) {
+        // DISPLAY
+        int totalWidth = width;
+        int spacesNeeded = Math.max(0, totalWidth - line.length() - 1); // NOTE: (spacesNeeded = totalWidth - prefixLength - usernameLength - 1) <========= FORMULA BY CLAUDE
+        String padding = " ".repeat(spacesNeeded);
 
+        return line + padding + line.toCharArray()[0];
+    }
+    public static String softWrapping(String line, int width) {
+        // NOTE: THIS IS METHOD IS ENTIRELY MADE BY CLAUADE
+        // NOTE: `lineAutoSpacing()` is used in this method
+
+        if (line.length() + 1 <= width) { // +1 for the closing ║
+            return lineAutoSpacing(line, width);
+        }
+
+        StringBuilder result = new StringBuilder();
+        String continuationPrefix = "║   "; // indent for wrapped lines
+
+        // split at the threshold
+        String firstChunk = line.substring(0, width - 2); // -2 for closing ║ and space
+        String remainder = line.substring(width - 2).trim();
+
+        result.append(lineAutoSpacing(firstChunk, width)).append("\n");
+
+        // handle remainder in chunks
+        while (!remainder.isEmpty()) {
+            if (continuationPrefix.length() + remainder.length() + 1 <= width) {
+                result.append(lineAutoSpacing(continuationPrefix + remainder, width));
+                remainder = "";
+            } else {
+                int space = width - continuationPrefix.length() - 2;
+                result.append(lineAutoSpacing(continuationPrefix + remainder.substring(0, space), width)).append("\n");
+                remainder = remainder.substring(space).trim();
+            }
+        }
+
+        return result.toString();
+    }
 
     // [STRING GAMES]
     // Uses: Requirements
@@ -90,6 +128,28 @@ public class StringUtils {
         }
 
         return CharacterCounts01.equals(CharacterCounts02);
+    }
+    public static int getAnswer(int start, int end) {  // Note: i am planning to add a throw in this reuseable method so that we can reuse "e" to exit.
+        boolean ValidAnswer = false; //... Placeholders
+        int Answer = 0; //... Placeholders
+        while (!ValidAnswer) {
+            try {
+                System.out.print("Answer: ");
+                Answer = input.nextInt();
+                input.nextLine(); // Refreshes buffer
+                if (Answer < start || Answer > end) {
+                    throw new InputMismatchException();
+                }
+
+                ValidAnswer = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Please choose between "+start+" through "+end);
+                input.nextLine(); // Refreshes buffer
+            }
+        }
+        System.out.println();
+
+        return Answer;
     }
 
     // [HIDE VALUE]

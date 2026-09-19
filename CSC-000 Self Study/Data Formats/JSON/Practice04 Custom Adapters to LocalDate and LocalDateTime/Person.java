@@ -1,8 +1,9 @@
 // Creation Date: September 17, 2026. at 2:14 PM
-// Last Modified: September 17, 2026. at  3:42 PM
+// Last Modified: September 18, 2026. at  8:27 PM
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Person {
     //=======VARIABLES=======//
@@ -30,12 +31,19 @@ public class Person {
     public void setBirthday(LocalDate Birthday) {
         this.Birthday = Birthday;
     }
+    public String getCreationDate() {
+        DateTimeFormatter DTF = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
+
+        return DTF.format(CreationDate);
+    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     public void displayInformation() {
         System.out.println("Name: "+Name);
         System.out.println("Age: "+Age);
-        System.out.println("Birthday: "+Birthday.getMonth()+" "+Birthday.getDayOfMonth()+", "+Birthday.getYear());
+        System.out.println("Birthday: "+((Birthday != null) ? Birthday.getMonth()+" "+Birthday.getDayOfMonth()+", "+Birthday.getYear() : "NULL") );
+        System.out.println("Creation Date: "+getCreationDate());
+
     }
 
     // ================================================== OTHER CLASSES ================================================== \\

@@ -1,12 +1,12 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 12, 2026. at  3:29 PM
+// Last Modified: September 18, 2026. at  9:37 PM
 
-import Classess.MileStoneTrackerData;
+import Misc.GSON_Adapters.GsonAdapter_Date;
+import com.google.gson.*;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import javax.swing.text.DateFormatter;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -21,6 +21,7 @@ import java.util.Scanner;
 public class ReuseableMethods {
     //=======VARIABLES=======//
     public static Scanner input = new Scanner(System.in);
+    public static Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate.class, new GsonAdapter_Date()).create();
         // LESSON LEARNED: I learned that you can use an object anywhere in the project if it is a static public
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
@@ -190,21 +191,8 @@ public class ReuseableMethods {
 
         return SaveFiles;
     }
-    public static String formatFileSize(long FileSize) { // NOTE: This method and it's formula is created by Claude (made some tweaks to make it readable to me)
-        if (FileSize < 1024) {
-            return FileSize + " B";
-        } else if (FileSize < 1024 * 1024) {
-            return String.format("%.2f KB", FileSize / 1024.0);
-        } else {
-            return String.format("%.2f MB", FileSize / (1024.0 * 1024.0));
-        }
-    }
-    public static void serializeFile(MileStoneTrackerData AMST_Data, File SaveFile) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SaveFile))) { // enabling serialization to a file (Output)
-            oos.writeObject(AMST_Data); // serialize the object into the file
-        } catch (IOException e) {
-            System.out.println("[ERROR: " + e.getClass().getSimpleName() + "] " + e.getMessage());
-        }
+    public static void updateJsonFile(Object obj, FileWriter file) {
+        gson.toJson(obj, file);
     }
 
     // [BIRTHDAYS]
@@ -257,6 +245,15 @@ public class ReuseableMethods {
         }
 
         return null;
+    }
+    public static String formatFileSize(long FileSize) { // NOTE: This method and it's formula is created by Claude (made some tweaks to make it readable to me)
+        if (FileSize < 1024) {
+            return FileSize + " B";
+        } else if (FileSize < 1024 * 1024) {
+            return String.format("%.2f KB", FileSize / 1024.0);
+        } else {
+            return String.format("%.2f MB", FileSize / (1024.0 * 1024.0));
+        }
     }
 
 

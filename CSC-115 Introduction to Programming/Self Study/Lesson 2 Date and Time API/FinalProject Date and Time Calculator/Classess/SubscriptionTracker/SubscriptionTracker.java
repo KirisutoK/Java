@@ -1,9 +1,9 @@
-package Classess;
+package Classess.SubscriptionTracker;
 
 // Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: August 21, 2026. at 12:06 AM
+// Last Modified: September 18, 2026. at  8:43 PM
 
-public class MultiTimeZoneMeetingPlanner {
+public class SubscriptionTracker {
     //=======VARIABLES=======//
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
@@ -19,5 +19,6 @@ public class MultiTimeZoneMeetingPlanner {
 }
 
 // INITIAL IDEA:
-// Given a list of participants each in a different timezone and a proposed meeting time, checks if the time falls within business
-// hours for everyone and suggests alternatives if not. Reusable in any collaborative or international scheduling tool.
+// A list of subscriptions or licenses each with a start date and duration — calculates expiry dates,
+// flags what's expiring soon or already expired, and sorts by urgency.
+// Reusable in any SaaS, license management, or reminder system.

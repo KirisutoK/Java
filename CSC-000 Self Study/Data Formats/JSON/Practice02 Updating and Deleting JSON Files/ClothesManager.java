@@ -1,5 +1,5 @@
 // Creation Date: September 15, 2026. at 2:12 PM
-// Last Modified: September 15, 2026. at  3:26 PM
+// Last Modified: September 18, 2026. at  8:25 PM
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -62,7 +62,7 @@ public class ClothesManager {
     }
     private void saveFile(String Name) {
         //... Locate Directory
-        File JSON_Files = new File("JSON_Files");
+        File JSON_Files = new File("json_Files");
         if (!JSON_Files.exists() || JSON_Files.isFile()) {
             JSON_Files.mkdir();
         }
@@ -87,7 +87,7 @@ public class ClothesManager {
     }
     public void loadFile(String name) {
         //... Locate Directory
-        File JSON_Files = new File("JSON_Files");
+        File JSON_Files = new File("json_Files");
         if (!JSON_Files.exists() || JSON_Files.isFile()) {
             System.out.println("There are currently no files in the JSON_Files directory");
         }

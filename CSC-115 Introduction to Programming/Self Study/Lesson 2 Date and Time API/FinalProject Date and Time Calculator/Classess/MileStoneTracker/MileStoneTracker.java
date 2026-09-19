@@ -1,9 +1,11 @@
-package Classess;
+package Classess.MileStoneTracker;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 11, 2026. at  9:35 AM
+// Last Modified: September 18, 2026. at 10:08 PM
 
 import Misc.ReuseableMethods;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.*;
 import java.nio.file.NoSuchFileException;
@@ -28,7 +30,7 @@ public class MileStoneTracker {
     private final int numbersPassword = 1; // must have at least 1 int characters
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    MileStoneTracker(String Username, LocalDate UserBirthday) {
+    public MileStoneTracker(String Username, LocalDate UserBirthday) {
         this.Username = Username;
         this.UserBirthday = UserBirthday;
     }
@@ -42,12 +44,19 @@ public class MileStoneTracker {
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
+    // [CLASS VARIABLE MANAGEMENT]
+    public void resetCurrentFileData() {
+        CurrentAMST_Data = null;
+        CurrentFile = null;
+    }
     public void setUsername(String Username) {
         this.Username = Username;
     }
     public void setUserBirthday(LocalDate Userbirthday) {
         this.UserBirthday = UserBirthday;
     }
+
+    // [FILE MANAGEMENT]
     public boolean createFile(String FileName) {
         //... CHECK THE DIRECTORY OF `Saves`
         File SavesFolder = new File("Saves");
@@ -62,7 +71,7 @@ public class MileStoneTracker {
         }
 
         //... UNDER `MileStoneTracker`, Check if it already exists in the list.
-        File SaveFile = new File(MileStoneTrackerFolder, FileName + ".AMST_Data"); // NOTE: `.AMST_Data` append so that every file will be a `.AMST_Data` file
+        File SaveFile = new File(MileStoneTrackerFolder, FileName + ".json"); // NOTE: `.AMST_Data` append so that every file will be a `.AMST_Data` file
         if (!SaveFile.exists() || SaveFile.isDirectory()) { // if the SaveFile does not exist or is currently a directory then.
             //... b. Create the password for the file.
             String Password = " "; // `" "` is just a placeholder
@@ -75,11 +84,14 @@ public class MileStoneTracker {
             }
 
             //... c. Create the file and return true.
-            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SaveFile))) { // NOTE: WE WILL BE USING `.AMST_Data` for the file name of our datas
+            try (FileWriter fw = new FileWriter(SaveFile)) { // NOTE: WE WILL BE USING `.AMST_Data` for the file name for our datas
                 CurrentAMST_Data = new MileStoneTrackerData(Username, Password, UserBirthday);
-                oos.writeObject(CurrentAMST_Data); // grab the file and put the object in that file
                 CurrentFile = SaveFile;
                 CurrentAMST_Data.logIn(Password); // this auto logIn's the current selected object as it is created
+
+                //... d. Serialize the data into the file
+                ReuseableMethods.updateJsonFile(CurrentAMST_Data, fw);
+
 
                 System.out.println(FileName + " has been created!");
                 System.out.println();
@@ -232,10 +244,6 @@ public class MileStoneTracker {
 
         System.out.println();
     }
-    public void resetCurrentFileData() {
-        CurrentAMST_Data = null;
-        CurrentFile = null;
-    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     // [MENUS]
@@ -357,23 +365,23 @@ public class MileStoneTracker {
         // [PROCESSING OUTPUTS]
         boolean isRunning; // this variable is just a placeholder so that each cases can have the same name;
         switch (Answer) {
-            case 1:
+            case 1: // +[View Milestone]+
                 CurrentAMST_Data.viewData(CurrentFile);
                 break;
-            case 2:
+            case 2: // +[Add Milestone]+
                 isRunning = true;
                 while (isRunning) {
                     isRunning = addMilestoneConfirmation();
                 }
 
                 break;
-            case 3:
+            case 3: // +[Remove Milestone]+
                 isRunning = true;
                 while (isRunning) {
                     isRunning = removeMilestoneConfirmation();
                 }
                 break;
-            case 4:
+            case 4: // +[Go Back]+
                 return false; // `false` means that this method will now stop running (there is a variable at AMST_Menu)
         }
         return true; // `true` means that this method will keep running
@@ -462,15 +470,17 @@ public class MileStoneTracker {
 
                         ValidInput = CurrentAMST_Data.addAgeBasedMilestone(age, message);
 
+                        //... b. Processing Output
+                        ReuseableMethods.updateJsonFile(CurrentAMST_Data, new FileWriter(CurrentFile));
+
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] age must not be a letter, it must be a number or integer.");
                         System.out.println();
                         ReuseableMethods.input.nextLine(); // this refreshes buffer
+                    } catch (IOException e) {
+                        System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
                     }
                 }
-
-                //... b. Processing Output (Serialization)
-                ReuseableMethods.serializeFile(CurrentAMST_Data, CurrentFile);
 
                 return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
             case 2:
@@ -485,15 +495,20 @@ public class MileStoneTracker {
                         System.out.println();
 
                         ValidInput = CurrentAMST_Data.addDayBasedMilestone(day, message); // returns a boolean and processes data at the same time
+
+                        //... b. Processing Output
+                        ReuseableMethods.updateJsonFile(CurrentAMST_Data, new FileWriter(CurrentFile));
+
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
                         System.out.println();
                         ReuseableMethods.input.nextLine(); // this refreshes buffer
+                    } catch (IOException e) {
+                        System.out.println("[ERROR: IOException] "+e.getMessage());
+                        System.out.println();
+                        ReuseableMethods.input.nextLine(); // this refreshes buffer
                     }
                 }
-
-                //... b. Processing Output (Serialization)
-                ReuseableMethods.serializeFile(CurrentAMST_Data, CurrentFile);
 
                 return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
             case 3:

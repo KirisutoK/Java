@@ -1,9 +1,9 @@
-package Classess;
+package Classess.DayPlanner;
 
 // Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: August 21, 2026. at 12:06 AM
+// Last Modified: September 18, 2026. at  8:43 PM
 
-public class SubscriptionTracker {
+public class DayPlanner {
     //=======VARIABLES=======//
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
@@ -18,7 +18,6 @@ public class SubscriptionTracker {
     // ================================================== OTHER CLASSES ================================================== \\
 }
 
-// INITIAL IDEA:
-// A list of subscriptions or licenses each with a start date and duration — calculates expiry dates,
-// flags what's expiring soon or already expired, and sorts by urgency.
-// Reusable in any SaaS, license management, or reminder system.
+// INITIAL IDEAS:
+// A program that takes a list of events with names, dates, times, and timezones — prints them sorted, flags conflicts (two events overlapping),
+// and shows how much free time is between each one. Reusable as a foundation for any scheduling feature in future apps.

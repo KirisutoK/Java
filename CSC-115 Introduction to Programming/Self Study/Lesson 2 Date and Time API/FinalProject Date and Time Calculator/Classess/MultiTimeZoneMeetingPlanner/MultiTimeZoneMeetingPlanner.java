@@ -1,9 +1,9 @@
-package Classess;
+package Classess.MultiTimeZoneMeetingPlanner;
 
 // Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: August 21, 2026. at 12:05 AM
+// Last Modified: September 18, 2026. at  8:43 PM
 
-public class DayPlanner {
+public class MultiTimeZoneMeetingPlanner {
     //=======VARIABLES=======//
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
@@ -18,6 +18,6 @@ public class DayPlanner {
     // ================================================== OTHER CLASSES ================================================== \\
 }
 
-// INITIAL IDEAS:
-// A program that takes a list of events with names, dates, times, and timezones — prints them sorted, flags conflicts (two events overlapping),
-// and shows how much free time is between each one. Reusable as a foundation for any scheduling feature in future apps.
+// INITIAL IDEA:
+// Given a list of participants each in a different timezone and a proposed meeting time, checks if the time falls within business
+// hours for everyone and suggests alternatives if not. Reusable in any collaborative or international scheduling tool.
