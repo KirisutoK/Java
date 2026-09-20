@@ -1,7 +1,7 @@
 package Classess.MileStoneTracker;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 18, 2026. at 10:53 PM
+// Last Modified: September 20, 2026. at  1:26 PM
 
 import Misc.ReuseableMethods;
 
@@ -20,6 +20,7 @@ public class MileStoneTrackerData implements Serializable {
 
     // [Security]
     private String Password; // TODO: WE NEED TO ENCRYPT THIS! in the object file, it shows the password. (DO THIS AFTER LEARNING HOW TO ENCRYPT AND HASHING [Cryptography Lessons: Not OOP])
+    private boolean EmptyPassword;
     private boolean LoggedIn = false;
 
     // [Basic Data]
@@ -36,6 +37,16 @@ public class MileStoneTrackerData implements Serializable {
     MileStoneTrackerData(String Username, String Password, LocalDate Birthday) {
         this.Username = Username;
         this.Password = Password;
+        this.EmptyPassword = false;
+        this.Birthday = Birthday;
+        this.Today = LocalDate.now();
+        this.Age = ReuseableMethods.getAge(Birthday);
+        this.AgeBasedMilestone = new HashMap<>();
+        this.DayBasedMilestone = new HashMap<>();
+    }
+    MileStoneTrackerData(String Username, LocalDate Birthday) {
+        this.Username = Username;
+        this.EmptyPassword = true;
         this.Birthday = Birthday;
         this.Today = LocalDate.now();
         this.Age = ReuseableMethods.getAge(Birthday);
@@ -68,6 +79,9 @@ public class MileStoneTrackerData implements Serializable {
     public boolean getLoggedIn() {
         return LoggedIn;
     }
+    public boolean getEmptyPassword() {
+        return EmptyPassword;
+    }
 
     public boolean DayMilestoneIsEmpty() {
         return DayBasedMilestone.isEmpty();
@@ -91,6 +105,10 @@ public class MileStoneTrackerData implements Serializable {
     }
     public void logOut() {
         LoggedIn = false;
+    }
+    public void setPassword(String HashedPassword) {
+        this.Password = HashedPassword;
+        this.EmptyPassword = false;
     }
 
     // [MILESTONES]

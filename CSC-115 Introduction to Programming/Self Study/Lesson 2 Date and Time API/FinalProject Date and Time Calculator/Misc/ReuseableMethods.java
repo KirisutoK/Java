@@ -1,5 +1,5 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 18, 2026. at 10:52 PM
+// Last Modified: September 20, 2026. at 12:47 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.*;
@@ -214,6 +214,32 @@ public class ReuseableMethods {
         } catch (IOException e) {
             System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
         }
+    }
+    public static File createFile(String Parentname, String Filename) {
+        //... CHECK THE DIRECTORY OF `Saves`
+        File SavesFolder = new File("Saves");
+        if (!SavesFolder.exists() || SavesFolder.isFile()) { // if the path does not exist or there is an existing file called "Saves" then.
+            SavesFolder.mkdir();
+        }
+
+        //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `MileStoneTracker`
+        File MileStoneTrackerFolder = new File(SavesFolder, Parentname);
+        if (!MileStoneTrackerFolder.exists() || MileStoneTrackerFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
+            MileStoneTrackerFolder.mkdir();
+        }
+
+        //... UNDER `MileStoneTracker`, Check if it already exists in the list.
+        File SaveFile = new File(MileStoneTrackerFolder, Filename+".json"); // NOTE: `.AMST_Data` append so that every file will be a `.AMST_Data` file
+        try {
+            if (!SaveFile.exists() || SaveFile.isDirectory()) { // if the SaveFile does not exist or is currently a directory then.
+                SaveFile.createNewFile();
+                return SaveFile;
+            }
+        } catch (IOException e) {
+            return null;
+        }
+
+        return null;
     }
 
     // [BIRTHDAYS]

@@ -1,7 +1,7 @@
 package Classess.MileStoneTracker;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 19, 2026. at 12:00 AM
+// Last Modified: September 20, 2026. at  1:28 PM
 
 import Misc.ReuseableMethods;
 
@@ -20,14 +20,8 @@ public class MileStoneTracker {
     // [MISC]
 
     // [DYNAMIC VARIABLE]
-    private MileStoneTrackerData CurrentAMST_Data; // This will be the current selected object or data (Object)
+    private MileStoneTrackerData CurrentMST_Data; // This will be the current selected object or data (Object)
     private File CurrentFile; // This will be the holder or container of that selected object or data (File)
-
-    // [SECURITY]
-    private final int minimumPassword = 5; // must have at least 5 characters
-    private final int maximumPassword = 20; // must have at least 20 characters
-    private final int specialCharactersPassword = 1; // must have at least 2 special characters
-    private final int numbersPassword = 1; // must have at least 1 int characters
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public MileStoneTracker(String Username, LocalDate UserBirthday) {
@@ -37,7 +31,7 @@ public class MileStoneTracker {
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
     public MileStoneTrackerData getCurrentAMST_Data() {
-        return CurrentAMST_Data;
+        return CurrentMST_Data;
     }
     public File getCurrentFile() {
         return CurrentFile;
@@ -46,7 +40,7 @@ public class MileStoneTracker {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     // [CLASS VARIABLE MANAGEMENT]
     public void resetCurrentFileData() {
-        CurrentAMST_Data = null;
+        CurrentMST_Data = null;
         CurrentFile = null;
     }
     public void setUsername(String Username) {
@@ -58,50 +52,42 @@ public class MileStoneTracker {
 
     // [FILE MANAGEMENT]
     public boolean createFile(String FileName) {
-        //... CHECK THE DIRECTORY OF `Saves`
-        File SavesFolder = new File("Saves");
-        if (!SavesFolder.exists() || SavesFolder.isFile()) { // if the path does not exist or there is an existing file called "Saves" then.
-            SavesFolder.mkdir();
-        }
-
-        //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `MileStoneTracker`
-        File MileStoneTrackerFolder = new File(SavesFolder, "MileStoneTracker");
-        if (!MileStoneTrackerFolder.exists() || MileStoneTrackerFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
-            MileStoneTrackerFolder.mkdir();
-        }
-
         //... UNDER `MileStoneTracker`, Check if it already exists in the list.
-        File SaveFile = new File(MileStoneTrackerFolder, FileName+".json"); // NOTE: `.AMST_Data` append so that every file will be a `.AMST_Data` file
-        if (!SaveFile.exists() || SaveFile.isDirectory()) { // if the SaveFile does not exist or is currently a directory then.
-            //... b. Create the password for the file.
-            String HashedPassword = " "; // `" "` is just a placeholder
-            boolean ValidPassword = false;
-            while (!ValidPassword) {
-                System.out.print("Enter a password for the created file: ");
-                String Password = ReuseableMethods.input.nextLine();
-                HashedPassword = ReuseableMethods.hashPassword(Password);
-                System.out.println();
-                ValidPassword = ReuseableMethods.passwordValidation(Password, minimumPassword, maximumPassword, specialCharactersPassword, numbersPassword);
-            }
+        File SaveFile = ReuseableMethods.createFile("MileStoneTracker", FileName);
 
+        if (SaveFile != null) { // if the SaveFile is null.
             //... c. Create the file and return true.
-            CurrentAMST_Data = new MileStoneTrackerData(Username, HashedPassword, UserBirthday);
+            CurrentMST_Data = new MileStoneTrackerData(Username, UserBirthday);
             CurrentFile = SaveFile;
-            CurrentAMST_Data.logIn(HashedPassword); // this auto logIn's the current selected object as it is created
 
             //... d. Serialize the data into the file
-            ReuseableMethods.updateJsonFile(CurrentAMST_Data, CurrentFile);
+            ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
 
-            System.out.println(FileName + " has been created!");
-            System.out.println();
+            // NOTE: We can use IntelliJ IDEA Debugging tool to find bugs and the process of the program.
             return true; // true means that it has successfully been created!
-        } else {
-            System.out.println(FileName + " already exists! please try another name.");
         }
 
-        //... a. Return false if it exists already.
-        return false; // false means that it did not work or something lmao
+        // NOTE: We can use IntelliJ IDEA Debugging tool to find bugs and the process of the program.
+        //... a. Return false if it the createdsavefile is null (must be because it already exist or that something went wrong)
+        return false; // false means that it did not work or something
     }
+    public boolean setNewFilePassword(String Password) {
+        if (CurrentMST_Data.getEmptyPassword()) { // if the current file is an empty password.
+            //... a. Create the password for the file.
+            String HashedPassword = ReuseableMethods.hashPassword(Password); // NOTE: In order for this to run, it needs to do a security check before running the program.
+            CurrentMST_Data.setPassword(HashedPassword);
+            CurrentMST_Data.logIn(HashedPassword); // this auto logIn's the current selected object as it is created
+
+            //... b. Serialize the data into the file
+            ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
+
+            return true; // true means the process was successsfull
+        }
+
+        return false; // false means the process was not successful (password was not set).
+    }
+
+
     public boolean loadFile() {
         //... a. Print existing Saved Files
         File[] SavedFiles = ReuseableMethods.getSaveFiles("MileStoneTracker");
@@ -152,7 +138,7 @@ public class MileStoneTracker {
                             }
                         }
 
-                        CurrentAMST_Data = Temp;
+                        CurrentMST_Data = Temp;
                         CurrentFile = ChosenFile;
 
                         ValidChosenFile = true;
@@ -230,94 +216,13 @@ public class MileStoneTracker {
             System.out.println("[ERROR] "+CurrentFileName+ " did not get deleted!");
         }
         CurrentFile = null;
-        CurrentAMST_Data = null;
+        CurrentMST_Data = null;
 
         System.out.println();
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     // [MENUS]
-    public boolean AMST_Menu() {
-        // [DISPLAY]
-        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println("║               AGE MILESTONE TRACKER [Launcher Menu]                 ║");
-        System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-        System.out.println(ReuseableMethods.softWrapping("║ Username: " + Username, 67));
-        System.out.println(ReuseableMethods.softWrapping("║ Age: " + ReuseableMethods.getAge(UserBirthday), 67));
-        if (CurrentFile == null) {
-            System.out.println(ReuseableMethods.lineAutoSpacing("║ Current File: NULL", 67));
-        } else {
-            System.out.println(ReuseableMethods.softWrapping("║ Current File: "+ReuseableMethods.fileNameOnly(CurrentFile, 5), 67));
-        }
-        System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢");
-        System.out.println("║ 1. Create File                                                  ║");
-        System.out.println("║ 2. Load File                                                    ║");
-        System.out.println("║ 3. View File                                                    ║");
-        System.out.println("║ 4. Delete File                                                  ║");
-        System.out.println("║ 5. Go Back                                                      ║");
-        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
-        System.out.println();
-
-        // [PROCESSING INPUTS]
-        int Answer = ReuseableMethods.getAnswer(1, 5);
-
-        // [PROCESSING OUTPUTS]
-        boolean isRunningFileMenu; // this is just a place holder (I am trying to avoid using many instance of variables of boolean) since variables are shared throughout switch cases.
-        switch (Answer) {
-            case 1:
-                boolean ValidName = false;
-                while (!ValidName) {
-                    System.out.print("Please enter file name: ");
-                    String FileName = ReuseableMethods.input.nextLine();
-                    ValidName = createFile(FileName);
-                }
-
-                // THIS IS JUST SO THAT THE FILEMENU WILL KEEP SHOWING UNTIL IT RETURNS FALSEs
-                isRunningFileMenu = true;
-                while (isRunningFileMenu) {
-                    isRunningFileMenu = AMST_FileMenu();
-                }
-
-                break;
-            case 2:
-                if (!loadFile()) { // if load file returns false (did not load successfully, go back to the AMST_Menu
-                    break;
-                }
-
-                // THIS IS JUST SO THAT THE FILEMENU WILL KEEP SHOWING UNTIL IT RETURNS FALSEs
-                isRunningFileMenu = true;
-                while (isRunningFileMenu) {
-                    isRunningFileMenu = AMST_FileMenu();
-                }
-
-                break;
-            case 3:
-                if (CurrentAMST_Data != null && CurrentFile != null) { // Note: no need to check if it's logged-in since it needs to be log in when initializing it into the `current` variable
-                    isRunningFileMenu = true;
-                    while (isRunningFileMenu) {
-                        isRunningFileMenu = AMST_FileMenu();
-                    }
-                } else {
-                    System.out.println("[ERROR] User currently has not created or loaded a file.");
-                    System.out.println();
-                }
-                break;
-            case 4:
-                if (ReuseableMethods.getSaveFiles("MileStoneTracker") != null) {
-                    deleteFileConfirmation();
-                }
-
-                break;
-            case 5:
-                if (CurrentAMST_Data != null) {
-                    CurrentAMST_Data.logOut(); // logOut when leaving the FileMenu
-                    ReuseableMethods.updateJsonFile(CurrentAMST_Data, CurrentFile);
-                }
-                return false; // false means it stopped running
-        }
-
-        return true; // true means it's still running
-    }
     private boolean AMST_FileMenu() {
         // [DISPLAY]
         try {
@@ -329,7 +234,7 @@ public class MileStoneTracker {
             System.out.println("╔═════════════════════════════════════════════════════════════════╗");
             System.out.println("║                AGE MILESTONE TRACKER [FILE MENU]                ║");
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-            System.out.println(ReuseableMethods.softWrapping("║ Author: " + CurrentAMST_Data.getUsername(), 67));
+            System.out.println(ReuseableMethods.softWrapping("║ Author: " + CurrentMST_Data.getUsername(), 67));
             System.out.println(ReuseableMethods.softWrapping("║ Current File: " + ReuseableMethods.fileNameOnly(CurrentFile, 5), 67));
             System.out.println(ReuseableMethods.softWrapping("║ File Size: " + ReuseableMethods.formatFileSize(CurrentFile.length()), 67));
             System.out.println(ReuseableMethods.softWrapping("║ Date Created: " + DateCreation, 67));
@@ -357,7 +262,7 @@ public class MileStoneTracker {
         boolean isRunning; // this variable is just a placeholder so that each cases can have the same name;
         switch (Answer) {
             case 1: // +[View Milestone]+
-                CurrentAMST_Data.viewData(CurrentFile);
+                CurrentMST_Data.viewData(CurrentFile);
                 break;
             case 2: // +[Add Milestone]+
                 isRunning = true;
@@ -397,7 +302,7 @@ public class MileStoneTracker {
         // PROCESSING OUTPUT
         switch (Answer) {
             case 1:
-                if ((CurrentAMST_Data != null && CurrentFile != null) && ReuseableMethods.Confirmation("Delete Current File")) {
+                if ((CurrentMST_Data != null && CurrentFile != null) && ReuseableMethods.Confirmation("Delete Current File")) {
                     deleteCurrentFile();
                 }
                 break;
@@ -459,10 +364,10 @@ public class MileStoneTracker {
                         String message = ReuseableMethods.input.nextLine();
                         System.out.println();
 
-                        ValidInput = CurrentAMST_Data.addAgeBasedMilestone(age, message);
+                        ValidInput = CurrentMST_Data.addAgeBasedMilestone(age, message);
 
                         //... b. Processing Output
-                        ReuseableMethods.updateJsonFile(CurrentAMST_Data, CurrentFile);
+                        ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
 
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] age must not be a letter, it must be a number or integer.");
@@ -483,10 +388,10 @@ public class MileStoneTracker {
                         String message = ReuseableMethods.input.nextLine();
                         System.out.println();
 
-                        ValidInput = CurrentAMST_Data.addDayBasedMilestone(day, message); // returns a boolean and processes data at the same time
+                        ValidInput = CurrentMST_Data.addDayBasedMilestone(day, message); // returns a boolean and processes data at the same time
 
                         //... b. Processing Output
-                        ReuseableMethods.updateJsonFile(CurrentAMST_Data, CurrentFile);
+                        ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
                         System.out.println();
@@ -519,7 +424,7 @@ public class MileStoneTracker {
         switch (Answer) {
             case 1:
                 // [SECURITY]
-                if (CurrentAMST_Data.AgeMilestoneIsEmpty()) {
+                if (CurrentMST_Data.AgeMilestoneIsEmpty()) {
                     System.out.println("There are currently no Age Milestones saved on this!"); // Note: might need to improve bit with this message
                     break;
                 }
@@ -528,7 +433,7 @@ public class MileStoneTracker {
                 while (!ValidInput) {
                     try {
                         //... a. showing display
-                        CurrentAMST_Data.printAgeMilestones();
+                        CurrentMST_Data.printAgeMilestones();
 
                         //... b. Processing Input
                         System.out.print("Please enter a age: ");
@@ -540,7 +445,7 @@ public class MileStoneTracker {
                             break;
                         }
 
-                        ValidInput = CurrentAMST_Data.removeAgeBasedMilestone(age);
+                        ValidInput = CurrentMST_Data.removeAgeBasedMilestone(age);
                         System.out.println();
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
@@ -550,12 +455,12 @@ public class MileStoneTracker {
                 }
 
                 //... b. Serialization
-                ReuseableMethods.updateJsonFile(CurrentAMST_Data, CurrentFile);
+                ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
 
                 return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
             case 2:
                 // [SECURITY]
-                if (CurrentAMST_Data.DayMilestoneIsEmpty()) {
+                if (CurrentMST_Data.DayMilestoneIsEmpty()) {
                     System.out.println("There are currently no Day Milestones saved on this!"); // Note: might need to improve bit with this message
                     break;
                 }
@@ -564,7 +469,7 @@ public class MileStoneTracker {
                 while (!ValidInput) {
                     try {
                         //... a. Showing display
-                        CurrentAMST_Data.printDayMilestones();
+                        CurrentMST_Data.printDayMilestones();
 
                         //... b. Processing Input   
                         System.out.print("Please enter a day: ");
@@ -576,7 +481,7 @@ public class MileStoneTracker {
                             break;
                         }
 
-                        ValidInput = CurrentAMST_Data.removeDayBasedMilestone(day);
+                        ValidInput = CurrentMST_Data.removeDayBasedMilestone(day);
                         System.out.println();
                         
                     } catch (InputMismatchException e) {
@@ -587,7 +492,7 @@ public class MileStoneTracker {
                 }
 
                 //... b. Serialization
-                ReuseableMethods.updateJsonFile(CurrentAMST_Data, CurrentFile);
+                ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
 
                 return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
             case 3:
@@ -604,4 +509,4 @@ public class MileStoneTracker {
 
 // NOTE: I am kind of confused here because of the roadmap.
 // NOTE: It says that i need to create another class for prompting inputs/outputs into the same level of Menu.class which is under Controller<CLI.
-// NOTE: Is it so i can use this class for JavaFX? just keep the logic and the input just needs to be out?
+// NOTE: Is it so i can use this class for JavaFX? just keep the logic and the prompting just needs to be removed and redirected?

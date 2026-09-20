@@ -1,8 +1,10 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 18, 2026. at 11:58 PM
+// Last Modified: September 20, 2026. at  1:31 PM
 
+import java.nio.file.NoSuchFileException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import Classess.DayPlanner.DayPlanner;
@@ -19,11 +21,39 @@ public class Menu {
     private LocalDate UserBirthday;
 
     // [CLASSES OR APPLICATIONS]
-    private static MileStoneTracker AMST;
-    private static DayPlanner DP;
-    private static MultiTimeZoneMeetingPlanner MTZMP;
-    private static SubscriptionTracker ST;
-    private static WorkHoursTracker WHT;
+    private MileStoneTracker MST;
+    private DayPlanner DP;
+    private MultiTimeZoneMeetingPlanner MTZMP;
+    private SubscriptionTracker ST;
+    private WorkHoursTracker WHT;
+
+    // [USER CONDITIONS]
+    private boolean LockUsername = false;
+    private boolean LockBirthday = false;
+
+    //==================MAIN==================\\ NOTE: THIS IS A PSUEDO MAIN METHOD, CALLING THIS METHOD WILL RUN A SEQUENCES OF METHODS (ALMOST LIKE THE STANDARD MAIN)
+    public void Main() { // NOTE: This is a psuedo main method similar to what we used. we just have to call this method and the whole program will run in CLI.
+        boolean ApplicationRunning = true;
+        while (ApplicationRunning) {
+            if (!LockUsername) {
+                enterUsername();
+                LockUsername = true;
+            }
+            if (!LockBirthday) {
+                enterBirthday();
+                LockBirthday = true;
+            }
+
+
+            boolean showingMenu = true;
+            while (showingMenu) {
+                showingMenu = MainMenu(); //... This runs multiple process
+                //... Runs menu.MainMenu()
+                //... Returns boolean after the method
+            }
+            changeProfileMenu(); // this will only run if the user decided to choose the only answer that returns `false` which is the `Change Profile case`.
+        }
+    }
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     public Menu() {
@@ -32,15 +62,78 @@ public class Menu {
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-    public void setBirthday(LocalDate UserBirthday) {
-        this.UserBirthday = UserBirthday;
+    void enterUsername() {
+        System.out.print("Enter Username: ");
+        Username = ReuseableMethods.input.nextLine();
+        System.out.println();
     }
-    public void setUsername(String Username) {
-        this.Username = Username;
+    void enterBirthday() {
+        // PROCESS DATE INPUT
+        boolean ValidInput = false;
+        while (!ValidInput) {
+            try {
+                System.out.println("Please enter your Birthday: ");
+                System.out.println("(Month DayOfMonth Year) => ex: 12/05/2006");
+                System.out.print("Answer: ");
+                String Birthday = ReuseableMethods.input.nextLine();
+
+                // LETS SPLIT THEM LINES AND CONVERT IT INTO INTEGERS THEN PASS IT ON
+                String[] Lines = Birthday.split("/");
+
+                // ADD THE CONVERTED LINES INTO THE CONSTRUCTOR
+                LocalDate UserBirthday = LocalDate.of(Integer.parseInt(Lines[2]), Integer.parseInt(Lines[0]), Integer.parseInt(Lines[1]));
+                if (!(UserBirthday.isAfter(LocalDate.now()))) {
+                    this.UserBirthday = UserBirthday;
+                    ValidInput = true;
+                } else {
+                    System.out.println("[ERROR] User Birthday must not be after today's date.");
+                }
+            } catch (DateTimeException e) {
+                System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] Please follow the Date Format which is `MM/DD/YY` or `Month/DayOfMonth/Year`.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] You are missing the required numbers, please enter your Birthday, separating with `/`.");
+            } catch (Exception e) {
+                System.out.println("[UNEXPECTED ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+            } finally {
+                System.out.println();
+            }
+        }
+    }
+    void changeProfileMenu() {
+        // DISPLAY
+        System.out.println("╔═══════════════════════════════════════════════════╗");
+        System.out.println("║ Which information would you like to change?       ║");
+        System.out.println("╟───────────────────────────────────────────────────╢");
+        System.out.println("║ 1. Username                                       ║");
+        System.out.println("║ 2. Birthday                                       ║");
+        System.out.println("║ 3. Username & Birthday                            ║");
+        System.out.println("╚═══════════════════════════════════════════════════╝");
+        System.out.println();
+
+        // PROCESSING INPUT
+        int Answer = ReuseableMethods.getAnswer(1, 3);
+
+        // PROCESSING OUTPUTS
+        switch (Answer) {
+            case 1:
+                LockUsername = false;
+                break;
+            case 2:
+                LockBirthday = false;
+                break;
+            case 3:
+                LockUsername = false;
+                LockBirthday = false;
+                break;
+
+        }
+
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
-    public boolean MainMenu() {
+    boolean MainMenu() {
         // DISPLAY
         System.out.println("╔════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                            ChronoSuite 1.0                             ║");
@@ -62,34 +155,34 @@ public class Menu {
         switch (Answer) {
             case 1: // +[MILESTONE TRACKER]+
                 // [SECURITY]
-                if (AMST == null) { //... this is to avoid having to re-enter credentials again
-                    AMST = new MileStoneTracker(Username, UserBirthday);
-                } else if( AMST.getCurrentAMST_Data() != null && !(AMST.getCurrentAMST_Data().getLoggedIn()) ) { // if the currentASMT_Data is not null and that the password is not passed (not logged in)
+                if (MST == null) { //... this is to avoid having to re-enter credentials again
+                    MST = new MileStoneTracker(Username, UserBirthday);
+                } else if( MST.getCurrentAMST_Data() != null && !(MST.getCurrentAMST_Data().getLoggedIn()) ) { // if the currentASMT_Data is not null and that the password is not passed (not logged in)
                     //... this is so that unauthorized users will not be able to see the file without having to log in again.
-                    System.out.println("You currently have a file open in the Milestone Tracker Program, you will have to enter your password again for "+AMST.getCurrentFile().getName()+".");
+                    System.out.println("You currently have a file open in the Milestone Tracker Program, you will have to enter your password again for "+ MST.getCurrentFile().getName()+".");
                     System.out.println("[NOTE] input \"e\" to load the application with no current files open.");
                     System.out.println();
                     boolean ValidPassword = false;
                     while (!ValidPassword) {
                         System.out.print("Enter Password: ");
                         String UserInputPassword = ReuseableMethods.input.nextLine();
-                        ValidPassword = AMST.getCurrentAMST_Data().logIn(UserInputPassword);
+                        ValidPassword = MST.getCurrentAMST_Data().logIn(UserInputPassword);
 
                         if (UserInputPassword.equals("e")) { // NOTE: Lowky dont know how to deal with this, initially planning to go back to selecting files but dont know how
-                            AMST.resetCurrentFileData();
+                            MST.resetCurrentFileData();
                             ValidPassword = true;
                         }
                     }
                 }
 
                 // [PROCESS] We need to add this so that every time a user changes their username/birthday in the main menu, it will also apply into AMST.
-                AMST.setUsername(Username);
-                AMST.setUserBirthday(UserBirthday);
+                MST.setUsername(Username);
+                MST.setUserBirthday(UserBirthday);
 
                 // [DISPLAY]
                 boolean FeatureRunning = true;
                 while (FeatureRunning) {
-                    FeatureRunning = AMST.AMST_Menu(); //... This runs multiple process
+                    FeatureRunning = AMST_Menu(); //... This runs multiple process
                             //... Runs the Method
                             //... Returns boolean
                 }
@@ -117,8 +210,145 @@ public class Menu {
         return true; // Only Case 6 of Switch(Answer) will return `false` since its an indication of "Stop" or "Running is False"
     }
 
-
     // [MileStoneTracker Methods]
+    // +[MENUS]+
+    public boolean AMST_Menu() {
+        // [DISPLAY]
+        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+        System.out.println("║              AGE MILESTONE TRACKER [Launcher Menu]              ║");
+        System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+        System.out.println(ReuseableMethods.softWrapping("║ Username: " + Username, 67));
+        System.out.println(ReuseableMethods.softWrapping("║ Age: " + ReuseableMethods.getAge(UserBirthday), 67));
+        if (MST.getCurrentFile() == null) {
+            System.out.println(ReuseableMethods.lineAutoSpacing("║ Current File: NULL", 67));
+        } else {
+            System.out.println(ReuseableMethods.softWrapping("║ Current File: "+ReuseableMethods.fileNameOnly(MST.getCurrentFile(), 5), 67));
+        }
+        System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢");
+        System.out.println("║ 1. Create File                                                  ║");
+        System.out.println("║ 2. Load File                                                    ║");
+        System.out.println("║ 3. View File                                                    ║");
+        System.out.println("║ 4. Delete File                                                  ║");
+        System.out.println("║ 5. Go Back                                                      ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+
+        // [PROCESSING INPUTS]
+        int Answer = ReuseableMethods.getAnswer(1, 5);
+        System.out.println();
+
+        // [PROCESSING OUTPUTS]
+        boolean isRunningMethod; // this is just a place holder (I am trying to avoid using many instance of variables of boolean) since variables are shared throughout switch cases.
+        switch (Answer) {
+            case 1:
+                isRunningMethod = true;
+                while (isRunningMethod) {
+                    // GET FILENAME INPUT
+                    boolean validFileName = false;
+                    while (validFileName == false) {
+                        System.out.print("Enter File Name: ");
+                        String FileName = ReuseableMethods.input.nextLine();
+                        if (MST.createFile(FileName)) {
+                            //... IF THE CREATION FILE RETURNS TRUE
+                            System.out.print("Please enter a password for the data: ");
+
+                            //... CREATE PASSWORD
+                            boolean validNewPassword = false;
+                            String Password = ""; // just for placeholder
+                            while (validNewPassword == false) {
+                                Password = ReuseableMethods.input.nextLine();
+
+                                // [SECURITY]
+                                //    private final int minimumPassword = 5; // must have at least 5 characters
+                                //    private final int maximumPassword = 20; // must have at least 20 characters
+                                //    private final int specialCharactersPassword = 1; // must have at least 2 special characters
+                                //    private final int numbersPassword = 1; // must have at least 1 int characters
+
+                                validNewPassword = ReuseableMethods.passwordValidation(Password, 5, 20, 1, 1);
+                            }
+
+                            //... SET THE PASSWORD
+                            MST.setNewFilePassword(Password);
+
+                            //... FINISH TOUCH
+                            System.out.println(FileName+" has been created!");
+                            isRunningMethod = false;
+                            validFileName = true;
+                        } else {
+                            System.out.println(FileName + " already exist! please try another name");
+                        }
+                    }
+                }
+                break;
+            case 2:
+                //! <=============================================================== YOU LEFT HERE!
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                return false; // false means it stopped running
+        }
+
+        return true; // true means it's still running
+    }
+    private boolean AMST_FileMenu() {
+        // [DISPLAY]
+        try {
+            // Error Check
+            String DateCreation = ReuseableMethods.getDateCreated(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
+            String LastModified = ReuseableMethods.getLastModified(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
+
+            // Print
+            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+            System.out.println("║                AGE MILESTONE TRACKER [FILE MENU]                ║");
+            System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+            System.out.println(ReuseableMethods.softWrapping("║ Author: " + MST.getCurrentAMST_Data().getUsername(), 67));
+            System.out.println(ReuseableMethods.softWrapping("║ Current File: " + ReuseableMethods.fileNameOnly(MST.getCurrentFile(), 5), 67));
+            System.out.println(ReuseableMethods.softWrapping("║ File Size: " + ReuseableMethods.formatFileSize(MST.getCurrentFile().length()), 67));
+            System.out.println(ReuseableMethods.softWrapping("║ Date Created: " + DateCreation, 67));
+            System.out.println(ReuseableMethods.softWrapping("║ Last Modified: " + LastModified, 67));
+            System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢ ");
+            System.out.println("║ 1. View MileStones                                              ║");
+            System.out.println("║ 2. Add MileStones                                               ║");
+            System.out.println("║ 3. Remove MileStones                                            ║");
+            System.out.println("║ 4. Go Back                                                      ║");
+            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+            System.out.println();
+        } catch (NoSuchFileException e) {
+            MST.resetCurrentFileData(); // turns currentfile and currentdata into null
+
+            System.out.println("[ERROR] Current File has been either deleted or moved.");
+            System.out.println();
+
+            return false; // false means that this menu will stop running (called in the parent menu or in the AMST_Menu())
+        }
+
+        // [PROCESSING INPUTS]
+        int Answer = ReuseableMethods.getAnswer(1, 4);
+
+        // [PROCESSING OUTPUTS]
+        boolean isRunning; // this variable is just a placeholder so that each cases can have the same name;
+        switch (Answer) {
+            case 1: // +[View Milestone]+
+
+                break;
+            case 2: // +[Add Milestone]+
+
+                break;
+            case 3: // +[Remove Milestone]+
+
+                break;
+            case 4: // +[Go Back]+
+                return false; // `false` means that this method will now stop running (there is a variable at AMST_Menu)
+        }
+        return true; // `true` means that this method will keep running
+    }
+
     // [DayPlanner Methods]
     // [MultiTimeZoneMeetingPlanner Methods]
     // [SubscriptionTracker Methods]
