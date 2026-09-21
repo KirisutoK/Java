@@ -1,8 +1,10 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 20, 2026. at  1:31 PM
+// Last Modified: September 21, 2026. at  1:44 PM
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -281,7 +283,49 @@ public class Menu {
                 }
                 break;
             case 2:
-                //! <=============================================================== YOU LEFT HERE!
+                isRunningMethod = true;
+                while (isRunningMethod) {
+                    //... DISPLAY
+                    File SavedFilesDirectory = new File("Saves/MileStoneTracker"); // Creates a path to this
+                    File[] SavedFiles = SavedFilesDirectory.listFiles(); // Create a list based on the path
+                    if (SavedFiles == null) {
+                        System.out.println("[ERROR] There are currently no saved files in your saved files directory!");
+                        System.out.println();
+                        isRunningMethod = true;
+                        continue;
+                    }
+                    ReuseableMethods.printSavedFiles(SavedFiles, MST.getCurrentFile()) ; // Print
+
+                    //... GET INPUT
+                    boolean ValidAnswer = false;
+                    while (!ValidAnswer) {
+                        String FilenameAnswer = "NULL";
+                        try {
+                            System.out.print("Choose File: ");
+                            FilenameAnswer = ReuseableMethods.input.nextLine(); // get input
+                            //... LOAD THE FILE INTO THE MST OBJECT
+                            if (!MST.loadFile(FilenameAnswer)) { // if it did not load
+                                System.out.println(FilenameAnswer+" does not exist! please choose another file.");
+                                continue;
+                            }
+                        } catch (IOException e) {
+                            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                        }
+
+                        //... ENTER PASSWORD <======== LOGGING IN
+                        boolean ValidPassword = false;
+                        while (!ValidPassword) {
+                            System.out.println("Please enter password for "+FilenameAnswer+": ");
+                            ValidPassword = MST.getCurrentAMST_Data().logIn(ReuseableMethods.input.nextLine());
+                        }
+
+                        System.out.println();
+                        System.out.println(FilenameAnswer+" has been successfully loaded!");
+                        System.out.println();
+                    }
+                }
+
+                //! <=================================== YOU LEFT HERE (IT ALWAYS THROWS AN ERROR EVERY TIME I LOAD IT IN, SAYING THAT THE JSON FILE DOES NOT MATCH THE CLASS)
                 break;
             case 3:
 

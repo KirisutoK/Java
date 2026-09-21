@@ -1,9 +1,11 @@
 package Classess.MileStoneTracker;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 20, 2026. at  1:28 PM
+// Last Modified: September 21, 2026. at  1:39 PM
 
 import Misc.ReuseableMethods;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -52,10 +54,15 @@ public class MileStoneTracker {
 
     // [FILE MANAGEMENT]
     public boolean createFile(String FileName) {
-        //... UNDER `MileStoneTracker`, Check if it already exists in the list.
-        File SaveFile = ReuseableMethods.createFile("MileStoneTracker", FileName);
+        // [SECURITY]
+        if (CurrentMST_Data != null) {
+            CurrentMST_Data.logOut();
+        }
 
-        if (SaveFile != null) { // if the SaveFile is null.
+        //... UNDER `MileStoneTracker`, Check if it already exists in the list.
+        File SaveFile = ReuseableMethods.createFile("MileStoneTracker", FileName); // NOTE: this method will return null if the filename already existed
+
+        if (SaveFile != null) { // if the SaveFile is not null.
             //... c. Create the file and return true.
             CurrentMST_Data = new MileStoneTrackerData(Username, UserBirthday);
             CurrentFile = SaveFile;
@@ -86,126 +93,38 @@ public class MileStoneTracker {
 
         return false; // false means the process was not successful (password was not set).
     }
+    public boolean loadFile(String Filename) throws IOException {
+        // [SECURITY CHECK]
+        CurrentFile = ReuseableMethods.loadFile("MileStoneTracker", Filename);
 
-
-    public boolean loadFile() {
-        //... a. Print existing Saved Files
-        File[] SavedFiles = ReuseableMethods.getSaveFiles("MileStoneTracker");
-        if (SavedFiles == null) {
-            return false;
+        if (CurrentMST_Data != null) {
+            CurrentMST_Data.logOut(); // Logs out so that if the CurrentMST_Data was not selected to the MST Object, it will show logged out for its JSON data.
         }
-        ReuseableMethods.printSavedFiles(SavedFiles, CurrentFile);
-
-        //... b. Grab input
-        boolean ValidChosenFile = false;
-        while (!ValidChosenFile) {
-            System.out.print("Choose which save file would you like to load: ");
-            String UserAnswerFileName = ReuseableMethods.input.nextLine();
-            File ChosenFile = new File(SavedFiles[0].getParentFile(), UserAnswerFileName + ".json");
-
-            //... c. Process output
-            for (File f : SavedFiles) {
-                if (CurrentFile != null) { // If its not null
-                    if (f.getName().equals(ChosenFile.getName()) && ChosenFile.getName().equals(CurrentFile.getName())) {
-                        if (!CurrentFile.exists()) {
-                            resetCurrentFileData(); // turns currentfile and currentdata into null
-
-                            System.out.println("[ERROR] Current File has been either deleted or moved.");
-                        } else {
-                            System.out.println(ReuseableMethods.fileNameOnly(ChosenFile, 5) + " has already been loaded (Current File).");
-                            System.out.println();
-                        }
-
-                        return false; // false means that it did not successfully load
-                    }
-                }
-
-                if (f.getName().equals(ChosenFile.getName())) {
-                    try {
-                        //... d. Convert json file into Java Object (Deserialization)
-                        String JSON_Data = Files.readString(Path.of(ChosenFile.getPath()));
-                        MileStoneTrackerData Temp = ReuseableMethods.gson.fromJson(JSON_Data, MileStoneTrackerData.class);
-
-                        //... e. Must log-in in order for the data to load
-                        boolean ValidPassword = false;
-                        while (!ValidPassword) {
-                            System.out.print("Enter Password: ");
-                            String UserInputPassword = ReuseableMethods.input.nextLine();
-                            ValidPassword = Temp.logIn(ReuseableMethods.hashPassword(UserInputPassword));
-
-                            if (UserInputPassword.equals("e")) { // NOTE: Lowky dont know how to deal with this, initially planning to go back to selecting files but dont know how
-                                return false; // false means that it did not successfully load
-                            }
-                        }
-
-                        CurrentMST_Data = Temp;
-                        CurrentFile = ChosenFile;
-
-                        ValidChosenFile = true;
-                        System.out.println(ReuseableMethods.fileNameOnly(f, 5) + " has successfully loaded!");
-                        System.out.println();
-
-                        return true; // true means that it has successfully loaded
-                    } catch (IOException e) {
-                        System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
-                    }
-                }
-            }
-
-            if (UserAnswerFileName.equals("e")) {
-                System.out.println();
-                return false; // false means that it did not successfully load
-            }
-            System.out.println("[ERROR] " + ReuseableMethods.fileNameOnly(ChosenFile, 5) + " does not exists, please try another save file. ");
-            System.out.println();
+        if (CurrentFile == null) {
+            resetCurrentFileData();
+            return false; // False means that it did not load successfully
         }
 
-        return false; // false means that it did not successfully load
+        // [DESERIALIZATION]
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String JSON_Data;
+        try {
+            JSON_Data = Files.readString(Path.of(CurrentFile.getPath()));
+        } catch (IOException e) {
+            throw new IOException();
+        }
+        CurrentMST_Data = gson.fromJson(JSON_Data, MileStoneTrackerData.class);
+
+        // NOTE: Dont forget to log in when loading the file in
+        return true; // True means that it loaded successfully into MST
     }
-    private void deleteSelectedFile() {
-        //... a. Print existing Saved Files
-        File[] SavedFiles = ReuseableMethods.getSaveFiles("MileStoneTracker");
-        if (SavedFiles == null) {
-            return;
+    private boolean deleteSelectedFile(String Filename) {
+        File SelectedFile = ReuseableMethods.loadFile("MileStoneTracker", Filename);
+        if (SelectedFile.delete()) {
+            return true;
         }
-        ReuseableMethods.printSavedFiles(SavedFiles, CurrentFile);
 
-        //... b. Grab input
-        boolean ValidChosenFile = false;
-        while (!ValidChosenFile) {
-            System.out.print("Choose which save file would you like to delete: ");
-            String UserAnswerFileName = ReuseableMethods.input.nextLine();
-            File ChosenFile = new File(SavedFiles[0].getParentFile(), UserAnswerFileName + ".json");
-            System.out.println();
-
-            //... c. Process output
-            if (UserAnswerFileName.equals("e")) {
-                System.out.println();
-                return;
-            }
-
-            for (File f : SavedFiles) {
-                if (f.getName().equals(ChosenFile.getName())) {
-                    if (CurrentFile != null && ChosenFile.getName().equals(CurrentFile.getName())) {
-                        if (ReuseableMethods.Confirmation("Delete Current File")) { // if it returned true
-                            deleteCurrentFile();
-                        }
-                    } else {
-                        if (ReuseableMethods.Confirmation("Delete Selected File (" + ReuseableMethods.fileNameOnly(f, 5) + ")")) { // if it returned true
-                            if (f.delete()) { // if the deletion is successful
-                                System.out.println(ReuseableMethods.fileNameOnly(f, 5) + " has been successfully deleted!");
-                            } else {
-                                System.out.println("[ERROR] "+ReuseableMethods.fileNameOnly(f, 5) + " did not get deleted!");
-                            }
-                            System.out.println();
-                        }
-                    }
-                    return;
-                }
-            }
-            System.out.println("[ERROR] " + ReuseableMethods.fileNameOnly(ChosenFile, 5) + " does not exists, please try another save file. ");
-            System.out.println();
-        }
+        return false;
     }
     private void deleteCurrentFile() {
         String CurrentFileName = ReuseableMethods.fileNameOnly(CurrentFile, 5);
@@ -284,56 +203,56 @@ public class MileStoneTracker {
     }
 
     // [FILES]
-    private void deleteFileConfirmation() {
-        // DISPLAY
-        System.out.println("╔═══════════════════════════════════════════════════════════════════╗");
-        System.out.println("║ Please specify which type of delete method would you like to run? ║");
-        System.out.println("╟───────────────────────────────────────────────────────────────────╢");
-        System.out.println("║ 1. Delete Current File                                            ║");
-        System.out.println("║ 2. Delete Selected File                                           ║");
-        System.out.println("║ 3. Delete All Saved Files                                         ║");
-        System.out.println("║ 4. Go Back                                                        ║");
-        System.out.println("╚═══════════════════════════════════════════════════════════════════╝");
-        System.out.println();
-
-        // PROCESSING INPUT
-        int Answer = ReuseableMethods.getAnswer(1, 3);
-
-        // PROCESSING OUTPUT
-        switch (Answer) {
-            case 1:
-                if ((CurrentMST_Data != null && CurrentFile != null) && ReuseableMethods.Confirmation("Delete Current File")) {
-                    deleteCurrentFile();
-                }
-                break;
-            case 2:
-                deleteSelectedFile();
-                break;
-            case 3:
-                System.out.println("Note: `Delete All Saved File` will not delete your current File.");
-                File[] SavedFiles = ReuseableMethods.getSaveFiles("MileStoneTracker");
-                if (SavedFiles != null && ReuseableMethods.Confirmation("Delete All Saved File")) {
-                    for (File f : SavedFiles) {
-                        if (CurrentFile != null) { // if we currently have a file
-                            if (!(f.getName().equals(CurrentFile.getName()))) { // if the f is equal to the current file
-                                if (!f.delete()) { // if it did not get deleted
-                                    System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
-                                }
-                            }
-                        } else { // If there is no current file yet.
-                            if (!f.delete()) { // if it did not get deleted
-                                System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
-                            }
-                        }
-                    }
-                }
-                System.out.println("Delete All Saved File has successfully completed!");
-                System.out.println();
-                break;
-            case 4:
-                break;
-        }
-    }
+//    private void deleteFileConfirmation() {
+//        // DISPLAY
+//        System.out.println("╔═══════════════════════════════════════════════════════════════════╗");
+//        System.out.println("║ Please specify which type of delete method would you like to run? ║");
+//        System.out.println("╟───────────────────────────────────────────────────────────────────╢");
+//        System.out.println("║ 1. Delete Current File                                            ║");
+//        System.out.println("║ 2. Delete Selected File                                           ║");
+//        System.out.println("║ 3. Delete All Saved Files                                         ║");
+//        System.out.println("║ 4. Go Back                                                        ║");
+//        System.out.println("╚═══════════════════════════════════════════════════════════════════╝");
+//        System.out.println();
+//
+//        // PROCESSING INPUT
+//        int Answer = ReuseableMethods.getAnswer(1, 3);
+//
+//        // PROCESSING OUTPUT
+//        switch (Answer) {
+//            case 1:
+//                if ((CurrentMST_Data != null && CurrentFile != null) && ReuseableMethods.Confirmation("Delete Current File")) {
+//                    deleteCurrentFile();
+//                }
+//                break;
+//            case 2:
+//                deleteSelectedFile();
+//                break;
+//            case 3:
+//                System.out.println("Note: `Delete All Saved File` will not delete your current File.");
+//                File[] SavedFiles = ReuseableMethods.getSaveFiles("MileStoneTracker");
+//                if (SavedFiles != null && ReuseableMethods.Confirmation("Delete All Saved File")) {
+//                    for (File f : SavedFiles) {
+//                        if (CurrentFile != null) { // if we currently have a file
+//                            if (!(f.getName().equals(CurrentFile.getName()))) { // if the f is equal to the current file
+//                                if (!f.delete()) { // if it did not get deleted
+//                                    System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
+//                                }
+//                            }
+//                        } else { // If there is no current file yet.
+//                            if (!f.delete()) { // if it did not get deleted
+//                                System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
+//                            }
+//                        }
+//                    }
+//                }
+//                System.out.println("Delete All Saved File has successfully completed!");
+//                System.out.println();
+//                break;
+//            case 4:
+//                break;
+//        }
+//    }
 
     // [DATA MANAGEMENT]
     private boolean addMilestoneConfirmation() {

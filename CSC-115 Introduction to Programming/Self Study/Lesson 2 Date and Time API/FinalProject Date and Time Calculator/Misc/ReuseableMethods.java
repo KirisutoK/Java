@@ -1,5 +1,5 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 20, 2026. at 12:47 PM
+// Last Modified: September 21, 2026. at  1:06 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.*;
@@ -183,30 +183,6 @@ public class ReuseableMethods {
         System.out.println("╘═══════════════════════════════════════════════════╛");
         System.out.println();
     }
-    public static File[] getSaveFiles(String ApplicationSavesFolderName) {
-        //... CHECK THE DIRECTORY OF `Saves`
-        File SavesFolder = new File("Saves");
-        if (!SavesFolder.exists() || SavesFolder.isFile()) { // if the path does not exist or there is an existing file called "Saves" then.
-            SavesFolder.mkdir();
-        }
-
-        //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `MileStoneTracker`
-        File ApplicationSavesFolder = new File(SavesFolder, ApplicationSavesFolderName);
-        if (!ApplicationSavesFolder.exists() || ApplicationSavesFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
-            ApplicationSavesFolder.mkdir();
-        }
-
-        //... UNDER `MileStoneTracker`.
-        File[] SaveFiles = ApplicationSavesFolder.listFiles();
-        //... If it has no contents or files in the folder
-        if (SaveFiles == null || SaveFiles.length < 1) {
-            System.out.println("[ERROR] There are currently no saved files in the Age MileStone Tracker Folder");
-            System.out.println();
-            return null; // false means that it did not load successfully
-        }
-
-        return SaveFiles;
-    }
     public static void updateJsonFile(Object obj, File file) {
         // NOTE: I feel like this might cause an error issue if something wrongs with any of the methods this method had been used on
         try (FileWriter fw = new FileWriter(file)) {
@@ -215,7 +191,7 @@ public class ReuseableMethods {
             System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
         }
     }
-    public static File createFile(String Parentname, String Filename) {
+    public static File createFile(String Directory, String Filename){
         //... CHECK THE DIRECTORY OF `Saves`
         File SavesFolder = new File("Saves");
         if (!SavesFolder.exists() || SavesFolder.isFile()) { // if the path does not exist or there is an existing file called "Saves" then.
@@ -223,7 +199,7 @@ public class ReuseableMethods {
         }
 
         //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `MileStoneTracker`
-        File MileStoneTrackerFolder = new File(SavesFolder, Parentname);
+        File MileStoneTrackerFolder = new File(SavesFolder, Directory);
         if (!MileStoneTrackerFolder.exists() || MileStoneTrackerFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
             MileStoneTrackerFolder.mkdir();
         }
@@ -237,6 +213,29 @@ public class ReuseableMethods {
             }
         } catch (IOException e) {
             return null;
+        }
+
+        return null;
+    }
+    public static File loadFile(String Directory, String Filename) {
+        //... CHECK THE DIRECTORY OF `Saves`
+        File SavesFolder = new File("Saves");
+        if (!SavesFolder.exists() || SavesFolder.isFile()) { // if the path does not exist or there is an existing file called "Saves" then.
+            SavesFolder.mkdir();
+        }
+
+        //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `MileStoneTracker`
+        File MileStoneTrackerFolder = new File(SavesFolder, Directory);
+        if (!MileStoneTrackerFolder.exists() || MileStoneTrackerFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
+            MileStoneTrackerFolder.mkdir();
+        }
+
+        //... UNDER `MileStoneTracker`, find if any filename matches
+        File[] SavedFiles = MileStoneTrackerFolder.listFiles();
+        for (File f:SavedFiles) {
+            if (ReuseableMethods.fileNameOnly(f, 5).equals(Filename)) {
+                return f;
+            }
         }
 
         return null;
