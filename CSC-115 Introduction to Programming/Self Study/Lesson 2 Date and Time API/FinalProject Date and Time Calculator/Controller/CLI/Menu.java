@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 21, 2026. at  1:44 PM
+// Last Modified: September 22, 2026. at 12:22 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import Classess.MileStoneTracker.MileStoneTracker;
 import Classess.MultiTimeZoneMeetingPlanner.MultiTimeZoneMeetingPlanner;
 import Classess.SubscriptionTracker.SubscriptionTracker;
 import Classess.WorkHoursTracker.WorkHoursTracker;
-import Misc.ReuseableMethods;
+import Misc.ReuseableMethodsCLI;
 
 public class Menu {
     //=======VARIABLES=======//
@@ -66,7 +66,7 @@ public class Menu {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     void enterUsername() {
         System.out.print("Enter Username: ");
-        Username = ReuseableMethods.input.nextLine();
+        Username = ReuseableMethodsCLI.input.nextLine();
         System.out.println();
     }
     void enterBirthday() {
@@ -77,7 +77,7 @@ public class Menu {
                 System.out.println("Please enter your Birthday: ");
                 System.out.println("(Month DayOfMonth Year) => ex: 12/05/2006");
                 System.out.print("Answer: ");
-                String Birthday = ReuseableMethods.input.nextLine();
+                String Birthday = ReuseableMethodsCLI.input.nextLine();
 
                 // LETS SPLIT THEM LINES AND CONVERT IT INTO INTEGERS THEN PASS IT ON
                 String[] Lines = Birthday.split("/");
@@ -115,7 +115,7 @@ public class Menu {
         System.out.println();
 
         // PROCESSING INPUT
-        int Answer = ReuseableMethods.getAnswer(1, 3);
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 3);
 
         // PROCESSING OUTPUTS
         switch (Answer) {
@@ -140,8 +140,8 @@ public class Menu {
         System.out.println("╔════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                            ChronoSuite 1.0                             ║");
         System.out.println("╠════════════════════════════════════════════════════════════════════════╣");
-        System.out.println(ReuseableMethods.lineAutoSpacing("║ Username: "+Username, 74));
-        System.out.println(ReuseableMethods.lineAutoSpacing("║ Birthday: "+ReuseableMethods.toStringBirthday(UserBirthday), 74));
+        System.out.println(ReuseableMethodsCLI.lineAutoSpacing("║ Username: "+Username, 74));
+        System.out.println(ReuseableMethodsCLI.lineAutoSpacing("║ Birthday: "+ ReuseableMethodsCLI.toStringBirthday(UserBirthday), 74));
         System.out.println("╟──[APPLICATIONS]────────────────────────────────────────────────────────╢");
         System.out.println("║ 1. MileStone Tracker                 4. Subscription Tracker (WIP)     ║");
         System.out.println("║ 2. Day Planner (WIP)                 5. Work Hours Tracker (WIP)       ║");
@@ -151,7 +151,7 @@ public class Menu {
         
 
         // PROCESSING INPUTS
-        int Answer = ReuseableMethods.getAnswer(1, 6); // CustomUtil.getAnswer(start, end);
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 6); // CustomUtil.getAnswer(start, end);
 
         // PROCESSING OUTPUTS
         switch (Answer) {
@@ -167,7 +167,7 @@ public class Menu {
                     boolean ValidPassword = false;
                     while (!ValidPassword) {
                         System.out.print("Enter Password: ");
-                        String UserInputPassword = ReuseableMethods.input.nextLine();
+                        String UserInputPassword = ReuseableMethodsCLI.input.nextLine();
                         ValidPassword = MST.getCurrentAMST_Data().logIn(UserInputPassword);
 
                         if (UserInputPassword.equals("e")) { // NOTE: Lowky dont know how to deal with this, initially planning to go back to selecting files but dont know how
@@ -219,12 +219,12 @@ public class Menu {
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println("║              AGE MILESTONE TRACKER [Launcher Menu]              ║");
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-        System.out.println(ReuseableMethods.softWrapping("║ Username: " + Username, 67));
-        System.out.println(ReuseableMethods.softWrapping("║ Age: " + ReuseableMethods.getAge(UserBirthday), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + Username, 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Age: " + ReuseableMethodsCLI.getAge(UserBirthday), 67));
         if (MST.getCurrentFile() == null) {
-            System.out.println(ReuseableMethods.lineAutoSpacing("║ Current File: NULL", 67));
+            System.out.println(ReuseableMethodsCLI.lineAutoSpacing("║ Current File: NULL", 67));
         } else {
-            System.out.println(ReuseableMethods.softWrapping("║ Current File: "+ReuseableMethods.fileNameOnly(MST.getCurrentFile(), 5), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Current File: "+ ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), 67));
         }
         System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢");
         System.out.println("║ 1. Create File                                                  ║");
@@ -236,7 +236,7 @@ public class Menu {
         System.out.println();
 
         // [PROCESSING INPUTS]
-        int Answer = ReuseableMethods.getAnswer(1, 5);
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 5);
         System.out.println();
 
         // [PROCESSING OUTPUTS]
@@ -246,10 +246,24 @@ public class Menu {
                 isRunningMethod = true;
                 while (isRunningMethod) {
                     // GET FILENAME INPUT
-                    boolean validFileName = false;
-                    while (validFileName == false) {
-                        System.out.print("Enter File Name: ");
-                        String FileName = ReuseableMethods.input.nextLine();
+                    boolean validFile = false;
+                    while (validFile == false) {
+                        // security
+                        boolean has_e = true; // placeholder
+                        String FileName = "NULL"; // placeholder
+                        while (has_e) { // while it's true
+                            System.out.print("Enter File Name: ");
+                            FileName = ReuseableMethodsCLI.input.nextLine();
+
+                            // security
+                            if (FileName.equals("e")) {
+                                System.out.println("Can't name a file \"e\" because \"e\" is to exit, please try another name");
+                                has_e = true;
+                            } else {
+                                has_e = false;
+                            }
+                        }
+
                         if (MST.createFile(FileName)) {
                             //... IF THE CREATION FILE RETURNS TRUE
                             System.out.print("Please enter a password for the data: ");
@@ -258,7 +272,7 @@ public class Menu {
                             boolean validNewPassword = false;
                             String Password = ""; // just for placeholder
                             while (validNewPassword == false) {
-                                Password = ReuseableMethods.input.nextLine();
+                                Password = ReuseableMethodsCLI.input.nextLine();
 
                                 // [SECURITY]
                                 //    private final int minimumPassword = 5; // must have at least 5 characters
@@ -266,7 +280,7 @@ public class Menu {
                                 //    private final int specialCharactersPassword = 1; // must have at least 2 special characters
                                 //    private final int numbersPassword = 1; // must have at least 1 int characters
 
-                                validNewPassword = ReuseableMethods.passwordValidation(Password, 5, 20, 1, 1);
+                                validNewPassword = ReuseableMethodsCLI.passwordValidation(Password, 5, 20, 1, 1);
                             }
 
                             //... SET THE PASSWORD
@@ -275,7 +289,7 @@ public class Menu {
                             //... FINISH TOUCH
                             System.out.println(FileName+" has been created!");
                             isRunningMethod = false;
-                            validFileName = true;
+                            validFile = true;
                         } else {
                             System.out.println(FileName + " already exist! please try another name");
                         }
@@ -294,7 +308,7 @@ public class Menu {
                         isRunningMethod = true;
                         continue;
                     }
-                    ReuseableMethods.printSavedFiles(SavedFiles, MST.getCurrentFile()) ; // Print
+                    ReuseableMethodsCLI.printSavedFiles(SavedFiles, MST.getCurrentFile()) ; // Print
 
                     //... GET INPUT
                     boolean ValidAnswer = false;
@@ -302,7 +316,16 @@ public class Menu {
                         String FilenameAnswer = "NULL";
                         try {
                             System.out.print("Choose File: ");
-                            FilenameAnswer = ReuseableMethods.input.nextLine(); // get input
+                            FilenameAnswer = ReuseableMethodsCLI.input.nextLine(); // get input
+
+                            // security
+                            if(FilenameAnswer.equals("e")) {
+                                isRunningMethod = false;
+                                ValidAnswer = true;
+                                System.out.println();
+                                break;
+                            }
+
                             //... LOAD THE FILE INTO THE MST OBJECT
                             if (!MST.loadFile(FilenameAnswer)) { // if it did not load
                                 System.out.println(FilenameAnswer+" does not exist! please choose another file.");
@@ -315,20 +338,36 @@ public class Menu {
                         //... ENTER PASSWORD <======== LOGGING IN
                         boolean ValidPassword = false;
                         while (!ValidPassword) {
-                            System.out.println("Please enter password for "+FilenameAnswer+": ");
-                            ValidPassword = MST.getCurrentAMST_Data().logIn(ReuseableMethods.input.nextLine());
-                        }
+                            System.out.print("Please enter password for "+FilenameAnswer+": ");
+                            String Password = ReuseableMethodsCLI.input.nextLine();
+                            if (Password.equals("e")) {
+                                isRunningMethod = false;
+                                ValidAnswer = true;
+                                MST.resetCurrentFileData(); // since it was the data was loaded into the object but it was not logged in, it gotta be removed for security purposes.
+                                System.out.println();
+                                break; // exits out of the while loop (ValidPassword)
+                            }
 
-                        System.out.println();
-                        System.out.println(FilenameAnswer+" has been successfully loaded!");
-                        System.out.println();
+                            if (MST.getCurrentAMST_Data().logIn(ReuseableMethodsCLI.hashPassword(ReuseableMethodsCLI.input.nextLine()))) {
+                                //... Runs the method and returns boolean
+
+                                ValidPassword = true;
+                                ValidAnswer = true;
+                                isRunningMethod = false;
+
+                                System.out.println(FilenameAnswer+" has been successfully loaded!");
+                                System.out.println();
+                            } else {
+                                System.out.println("[ERROR] Invalid Password");
+                                System.out.println();
+                            }
+                        }
                     }
                 }
-
-                //! <=================================== YOU LEFT HERE (IT ALWAYS THROWS AN ERROR EVERY TIME I LOAD IT IN, SAYING THAT THE JSON FILE DOES NOT MATCH THE CLASS)
                 break;
             case 3:
 
+                //! <==================================== YOU LEFT HERE (GOTTA ADD THE VIEW FILE NEXT AND TRY TO CREATE ATLEAST 2 REUSEABLE METHODS FOR BOTH CLI AND JAVAFX)
                 break;
             case 4:
 
@@ -344,18 +383,18 @@ public class Menu {
         // [DISPLAY]
         try {
             // Error Check
-            String DateCreation = ReuseableMethods.getDateCreated(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
-            String LastModified = ReuseableMethods.getLastModified(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
+            String DateCreation = ReuseableMethodsCLI.getDateCreated(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
+            String LastModified = ReuseableMethodsCLI.getLastModified(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
 
             // Print
             System.out.println("╔═════════════════════════════════════════════════════════════════╗");
             System.out.println("║                AGE MILESTONE TRACKER [FILE MENU]                ║");
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-            System.out.println(ReuseableMethods.softWrapping("║ Author: " + MST.getCurrentAMST_Data().getUsername(), 67));
-            System.out.println(ReuseableMethods.softWrapping("║ Current File: " + ReuseableMethods.fileNameOnly(MST.getCurrentFile(), 5), 67));
-            System.out.println(ReuseableMethods.softWrapping("║ File Size: " + ReuseableMethods.formatFileSize(MST.getCurrentFile().length()), 67));
-            System.out.println(ReuseableMethods.softWrapping("║ Date Created: " + DateCreation, 67));
-            System.out.println(ReuseableMethods.softWrapping("║ Last Modified: " + LastModified, 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Author: " + MST.getCurrentAMST_Data().getUsername(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Current File: " + ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ File Size: " + ReuseableMethodsCLI.formatFileSize(MST.getCurrentFile().length()), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Date Created: " + DateCreation, 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Last Modified: " + LastModified, 67));
             System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢ ");
             System.out.println("║ 1. View MileStones                                              ║");
             System.out.println("║ 2. Add MileStones                                               ║");
@@ -373,7 +412,7 @@ public class Menu {
         }
 
         // [PROCESSING INPUTS]
-        int Answer = ReuseableMethods.getAnswer(1, 4);
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 4);
 
         // [PROCESSING OUTPUTS]
         boolean isRunning; // this variable is just a placeholder so that each cases can have the same name;

@@ -1,5 +1,5 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 21, 2026. at  1:06 PM
+// Last Modified: September 22, 2026. at 12:22 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.*;
@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ReuseableMethods {
+public class ReuseableMethodsCLI {
     //=======VARIABLES=======//
     public static Scanner input = new Scanner(System.in);
     public static Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate.class, new GsonAdapter_Date()).create();
@@ -138,14 +138,14 @@ public class ReuseableMethods {
     public static boolean Confirmation(String process) {
         // DISPLAY
         System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println(ReuseableMethods.lineAutoSpacing("║ Are you sure you would like to confirm \""+process+"\"?", 85));
+        System.out.println(ReuseableMethodsCLI.lineAutoSpacing("║ Are you sure you would like to confirm \""+process+"\"?", 85));
         System.out.println("╟───────────────────────────────────────────────────────────────────────────────────╢");
         System.out.println("║ 1. Yes                                     2. No                                  ║");
         System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════╝");
         System.out.println();
 
         // PROCESSING INPUT
-        int Answer = ReuseableMethods.getAnswer(1, 2);
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 2);
 
         // PROCESSING OUTPUT
         return Answer == 1; // if it's 1, return true, else false
@@ -165,14 +165,14 @@ public class ReuseableMethods {
         System.out.println("╒══════════[AGE MILESTONE TRACKER SAVES]════════════╕");
         for (File f:savedFiles) {
             if (currentFile != null) {
-                System.out.println(ReuseableMethods.lineAutoSpacing("│ Name: "+ReuseableMethods.fileNameOnly(f, 5)+((f.getName().equals(currentFile.getName())) ? " (CURRENT FILE)":""), 53)); // The extra methods are meant to remove the `.txt
+                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Name: "+ ReuseableMethodsCLI.fileNameOnly(f, 5)+((f.getName().equals(currentFile.getName())) ? " (CURRENT FILE)":""), 53)); // The extra methods are meant to remove the `.txt
             } else {
-                System.out.println(ReuseableMethods.lineAutoSpacing("│ Name: "+ReuseableMethods.fileNameOnly(f, 5), 53)); // The extra methods are meant to remove the `.txt`
+                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Name: "+ ReuseableMethodsCLI.fileNameOnly(f, 5), 53)); // The extra methods are meant to remove the `.txt`
             }
             try {
-                System.out.println(ReuseableMethods.lineAutoSpacing("│ Size: "+ReuseableMethods.formatFileSize(f.length()), 53));
-                System.out.println(ReuseableMethods.lineAutoSpacing("│ Date Created: "+ReuseableMethods.getDateCreated(f), 53));
-                System.out.println(ReuseableMethods.lineAutoSpacing("│ Last Modified: "+ReuseableMethods.getLastModified(f), 53));
+                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Size: "+ ReuseableMethodsCLI.formatFileSize(f.length()), 53));
+                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Date Created: "+ ReuseableMethodsCLI.getDateCreated(f), 53));
+                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Last Modified: "+ ReuseableMethodsCLI.getLastModified(f), 53));
             } catch (NoSuchFileException e) { // Note: I feel like we will never run into this because savedFiles are called every single time to double check so it's impossible to delete a file in nanoseconds while this method runs
                 System.out.println("[ERROR: NoSuchFileException] "+e.getMessage());
             }
@@ -233,7 +233,7 @@ public class ReuseableMethods {
         //... UNDER `MileStoneTracker`, find if any filename matches
         File[] SavedFiles = MileStoneTrackerFolder.listFiles();
         for (File f:SavedFiles) {
-            if (ReuseableMethods.fileNameOnly(f, 5).equals(Filename)) {
+            if (ReuseableMethodsCLI.fileNameOnly(f, 5).equals(Filename)) {
                 return f;
             }
         }

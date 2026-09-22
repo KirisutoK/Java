@@ -118,7 +118,7 @@ public class SciCalc {
         FunctionChoice = scanner.nextInt();
     }
 
-    // =================== ReuseableMethods for the Switches(FunctionChoice) ===================//
+    // =================== ReuseableMethodsCLI for the Switches(FunctionChoice) ===================//
 
     public static int add(int num1, int num2) {
         int Results = num1 + num2;

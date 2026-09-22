@@ -1,9 +1,10 @@
 package Classess.MileStoneTracker;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 21, 2026. at  1:39 PM
+// Last Modified: September 22, 2026. at 12:22 PM
 
-import Misc.ReuseableMethods;
+import Misc.GSON_Adapters.GsonAdapter_Date;
+import Misc.ReuseableMethodsCLI;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -60,7 +61,7 @@ public class MileStoneTracker {
         }
 
         //... UNDER `MileStoneTracker`, Check if it already exists in the list.
-        File SaveFile = ReuseableMethods.createFile("MileStoneTracker", FileName); // NOTE: this method will return null if the filename already existed
+        File SaveFile = ReuseableMethodsCLI.createFile("MileStoneTracker", FileName); // NOTE: this method will return null if the filename already existed
 
         if (SaveFile != null) { // if the SaveFile is not null.
             //... c. Create the file and return true.
@@ -68,7 +69,7 @@ public class MileStoneTracker {
             CurrentFile = SaveFile;
 
             //... d. Serialize the data into the file
-            ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
+            ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
 
             // NOTE: We can use IntelliJ IDEA Debugging tool to find bugs and the process of the program.
             return true; // true means that it has successfully been created!
@@ -81,12 +82,12 @@ public class MileStoneTracker {
     public boolean setNewFilePassword(String Password) {
         if (CurrentMST_Data.getEmptyPassword()) { // if the current file is an empty password.
             //... a. Create the password for the file.
-            String HashedPassword = ReuseableMethods.hashPassword(Password); // NOTE: In order for this to run, it needs to do a security check before running the program.
+            String HashedPassword = ReuseableMethodsCLI.hashPassword(Password); // NOTE: In order for this to run, it needs to do a security check before running the program.
             CurrentMST_Data.setPassword(HashedPassword);
             CurrentMST_Data.logIn(HashedPassword); // this auto logIn's the current selected object as it is created
 
             //... b. Serialize the data into the file
-            ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
+            ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
 
             return true; // true means the process was successsfull
         }
@@ -95,7 +96,7 @@ public class MileStoneTracker {
     }
     public boolean loadFile(String Filename) throws IOException {
         // [SECURITY CHECK]
-        CurrentFile = ReuseableMethods.loadFile("MileStoneTracker", Filename);
+        CurrentFile = ReuseableMethodsCLI.loadFile("MileStoneTracker", Filename);
 
         if (CurrentMST_Data != null) {
             CurrentMST_Data.logOut(); // Logs out so that if the CurrentMST_Data was not selected to the MST Object, it will show logged out for its JSON data.
@@ -106,7 +107,7 @@ public class MileStoneTracker {
         }
 
         // [DESERIALIZATION]
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate.class, new GsonAdapter_Date()).create();
         String JSON_Data;
         try {
             JSON_Data = Files.readString(Path.of(CurrentFile.getPath()));
@@ -119,7 +120,7 @@ public class MileStoneTracker {
         return true; // True means that it loaded successfully into MST
     }
     private boolean deleteSelectedFile(String Filename) {
-        File SelectedFile = ReuseableMethods.loadFile("MileStoneTracker", Filename);
+        File SelectedFile = ReuseableMethodsCLI.loadFile("MileStoneTracker", Filename);
         if (SelectedFile.delete()) {
             return true;
         }
@@ -127,7 +128,7 @@ public class MileStoneTracker {
         return false;
     }
     private void deleteCurrentFile() {
-        String CurrentFileName = ReuseableMethods.fileNameOnly(CurrentFile, 5);
+        String CurrentFileName = ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5);
 
         if (CurrentFile.delete()) { // if the deletion is successful
             System.out.println(CurrentFileName + " has been successfully deleted!");
@@ -146,18 +147,18 @@ public class MileStoneTracker {
         // [DISPLAY]
         try {
             // Error Check
-            String DateCreation = ReuseableMethods.getDateCreated(CurrentFile); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
-            String LastModified = ReuseableMethods.getLastModified(CurrentFile); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
+            String DateCreation = ReuseableMethodsCLI.getDateCreated(CurrentFile); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
+            String LastModified = ReuseableMethodsCLI.getLastModified(CurrentFile); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
 
             // Print
             System.out.println("╔═════════════════════════════════════════════════════════════════╗");
             System.out.println("║                AGE MILESTONE TRACKER [FILE MENU]                ║");
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-            System.out.println(ReuseableMethods.softWrapping("║ Author: " + CurrentMST_Data.getUsername(), 67));
-            System.out.println(ReuseableMethods.softWrapping("║ Current File: " + ReuseableMethods.fileNameOnly(CurrentFile, 5), 67));
-            System.out.println(ReuseableMethods.softWrapping("║ File Size: " + ReuseableMethods.formatFileSize(CurrentFile.length()), 67));
-            System.out.println(ReuseableMethods.softWrapping("║ Date Created: " + DateCreation, 67));
-            System.out.println(ReuseableMethods.softWrapping("║ Last Modified: " + LastModified, 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Author: " + CurrentMST_Data.getUsername(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Current File: " + ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ File Size: " + ReuseableMethodsCLI.formatFileSize(CurrentFile.length()), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Date Created: " + DateCreation, 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Last Modified: " + LastModified, 67));
             System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢ ");
             System.out.println("║ 1. View MileStones                                              ║");
             System.out.println("║ 2. Add MileStones                                               ║");
@@ -175,7 +176,7 @@ public class MileStoneTracker {
         }
 
         // [PROCESSING INPUTS]
-        int Answer = ReuseableMethods.getAnswer(1, 4);
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 4);
 
         // [PROCESSING OUTPUTS]
         boolean isRunning; // this variable is just a placeholder so that each cases can have the same name;
@@ -216,12 +217,12 @@ public class MileStoneTracker {
 //        System.out.println();
 //
 //        // PROCESSING INPUT
-//        int Answer = ReuseableMethods.getAnswer(1, 3);
+//        int Answer = ReuseableMethodsCLI.getAnswer(1, 3);
 //
 //        // PROCESSING OUTPUT
 //        switch (Answer) {
 //            case 1:
-//                if ((CurrentMST_Data != null && CurrentFile != null) && ReuseableMethods.Confirmation("Delete Current File")) {
+//                if ((CurrentMST_Data != null && CurrentFile != null) && ReuseableMethodsCLI.Confirmation("Delete Current File")) {
 //                    deleteCurrentFile();
 //                }
 //                break;
@@ -230,8 +231,8 @@ public class MileStoneTracker {
 //                break;
 //            case 3:
 //                System.out.println("Note: `Delete All Saved File` will not delete your current File.");
-//                File[] SavedFiles = ReuseableMethods.getSaveFiles("MileStoneTracker");
-//                if (SavedFiles != null && ReuseableMethods.Confirmation("Delete All Saved File")) {
+//                File[] SavedFiles = ReuseableMethodsCLI.getSaveFiles("MileStoneTracker");
+//                if (SavedFiles != null && ReuseableMethodsCLI.Confirmation("Delete All Saved File")) {
 //                    for (File f : SavedFiles) {
 //                        if (CurrentFile != null) { // if we currently have a file
 //                            if (!(f.getName().equals(CurrentFile.getName()))) { // if the f is equal to the current file
@@ -267,7 +268,7 @@ public class MileStoneTracker {
         System.out.println();
 
         // [PROCESSING INPUT]
-        int Answer = ReuseableMethods.getAnswer(1, 3);
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 3);
 
         // [PROCESSING OUTPUT]
         boolean ValidInput = false;
@@ -277,21 +278,21 @@ public class MileStoneTracker {
                     try {
                         //... a. Processing Input
                         System.out.print("Please enter an age: ");
-                        int age = ReuseableMethods.input.nextInt();
-                        ReuseableMethods.input.nextLine(); // this refreshes buffer
+                        int age = ReuseableMethodsCLI.input.nextInt();
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
                         System.out.print("Please enter a message for the day: ");
-                        String message = ReuseableMethods.input.nextLine();
+                        String message = ReuseableMethodsCLI.input.nextLine();
                         System.out.println();
 
                         ValidInput = CurrentMST_Data.addAgeBasedMilestone(age, message);
 
                         //... b. Processing Output
-                        ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
+                        ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
 
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] age must not be a letter, it must be a number or integer.");
                         System.out.println();
-                        ReuseableMethods.input.nextLine(); // this refreshes buffer
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
                     }
                 }
 
@@ -301,20 +302,20 @@ public class MileStoneTracker {
                     try {
                         //... a. Processing Input
                         System.out.print("Please enter a day: ");
-                        int day = ReuseableMethods.input.nextInt();
-                        ReuseableMethods.input.nextLine(); // this refreshes buffer
+                        int day = ReuseableMethodsCLI.input.nextInt();
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
                         System.out.print("Please enter a message for the day: ");
-                        String message = ReuseableMethods.input.nextLine();
+                        String message = ReuseableMethodsCLI.input.nextLine();
                         System.out.println();
 
                         ValidInput = CurrentMST_Data.addDayBasedMilestone(day, message); // returns a boolean and processes data at the same time
 
                         //... b. Processing Output
-                        ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
+                        ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
                         System.out.println();
-                        ReuseableMethods.input.nextLine(); // this refreshes buffer
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
                     }
                 }
 
@@ -336,7 +337,7 @@ public class MileStoneTracker {
         System.out.println();
 
         // [PROCESSING INPUT]
-        int Answer = ReuseableMethods.getAnswer(1, 3);
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 3);
 
         // [PROCESSING OUTPUT]
         boolean ValidInput = false;
@@ -356,8 +357,8 @@ public class MileStoneTracker {
 
                         //... b. Processing Input
                         System.out.print("Please enter a age: ");
-                        int age = ReuseableMethods.input.nextInt();
-                        ReuseableMethods.input.nextLine(); // this refreshes buffer
+                        int age = ReuseableMethodsCLI.input.nextInt();
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
 
                         if (age == -1) {
                             System.out.println();
@@ -369,12 +370,12 @@ public class MileStoneTracker {
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
                         System.out.println();
-                        ReuseableMethods.input.nextLine(); // this refreshes buffer
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
                     }
                 }
 
                 //... b. Serialization
-                ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
+                ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
 
                 return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
             case 2:
@@ -392,8 +393,8 @@ public class MileStoneTracker {
 
                         //... b. Processing Input   
                         System.out.print("Please enter a day: ");
-                        int day = ReuseableMethods.input.nextInt();
-                        ReuseableMethods.input.nextLine(); // this refreshes buffer
+                        int day = ReuseableMethodsCLI.input.nextInt();
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
 
                         if (day == -1) {
                             System.out.println();
@@ -406,12 +407,12 @@ public class MileStoneTracker {
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
                         System.out.println();
-                        ReuseableMethods.input.nextLine(); // this refreshes buffer
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
                     }
                 }
 
                 //... b. Serialization
-                ReuseableMethods.updateJsonFile(CurrentMST_Data, CurrentFile);
+                ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
 
                 return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
             case 3:

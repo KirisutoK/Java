@@ -9,4 +9,4 @@ public interface Adjustable { // A Template/Contract that gives requirements for
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 }
 
-// ReuseableMethods and Interface is static by default
+// ReuseableMethodsCLI and Interface is static by default

@@ -1,9 +1,9 @@
 package Classess.MileStoneTracker;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 20, 2026. at  1:26 PM
+// Last Modified: September 22, 2026. at 12:22 PM
 
-import Misc.ReuseableMethods;
+import Misc.ReuseableMethodsCLI;
 
 import java.io.File;
 import java.io.Serializable;
@@ -40,7 +40,7 @@ public class MileStoneTrackerData implements Serializable {
         this.EmptyPassword = false;
         this.Birthday = Birthday;
         this.Today = LocalDate.now();
-        this.Age = ReuseableMethods.getAge(Birthday);
+        this.Age = ReuseableMethodsCLI.getAge(Birthday);
         this.AgeBasedMilestone = new HashMap<>();
         this.DayBasedMilestone = new HashMap<>();
     }
@@ -49,7 +49,7 @@ public class MileStoneTrackerData implements Serializable {
         this.EmptyPassword = true;
         this.Birthday = Birthday;
         this.Today = LocalDate.now();
-        this.Age = ReuseableMethods.getAge(Birthday);
+        this.Age = ReuseableMethodsCLI.getAge(Birthday);
         this.AgeBasedMilestone = new HashMap<>();
         this.DayBasedMilestone = new HashMap<>();
     }
@@ -96,12 +96,10 @@ public class MileStoneTrackerData implements Serializable {
     public boolean logIn(String input) {
         if (Password.equals(input)) {
             LoggedIn = true;
-            return true;
+            return true; // true means that it has succefully logged in
         }
 
-        System.out.println("[ERROR] Invalid Password");
-        System.out.println();
-        return false;
+        return false; // false means that it did not logged-in successsfully
     }
     public void logOut() {
         LoggedIn = false;
@@ -186,7 +184,7 @@ public class MileStoneTrackerData implements Serializable {
         System.out.println("║                         DAY MILESTONES                          ║");
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
         for (int d: sortedDays) {
-            System.out.println(ReuseableMethods.softWrapping("║ (Day: "+d+") {Message: "+DayBasedMilestone.get(d)+"} ", 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ (Day: "+d+") {Message: "+DayBasedMilestone.get(d)+"} ", 67));
         }
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
         System.out.println("║[NOTE] Input \"-1\" to exit.                                       ║");
@@ -203,7 +201,7 @@ public class MileStoneTrackerData implements Serializable {
         System.out.println("║                         AGE MILESTONES                          ║");
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
         for (int a: sortedAges) {
-            System.out.println(ReuseableMethods.softWrapping("║ (Age: "+a+") {Message: "+AgeBasedMilestone.get(a)+"} ", 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ (Age: "+a+") {Message: "+AgeBasedMilestone.get(a)+"} ", 67));
         }
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
         System.out.println("║[NOTE] Input \"-1\" to exit.                                       ║");
@@ -221,18 +219,18 @@ public class MileStoneTrackerData implements Serializable {
 
         // [PRINT]
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println(ReuseableMethods.softWrapping("║ File Name: "+ReuseableMethods.fileNameOnly(CurrentFile, 5)+((AgeBasedMilestone.isEmpty()&&DayBasedMilestone.isEmpty())? " (EMPTY)":""), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: "+ ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5)+((AgeBasedMilestone.isEmpty()&&DayBasedMilestone.isEmpty())? " (EMPTY)":""), 67));
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
-        System.out.println(ReuseableMethods.softWrapping("║ Username: "+Username, 67));
-        System.out.println(ReuseableMethods.softWrapping("║ Age: "+Age, 67));
-        System.out.println(ReuseableMethods.softWrapping("║ Next Birthday: "+getNextBirthday(), 67));
-        System.out.println(ReuseableMethods.softWrapping("║ Total Days Alive: "+getTotalDaysAlive(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: "+Username, 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Age: "+Age, 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Next Birthday: "+getNextBirthday(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Days Alive: "+getTotalDaysAlive(), 67));
         if (!DayBasedMilestone.isEmpty()) { 
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
             System.out.println("║                         DAY MILESTONES                          ║");
             System.out.println("╟─────────────────────────────────────────────────────────────────╢");
             for (int d: sortedDays) {
-                System.out.println(ReuseableMethods.softWrapping("║ (Day: "+d+") {Message: "+DayBasedMilestone.get(d)+"} ", 67));
+                System.out.println(ReuseableMethodsCLI.softWrapping("║ (Day: "+d+") {Message: "+DayBasedMilestone.get(d)+"} ", 67));
             }
             System.out.println("║                                                                 ║");
         }
@@ -241,7 +239,7 @@ public class MileStoneTrackerData implements Serializable {
             System.out.println("║                         AGE MILESTONES                          ║");
             System.out.println("╟─────────────────────────────────────────────────────────────────╢");
             for (int a: sortedAge) {
-                System.out.println(ReuseableMethods.softWrapping("║ (Age: "+a+") {Message: "+AgeBasedMilestone.get(a)+"} ", 67));
+                System.out.println(ReuseableMethodsCLI.softWrapping("║ (Age: "+a+") {Message: "+AgeBasedMilestone.get(a)+"} ", 67));
             }
             System.out.println("║                                                                 ║");
         }
@@ -253,7 +251,7 @@ public class MileStoneTrackerData implements Serializable {
         // It will not run the other methods unless "e" is inputted
         while (true) {
             System.out.print("Answer: ");
-            String Answer = ReuseableMethods.input.nextLine();
+            String Answer = ReuseableMethodsCLI.input.nextLine();
             System.out.println();
 
             if (Answer.equals("e")) {

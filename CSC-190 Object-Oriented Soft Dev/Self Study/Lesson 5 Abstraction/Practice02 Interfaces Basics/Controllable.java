@@ -10,4 +10,4 @@ public interface Controllable { // A TEMPLATE/CONTRACT THAT GIVES REQUIREMENTS F
 
 }
 
-// ReuseableMethods and Interface is static by default
+// ReuseableMethodsCLI and Interface is static by default

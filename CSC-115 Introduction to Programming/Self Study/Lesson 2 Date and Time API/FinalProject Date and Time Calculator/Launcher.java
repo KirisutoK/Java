@@ -1,8 +1,8 @@
 // Creation Date: August 21, 2026. at 12:02 AM
-// Last Modified: September 20, 2026. at 12:02 PM
+// Last Modified: September 22, 2026. at 12:22 PM
 
 import Controller.CLI.Menu;
-import Misc.ReuseableMethods;
+import Misc.ReuseableMethodsCLI;
 
 public class Launcher {
     // =========================== CLASS VARIABLES =========================== \\
@@ -13,7 +13,7 @@ public class Launcher {
     // =========================== MAIN =========================== \\
     public static void main(String[] args) {
         System.out.println("1. CLI   2. JavaFX");
-        int Answer = ReuseableMethods.getAnswer(1, 2);
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 2);
 
         switch (Answer) {
             case 1:
