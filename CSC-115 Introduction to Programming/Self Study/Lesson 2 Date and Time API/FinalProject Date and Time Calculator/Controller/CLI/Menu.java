@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 22, 2026. at 12:22 PM
+// Last Modified: September 23, 2026. at 10:35 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -242,26 +242,22 @@ public class Menu {
         // [PROCESSING OUTPUTS]
         boolean isRunningMethod; // this is just a place holder (I am trying to avoid using many instance of variables of boolean) since variables are shared throughout switch cases.
         switch (Answer) {
-            case 1:
+            case 1: // +[CREATE FILE]
                 isRunningMethod = true;
                 while (isRunningMethod) {
                     // GET FILENAME INPUT
                     boolean validFile = false;
                     while (validFile == false) {
-                        // security
-                        boolean has_e = true; // placeholder
-                        String FileName = "NULL"; // placeholder
-                        while (has_e) { // while it's true
-                            System.out.print("Enter File Name: ");
-                            FileName = ReuseableMethodsCLI.input.nextLine();
+                        // INPUT
+                        System.out.println("Input \"e\" to exit.");
+                        System.out.print("Enter File Name: ");
+                        String FileName = ReuseableMethodsCLI.input.nextLine();
 
-                            // security
-                            if (FileName.equals("e")) {
-                                System.out.println("Can't name a file \"e\" because \"e\" is to exit, please try another name");
-                                has_e = true;
-                            } else {
-                                has_e = false;
-                            }
+                        // Security
+                        if (FileName.equals("e")) {
+                            System.out.println();
+                            isRunningMethod = false;
+                            break;
                         }
 
                         if (MST.createFile(FileName)) {
@@ -288,6 +284,7 @@ public class Menu {
 
                             //... FINISH TOUCH
                             System.out.println(FileName+" has been created!");
+                            System.out.println();
                             isRunningMethod = false;
                             validFile = true;
                         } else {
@@ -296,7 +293,7 @@ public class Menu {
                     }
                 }
                 break;
-            case 2:
+            case 2: // +[LOAD FILE]
                 isRunningMethod = true;
                 while (isRunningMethod) {
                     //... DISPLAY
@@ -338,8 +335,11 @@ public class Menu {
                         //... ENTER PASSWORD <======== LOGGING IN
                         boolean ValidPassword = false;
                         while (!ValidPassword) {
+                            // Grab Input
                             System.out.print("Please enter password for "+FilenameAnswer+": ");
                             String Password = ReuseableMethodsCLI.input.nextLine();
+
+                            // Security
                             if (Password.equals("e")) {
                                 isRunningMethod = false;
                                 ValidAnswer = true;
@@ -348,7 +348,8 @@ public class Menu {
                                 break; // exits out of the while loop (ValidPassword)
                             }
 
-                            if (MST.getCurrentAMST_Data().logIn(ReuseableMethodsCLI.hashPassword(ReuseableMethodsCLI.input.nextLine()))) {
+                            // Process
+                            if (MST.getCurrentAMST_Data().logIn(ReuseableMethodsCLI.hashPassword(Password))) {
                                 //... Runs the method and returns boolean
 
                                 ValidPassword = true;
@@ -367,10 +368,105 @@ public class Menu {
                 break;
             case 3:
 
-                //! <==================================== YOU LEFT HERE (GOTTA ADD THE VIEW FILE NEXT AND TRY TO CREATE ATLEAST 2 REUSEABLE METHODS FOR BOTH CLI AND JAVAFX)
                 break;
-            case 4:
+            case 4: // +[VIEW FILE]
+                isRunningMethod = true;
+                while (isRunningMethod) {
+                    // DISPLAY
+                    System.out.println("╔═══════════════════════════════════════════════════════════════════╗");
+                    System.out.println("║ Please specify which type of delete method would you like to run? ║");
+                    System.out.println("╟───────────────────────────────────────────────────────────────────╢");
+                    System.out.println("║ 1. Delete Current File                                            ║");
+                    System.out.println("║ 2. Delete Selected File                                           ║");
+                    System.out.println("║ 3. Delete All Saved Files                                         ║");
+                    System.out.println("║ 4. Go Back                                                        ║");
+                    System.out.println("╚═══════════════════════════════════════════════════════════════════╝");
+                    System.out.println();
 
+                    int AnswerViewFile = ReuseableMethodsCLI.getAnswer(1, 4);
+
+                    switch (AnswerViewFile) {
+                        case 1:
+                            // Security
+                            if (MST.getCurrentFile() == null) {
+                                System.out.println("[ERROR] There is currently no file at the moment.");
+                                System.out.println();
+                                isRunningMethod = false;
+                                break;
+                            }
+
+                            // Process
+                            if (ReuseableMethodsCLI.Confirmation("Delete Current File")) {
+                                MST.deleteCurrentFile();
+                            }
+
+                            isRunningMethod = false;
+                            break;
+                        case 2:
+                            // DISPLAY
+                            ReuseableMethodsCLI.printSavedFiles(MST.getCurrentFile().getParentFile().listFiles(), MST.getCurrentFile());
+
+                            // GATHER INPUT
+                            System.out.print("Choose File: ");
+                            String FileAnswer = ReuseableMethodsCLI.input.nextLine();
+                            if (FileAnswer.equals("e")) {
+                                System.out.println();
+                                isRunningMethod = false;
+                                break;
+                            }
+
+                            // PROCESS
+                            if (FileAnswer.equals(ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5))) {
+                                if (ReuseableMethodsCLI.Confirmation("Delete Current File")) {
+                                    MST.deleteCurrentFile();
+                                    isRunningMethod = false;
+                                    break;
+                                } else {
+                                    continue;
+                                }
+                            }
+
+                            if (MST.deleteSelectedFile(FileAnswer)) {
+                                System.out.println(FileAnswer+" has been successfully deleted!");
+                                isRunningMethod = false;
+                            } else {
+                                System.out.println("[ERROR] "+FileAnswer+" did not get deleted!");
+                                isRunningMethod = false;
+                            }
+
+                            break;
+                        case 3:
+                            System.out.println("Note: `Delete All Saved File` will not delete your current File.");
+
+                            File[] SavedFiles = MST.getCurrentFile().getParentFile().listFiles();
+                            if (SavedFiles != null && ReuseableMethodsCLI.Confirmation("Delete All Saved Files")) {
+                                for (File f : SavedFiles) {
+                                    if (MST.getCurrentFile() != null) { // if we currently have a file
+                                        if (!(f.getName().equals(MST.getCurrentFile().getName()))) { // if the f is equal to the current file
+                                            if (!f.delete()) { // if it did not get deleted
+                                                System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
+                                            }
+                                        }
+                                    } else { // If there is no current file yet.
+                                        if (!f.delete()) { // if it did not get deleted
+                                            System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
+                                        }
+                                    }
+                                }
+                            }
+                            System.out.println("Delete All Saved File has successfully completed!");
+                            System.out.println();
+
+                            isRunningMethod = false;
+                            break;
+                        case 4:
+                            isRunningMethod = false;
+                            break;
+                    }
+                }
+
+                //! <==================================== YOU LEFT HERE (GOTTA ADD THE VIEW FILE NEXT AND TRY TO CREATE ATLEAST 2 REUSEABLE METHODS FOR BOTH CLI AND JAVAFX)
+                // NOTE: SOMEHOW THE THE LOAD CASE PRINTS OUT AND DOES NOT SAY "THERE ARE CURRENTLY NO SAVED FILES" AFTER DELETING CURRENT FILE WHICH IS A BUG
                 break;
             case 5:
 
