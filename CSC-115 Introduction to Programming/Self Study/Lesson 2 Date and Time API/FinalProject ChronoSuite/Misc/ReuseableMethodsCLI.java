@@ -1,5 +1,5 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 22, 2026. at 12:22 PM
+// Last Modified: September 24, 2026. at 11:35 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.*;
@@ -152,13 +152,13 @@ public class ReuseableMethodsCLI {
     }
 
     // [FILE MANAGEMENT]
-    public static void printSavedFiles(File[] savedFiles, File currentFile) {
+    public static boolean printSavedFiles(File[] savedFiles, File currentFile) {
         // Check if it's null
-        if (savedFiles == null) {
+        if (savedFiles == null || savedFiles.length == 0) {
             System.out.println("[ERROR] Saved Files is empty!");
             System.out.println("[METHOD] printSavedFiles(File[] savedFiles)");
             System.out.println();
-            return;
+            return false; // false means it did not load successfully
         }
 
         // Print
@@ -182,6 +182,8 @@ public class ReuseableMethodsCLI {
         System.out.println("│[NOTE] Input \"e\" to exit.                          │");
         System.out.println("╘═══════════════════════════════════════════════════╛");
         System.out.println();
+
+        return true; // true means that it loaded successfully
     }
     public static void updateJsonFile(Object obj, File file) {
         // NOTE: I feel like this might cause an error issue if something wrongs with any of the methods this method had been used on

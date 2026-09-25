@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 23, 2026. at 10:35 PM
+// Last Modified: September 24, 2026. at 11:49 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -237,7 +237,6 @@ public class Menu {
 
         // [PROCESSING INPUTS]
         int Answer = ReuseableMethodsCLI.getAnswer(1, 5);
-        System.out.println();
 
         // [PROCESSING OUTPUTS]
         boolean isRunningMethod; // this is just a place holder (I am trying to avoid using many instance of variables of boolean) since variables are shared throughout switch cases.
@@ -297,15 +296,10 @@ public class Menu {
                 isRunningMethod = true;
                 while (isRunningMethod) {
                     //... DISPLAY
-                    File SavedFilesDirectory = new File("Saves/MileStoneTracker"); // Creates a path to this
-                    File[] SavedFiles = SavedFilesDirectory.listFiles(); // Create a list based on the path
-                    if (SavedFiles == null) {
-                        System.out.println("[ERROR] There are currently no saved files in your saved files directory!");
-                        System.out.println();
-                        isRunningMethod = true;
+                    if (!ReuseableMethodsCLI.printSavedFiles(new File("Saves/MileStoneTracker").listFiles(), MST.getCurrentFile())) {
+                        isRunningMethod = false;
                         continue;
                     }
-                    ReuseableMethodsCLI.printSavedFiles(SavedFiles, MST.getCurrentFile()) ; // Print
 
                     //... GET INPUT
                     boolean ValidAnswer = false;
@@ -386,7 +380,7 @@ public class Menu {
                     int AnswerViewFile = ReuseableMethodsCLI.getAnswer(1, 4);
 
                     switch (AnswerViewFile) {
-                        case 1:
+                        case 1: // +[DELETE CURRENT FILE]+
                             // Security
                             if (MST.getCurrentFile() == null) {
                                 System.out.println("[ERROR] There is currently no file at the moment.");
@@ -402,9 +396,9 @@ public class Menu {
 
                             isRunningMethod = false;
                             break;
-                        case 2:
+                        case 2: // +[DELETE SELECTED FILE]+
                             // DISPLAY
-                            ReuseableMethodsCLI.printSavedFiles(MST.getCurrentFile().getParentFile().listFiles(), MST.getCurrentFile());
+                            ReuseableMethodsCLI.printSavedFiles(new File("Saves/MileStoneTracker").listFiles(), MST.getCurrentFile());
 
                             // GATHER INPUT
                             System.out.print("Choose File: ");
@@ -416,7 +410,7 @@ public class Menu {
                             }
 
                             // PROCESS
-                            if (FileAnswer.equals(ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5))) {
+                            if (MST.getCurrentFile() != null && FileAnswer.equals(ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5))) {
                                 if (ReuseableMethodsCLI.Confirmation("Delete Current File")) {
                                     MST.deleteCurrentFile();
                                     isRunningMethod = false;
@@ -426,7 +420,7 @@ public class Menu {
                                 }
                             }
 
-                            if (MST.deleteSelectedFile(FileAnswer)) {
+                            if (ReuseableMethodsCLI.Confirmation("Delete `"+FileAnswer+"` File") && MST.deleteSelectedFile(FileAnswer)) {
                                 System.out.println(FileAnswer+" has been successfully deleted!");
                                 isRunningMethod = false;
                             } else {
@@ -435,7 +429,7 @@ public class Menu {
                             }
 
                             break;
-                        case 3:
+                        case 3: //! +[DELETE CURRENT FILE]+ BUG: NULLPOINTER EXCEPTION, WHEN DELETING ALL FILES WITH ONLY THE CURRENT FILE LEFT
                             System.out.println("Note: `Delete All Saved File` will not delete your current File.");
 
                             File[] SavedFiles = MST.getCurrentFile().getParentFile().listFiles();
@@ -465,12 +459,12 @@ public class Menu {
                     }
                 }
 
+
                 //! <==================================== YOU LEFT HERE (GOTTA ADD THE VIEW FILE NEXT AND TRY TO CREATE ATLEAST 2 REUSEABLE METHODS FOR BOTH CLI AND JAVAFX)
-                // NOTE: SOMEHOW THE THE LOAD CASE PRINTS OUT AND DOES NOT SAY "THERE ARE CURRENTLY NO SAVED FILES" AFTER DELETING CURRENT FILE WHICH IS A BUG
                 break;
             case 5:
 
-                return false; // false means it stopped running
+                return false; // false means it stopped running 
         }
 
         return true; // true means it's still running
