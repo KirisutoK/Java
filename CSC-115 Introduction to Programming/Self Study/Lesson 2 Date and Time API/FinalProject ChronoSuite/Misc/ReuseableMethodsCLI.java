@@ -1,5 +1,5 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 24, 2026. at 11:35 PM
+// Last Modified: September 25, 2026. at 11:05 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.*;
@@ -156,7 +156,6 @@ public class ReuseableMethodsCLI {
         // Check if it's null
         if (savedFiles == null || savedFiles.length == 0) {
             System.out.println("[ERROR] Saved Files is empty!");
-            System.out.println("[METHOD] printSavedFiles(File[] savedFiles)");
             System.out.println();
             return false; // false means it did not load successfully
         }

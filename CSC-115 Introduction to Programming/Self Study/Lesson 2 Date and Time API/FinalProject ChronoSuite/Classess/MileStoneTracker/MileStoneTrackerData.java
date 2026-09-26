@@ -1,11 +1,10 @@
 package Classess.MileStoneTracker;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 22, 2026. at 12:22 PM
+// Last Modified: September 25, 2026. at 11:54 PM
 
 import Misc.ReuseableMethodsCLI;
 
-import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -90,6 +89,25 @@ public class MileStoneTrackerData implements Serializable {
         return AgeBasedMilestone.isEmpty();
     }
 
+    // [FOR MENU PRINTING] NOTE: I feel ashamed having to be able to call this when its supposed to be "secure"
+    public HashMap<Integer, String> getAgeBasedMilestone() {
+        return AgeBasedMilestone;
+    }
+    public HashMap<Integer, String> getDayBasedMilestone() {
+        return DayBasedMilestone;
+    }
+
+    public ArrayList<Integer> getSortedAgeKeys() {
+        ArrayList<Integer> sortedAge = new ArrayList<>(AgeBasedMilestone.keySet());
+        Collections.sort(sortedAge);
+        return sortedAge;
+    }
+    public ArrayList<Integer> getSortedDayKeys() {
+        ArrayList<Integer> sortedDay = new ArrayList<>(DayBasedMilestone.keySet());
+        Collections.sort(sortedDay);
+        return sortedDay;
+    }
+
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
     // [SECURITY]
@@ -113,15 +131,15 @@ public class MileStoneTrackerData implements Serializable {
     public boolean addDayBasedMilestone(int day, String message) {
         // [SECURITY]
         if (day < 0 || day > 45000) {
-            System.out.println("[ERROR] Day can not be less than 0 or greater than 45000 days");
+            // System.out.println("[ERROR] Day can not be less than 0 or greater than 45000 days");
             return false;
         }
 
         // [PRINT]
         if (DayBasedMilestone.containsKey(day)) {
-            System.out.println("(Day: "+day+") {Message: "+message+"} has been successfully overwritten!");
+            // System.out.println("(Day: "+day+") {Message: "+message+"} has been successfully overwritten!");
         } else {
-            System.out.println("(Day: "+day+") {Message: "+message+"} has been successfully added!");
+            // System.out.println("(Day: "+day+") {Message: "+message+"} has been successfully added!");
         }
 
         // [PROCESS]
@@ -208,59 +226,8 @@ public class MileStoneTrackerData implements Serializable {
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
         System.out.println();
     }
-    public void viewData(File CurrentFile) {
 
 
-        // [SORTING]   <============== THANKS TO PROFESSOR CLAUDE FOR SUGGESTING ME THIS METHOD
-        ArrayList<Integer> sortedDays = new ArrayList<>(DayBasedMilestone.keySet());
-        Collections.sort(sortedDays);
-        ArrayList<Integer> sortedAge = new ArrayList<>(AgeBasedMilestone.keySet());
-        Collections.sort(sortedAge);
-
-        // [PRINT]
-        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: "+ ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5)+((AgeBasedMilestone.isEmpty()&&DayBasedMilestone.isEmpty())? " (EMPTY)":""), 67));
-        System.out.println("╟─────────────────────────────────────────────────────────────────╢");
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: "+Username, 67));
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Age: "+Age, 67));
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Next Birthday: "+getNextBirthday(), 67));
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Days Alive: "+getTotalDaysAlive(), 67));
-        if (!DayBasedMilestone.isEmpty()) { 
-            System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-            System.out.println("║                         DAY MILESTONES                          ║");
-            System.out.println("╟─────────────────────────────────────────────────────────────────╢");
-            for (int d: sortedDays) {
-                System.out.println(ReuseableMethodsCLI.softWrapping("║ (Day: "+d+") {Message: "+DayBasedMilestone.get(d)+"} ", 67));
-            }
-            System.out.println("║                                                                 ║");
-        }
-        if (!AgeBasedMilestone.isEmpty()) {
-            System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-            System.out.println("║                         AGE MILESTONES                          ║");
-            System.out.println("╟─────────────────────────────────────────────────────────────────╢");
-            for (int a: sortedAge) {
-                System.out.println(ReuseableMethodsCLI.softWrapping("║ (Age: "+a+") {Message: "+AgeBasedMilestone.get(a)+"} ", 67));
-            }
-            System.out.println("║                                                                 ║");
-        }
-        System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-        System.out.println("║[NOTE] Input \"e\" to exit.                                        ║");
-        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
-        System.out.println();
-
-        // It will not run the other methods unless "e" is inputted
-        while (true) {
-            System.out.print("Answer: ");
-            String Answer = ReuseableMethodsCLI.input.nextLine();
-            System.out.println();
-
-            if (Answer.equals("e")) {
-                return;
-            }
-        }
-    }
-
-    
     // ================================================== OTHER CLASSES ================================================== \\
 }
 

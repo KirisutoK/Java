@@ -1,7 +1,7 @@
 package Classess.MileStoneTracker;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 23, 2026. at 10:04 PM
+// Last Modified: September 25, 2026. at 11:54 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import Misc.ReuseableMethodsCLI;
@@ -10,7 +10,6 @@ import com.google.gson.GsonBuilder;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.time.*;
 import java.util.InputMismatchException;
@@ -33,7 +32,7 @@ public class MileStoneTracker {
     }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    public MileStoneTrackerData getCurrentAMST_Data() {
+    public MileStoneTrackerData getCurrentMST_Data() {
         return CurrentMST_Data;
     }
     public File getCurrentFile() {
@@ -142,51 +141,15 @@ public class MileStoneTracker {
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     // [MENUS]
     private boolean AMST_FileMenu() {
-        // [DISPLAY]
-        try {
-            // Error Check
-            String DateCreation = ReuseableMethodsCLI.getDateCreated(CurrentFile); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
-            String LastModified = ReuseableMethodsCLI.getLastModified(CurrentFile); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
-
-            // Print
-            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-            System.out.println("║                AGE MILESTONE TRACKER [FILE MENU]                ║");
-            System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-            System.out.println(ReuseableMethodsCLI.softWrapping("║ Author: " + CurrentMST_Data.getUsername(), 67));
-            System.out.println(ReuseableMethodsCLI.softWrapping("║ Current File: " + ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5), 67));
-            System.out.println(ReuseableMethodsCLI.softWrapping("║ File Size: " + ReuseableMethodsCLI.formatFileSize(CurrentFile.length()), 67));
-            System.out.println(ReuseableMethodsCLI.softWrapping("║ Date Created: " + DateCreation, 67));
-            System.out.println(ReuseableMethodsCLI.softWrapping("║ Last Modified: " + LastModified, 67));
-            System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢ ");
-            System.out.println("║ 1. View MileStones                                              ║");
-            System.out.println("║ 2. Add MileStones                                               ║");
-            System.out.println("║ 3. Remove MileStones                                            ║");
-            System.out.println("║ 4. Go Back                                                      ║");
-            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
-            System.out.println();
-        } catch (NoSuchFileException e) {
-            resetCurrentFileData(); // turns currentfile and currentdata into null
-
-            System.out.println("[ERROR] Current File has been either deleted or moved.");
-            System.out.println();
-
-            return false; // false means that this menu will stop running (called in the parent menu or in the AMST_Menu())
-        }
-
-        // [PROCESSING INPUTS]
-        int Answer = ReuseableMethodsCLI.getAnswer(1, 4);
 
         // [PROCESSING OUTPUTS]
+        int Answer = 0; // Placeholder
         boolean isRunning; // this variable is just a placeholder so that each cases can have the same name;
         switch (Answer) {
             case 1: // +[View Milestone]+
-                CurrentMST_Data.viewData(CurrentFile);
+
                 break;
             case 2: // +[Add Milestone]+
-                isRunning = true;
-                while (isRunning) {
-                    isRunning = addMilestoneConfirmation();
-                }
 
                 break;
             case 3: // +[Remove Milestone]+
@@ -199,77 +162,6 @@ public class MileStoneTracker {
                 return false; // `false` means that this method will now stop running (there is a variable at AMST_Menu)
         }
         return true; // `true` means that this method will keep running
-    }
-
-    // [DATA MANAGEMENT]
-    private boolean addMilestoneConfirmation() {
-        // [DISPLAY]
-        System.out.println("╔═══════════════════════════════════════════════════════════════════╗");
-        System.out.println("║ Which milestone would you like to add?                            ║");
-        System.out.println("╟───────────────────────────────────────────────────────────────────╢");
-        System.out.println("║ 1. Age Milestone                                                  ║");
-        System.out.println("║ 2. Day Milestone                                                  ║");
-        System.out.println("║ 3. Go Back                                                        ║");
-        System.out.println("╚═══════════════════════════════════════════════════════════════════╝");
-        System.out.println();
-
-        // [PROCESSING INPUT]
-        int Answer = ReuseableMethodsCLI.getAnswer(1, 3);
-
-        // [PROCESSING OUTPUT]
-        boolean ValidInput = false;
-        switch (Answer) {
-            case 1:
-                while (!ValidInput) {
-                    try {
-                        //... a. Processing Input
-                        System.out.print("Please enter an age: ");
-                        int age = ReuseableMethodsCLI.input.nextInt();
-                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
-                        System.out.print("Please enter a message for the day: ");
-                        String message = ReuseableMethodsCLI.input.nextLine();
-                        System.out.println();
-
-                        ValidInput = CurrentMST_Data.addAgeBasedMilestone(age, message);
-
-                        //... b. Processing Output
-                        ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
-
-                    } catch (InputMismatchException e) {
-                        System.out.println("[ERROR: InputMismatchException] age must not be a letter, it must be a number or integer.");
-                        System.out.println();
-                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
-                    }
-                }
-
-                return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
-            case 2:
-                while (!ValidInput) {
-                    try {
-                        //... a. Processing Input
-                        System.out.print("Please enter a day: ");
-                        int day = ReuseableMethodsCLI.input.nextInt();
-                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
-                        System.out.print("Please enter a message for the day: ");
-                        String message = ReuseableMethodsCLI.input.nextLine();
-                        System.out.println();
-
-                        ValidInput = CurrentMST_Data.addDayBasedMilestone(day, message); // returns a boolean and processes data at the same time
-
-                        //... b. Processing Output
-                        ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
-                    } catch (InputMismatchException e) {
-                        System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
-                        System.out.println();
-                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
-                    }
-                }
-
-                return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
-            case 3:
-                return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
-        }
-        return true; // true means that this method will keep running (the caller of the method handles the boolean conditions)
     }
     private boolean removeMilestoneConfirmation() {
         // [DISPLAY]

@@ -1,16 +1,18 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 24, 2026. at 11:58 PM
+// Last Modified: September 25, 2026. at 11:54 PM
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 
 import Classess.DayPlanner.DayPlanner;
 import Classess.MileStoneTracker.MileStoneTracker;
+import Classess.MileStoneTracker.MileStoneTrackerData;
 import Classess.MultiTimeZoneMeetingPlanner.MultiTimeZoneMeetingPlanner;
 import Classess.SubscriptionTracker.SubscriptionTracker;
 import Classess.WorkHoursTracker.WorkHoursTracker;
@@ -148,7 +150,7 @@ public class Menu {
         System.out.println("║ 3. Multi-TimeZone Tracker (WIP)      6. Change Profile                 ║");
         System.out.println("╚════════════════════════════════════════════════════════════════════════╝");
         System.out.println();
-        
+
 
         // PROCESSING INPUTS
         int Answer = ReuseableMethodsCLI.getAnswer(1, 6); // CustomUtil.getAnswer(start, end);
@@ -159,7 +161,7 @@ public class Menu {
                 // [SECURITY]
                 if (MST == null) { //... this is to avoid having to re-enter credentials again
                     MST = new MileStoneTracker(Username, UserBirthday);
-                } else if( MST.getCurrentAMST_Data() != null && !(MST.getCurrentAMST_Data().getLoggedIn()) ) { // if the currentASMT_Data is not null and that the password is not passed (not logged in)
+                } else if( MST.getCurrentMST_Data() != null && !(MST.getCurrentMST_Data().getLoggedIn()) ) { // if the currentASMT_Data is not null and that the password is not passed (not logged in)
                     //... this is so that unauthorized users will not be able to see the file without having to log in again.
                     System.out.println("You currently have a file open in the Milestone Tracker Program, you will have to enter your password again for "+ MST.getCurrentFile().getName()+".");
                     System.out.println("[NOTE] input \"e\" to load the application with no current files open.");
@@ -168,7 +170,7 @@ public class Menu {
                     while (!ValidPassword) {
                         System.out.print("Enter Password: ");
                         String UserInputPassword = ReuseableMethodsCLI.input.nextLine();
-                        ValidPassword = MST.getCurrentAMST_Data().logIn(UserInputPassword);
+                        ValidPassword = MST.getCurrentMST_Data().logIn(UserInputPassword);
 
                         if (UserInputPassword.equals("e")) { // NOTE: Lowky dont know how to deal with this, initially planning to go back to selecting files but dont know how
                             MST.resetCurrentFileData();
@@ -343,7 +345,7 @@ public class Menu {
                             }
 
                             // Process
-                            if (MST.getCurrentAMST_Data().logIn(ReuseableMethodsCLI.hashPassword(Password))) {
+                            if (MST.getCurrentMST_Data().logIn(ReuseableMethodsCLI.hashPassword(Password))) {
                                 //... Runs the method and returns boolean
 
                                 ValidPassword = true;
@@ -360,10 +362,24 @@ public class Menu {
                     }
                 }
                 break;
-            case 3:
+            case 3: // +[VIEW FILE]
+                isRunningMethod = true;
+                while (isRunningMethod) {
+                    isRunningMethod = AMST_FileMenu();
+                }
 
+                //! <==================================== YOU LEFT HERE (GOTTA ADD THE VIEW FILE NEXT AND TRY TO CREATE ATLEAST 2 REUSEABLE METHODS FOR BOTH CLI AND JAVAFX)
                 break;
-            case 4: // +[VIEW FILE]
+            case 4: // +[DELETE FILE]
+                // Security
+                File[] SavedFiles = new File("Saves/MileStoneTracker").listFiles();
+                if (MST.getCurrentFile() == null && SavedFiles.length == 0 || SavedFiles == null) {
+                    System.out.println("[ERROR] You currently do not have a Current File and Saved Files in the saved files Folder!");
+                    System.out.println();
+                    break;
+                }
+
+                // Process
                 isRunningMethod = true;
                 while (isRunningMethod) {
                     // DISPLAY
@@ -429,10 +445,9 @@ public class Menu {
                             }
 
                             break;
-                        case 3: //! +[DELETE CURRENT FILE]+ BUG: NULLPOINTER EXCEPTION, WHEN DELETING ALL FILES WITH ONLY THE CURRENT FILE LEFT
+                        case 3:
                             System.out.println("Note: `Delete All Saved File` will not delete your current File.");
 
-                            File[] SavedFiles = MST.getCurrentFile().getParentFile().listFiles();
                             if (SavedFiles != null && ReuseableMethodsCLI.Confirmation("Delete All Saved Files")) {
                                 for (File f : SavedFiles) {
                                     if (MST.getCurrentFile() != null) { // if we currently have a file
@@ -459,8 +474,6 @@ public class Menu {
                     }
                 }
 
-
-                //! <==================================== YOU LEFT HERE (GOTTA ADD THE VIEW FILE NEXT AND TRY TO CREATE ATLEAST 2 REUSEABLE METHODS FOR BOTH CLI AND JAVAFX)
                 break;
             case 5:
 
@@ -469,8 +482,7 @@ public class Menu {
 
         return true; // true means it's still running
     }
-    private boolean AMST_FileMenu() {
-        // [DISPLAY]
+    public boolean AMST_FileMenu() {
         try {
             // Error Check
             String DateCreation = ReuseableMethodsCLI.getDateCreated(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
@@ -480,7 +492,7 @@ public class Menu {
             System.out.println("╔═════════════════════════════════════════════════════════════════╗");
             System.out.println("║                AGE MILESTONE TRACKER [FILE MENU]                ║");
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-            System.out.println(ReuseableMethodsCLI.softWrapping("║ Author: " + MST.getCurrentAMST_Data().getUsername(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Author: " + MST.getCurrentMST_Data().getUsername(), 67));
             System.out.println(ReuseableMethodsCLI.softWrapping("║ Current File: " + ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), 67));
             System.out.println(ReuseableMethodsCLI.softWrapping("║ File Size: " + ReuseableMethodsCLI.formatFileSize(MST.getCurrentFile().length()), 67));
             System.out.println(ReuseableMethodsCLI.softWrapping("║ Date Created: " + DateCreation, 67));
@@ -498,29 +510,143 @@ public class Menu {
             System.out.println("[ERROR] Current File has been either deleted or moved.");
             System.out.println();
 
-            return false; // false means that this menu will stop running (called in the parent menu or in the AMST_Menu())
+            return false; // false means that this method will now stop running.
         }
 
         // [PROCESSING INPUTS]
         int Answer = ReuseableMethodsCLI.getAnswer(1, 4);
 
         // [PROCESSING OUTPUTS]
-        boolean isRunning; // this variable is just a placeholder so that each cases can have the same name;
         switch (Answer) {
-            case 1: // +[View Milestone]+
+            case 1:
+                MST_viewData(MST.getCurrentMST_Data(), MST.getCurrentFile());
+                return true; // true means that this method will keep running after this case finishes
+            case 2:
+                boolean isRunningAddMilestone = true;
+                while (isRunningAddMilestone) {
+                    isRunningAddMilestone = addMilestoneConfirmation();
+                }
 
                 break;
-            case 2: // +[Add Milestone]+
+            case 3:
 
                 break;
-            case 3: // +[Remove Milestone]+
+            case 4:
 
                 break;
-            case 4: // +[Go Back]+
-                return false; // `false` means that this method will now stop running (there is a variable at AMST_Menu)
         }
-        return true; // `true` means that this method will keep running
+
+        return false; // false means that this method will now stop running.
     }
+    // +[DATA MANAGEMENT]+
+    public void MST_viewData(MileStoneTrackerData data, File f) {
+        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + ReuseableMethodsCLI.fileNameOnly(f, 5) + ((data.getAgeBasedMilestone().isEmpty() && data.getDayBasedMilestone().isEmpty()) ? " (EMPTY)" : ""), 67));
+        System.out.println("╟─────────────────────────────────────────────────────────────────╢");
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + data.getUsername(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Age: " + data.getAge(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Next Birthday: " + data.getNextBirthday(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Days Alive: " + data.getTotalDaysAlive(), 67));
+        if (!data.getDayBasedMilestone().isEmpty()) {
+            System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+            System.out.println("║                         DAY MILESTONES                          ║");
+            System.out.println("╟─────────────────────────────────────────────────────────────────╢");
+            for (int d : data.getSortedDayKeys()) {
+                System.out.println(ReuseableMethodsCLI.softWrapping("║ (Day: " + d + ") {Message: " + data.getDayBasedMilestone().get(d) + "} ", 67));
+            }
+            System.out.println("║                                                                 ║");
+        }
+        if (!data.getAgeBasedMilestone().isEmpty()) {
+            System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+            System.out.println("║                         AGE MILESTONES                          ║");
+            System.out.println("╟─────────────────────────────────────────────────────────────────╢");
+            for (int a : data.getSortedAgeKeys()) {
+                System.out.println(ReuseableMethodsCLI.softWrapping("║ (Age: " + a + ") {Message: " + data.getAgeBasedMilestone().get(a) + "} ", 67));
+            }
+            System.out.println("║                                                                 ║");
+        }
+        System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+        System.out.println("║[NOTE] Input \"e\" to exit.                                        ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+
+        while (true) {
+            System.out.print("Answer: ");
+            String Answer = ReuseableMethodsCLI.input.nextLine();
+            System.out.println();
+            if (Answer.equals("e")) return;
+        }
+    }
+    private boolean addMilestoneConfirmation() {
+        // [DISPLAY]
+        System.out.println("╔═══════════════════════════════════════════════════════════════════╗");
+        System.out.println("║ Which milestone would you like to add?                            ║");
+        System.out.println("╟───────────────────────────────────────────────────────────────────╢");
+        System.out.println("║ 1. Age Milestone                                                  ║");
+        System.out.println("║ 2. Day Milestone                                                  ║");
+        System.out.println("║ 3. Go Back                                                        ║");
+        System.out.println("╚═══════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+
+        // [PROCESSING INPUT]
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 3);
+
+        // [PROCESSING OUTPUT]
+        boolean ValidInput = false;
+        switch (Answer) {
+            case 1:
+                while (!ValidInput) {
+                    try {
+                        //... a. Processing Input
+                        System.out.print("Please enter an age: ");
+                        int age = ReuseableMethodsCLI.input.nextInt();
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
+                        System.out.print("Please enter a message for the day: ");
+                        String message = ReuseableMethodsCLI.input.nextLine();
+                        System.out.println();
+
+                        ValidInput = MST.getCurrentMST_Data().addAgeBasedMilestone(age, message);
+
+                        //... b. Processing Output
+                        ReuseableMethodsCLI.updateJsonFile(MST.getCurrentMST_Data(), MST.getCurrentFile());
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("[ERROR: InputMismatchException] age must not be a letter, it must be a number or integer.");
+                        System.out.println();
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
+                    }
+                }
+
+                return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
+            case 2:
+                while (!ValidInput) {
+                    try {
+                        //... a. Processing Input
+                        System.out.print("Please enter a day: ");
+                        int day = ReuseableMethodsCLI.input.nextInt();
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
+                        System.out.print("Please enter a message for the day: ");
+                        String message = ReuseableMethodsCLI.input.nextLine();
+                        System.out.println();
+
+                        ValidInput = MST.getCurrentMST_Data().addDayBasedMilestone(day, message); // returns a boolean and processes data at the same time
+
+                        //... b. Processing Output
+                        ReuseableMethodsCLI.updateJsonFile(MST.getCurrentMST_Data(), MST.getCurrentFile());
+                    } catch (InputMismatchException e) {
+                        System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
+                        System.out.println();
+                        ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
+                    }
+                }
+
+                return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
+            case 3:
+                return false; // false means that this method will now stop running (the caller of the method handles the boolean conditions)
+        }
+        return true; // true means that this method will keep running (the caller of the method handles the boolean conditions)
+    }
+
 
     // [DayPlanner Methods]
     // [MultiTimeZoneMeetingPlanner Methods]
