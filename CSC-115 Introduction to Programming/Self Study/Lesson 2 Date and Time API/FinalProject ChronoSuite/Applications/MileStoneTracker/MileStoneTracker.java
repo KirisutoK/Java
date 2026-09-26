@@ -1,12 +1,14 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 26, 2026. at  1:44 AM
+// Last Modified: September 26, 2026. at  2:26 AM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import Misc.ReuseableMethodsCLI;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -109,8 +111,9 @@ public class MileStoneTracker {
         String JSON_Data;
         try {
             JSON_Data = Files.readString(Path.of(CurrentFile.getPath()));
+            CurrentMST_Data = gson.fromJson(JSON_Data, MileStoneTrackerData.class);
         } catch (IOException e) {
-            throw new IOException();
+            throw new IOException(e);
         }
         CurrentMST_Data = gson.fromJson(JSON_Data, MileStoneTrackerData.class);
 

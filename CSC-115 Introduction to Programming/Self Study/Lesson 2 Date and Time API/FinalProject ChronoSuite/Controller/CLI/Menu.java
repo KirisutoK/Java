@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 26, 2026. at  1:35 AM
+// Last Modified: September 26, 2026. at  2:32 AM
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +17,7 @@ import Applications.MultiTimeZoneMeetingPlanner.MultiTimeZoneMeetingPlanner;
 import Applications.SubscriptionTracker.SubscriptionTracker;
 import Applications.WorkHoursTracker.WorkHoursTracker;
 import Misc.ReuseableMethodsCLI;
+import com.google.gson.JsonSyntaxException;
 
 public class Menu {
     //=======VARIABLES=======//
@@ -298,7 +299,7 @@ public class Menu {
                 isRunningMethod = true;
                 while (isRunningMethod) {
                     //... DISPLAY
-                    if (!ReuseableMethodsCLI.printSavedFiles(new File("Saves/MileStoneTracker").listFiles(), MST.getCurrentFile())) {
+                    if (!ReuseableMethodsCLI.printSavedFiles(ReuseableMethodsCLI.getSavedFiles("Saves/MileStoneTracker"), MST.getCurrentFile())) {
                         isRunningMethod = false;
                         continue;
                     }
@@ -325,6 +326,8 @@ public class Menu {
                                 continue;
                             }
                         } catch (IOException e) {
+                            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                        } catch (JsonSyntaxException e) {
                             System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
                         }
 
@@ -367,12 +370,11 @@ public class Menu {
                 while (isRunningMethod) {
                     isRunningMethod = AMST_FileMenu();
                 }
-
                 return true; // true means that this method will keep running due to a while loop of the caller.
             case 4: // +[DELETE FILE]
                 // Security
-                File[] SavedFiles = new File("Saves/MileStoneTracker").listFiles();
-                if (MST.getCurrentFile() == null && SavedFiles.length == 0 || SavedFiles == null) {
+                File[] SavedFiles = ReuseableMethodsCLI.getSavedFiles("Saves/MileStoneTracker");
+                if (MST.getCurrentFile() == null && SavedFiles == null || SavedFiles.length == 0) {
                     System.out.println("[ERROR] You currently do not have a Current File and Saved Files in the saved files Folder!");
                     System.out.println();
                     return true; // true means that this method will keep running due to a while loop of the caller.
@@ -381,99 +383,7 @@ public class Menu {
                 // Process
                 isRunningMethod = true;
                 while (isRunningMethod) {
-                    // DISPLAY
-                    System.out.println("╔═══════════════════════════════════════════════════════════════════╗");
-                    System.out.println("║ Please specify which type of delete method would you like to run? ║");
-                    System.out.println("╟───────────────────────────────────────────────────────────────────╢");
-                    System.out.println("║ 1. Delete Current File                                            ║");
-                    System.out.println("║ 2. Delete Selected File                                           ║");
-                    System.out.println("║ 3. Delete All Saved Files                                         ║");
-                    System.out.println("║ 4. Go Back                                                        ║");
-                    System.out.println("╚═══════════════════════════════════════════════════════════════════╝");
-                    System.out.println();
-
-                    int AnswerViewFile = ReuseableMethodsCLI.getAnswer(1, 4);
-
-                    switch (AnswerViewFile) {
-                        case 1: // +[DELETE CURRENT FILE]+
-                            // Security
-                            if (MST.getCurrentFile() == null) {
-                                System.out.println("[ERROR] There is currently no file at the moment.");
-                                System.out.println();
-                                isRunningMethod = false;
-                                break;
-                            }
-
-                            // Process
-                            if (ReuseableMethodsCLI.Confirmation("Delete Current File")) {
-                                MST.deleteCurrentFile();
-                            }
-
-                            isRunningMethod = false;
-                            break;
-                        case 2: // +[DELETE SELECTED FILE]+
-                            // DISPLAY
-                            ReuseableMethodsCLI.printSavedFiles(new File("Saves/MileStoneTracker").listFiles(), MST.getCurrentFile());
-
-                            // GATHER INPUT
-                            System.out.print("Choose File: ");
-                            String FileAnswer = ReuseableMethodsCLI.input.nextLine();
-                            if (FileAnswer.equals("e")) {
-                                System.out.println();
-                                isRunningMethod = false;
-                                break;
-                            }
-
-                            // PROCESS
-                            if (MST.getCurrentFile() != null && FileAnswer.equals(ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5))) {
-                                if (ReuseableMethodsCLI.Confirmation("Delete Current File")) {
-                                    MST.deleteCurrentFile();
-                                    isRunningMethod = false;
-                                    break;
-                                } else {
-                                    continue;
-                                }
-                            }
-
-                            File[] SavedFiles = new File("Saves/MilestoneTracker").listFiles();
-                            if (SavedFiles.) {
-                                if (ReuseableMethodsCLI.Confirmation("Delete `"+FileAnswer+"` File") && MST.deleteSelectedFile(FileAnswer)) {
-                                    System.out.println(FileAnswer+" has been successfully deleted!");
-                                    isRunningMethod = false;
-                                } else {
-                                    System.out.println("[ERROR] "+FileAnswer+" did not get deleted!");
-                                    isRunningMethod = false;
-                                }
-                            }
-
-                            break;
-                        case 3:
-                            System.out.println("Note: `Delete All Saved File` will not delete your current File.");
-
-                            if (SavedFiles != null && ReuseableMethodsCLI.Confirmation("Delete All Saved Files")) {
-                                for (File f : SavedFiles) {
-                                    if (MST.getCurrentFile() != null) { // if we currently have a file
-                                        if (!(f.getName().equals(MST.getCurrentFile().getName()))) { // if the f is equal to the current file
-                                            if (!f.delete()) { // if it did not get deleted
-                                                System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
-                                            }
-                                        }
-                                    } else { // If there is no current file yet.
-                                        if (!f.delete()) { // if it did not get deleted
-                                            System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
-                                        }
-                                    }
-                                }
-                            }
-                            System.out.println("Delete All Saved File has successfully completed!");
-                            System.out.println();
-
-                            isRunningMethod = false;
-                            break;
-                        case 4:
-                            isRunningMethod = false;
-                            break;
-                    }
+                    isRunningMethod = deleteFileConfirmation(SavedFiles);
                 }
 
                 return true; // true means that this method will keep running due to a while loop of the caller.
@@ -539,6 +449,97 @@ public class Menu {
         }
 
         return false; // false means that this method will now stop running.
+    }
+    // +[FILE MANAGEMENT]+
+    public boolean deleteFileConfirmation(File[] SavedFiles) {
+        // DISPLAY
+        System.out.println("╔═══════════════════════════════════════════════════════════════════╗");
+        System.out.println("║ Please specify which type of delete method would you like to run? ║");
+        System.out.println("╟───────────────────────────────────────────────────────────────────╢");
+        System.out.println("║ 1. Delete Current File                                            ║");
+        System.out.println("║ 2. Delete Selected File                                           ║");
+        System.out.println("║ 3. Delete All Saved Files                                         ║");
+        System.out.println("║ 4. Go Back                                                        ║");
+        System.out.println("╚═══════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+
+        int AnswerViewFile = ReuseableMethodsCLI.getAnswer(1, 4);
+
+        switch (AnswerViewFile) {
+            case 1: // +[DELETE CURRENT FILE]+
+                // Security
+                if (MST.getCurrentFile() == null) {
+                    System.out.println("[ERROR] There is currently no file at the moment.");
+                    System.out.println();
+                    return false; // false means that this method will now stop running due to a while loop by the caller.
+                }
+
+                // Process
+                if (ReuseableMethodsCLI.Confirmation("Delete Current File")) {
+                    MST.deleteCurrentFile();
+                }
+
+                return false; // false means that this method will now stop running due to a while loop by the caller.
+            case 2: // +[DELETE SELECTED FILE]+
+                // DISPLAY
+                ReuseableMethodsCLI.printSavedFiles(ReuseableMethodsCLI.getSavedFiles("Saves/MileStoneTracker"), MST.getCurrentFile());
+
+                // GATHER INPUT
+                System.out.print("Choose File: ");
+                String FileAnswer = ReuseableMethodsCLI.input.nextLine();
+                if (FileAnswer.equals("e")) {
+                    System.out.println();
+                    return false; // false means that this method will now stop running due to a while loop by the caller.
+                }
+
+                // PROCESS
+                if (MST.getCurrentFile() != null && FileAnswer.equals(ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5))) {
+                    if (ReuseableMethodsCLI.Confirmation("Delete Current File")) {
+                        MST.deleteCurrentFile();
+                        return false; // false means that this method will now stop running due to a while loop by the caller.
+                    }
+                }
+
+                for (File f: SavedFiles) {
+                    if (ReuseableMethodsCLI.fileNameOnly(f, 5).equals(FileAnswer)) {
+                        if (ReuseableMethodsCLI.Confirmation("Delete `"+FileAnswer+"` File") && MST.deleteSelectedFile(FileAnswer)) {
+                            System.out.println(FileAnswer+" has been successfully deleted!");
+                            return false; // false means that this method will now stop running due to a while loop by the caller.
+                        } else {
+                            System.out.println("[ERROR] "+FileAnswer+" did not get deleted!");
+                            return false; // false means that this method will now stop running due to a while loop by the caller.
+                        }
+                    }
+                }
+                System.out.println(FileAnswer+" does not exist!");
+                System.out.println();
+                return false; // false means that this method will now stop running due to a while loop by the caller.
+            case 3:
+                System.out.println("Note: `Delete All Saved File` will not delete your current File.");
+
+                if (SavedFiles != null && ReuseableMethodsCLI.Confirmation("Delete All Saved Files")) {
+                    for (File f : SavedFiles) {
+                        if (MST.getCurrentFile() != null) { // if we currently have a file
+                            if (!(f.getName().equals(MST.getCurrentFile().getName()))) { // if the f is equal to the current file
+                                if (!f.delete()) { // if it did not get deleted
+                                    System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
+                                }
+                            }
+                        } else { // If there is no current file yet.
+                            if (!f.delete()) { // if it did not get deleted
+                                System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
+                            }
+                        }
+                    }
+                }
+                System.out.println("Delete All Saved File has successfully completed!");
+                System.out.println();
+
+                return false; // false means that this method will now stop running due to a while loop by the caller.
+            case 4:
+                return false; // false means that this method will now stop running due to a while loop by the caller.
+        }
+        return false; // false means that this method will now stop running due to a while loop by the caller.
     }
     // +[DATA MANAGEMENT]+
     public void MST_viewData() {

@@ -1,5 +1,5 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 25, 2026. at 11:05 PM
+// Last Modified: September 26, 2026. at  2:39 AM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.*;
@@ -233,6 +233,9 @@ public class ReuseableMethodsCLI {
 
         //... UNDER `MileStoneTracker`, find if any filename matches
         File[] SavedFiles = MileStoneTrackerFolder.listFiles();
+        if (SavedFiles == null || SavedFiles.length == 0) {
+            return null;
+        }
         for (File f:SavedFiles) {
             if (ReuseableMethodsCLI.fileNameOnly(f, 5).equals(Filename)) {
                 return f;
@@ -240,6 +243,9 @@ public class ReuseableMethodsCLI {
         }
 
         return null;
+    }
+    public static File[] getSavedFiles(String Directory) {
+        return new File(Directory).listFiles();
     }
 
     // [BIRTHDAYS]
