@@ -1,7 +1,7 @@
-package Classess.SubscriptionTracker;
+package Applications.SubscriptionTracker;
 
 // Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: September 18, 2026. at  8:43 PM
+// Last Modified: September 26, 2026. at  1:30 AM
 
 public class SubscriptionTracker {
     //=======VARIABLES=======//

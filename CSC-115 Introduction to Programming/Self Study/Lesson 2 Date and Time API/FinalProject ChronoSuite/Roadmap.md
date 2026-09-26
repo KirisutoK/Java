@@ -42,7 +42,7 @@
 - [ ] Move all the `System.out.println` menu-drawing and `Scanner` prompts for each feature into a dedicated CLI-side class instead of living inside the logic class.
 - [ ] Suggested structure to move toward:
   ```
-  Classess/
+  Applications/
   ├── MileStoneTracker/
   │   ├── MileStoneTracker.java       ← logic only, no I/O
   │   └── MileStoneTrackerData.java   ← already logic-only
@@ -52,7 +52,7 @@
   UI/
   ├── CLI/
   │   ├── Menu.java                   ← current console main menu, moved here
-  │   └── MileStoneTrackerCLI.java    ← console prompts/printing, calls into Classess/ logic
+  │   └── MileStoneTrackerCLI.java    ← console prompts/printing, calls into Applications/ logic
   ```
 - [ ] Re-test the CLI thoroughly after the refactor — this is a pure restructuring pass, behavior shouldn't change, so any difference you notice is a regression to fix.
 

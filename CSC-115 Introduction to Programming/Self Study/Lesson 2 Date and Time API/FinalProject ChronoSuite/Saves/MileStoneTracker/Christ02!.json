@@ -1,0 +1,17 @@
+{
+  "Password": "208b0c614baadf4487487c4fa33fe8fc0eb4435c40fc0d39c2ead00e883de09d",
+  "EmptyPassword": false,
+  "LoggedIn": true,
+  "Username": "Christ",
+  "Age": 19,
+  "Birthday": "December 05, 2006",
+  "Today": "September 25, 2026",
+  "AgeBasedMilestone": {
+    "1": "Day one or One DAY"
+  },
+  "DayBasedMilestone": {
+    "1": "Dayyyyyyyyyyyyyyyyy oneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee or oneeeeeeeeeeeeeeeeeeeeee dayyyyyyyyyyyyyyyyyyyyy",
+    "2": "Cay 2 or Day 2",
+    "3": "Day 3 or it should not be null"
+  }
+}

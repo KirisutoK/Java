@@ -1,9 +1,9 @@
-package Classess.WorkHoursTracker;
+package Applications.MultiTimeZoneMeetingPlanner;
 
 // Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: September 18, 2026. at  8:43 PM
+// Last Modified: September 26, 2026. at  1:30 AM
 
-public class WorkHoursTracker {
+public class MultiTimeZoneMeetingPlanner {
     //=======VARIABLES=======//
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
@@ -19,5 +19,5 @@ public class WorkHoursTracker {
 }
 
 // INITIAL IDEA:
-// Clock-in and clock-out logger that calculates total hours worked per day, flags overtime (over 8 hours),
-// and summarizes a week. Reusable in any HR or freelance billing system.
+// Given a list of participants each in a different timezone and a proposed meeting time, checks if the time falls within business
+// hours for everyone and suggests alternatives if not. Reusable in any collaborative or international scheduling tool.
