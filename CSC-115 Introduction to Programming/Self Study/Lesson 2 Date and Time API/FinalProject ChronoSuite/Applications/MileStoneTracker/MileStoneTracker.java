@@ -1,14 +1,12 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 26, 2026. at  2:26 AM
+// Last Modified: September 27, 2026. at  3:50 AM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import Misc.ReuseableMethodsCLI;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -58,6 +56,7 @@ public class MileStoneTracker {
         // [SECURITY]
         if (CurrentMST_Data != null) {
             CurrentMST_Data.logOut();
+            ReuseableMethodsCLI.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged in."); // records the action into a log file.
         }
 
         //... UNDER `MileStoneTracker`, Check if it already exists in the list.
@@ -84,7 +83,7 @@ public class MileStoneTracker {
             //... a. Create the password for the file.
             String HashedPassword = ReuseableMethodsCLI.hashPassword(Password); // NOTE: In order for this to run, it needs to do a security check before running the program.
             CurrentMST_Data.setPassword(HashedPassword);
-            CurrentMST_Data.logIn(HashedPassword); // this auto logIn's the current selected object as it is created
+            CurrentMST_Data.logIn(HashedPassword, Username); // this auto logIn's the current selected object as it is created
 
             //... b. Serialize the data into the file
             ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
@@ -100,6 +99,7 @@ public class MileStoneTracker {
 
         if (CurrentMST_Data != null) {
             CurrentMST_Data.logOut(); // Logs out so that if the CurrentMST_Data was not selected to the MST Object, it will show logged out for its JSON data.
+            ReuseableMethodsCLI.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged in."); // records the action into a log file.
         }
         if (CurrentFile == null) {
             resetCurrentFileData();
@@ -111,7 +111,6 @@ public class MileStoneTracker {
         String JSON_Data;
         try {
             JSON_Data = Files.readString(Path.of(CurrentFile.getPath()));
-            CurrentMST_Data = gson.fromJson(JSON_Data, MileStoneTrackerData.class);
         } catch (IOException e) {
             throw new IOException(e);
         }
@@ -122,6 +121,7 @@ public class MileStoneTracker {
     }
     public boolean deleteSelectedFile(String Filename) {
         File SelectedFile = ReuseableMethodsCLI.loadFile("MileStoneTracker", Filename);
+        ReuseableMethodsCLI.deleteLog("MileStoneTracker", Filename);
 
         if (SelectedFile != null && SelectedFile.delete()) {
             return true;
@@ -132,6 +132,7 @@ public class MileStoneTracker {
     public boolean deleteCurrentFile() {
         // NOTE: BEFORE CALLING THIS METHOD, IT MUST FIRST RUN A CONFIRMATION PROCESS
 
+        ReuseableMethodsCLI.deleteLog("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5));
         if (CurrentFile.delete()) { // if the deletion is successful
             resetCurrentFileData();
             return true; // if it got deleted

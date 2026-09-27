@@ -1,5 +1,5 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 26, 2026. at  2:39 AM
+// Last Modified: September 27, 2026. at  3:17 AM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.*;
@@ -150,6 +150,35 @@ public class ReuseableMethodsCLI {
         // PROCESSING OUTPUT
         return Answer == 1; // if it's 1, return true, else false
     }
+    public static void log(String ApplicationName, String FileName, String action) {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+        File LogParentFile = new File("Saves/"+ApplicationName+"/Logs");
+        File LogFile = new File(LogParentFile, FileName+".log");
+        try { // true = append, don't overwrite
+            if (!LogParentFile.exists()) {
+                LogParentFile.mkdirs();
+            }
+            if (!(LogFile.isFile() && LogFile.exists())) {
+                LogFile.createNewFile();
+            }
+            FileWriter fw = new FileWriter(LogFile, true);
+            fw.write("["+timestamp+"] "+action+"\n");
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+        }
+    }
+    public static boolean deleteLog(String ApplicationName, String FileName) {
+        File LogParentFile = new File("Saves/"+ApplicationName+"/Logs");
+        File LogFile = new File(LogParentFile, FileName+".log");
+
+        if (LogFile.delete()) {
+            return true;
+        }
+
+        return false;
+    }
 
     // [FILE MANAGEMENT]
     public static boolean printSavedFiles(File[] savedFiles, File currentFile) {
@@ -193,16 +222,9 @@ public class ReuseableMethodsCLI {
         }
     }
     public static File createFile(String Directory, String Filename){
-        //... CHECK THE DIRECTORY OF `Saves`
-        File SavesFolder = new File("Saves");
-        if (!SavesFolder.exists() || SavesFolder.isFile()) { // if the path does not exist or there is an existing file called "Saves" then.
-            SavesFolder.mkdir();
-        }
-
-        //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `MileStoneTracker`
-        File MileStoneTrackerFolder = new File(SavesFolder, Directory);
+        File MileStoneTrackerFolder = new File("Saves/"+Directory+"/Datas");
         if (!MileStoneTrackerFolder.exists() || MileStoneTrackerFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
-            MileStoneTrackerFolder.mkdir();
+            MileStoneTrackerFolder.mkdirs();
         }
 
         //... UNDER `MileStoneTracker`, Check if it already exists in the list.
@@ -219,16 +241,9 @@ public class ReuseableMethodsCLI {
         return null;
     }
     public static File loadFile(String Directory, String Filename) {
-        //... CHECK THE DIRECTORY OF `Saves`
-        File SavesFolder = new File("Saves");
-        if (!SavesFolder.exists() || SavesFolder.isFile()) { // if the path does not exist or there is an existing file called "Saves" then.
-            SavesFolder.mkdir();
-        }
-
-        //... UNDER DIRECTORY OF `Saves`, CREATE ANOTHER DIRECTORY CALLED `MileStoneTracker`
-        File MileStoneTrackerFolder = new File(SavesFolder, Directory);
+        File MileStoneTrackerFolder = new File("Saves/"+Directory+"/Datas");
         if (!MileStoneTrackerFolder.exists() || MileStoneTrackerFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
-            MileStoneTrackerFolder.mkdir();
+            MileStoneTrackerFolder.mkdirs();
         }
 
         //... UNDER `MileStoneTracker`, find if any filename matches

@@ -1,7 +1,7 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 26, 2026. at  1:32 AM
+// Last Modified: September 27, 2026. at  2:07 AM
 
 import Misc.ReuseableMethodsCLI;
 
@@ -23,10 +23,11 @@ public class MileStoneTrackerData implements Serializable {
     private boolean LoggedIn = false;
 
     // [Basic Data]
-    private String Username;
+    private String Author;
     private int Age;
     private LocalDate Birthday;
     private LocalDate Today;
+    private String LoggedUser;
 
     // [Milestones Data]
     private HashMap<Integer, String> AgeBasedMilestone; // Age, Message
@@ -34,7 +35,7 @@ public class MileStoneTrackerData implements Serializable {
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     MileStoneTrackerData(String Username, String Password, LocalDate Birthday) {
-        this.Username = Username;
+        this.Author = Username;
         this.Password = Password;
         this.EmptyPassword = false;
         this.Birthday = Birthday;
@@ -44,7 +45,7 @@ public class MileStoneTrackerData implements Serializable {
         this.DayBasedMilestone = new HashMap<>();
     }
     MileStoneTrackerData(String Username, LocalDate Birthday) {
-        this.Username = Username;
+        this.Author = Username;
         this.EmptyPassword = true;
         this.Birthday = Birthday;
         this.Today = LocalDate.now();
@@ -60,8 +61,8 @@ public class MileStoneTrackerData implements Serializable {
     public int getAge() {
         return (LoggedIn) ? Age: -1; // -1 means age that it did not logged in
     }
-    public String getUsername() {
-        return (LoggedIn) ? Username: "[ERROR] User is not logged in!";
+    public String getAuthor() {
+        return (LoggedIn) ? Author : "[ERROR] User is not logged in!";
     }
     public String getNextBirthday() {
         LocalDate nextBirthday = LocalDate.of(Today.getYear(), Birthday.getMonth(), Birthday.getDayOfMonth());
@@ -74,6 +75,9 @@ public class MileStoneTrackerData implements Serializable {
     }
     public long getTotalDaysAlive() {
         return ChronoUnit.DAYS.between(Birthday, Today);
+    }
+    public String getLoggedUser() {
+        return LoggedUser;
     }
 
     // +[SECURITY]+
@@ -119,7 +123,8 @@ public class MileStoneTrackerData implements Serializable {
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
     // [SECURITY]
-    public boolean logIn(String input) {
+    public boolean logIn(String input, String currentUser) {
+        LoggedUser = currentUser;
         if (Password.equals(input)) {
             LoggedIn = true;
             return true; // true means that it has succefully logged in
