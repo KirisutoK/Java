@@ -1,10 +1,12 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 27, 2026. at  3:50 AM
+// Last Modified: September 28, 2026. at  4:55 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
+import Misc.Logger;
 import Misc.ReuseableMethodsCLI;
+import Misc.FileManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -52,15 +54,15 @@ public class MileStoneTracker {
     }
 
     // [FILE MANAGEMENT]
-    public boolean createFile(String FileName) {
+    public boolean createFile(String FileName) throws IOException {
         // [SECURITY]
         if (CurrentMST_Data != null) {
             CurrentMST_Data.logOut();
-            ReuseableMethodsCLI.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged in."); // records the action into a log file.
+            Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged out."); // records the action into a log file.
         }
 
         //... UNDER `MileStoneTracker`, Check if it already exists in the list.
-        File SaveFile = ReuseableMethodsCLI.createFile("MileStoneTracker", FileName); // NOTE: this method will return null if the filename already existed
+        File SaveFile = FileManager.createFile("MileStoneTracker", FileName); // NOTE: this method will return null if the filename already existed
 
         if (SaveFile != null) { // if the SaveFile is not null.
             //... c. Create the file and return true.
@@ -68,7 +70,12 @@ public class MileStoneTracker {
             CurrentFile = SaveFile;
 
             //... d. Serialize the data into the file
-            ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
+            try {
+                FileManager.updateJsonFile(CurrentMST_Data, CurrentFile);
+            } catch (IOException e) {
+                throw new IOException(e);
+            }
+
 
             // NOTE: We can use IntelliJ IDEA Debugging tool to find bugs and the process of the program.
             return true; // true means that it has successfully been created!
@@ -78,7 +85,7 @@ public class MileStoneTracker {
         //... a. Return false if it the createdsavefile is null (must be because it already exist or that something went wrong)
         return false; // false means that it did not work or something
     }
-    public boolean setNewFilePassword(String Password) {
+    public boolean setNewFilePassword(String Password) throws IOException {
         if (CurrentMST_Data.getEmptyPassword()) { // if the current file is an empty password.
             //... a. Create the password for the file.
             String HashedPassword = ReuseableMethodsCLI.hashPassword(Password); // NOTE: In order for this to run, it needs to do a security check before running the program.
@@ -86,7 +93,11 @@ public class MileStoneTracker {
             CurrentMST_Data.logIn(HashedPassword, Username); // this auto logIn's the current selected object as it is created
 
             //... b. Serialize the data into the file
-            ReuseableMethodsCLI.updateJsonFile(CurrentMST_Data, CurrentFile);
+            try {
+                FileManager.updateJsonFile(CurrentMST_Data, CurrentFile);
+            } catch (IOException e) {
+                throw new IOException(e);
+            }
 
             return true; // true means the process was successsfull
         }
@@ -95,11 +106,11 @@ public class MileStoneTracker {
     }
     public boolean loadFile(String Filename) throws IOException {
         // [SECURITY CHECK]
-        CurrentFile = ReuseableMethodsCLI.loadFile("MileStoneTracker", Filename);
+        CurrentFile = FileManager.loadFile("MileStoneTracker", Filename);
 
         if (CurrentMST_Data != null) {
             CurrentMST_Data.logOut(); // Logs out so that if the CurrentMST_Data was not selected to the MST Object, it will show logged out for its JSON data.
-            ReuseableMethodsCLI.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged in."); // records the action into a log file.
+            Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged out."); // records the action into a log file.
         }
         if (CurrentFile == null) {
             resetCurrentFileData();
@@ -120,8 +131,8 @@ public class MileStoneTracker {
         return true; // True means that it loaded successfully into MST
     }
     public boolean deleteSelectedFile(String Filename) {
-        File SelectedFile = ReuseableMethodsCLI.loadFile("MileStoneTracker", Filename);
-        ReuseableMethodsCLI.deleteLog("MileStoneTracker", Filename);
+        File SelectedFile = FileManager.loadFile("MileStoneTracker", Filename);
+        Logger.deleteLog("MileStoneTracker", Filename);
 
         if (SelectedFile != null && SelectedFile.delete()) {
             return true;
@@ -132,7 +143,7 @@ public class MileStoneTracker {
     public boolean deleteCurrentFile() {
         // NOTE: BEFORE CALLING THIS METHOD, IT MUST FIRST RUN A CONFIRMATION PROCESS
 
-        ReuseableMethodsCLI.deleteLog("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5));
+        Logger.deleteLog("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5));
         if (CurrentFile.delete()) { // if the deletion is successful
             resetCurrentFileData();
             return true; // if it got deleted
@@ -164,7 +175,3 @@ public class MileStoneTracker {
 
     // ================================================== OTHER CLASSES ================================================== \\
 }
-
-// NOTE: I am kind of confused here because of the roadmap.
-// NOTE: It says that i need to create another class for prompting inputs/outputs into the same level of Menu.class which is under Controller<CLI.
-// NOTE: Is it so i can use this class for JavaFX? just keep the logic and the prompting just needs to be removed and redirected?

@@ -1,5 +1,5 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 27, 2026. at  3:17 AM
+// Last Modified: September 28, 2026. at  4:52 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.*;
@@ -150,35 +150,6 @@ public class ReuseableMethodsCLI {
         // PROCESSING OUTPUT
         return Answer == 1; // if it's 1, return true, else false
     }
-    public static void log(String ApplicationName, String FileName, String action) {
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
-        File LogParentFile = new File("Saves/"+ApplicationName+"/Logs");
-        File LogFile = new File(LogParentFile, FileName+".log");
-        try { // true = append, don't overwrite
-            if (!LogParentFile.exists()) {
-                LogParentFile.mkdirs();
-            }
-            if (!(LogFile.isFile() && LogFile.exists())) {
-                LogFile.createNewFile();
-            }
-            FileWriter fw = new FileWriter(LogFile, true);
-            fw.write("["+timestamp+"] "+action+"\n");
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
-        }
-    }
-    public static boolean deleteLog(String ApplicationName, String FileName) {
-        File LogParentFile = new File("Saves/"+ApplicationName+"/Logs");
-        File LogFile = new File(LogParentFile, FileName+".log");
-
-        if (LogFile.delete()) {
-            return true;
-        }
-
-        return false;
-    }
 
     // [FILE MANAGEMENT]
     public static boolean printSavedFiles(File[] savedFiles, File currentFile) {
@@ -212,52 +183,6 @@ public class ReuseableMethodsCLI {
         System.out.println();
 
         return true; // true means that it loaded successfully
-    }
-    public static void updateJsonFile(Object obj, File file) {
-        // NOTE: I feel like this might cause an error issue if something wrongs with any of the methods this method had been used on
-        try (FileWriter fw = new FileWriter(file)) {
-            gson.toJson(obj, fw);
-        } catch (IOException e) {
-            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
-        }
-    }
-    public static File createFile(String Directory, String Filename){
-        File MileStoneTrackerFolder = new File("Saves/"+Directory+"/Datas");
-        if (!MileStoneTrackerFolder.exists() || MileStoneTrackerFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
-            MileStoneTrackerFolder.mkdirs();
-        }
-
-        //... UNDER `MileStoneTracker`, Check if it already exists in the list.
-        File SaveFile = new File(MileStoneTrackerFolder, Filename+".json"); // NOTE: `.AMST_Data` append so that every file will be a `.AMST_Data` file
-        try {
-            if (!SaveFile.exists() || SaveFile.isDirectory()) { // if the SaveFile does not exist or is currently a directory then.
-                SaveFile.createNewFile();
-                return SaveFile;
-            }
-        } catch (IOException e) {
-            return null;
-        }
-
-        return null;
-    }
-    public static File loadFile(String Directory, String Filename) {
-        File MileStoneTrackerFolder = new File("Saves/"+Directory+"/Datas");
-        if (!MileStoneTrackerFolder.exists() || MileStoneTrackerFolder.isFile()) { // if the path does not exists or there is an existing file called "Saves" then
-            MileStoneTrackerFolder.mkdirs();
-        }
-
-        //... UNDER `MileStoneTracker`, find if any filename matches
-        File[] SavedFiles = MileStoneTrackerFolder.listFiles();
-        if (SavedFiles == null || SavedFiles.length == 0) {
-            return null;
-        }
-        for (File f:SavedFiles) {
-            if (ReuseableMethodsCLI.fileNameOnly(f, 5).equals(Filename)) {
-                return f;
-            }
-        }
-
-        return null;
     }
     public static File[] getSavedFiles(String Directory) {
         return new File(Directory).listFiles();
