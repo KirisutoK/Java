@@ -1,7 +1,7 @@
 package Misc;
 
 // Creation Date: September 28, 2026. at 4:31 PM
-// Last Modified: September 28, 2026. at  4:52 PM
+// Last Modified: September 29, 2026. at 12:18 PM
 
 import java.io.File;
 import java.io.FileWriter;
@@ -49,9 +49,10 @@ public class Logger {
 
         return false;
     }
-
     
     // ================================================== OTHER CLASSES ================================================== \\
+
+
 }
 
 // NOTE: This is just a class for logging stuff into the file.

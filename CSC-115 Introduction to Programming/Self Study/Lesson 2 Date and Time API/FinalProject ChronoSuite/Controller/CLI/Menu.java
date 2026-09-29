@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 28, 2026. at  4:58 PM
+// Last Modified: September 29, 2026. at  3:44 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +16,7 @@ import Applications.MileStoneTracker.MileStoneTrackerData;
 import Applications.MultiTimeZoneMeetingPlanner.MultiTimeZoneMeetingPlanner;
 import Applications.SubscriptionTracker.SubscriptionTracker;
 import Applications.WorkHoursTracker.WorkHoursTracker;
+import Misc.DataManager;
 import Misc.ReuseableMethodsCLI;
 import Misc.FileManager;
 import Misc.Logger;
@@ -149,13 +150,14 @@ public class Menu {
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
+
     boolean MainMenu() {
         // DISPLAY
         System.out.println("╔════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                            ChronoSuite 1.0                             ║");
         System.out.println("╠════════════════════════════════════════════════════════════════════════╣");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: "+Username, 74));
-        System.out.println(ReuseableMethodsCLI.lineAutoSpacing("║ Birthday: "+ ReuseableMethodsCLI.toStringBirthday(UserBirthday), 74));
+        System.out.println(ReuseableMethodsCLI.lineAutoSpacing("║ Birthday: "+ DataManager.toStringBirthday(UserBirthday), 74));
         System.out.println("╟──[APPLICATIONS]────────────────────────────────────────────────────────╢");
         System.out.println("║ 1. MileStone Tracker                 4. Subscription Tracker (WIP)     ║");
         System.out.println("║ 2. Day Planner (WIP)                 5. Work Hours Tracker (WIP)       ║");
@@ -185,11 +187,8 @@ public class Menu {
                         System.out.print("Enter Password: ");
                         String UserInputPassword = ReuseableMethodsCLI.input.nextLine();
                         if (MST.getCurrentMST_Data().logIn(ReuseableMethodsCLI.hashPassword(UserInputPassword), Username)) {
-                            try {
-                                Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has logged in."); // records the action into a log file.
-                            } catch (IOException e) {
-                                System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
-                            }
+                            ReuseableMethodsCLI.log("MileStoneTracker", FileManager.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has logged in."); // records the action into a log file.
+
                             ValidPassword = true;
                             System.out.println();
                         } else {
@@ -238,7 +237,7 @@ public class Menu {
         return true; // Only Case 6 of Switch(Answer) will return `false` since its an indication of "Stop" or "Running is False"
     }
 
-    // [MileStoneTracker Methods] ====================================================================================================<<<<<<<
+    // [MileStoneTracker Methods] ==============================================================================================<<<<<<<
     // +[MENUS]+
     public boolean MST_Menu() {
         // [DISPLAY]
@@ -246,11 +245,11 @@ public class Menu {
         System.out.println("║                  MILESTONE TRACKER [ MENU ]                     ║");
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + Username, 67));
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Age: " + ReuseableMethodsCLI.getAge(UserBirthday), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Age: " + DataManager.getAge(UserBirthday), 67));
         if (MST.getCurrentFile() == null) {
             System.out.println(ReuseableMethodsCLI.lineAutoSpacing("║ Current File: NULL", 67));
         } else {
-            System.out.println(ReuseableMethodsCLI.softWrapping("║ Current File: "+ ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Current File: "+ FileManager.fileNameOnly(MST.getCurrentFile(), 5), 67));
         }
         System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢");
         System.out.println("║ 1. Create File                                                  ║");
@@ -272,7 +271,7 @@ public class Menu {
                 while (isRunningMethod) {
                     // GET FILENAME INPUT
                     boolean validFile = false;
-                    while (validFile == false) {
+                    while (!validFile) {
                         // INPUT
                         System.out.println("Input \"e\" to exit.");
                         System.out.print("Enter File Name: ");
@@ -291,7 +290,7 @@ public class Menu {
                                 //... CREATE PASSWORD
                                 boolean validNewPassword = false;
                                 String Password = ""; // just for placeholder
-                                while (validNewPassword == false) {
+                                while (!validNewPassword) {
                                     System.out.print("Please enter a password for the data: ");
                                     Password = ReuseableMethodsCLI.input.nextLine();
 
@@ -309,7 +308,7 @@ public class Menu {
 
                                 //... FINISH TOUCH
                                 System.out.println(FileName+" has been created!");
-                                Logger.log("MileStoneTracker", FileName, "{Author: "+MST.getCurrentMST_Data().getAuthor()+"} has created the file."); // records the action into a log file.
+                                ReuseableMethodsCLI.log("MileStoneTracker", FileName, "{Author: "+MST.getCurrentMST_Data().getAuthor()+"} has created the file."); // records the action into a log file.
                                 System.out.println();
                                 isRunningMethod = false;
                                 validFile = true;
@@ -328,7 +327,7 @@ public class Menu {
                 isRunningMethod = true;
                 while (isRunningMethod) {
                     //... DISPLAY
-                    if (!ReuseableMethodsCLI.printSavedFiles(ReuseableMethodsCLI.getSavedFiles("Saves/MileStoneTracker/Datas"), MST.getCurrentFile())) {
+                    if (!ReuseableMethodsCLI.printSavedFiles(FileManager.getSavedFiles("Saves/MileStoneTracker/Datas"), MST.getCurrentFile())) {
                         isRunningMethod = false;
                         continue;
                     }
@@ -348,7 +347,7 @@ public class Menu {
                                 System.out.println();
                                 break;
                             }
-                            if (MST.getCurrentFile() != null && FilenameAnswer.equals(ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5))) {
+                            if (MST.getCurrentFile() != null && FilenameAnswer.equals(FileManager.fileNameOnly(MST.getCurrentFile(), 5))) {
                                 System.out.println("[ERROR] This file has already been loaded!");
                                 System.out.println();
                                 isRunningMethod = false;
@@ -361,9 +360,9 @@ public class Menu {
                                 System.out.println(FilenameAnswer+" does not exist! please choose another file.");
                                 continue;
                             }
-                        } catch (IOException e) {
-                            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
                         } catch (JsonSyntaxException e) {
+                            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                        } catch (IOException e) {
                             System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
                         }
 
@@ -392,11 +391,7 @@ public class Menu {
                                 isRunningMethod = false;
 
                                 System.out.println(FilenameAnswer+" has been successfully loaded!");
-                                try {
-                                    Logger.log("MileStoneTracker", FilenameAnswer, "{User: "+Username+"} has loaded the file.");
-                                } catch (IOException e) {
-                                    System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
-                                }
+                                ReuseableMethodsCLI.log("MileStoneTracker", FilenameAnswer, "{User: "+Username+"} has loaded the file.");
                                 System.out.println();
                             } else {
                                 System.out.println("[ERROR] Invalid Password");
@@ -422,7 +417,7 @@ public class Menu {
                 return true; // true means that this method will keep running due to a while loop of the caller.
             case 4: // +[DELETE FILE]
                 // Security
-                File[] SavedFiles = ReuseableMethodsCLI.getSavedFiles("Saves/MileStoneTracker/Datas");
+                File[] SavedFiles = FileManager.getSavedFiles("Saves/MileStoneTracker/Datas");
                 if (MST.getCurrentFile() == null && (SavedFiles == null || SavedFiles.length == 0)) {
                     System.out.println("[ERROR] You currently do not have a Current File and Saved Files in the saved files Folder!");
                     System.out.println();
@@ -439,11 +434,7 @@ public class Menu {
             case 5:
                 if (MST.getCurrentMST_Data() != null) { // If its currently in.
                     MST.getCurrentMST_Data().logOut(); // logs it out
-                    try {
-                        Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has logged out."); // records the action into a log file.
-                    } catch (IOException e) {
-                        System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
-                    }
+                    ReuseableMethodsCLI.log("MileStoneTracker", FileManager.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has logged out."); // records the action into a log file.
                 }
                 return false; // false means it stopped running 
         }
@@ -452,19 +443,19 @@ public class Menu {
     }
     public boolean MST_FileMenu() {
         try {
-            Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has viewed the file."); // records the action into a log file.
+            ReuseableMethodsCLI.log("MileStoneTracker", FileManager.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has viewed the file."); // records the action into a log file.
 
             // Error Check
-            String DateCreation = ReuseableMethodsCLI.getDateCreated(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
-            String LastModified = ReuseableMethodsCLI.getLastModified(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
+            String DateCreation = FileManager.getDateCreated(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
+            String LastModified = FileManager.getLastModified(MST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
 
             // Print
             System.out.println("╔═════════════════════════════════════════════════════════════════╗");
             System.out.println("║                 MILESTONE TRACKER [ FILE MENU ]                 ║");
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
             System.out.println(ReuseableMethodsCLI.softWrapping("║ Author: " + MST.getCurrentMST_Data().getAuthor(), 67));
-            System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), 67));
-            System.out.println(ReuseableMethodsCLI.softWrapping("║ File Size: " + ReuseableMethodsCLI.formatFileSize(MST.getCurrentFile().length()), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + FileManager.fileNameOnly(MST.getCurrentFile(), 5), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ File Size: " + FileManager.formatFileSize(MST.getCurrentFile().length()), 67));
             System.out.println(ReuseableMethodsCLI.softWrapping("║ Date Created: " + DateCreation, 67));
             System.out.println(ReuseableMethodsCLI.softWrapping("║ Last Modified: " + LastModified, 67));
             System.out.println(ReuseableMethodsCLI.softWrapping("║ Last User: "+MST.getCurrentMST_Data().getLoggedUser(), 67));
@@ -494,11 +485,7 @@ public class Menu {
         switch (Answer) {
             case 1:
                 MST_viewData();
-                try {
-                    Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has viewed the data."); // records the action into a log file.
-                } catch (IOException e) {
-                    System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
-                }
+                ReuseableMethodsCLI.log("MileStoneTracker", FileManager.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has viewed the data."); // records the action into a log file.
                 return true; // true means that this method will keep running after this case finishes
             case 2:
                 boolean isRunningAddMilestone = true;
@@ -550,7 +537,7 @@ public class Menu {
                 return false; // false means that this method will now stop running due to a while loop by the caller.
             case 2: // +[DELETE SELECTED FILE]+
                 // DISPLAY
-                ReuseableMethodsCLI.printSavedFiles(ReuseableMethodsCLI.getSavedFiles("Saves/MileStoneTracker/Datas"), MST.getCurrentFile());
+                ReuseableMethodsCLI.printSavedFiles(FileManager.getSavedFiles("Saves/MileStoneTracker/Datas"), MST.getCurrentFile());
 
                 // GATHER INPUT
                 System.out.print("Choose File: ");
@@ -561,7 +548,7 @@ public class Menu {
                 }
 
                 // PROCESS
-                if (MST.getCurrentFile() != null && FileAnswer.equals(ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5))) {
+                if (MST.getCurrentFile() != null && FileAnswer.equals(FileManager.fileNameOnly(MST.getCurrentFile(), 5))) {
                     if (ReuseableMethodsCLI.Confirmation("Delete Current File")) {
                         MST.deleteCurrentFile();
                         return false; // false means that this method will now stop running due to a while loop by the caller.
@@ -569,7 +556,7 @@ public class Menu {
                 }
 
                 for (File f: SavedFiles) {
-                    if (ReuseableMethodsCLI.fileNameOnly(f, 5).equals(FileAnswer)) {
+                    if (FileManager.fileNameOnly(f, 5).equals(FileAnswer)) {
                         if (ReuseableMethodsCLI.Confirmation("Delete `"+FileAnswer+"` File") && MST.deleteSelectedFile(FileAnswer)) {
                             System.out.println(FileAnswer+" has been successfully deleted!");
                             return false; // false means that this method will now stop running due to a while loop by the caller.
@@ -596,13 +583,13 @@ public class Menu {
                     for (File f : SavedFiles) {
                         if (MST.getCurrentFile() != null) { // if we currently have a file
                             if (!(f.getName().equals(MST.getCurrentFile().getName()))) { // if the f is not equal to the current file
-                                Logger.deleteLog("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(f, 5));
+                                Logger.deleteLog("MileStoneTracker", FileManager.fileNameOnly(f, 5));
                                 if (!f.delete()) { // if it did not get deleted
                                     System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
                                 }
                             }
                         } else { // If there is no current file yet.
-                            Logger.deleteLog("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(f, 5));
+                            Logger.deleteLog("MileStoneTracker", FileManager.fileNameOnly(f, 5));
                             if (!f.delete()) { // if it did not get deleted
                                 System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
                             }
@@ -621,7 +608,7 @@ public class Menu {
     // +[DATA MANAGEMENT]+
     public void MST_viewData() {
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5) + ((MST.getCurrentMST_Data().AgeMilestoneIsEmpty() && MST.getCurrentMST_Data().DayMilestoneIsEmpty()) ? " (EMPTY)" : ""), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + FileManager.fileNameOnly(MST.getCurrentFile(), 5) + ((MST.getCurrentMST_Data().AgeMilestoneIsEmpty() && MST.getCurrentMST_Data().DayMilestoneIsEmpty()) ? " (EMPTY)" : ""), 67));
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + MST.getCurrentMST_Data().getAuthor(), 67));
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Age: " + MST.getCurrentMST_Data().getAge(), 67));
@@ -705,7 +692,7 @@ public class Menu {
                         //... b. Processing Output
                         ValidInput = MST.addAgeBasedMilestone(age, message);
                         FileManager.updateJsonFile(MST.getCurrentMST_Data(), MST.getCurrentFile());
-                        Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has added a new {Age: "+age+"} Milestone, with a message of {Message: "+message+"}."); // records the action into a log file.
+                        ReuseableMethodsCLI.log("MileStoneTracker", FileManager.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has added a new {Age: "+age+"} Milestone, with a message of {Message: "+message+"}."); // records the action into a log file.
 
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] age must not be a letter, it must be a number or integer.");
@@ -747,7 +734,7 @@ public class Menu {
 
                         //... b. Processing Output
                         ValidInput = MST.addDayBasedMilestone(day, message); // returns a boolean and processes data at the same time
-                        Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has added a new {Age: "+day+"} Milestone, with a message of {Message: "+message+"}."); // records the action into a log file.
+                        ReuseableMethodsCLI.log("MileStoneTracker", FileManager.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has added a new {Age: "+day+"} Milestone, with a message of {Message: "+message+"}."); // records the action into a log file.
                         FileManager.updateJsonFile(MST.getCurrentMST_Data(), MST.getCurrentFile());
                     } catch (InputMismatchException e) {
                         System.out.println("[ERROR: InputMismatchException] day must not be a letter, it must be a number or integer.");
@@ -809,7 +796,7 @@ public class Menu {
                             System.out.println("age "+age+" has been successfully been removed!");
 
                             //... b. Serialization
-                            Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has removed {Age: "+age+"}."); // records the action into a log file.
+                            ReuseableMethodsCLI.log("MileStoneTracker", FileManager.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has removed {Age: "+age+"}."); // records the action into a log file.
                             FileManager.updateJsonFile(MST.getCurrentMST_Data(), MST.getCurrentFile());
                         } else {
                             System.out.println("age "+age+" does not exist!");
@@ -854,7 +841,7 @@ public class Menu {
                             System.out.println("day "+day+" has been successfully been removed!");
 
                             //... b. Serialization
-                            Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has removed {Day: "+day+"}."); // records the action into a log file.
+                            ReuseableMethodsCLI.log("MileStoneTracker", FileManager.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has removed {Day: "+day+"}."); // records the action into a log file.
                             FileManager.updateJsonFile(MST.getCurrentMST_Data(), MST.getCurrentFile());
                         } else {
                             System.out.println("day "+day+" does not exist!");
@@ -906,9 +893,9 @@ public class Menu {
 
     // [DayPlanner Methods] ====================================================================================================<<<<<<<
 
-    // [MultiTimeZoneMeetingPlanner Methods] ====================================================================================================<<<<<<<
+    // [MultiTimeZoneMeetingPlanner Methods] ===================================================================================<<<<<<<
 
-    // [SubscriptionTracker Methods] ====================================================================================================<<<<<<<
+    // [SubscriptionTracker Methods] ============================================================================================<<<<<<
     // +[MENUS]+
     public boolean STracker_Menu () {
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
@@ -928,7 +915,7 @@ public class Menu {
         return false; // false means that this method will now stop running due to a while loop from the caller.
     }
 
-    // [WorkHoursTracker Methods] ====================================================================================================<<<<<<<
+    // [WorkHoursTracker Methods] ==============================================================================================<<<<<<<
 
 
     // ================================================== OTHER CLASSES ================================================== \\

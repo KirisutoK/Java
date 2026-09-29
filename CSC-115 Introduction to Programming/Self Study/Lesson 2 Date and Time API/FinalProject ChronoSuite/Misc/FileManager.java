@@ -1,11 +1,16 @@
 package Misc;
 
 // Creation Date: September 28, 2026. at 4:35 PM
-// Last Modified: September 28, 2026. at  4:52 PM
+// Last Modified: September 29, 2026. at  3:44 PM
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 import static Misc.ReuseableMethodsCLI.gson;
 
@@ -15,6 +20,57 @@ public class FileManager {
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
+    public static File[] getSavedFiles(String Directory) {
+        return new File(Directory).listFiles();
+    }
+    public static String fileNameOnly(File file, int TypeWidth) {
+        return file.getName().substring(0, file.getName().length() - TypeWidth);
+    }
+
+    // [METADATA]
+    public static String getDateCreated(File f) throws IOException { // NOTE: <================= THIS IS NEW AND WAS NOT PART OF THE LESSON (THANKS TO CLAUDE FOR HELPING ME OUT GET METADATA INFORMATION FROM A FILE)
+        DateTimeFormatter DTF = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mma");
+
+        //... METADATA
+        try {
+            BasicFileAttributes metaData = Files.readAttributes(f.toPath(), BasicFileAttributes.class); // NOTE: <================= THIS IS NEW AND WAS NOT PART OF THE LESSON (THANKS TO CLAUDE FOR HELPING ME OUT GET METADATA INFORMATION FROM A FILE)
+            // NOTE: ^ is a standard class similar to `Integer.class` or `String.class`.
+            // LESSON LEARNED: NIO stands for New Input Output, its the advanced class for IO
+            // LESSON LEARNED: BasicFileAttirbutes.class can read an attribute of a file.
+
+            //... FORMATTING THE METADATA TO BE READABLE (METADATAS CONSIST OF LONG VALUES)
+            LocalDateTime LDT = LocalDateTime.ofInstant(metaData.creationTime().toInstant(), ZoneId.systemDefault());
+            return LDT.format(DTF);
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
+    }
+    public static String getLastModified(File f) throws IOException{
+        DateTimeFormatter DTF = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mma");
+
+        //... METADATA
+        try {
+            BasicFileAttributes metaData = Files.readAttributes(f.toPath(), BasicFileAttributes.class); // NOTE: <================= THIS IS NEW AND WAS NOT PART OF THE LESSON (THANKS TO CLAUDE FOR HELPING ME OUT GET METADATA INFORMATION FROM A FILE)
+            // NOTE: ^ is a standard class similar to `Integer.class` or `String.class`.
+            // LESSON LEARNED: NIO stands for New Input Output, its the advanced class for IO
+            // LESSON LEARNED: BasicFileAttirbutes.class can read an attribute of a file.
+
+            //... FORMATTING THE METADATA TO BE READABLE (METADATAS CONSIST OF LONG VALUES)
+            LocalDateTime LDT = LocalDateTime.ofInstant(metaData.lastModifiedTime().toInstant(), ZoneId.systemDefault());
+            return LDT.format(DTF);
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
+    }
+    public static String formatFileSize(long FileSize) { // NOTE: This method and it's formula is created by Claude (made some tweaks to make it readable to me)
+        if (FileSize < 1024) {
+            return FileSize + " B";
+        } else if (FileSize < 1024 * 1024) {
+            return String.format("%.2f KB", FileSize / 1024.0);
+        } else {
+            return String.format("%.2f MB", FileSize / (1024.0 * 1024.0));
+        }
+    }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
 
@@ -58,7 +114,7 @@ public class FileManager {
             return null;
         }
         for (File f:SavedFiles) {
-            if (ReuseableMethodsCLI.fileNameOnly(f, 5).equals(Filename)) {
+            if (fileNameOnly(f, 5).equals(Filename)) {
                 return f;
             }
         }

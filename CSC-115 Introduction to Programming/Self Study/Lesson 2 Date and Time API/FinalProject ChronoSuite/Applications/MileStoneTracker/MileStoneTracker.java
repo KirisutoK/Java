@@ -1,7 +1,7 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 28, 2026. at  4:55 PM
+// Last Modified: September 29, 2026. at  3:44 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import Misc.Logger;
@@ -58,7 +58,7 @@ public class MileStoneTracker {
         // [SECURITY]
         if (CurrentMST_Data != null) {
             CurrentMST_Data.logOut();
-            Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged out."); // records the action into a log file.
+            Logger.log("MileStoneTracker", FileManager.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged out."); // records the action into a log file.
         }
 
         //... UNDER `MileStoneTracker`, Check if it already exists in the list.
@@ -110,7 +110,7 @@ public class MileStoneTracker {
 
         if (CurrentMST_Data != null) {
             CurrentMST_Data.logOut(); // Logs out so that if the CurrentMST_Data was not selected to the MST Object, it will show logged out for its JSON data.
-            Logger.log("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged out."); // records the action into a log file.
+            Logger.log("MileStoneTracker", FileManager.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged out."); // records the action into a log file.
         }
         if (CurrentFile == null) {
             resetCurrentFileData();
@@ -143,7 +143,7 @@ public class MileStoneTracker {
     public boolean deleteCurrentFile() {
         // NOTE: BEFORE CALLING THIS METHOD, IT MUST FIRST RUN A CONFIRMATION PROCESS
 
-        Logger.deleteLog("MileStoneTracker", ReuseableMethodsCLI.fileNameOnly(CurrentFile, 5));
+        Logger.deleteLog("MileStoneTracker", FileManager.fileNameOnly(CurrentFile, 5));
         if (CurrentFile.delete()) { // if the deletion is successful
             resetCurrentFileData();
             return true; // if it got deleted

@@ -1,9 +1,9 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 27, 2026. at  2:07 AM
+// Last Modified: September 29, 2026. at  3:44 PM
 
-import Misc.ReuseableMethodsCLI;
+import Misc.DataManager;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -40,7 +40,7 @@ public class MileStoneTrackerData implements Serializable {
         this.EmptyPassword = false;
         this.Birthday = Birthday;
         this.Today = LocalDate.now();
-        this.Age = ReuseableMethodsCLI.getAge(Birthday);
+        this.Age = DataManager.getAge(Birthday);
         this.AgeBasedMilestone = new HashMap<>();
         this.DayBasedMilestone = new HashMap<>();
     }
@@ -49,7 +49,7 @@ public class MileStoneTrackerData implements Serializable {
         this.EmptyPassword = true;
         this.Birthday = Birthday;
         this.Today = LocalDate.now();
-        this.Age = ReuseableMethodsCLI.getAge(Birthday);
+        this.Age = DataManager.getAge(Birthday);
         this.AgeBasedMilestone = new HashMap<>();
         this.DayBasedMilestone = new HashMap<>();
     }
