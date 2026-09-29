@@ -1,19 +1,15 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 29, 2026. at  3:44 PM
+// Last Modified: September 29, 2026. at  5:11 PM
 
-import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.*;
 
 import java.io.*;
-import java.security.MessageDigest;
-import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ReuseableMethodsCLI {
     //=======VARIABLES=======//
     public static Scanner input = new Scanner(System.in);
-    public static Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate.class, new GsonAdapter_Date()).create();
         // LESSON LEARNED: I learned that you can use an object anywhere in the project if it is a static public
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
