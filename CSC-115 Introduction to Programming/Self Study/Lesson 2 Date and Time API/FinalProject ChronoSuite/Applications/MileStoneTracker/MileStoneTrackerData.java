@@ -1,7 +1,7 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 29, 2026. at  3:44 PM
+// Last Modified: September 30, 2026. at  6:15 PM
 
 import Misc.DataManager;
 
@@ -62,7 +62,7 @@ public class MileStoneTrackerData implements Serializable {
         return (LoggedIn) ? Age: -1; // -1 means age that it did not logged in
     }
     public String getAuthor() {
-        return (LoggedIn) ? Author : "[ERROR] User is not logged in!";
+        return (LoggedIn) ? Author : null;
     }
     public String getNextBirthday() {
         LocalDate nextBirthday = LocalDate.of(Today.getYear(), Birthday.getMonth(), Birthday.getDayOfMonth());

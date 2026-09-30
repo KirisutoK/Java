@@ -1,7 +1,7 @@
 package Misc;
 
 // Creation Date: September 28, 2026. at 4:35 PM
-// Last Modified: September 29, 2026. at  5:11 PM
+// Last Modified: September 30, 2026. at  5:40 PM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.Gson;
@@ -26,8 +26,8 @@ public class FileManager {
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    public static File[] getSavedFiles(String Directory) {
-        return new File(Directory).listFiles();
+    public static File[] getSavedFiles(String ApplicationName) {
+        return new File("Saves/"+ApplicationName+"/Datas").listFiles();
     }
     public static String fileNameOnly(File file, int TypeWidth) {
         return file.getName().substring(0, file.getName().length() - TypeWidth);
@@ -38,7 +38,7 @@ public class FileManager {
             MileStoneTrackerFolder.mkdirs();
         }
 
-        //... UNDER `MileStoneTrackerApplication`, find if any filename matches
+        //... UNDER `MileStoneTracker`, find if any filename matches
         File[] SavedFiles = MileStoneTrackerFolder.listFiles();
         if (SavedFiles == null || SavedFiles.length == 0) {
             return null;
@@ -122,7 +122,7 @@ public class FileManager {
             MileStoneTrackerFolder.mkdirs();
         }
 
-        //... UNDER `MileStoneTrackerApplication`, Check if it already exists in the list.
+        //... UNDER `MileStoneTracker`, Check if it already exists in the list.
         File SaveFile = new File(MileStoneTrackerFolder, Filename+".json"); // NOTE: `.AMST_Data` append so that every file will be a `.AMST_Data` file
         try {
             if (!SaveFile.exists() || SaveFile.isDirectory()) { // if the SaveFile does not exist or is currently a directory then.
