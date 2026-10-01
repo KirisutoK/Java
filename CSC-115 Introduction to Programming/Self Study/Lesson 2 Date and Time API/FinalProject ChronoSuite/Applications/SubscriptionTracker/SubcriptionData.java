@@ -1,24 +1,38 @@
 package Applications.SubscriptionTracker;
 
 // Creation Date: September 30, 2026. at 6:31 PM
-// Last Modified: September 30, 2026. at  6:55 PM
+// Last Modified: October 01, 2026. at 12:44 PM
 
 import Misc.DataManager;
 
 import java.time.LocalDate;
 
-public class Subcription {
+public class SubcriptionData {
     //=======VARIABLES=======//
     String SubscriptionName;
     LocalDate ExpiryDate;
     LocalDate CreationDate;
     double Price;
+    boolean Monthly;
+    boolean Yearly;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    Subcription(String SubscriptionName, LocalDate ExpiryDate, double Price) {
+    SubcriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price) {
         this.SubscriptionName = SubscriptionName;
         this.ExpiryDate = ExpiryDate;
         this.Price = Price;
+
+        CreationDate = LocalDate.now();
+    }
+    SubcriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price, int MonthlyOrYearly) {
+        this.SubscriptionName = SubscriptionName;
+        this.ExpiryDate = ExpiryDate;
+        this.Price = Price;
+        if (MonthlyOrYearly == 1) {
+            Monthly = true;
+        } else {
+            Yearly = true;
+        }
 
         CreationDate = LocalDate.now();
     }
@@ -28,10 +42,16 @@ public class Subcription {
         return SubscriptionName;
     }
     String getExpiryDate() {
-        return DataManager.toStringDate(ExpiryDate, "SOMETHING"); //! <=================== FORMAT NEEDS TO BE INITIALIZED
+        return DataManager.toStringDate(ExpiryDate, "MMMM dd, yyyy");
     }
-    double getPrice() {
-        return Price;
+    String getPrice() {
+        if (Monthly) {
+            return Price+" (Monthly)";
+        } else if (Yearly) {
+            return Price+" (Yearly)";
+        } else {
+            return Price+"";
+        }
     }
 
 
@@ -41,8 +61,8 @@ public class Subcription {
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
     void displaySubscription() {
         System.out.println("Name: "+SubscriptionName);
-        System.out.println();
-        System.out.println();
+        System.out.println("Expiration Date: "+getExpiryDate());
+        System.out.println("Price: "+getPrice());
     }
 
 

@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: September 30, 2026. at  6:04 PM
+// Last Modified: October 01, 2026. at  1:06 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -578,24 +578,12 @@ public class Menu {
 
                 //... Process
                 System.out.println("Note: `Delete All Saved File` will not delete your current File.");
-
                 if (SavedFiles != null && ReuseableMethodsCLI.Confirmation("Delete All Saved Files")) {
-                    for (File f : SavedFiles) {
-                        if (MST.getCurrentFile() != null) { // if we currently have a file
-                            if (!(f.getName().equals(MST.getCurrentFile().getName()))) { // if the f is not equal to the current file
-                                Logger.deleteLog("MileStoneTracker", FileManager.fileNameOnly(f, 5));
-                                if (!f.delete()) { // if it did not get deleted
-                                    System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
-                                }
-                            }
-                        } else { // If there is no current file yet.
-                            Logger.deleteLog("MileStoneTracker", FileManager.fileNameOnly(f, 5));
-                            if (!f.delete()) { // if it did not get deleted
-                                System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
-                            }
-                        }
+                    if (MST.deleteAllFiles()) {
+                        System.out.println("Delete All Saved File has successfully completed!");
+                    } else {
+                        System.out.println("[ERORR] Delete All Saved File has ran into a problem!");
                     }
-                    System.out.println("Delete All Saved File has successfully completed!");
                 }
                 System.out.println();
 
@@ -897,12 +885,11 @@ public class Menu {
 
     // [SubscriptionTracker Methods] ============================================================================================<<<<<<
     // +[MENUS]+
-    public boolean STracker_Menu () {
+    public boolean STracker_Menu () { //! <================================ YOU LEFT HERE!
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println("║              Subscription Tracker [Launcher Menu]                ║");
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + Username, 67));
-
         System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢");
         System.out.println("║ 1. Create File                                                  ║");
         System.out.println("║ 2. Load File                                                    ║");
@@ -911,6 +898,79 @@ public class Menu {
         System.out.println("║ 5. Go Back                                                      ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
         System.out.println();
+
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 5);
+
+        boolean isRunningMethod;
+        switch (Answer) {
+            case 1:
+                isRunningMethod = true;
+                while (isRunningMethod) {
+                    // GET FILENAME INPUT
+                    boolean validFile = false;
+                    while (!validFile) {
+                        // INPUT
+                        System.out.println("Input \"e\" to exit.");
+                        System.out.print("Enter File Name: ");
+                        String FileName = ReuseableMethodsCLI.input.nextLine();
+
+                        // Security
+                        if (FileName.equals("e")) {
+                            System.out.println();
+                            isRunningMethod = false;
+                            break;
+                        }
+
+                        try {
+                            if (ST.createFile(FileName)) {
+                                //... IF THE CREATION FILE RETURNS TRUE
+                                //... CREATE PASSWORD
+                                boolean validNewPassword = false;
+                                String Password = ""; // just for placeholder
+                                while (!validNewPassword) {
+                                    System.out.print("Please enter a password for the data: ");
+                                    Password = ReuseableMethodsCLI.input.nextLine();
+
+                                    // [SECURITY]
+                                    //    private final int minimumPassword = 5; // must have at least 5 characters
+                                    //    private final int maximumPassword = 20; // must have at least 20 characters
+                                    //    private final int specialCharactersPassword = 1; // must have at least 2 special characters
+                                    //    private final int numbersPassword = 1; // must have at least 1 int characters
+
+                                    validNewPassword = ReuseableMethodsCLI.passwordValidation(Password, 5, 20, 1, 1);
+                                }
+
+                                //... SET THE PASSWORD
+                                // ST.setNewFilePassword(Password);
+
+                                //... FINISH TOUCH
+                                System.out.println(FileName+" has been created!");
+                                System.out.println();
+                                isRunningMethod = false;
+                                validFile = true;
+                            } else {
+                                System.out.println(FileName + " already exist! please try another name");
+                            }
+                        } catch (NoSuchAlgorithmException | IOException e) {
+                            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                        }
+                    }
+
+                }
+                return true; // true means that this method will keep running due to a while loop of the caller.
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                break;
+        }
 
         return false; // false means that this method will now stop running due to a while loop from the caller.
     }
