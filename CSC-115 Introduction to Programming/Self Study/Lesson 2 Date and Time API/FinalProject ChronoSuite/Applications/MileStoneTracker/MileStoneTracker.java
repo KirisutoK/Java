@@ -1,23 +1,21 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 21, 2026. at 12:04 AM
-// Last Modified: September 30, 2026. at  6:10 PM
+// Last Modified: October 01, 2026. at 12:54 PM
 
+import Applications.Application;
 import Misc.DataManager;
 import Misc.Logger;
-import Misc.ReuseableMethodsCLI;
 import Misc.FileManager;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.time.*;
 
-public class MileStoneTracker {
+public class MileStoneTracker implements Application {
     //=======VARIABLES=======//
     private String Username;
     private LocalDate UserBirthday;
-
-    // [MISC]
 
     // [DYNAMIC VARIABLE]
     private MileStoneTrackerData CurrentMST_Data; // This will be the current selected object or data (Object)
@@ -36,6 +34,7 @@ public class MileStoneTracker {
     public File getCurrentFile() {
         return CurrentFile;
     }
+
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
     // [CLASS VARIABLE MANAGEMENT]
@@ -132,6 +131,33 @@ public class MileStoneTracker {
             resetCurrentFileData();
             return false;
         }
+    }
+    public boolean deleteAllFiles() {
+        File[] SavedFiles = FileManager.getSavedFiles("MileStoneTracker");
+
+        // Security
+        if (SavedFiles == null || SavedFiles.length == 1) {
+            return false; // false means that the deletion process was not successful
+        }
+
+        // Deletion Process
+        for (File f : SavedFiles) {
+            if (CurrentFile != null) { // if we currently have a file
+                if (!(f.getName().equals(CurrentFile.getName()))) { // if the f is not equal to the current file
+                    Logger.deleteLog("MileStoneTracker", FileManager.fileNameOnly(f, 5));
+                    if (!f.delete()) { // if it did not get deleted
+                        return false; // false means that the deletion process was not successful
+                    }
+                }
+            } else { // If there is no current file yet.
+                Logger.deleteLog("MileStoneTracker", FileManager.fileNameOnly(f, 5));
+                if (!f.delete()) { // if it did not get deleted
+                    return false; // false means that something went wrong with the deletion
+                }
+            }
+        }
+
+        return true; // true means that a deletion process has been successful
     }
 
     // [DATA MANAGEMENT]
