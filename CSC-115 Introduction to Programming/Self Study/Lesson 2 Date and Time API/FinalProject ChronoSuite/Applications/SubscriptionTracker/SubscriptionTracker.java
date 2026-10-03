@@ -1,7 +1,7 @@
 package Applications.SubscriptionTracker;
 
 // Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: October 01, 2026. at  1:06 PM
+// Last Modified: October 03, 2026. at 12:12 AM
 
 import Applications.MileStoneTracker.MileStoneTrackerData;
 import Misc.DataManager;
@@ -10,10 +10,11 @@ import Misc.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 
-public class SubscriptionTracker {
+public class SubscriptionTracker implements Serializable {
     //=======VARIABLES=======//
     String Username;
     LocalDate UserBirthday;
@@ -23,7 +24,7 @@ public class SubscriptionTracker {
     private File CurrentFile; // This will be the holder or container of that selected object or data (File)
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    SubscriptionTracker(String Username, LocalDate UserBirthday) {
+    public SubscriptionTracker(String Username, LocalDate UserBirthday) {
         this.Username = Username;
         this.UserBirthday = UserBirthday;
     }
@@ -46,15 +47,12 @@ public class SubscriptionTracker {
     public void setUsername(String Username) {
         this.Username = Username;
     }
-    public void setUserBirthday(LocalDate UserBirthday) {
-        this.UserBirthday = UserBirthday;
-    }
 
     // [FILE MANAGEMENT]
     public boolean createFile(String FileName) throws IOException {
         // [SECURITY]
         if (CurrentST_Data != null) {
-            // CurrentST_Data.logOut();
+            CurrentST_Data.logOut();
             Logger.log("SubscriptionTracker", FileManager.fileNameOnly(CurrentFile, 5), "{User: "+Username+"} has logged out. (THE METHOD ACTUALLY HAS NOT BEEN INITIALIZED)"); // records the action into a log file.
         }
 
@@ -63,7 +61,7 @@ public class SubscriptionTracker {
 
         if (SaveFile != null) { // if the SaveFile is not null.
             //... c. Create the file and return true.
-            CurrentST_Data = new SubscriptionTrackerData(Username, UserBirthday);
+            CurrentST_Data = new SubscriptionTrackerData(Username);
             CurrentFile = SaveFile;
 
             //... d. Serialize the data into the file
@@ -77,21 +75,21 @@ public class SubscriptionTracker {
         //... a. Return false if it the createdsavefile is null (must be because it already exist or that something went wrong)
         return false; // false means that it did not work or something
     }
-//    public boolean setNewFilePassword(String Password) throws  IOException, NoSuchAlgorithmException {
-//        if (CurrentMST_Data.getEmptyPassword()) { // if the current file is an empty password.
-//            //... a. Create the password for the file.
-//            String HashedPassword = DataManager.hashPassword(Password); // NOTE: In order for this to run, it needs to do a security check before running the program.
-//            CurrentMST_Data.setPassword(HashedPassword);
-//            CurrentMST_Data.logIn(HashedPassword, Username); // this auto logIn's the current selected object as it is created
-//
-//            //... b. Serialize the data into the file
-//            FileManager.updateJsonFile(CurrentMST_Data, CurrentFile);
-//
-//            return true; // true means the process was successsfull
-//        }
-//
-//        return false; // false means the process was not successful (password was not set).
-//    }
+    public boolean setNewFilePassword(String Password) throws  IOException, NoSuchAlgorithmException {
+        if (CurrentST_Data.getEmptyPassword()) { // if the current file is an empty password.
+            //... a. Create the password for the file.
+            String HashedPassword = DataManager.hashPassword(Password); // NOTE: In order for this to run, it needs to do a security check before running the program.
+            CurrentST_Data.setPassword(HashedPassword);
+            CurrentST_Data.logIn(HashedPassword, Username); // this auto logIn's the current selected object as it is created
+
+            //... b. Serialize the data into the file
+            FileManager.updateJsonFile(CurrentST_Data, CurrentFile);
+
+            return true; // true means the process was successsfull
+        }
+
+        return false; // false means the process was not successful (password was not set).
+    }
     public boolean loadFile(String Filename) throws IOException {
         // [SECURITY CHECK]
         CurrentFile = FileManager.getFile("SubscriptionTracker", Filename);

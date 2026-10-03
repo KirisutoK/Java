@@ -1,11 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-<<<<<<< HEAD
-// Last Modified: October 01, 2026. at  1:22 PM
-=======
-// Last Modified: October 01, 2026. at  1:17 PM
->>>>>>> 82683e8058246211d7c1d3b5219fef98739407e2
+// Last Modified: October 03, 2026. at 12:12 AM
 
 import java.io.File;
 import java.io.IOException;
@@ -177,6 +173,7 @@ public class Menu {
         int Answer = ReuseableMethodsCLI.getAnswer(1, 6); // CustomUtil.getAnswer(start, end);
 
         // PROCESSING OUTPUTS
+        boolean FeatureRunning;
         switch (Answer) {
             case 1: // +[MILESTONE TRACKER]+
                 // [SECURITY]
@@ -212,7 +209,7 @@ public class Menu {
                 MST.setUserBirthday(UserBirthday);
 
                 // [DISPLAY]
-                boolean FeatureRunning = true;
+                FeatureRunning = true;
                 while (FeatureRunning) {
                     FeatureRunning = MST_Menu(); //... This runs multiple process
                             //... Runs the Method
@@ -220,19 +217,32 @@ public class Menu {
                 }
 
                 break;
-            case 2:
+            case 2: // +[DAY PLANNER]+
                 System.out.println("This application is still in progress.");
                 System.out.println();
                 break;
-            case 3:
+            case 3: // +[MULTI-TIMEZEONE TRACKER]+
                 System.out.println("This application is still in progress.");
                 System.out.println();
                 break;
-            case 4:
-                System.out.println("This application is still in progress.");
-                System.out.println();
+            case 4: // +[SUBSCRIPTION TRACKER]+
+                if (ST == null) {
+                    ST = new SubscriptionTracker(Username, UserBirthday);
+                }
+
+                // [PROCESS] We need to add this so that every time a user changes their username/birthday in the main menu, it will also apply into AMST.
+                ST.setUsername(Username);
+
+                // [DISPLAY]
+                FeatureRunning = true;
+                while (FeatureRunning) {
+                    FeatureRunning = STracker_Menu();  //... This runs multiple process
+                            //... Runs the Method
+                            //... Returns boolean
+                }
+
                 break;
-            case 5:
+            case 5: // +[WORK HOURS TRACKER]+
                 System.out.println("This application is still in progress.");
                 System.out.println();
                 break;
@@ -902,11 +912,14 @@ public class Menu {
     // [SubscriptionTracker Methods] ============================================================================================<<<<<<
     // +[MENUS]+
     public boolean STracker_Menu () {
+        // DISPLAY
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println("║              Subscription Tracker [Launcher Menu]                ║");
+        System.out.println("║              Subscription Tracker [Launcher Menu]               ║");
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + Username, 67));
-
+        if (ST.getCurrentFile() != null) {
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Current File: "+FileManager.fileNameOnly(ST.getCurrentFile(), 5), 67) );
+        }
         System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢");
         System.out.println("║ 1. Create File                                                  ║");
         System.out.println("║ 2. Load File                                                    ║");
@@ -916,7 +929,79 @@ public class Menu {
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
         System.out.println();
 
-        return false; // false means that this method will now stop running due to a while loop from the caller.
+        // INPUT
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 5);
+
+        // OUTPUT
+        boolean isRunningMethod;
+        switch (Answer) {
+            case 1:
+                isRunningMethod = true;
+                while (isRunningMethod) {
+                    // GET FILENAME INPUT
+                    boolean validFile = false;
+                    while (!validFile) {
+                        // INPUT
+                        System.out.println("Input \"e\" to exit.");
+                        System.out.print("Enter File Name: ");
+                        String FileName = ReuseableMethodsCLI.input.nextLine();
+
+                        // Security
+                        if (FileName.equals("e")) {
+                            System.out.println();
+                            isRunningMethod = false;
+                            break;
+                        }
+
+                        try {
+                            if (ST.createFile(FileName)) {
+                                //... IF THE CREATION FILE RETURNS TRUE
+                                //... CREATE PASSWORD
+                                boolean validNewPassword = false;
+                                String Password = ""; // just for placeholder
+                                while (!validNewPassword) {
+                                    System.out.print("Please enter a password for the data: ");
+                                    Password = ReuseableMethodsCLI.input.nextLine();
+
+                                    // [SECURITY]
+                                    //    private final int minimumPassword = 5; // must have at least 5 characters
+                                    //    private final int maximumPassword = 20; // must have at least 20 characters
+                                    //    private final int specialCharactersPassword = 1; // must have at least 2 special characters
+                                    //    private final int numbersPassword = 1; // must have at least 1 int characters
+
+                                    validNewPassword = ReuseableMethodsCLI.passwordValidation(Password, 5, 20, 1, 1);
+                                }
+
+                                //... SET THE PASSWORD
+                                ST.setNewFilePassword(Password);
+
+                                //... FINISH TOUCH
+                                System.out.println(FileName+" has been created!");
+                                ReuseableMethodsCLI.log("MileStoneTracker", FileName, "{Author: "+ST.getCurrentST_Data().getAuthor()+"} has created the file."); // records the action into a log file.
+                                System.out.println();
+                                isRunningMethod = false;
+                                validFile = true;
+                            } else {
+                                System.out.println(FileName + " already exist! please try another name");
+                            }
+                        } catch (NoSuchAlgorithmException | IOException e) {
+                            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                        }
+                    }
+
+                }
+                return true; // true means that this method will keep running due to a while loop of the caller.
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                return false; // false means that this method will now stop running because of the while loop from the caller
+        }
+
+        return true; // true means that this method will keep running because of the while loop from caller.
     }
 
     // [WorkHoursTracker Methods] ==============================================================================================<<<<<<<

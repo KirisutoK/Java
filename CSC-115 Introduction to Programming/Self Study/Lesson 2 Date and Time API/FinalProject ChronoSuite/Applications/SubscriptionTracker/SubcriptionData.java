@@ -1,7 +1,7 @@
 package Applications.SubscriptionTracker;
 
 // Creation Date: September 30, 2026. at 6:31 PM
-// Last Modified: October 01, 2026. at 12:44 PM
+// Last Modified: October 03, 2026. at 12:07 AM
 
 import Misc.DataManager;
 
@@ -9,12 +9,13 @@ import java.time.LocalDate;
 
 public class SubcriptionData {
     //=======VARIABLES=======//
-    String SubscriptionName;
-    LocalDate ExpiryDate;
-    LocalDate CreationDate;
-    double Price;
-    boolean Monthly;
-    boolean Yearly;
+    // [PERSONAL]
+    private String SubscriptionName;
+    private LocalDate ExpiryDate;
+    private LocalDate CreationDate;
+    private double Price;
+    private boolean Monthly;
+    private boolean Yearly;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     SubcriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price) {

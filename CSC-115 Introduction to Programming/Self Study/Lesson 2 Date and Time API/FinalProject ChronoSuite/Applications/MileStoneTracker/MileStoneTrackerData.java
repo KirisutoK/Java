@@ -1,7 +1,7 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: September 30, 2026. at  6:15 PM
+// Last Modified: October 03, 2026. at 12:07 AM
 
 import Misc.DataManager;
 
@@ -19,7 +19,7 @@ public class MileStoneTrackerData implements Serializable {
 
     // [Security]
     private String Password; // TODO: WE NEED TO ENCRYPT THIS! in the object file, it shows the password. (DO THIS AFTER LEARNING HOW TO ENCRYPT AND HASHING [Cryptography Lessons: Not OOP])
-    private boolean EmptyPassword;
+    private boolean EmptyPassword; // this is to make sure that the actual file is actually has no password (It can be like a getter for password if return null).
     private boolean LoggedIn = false;
 
     // [Basic Data]
@@ -34,16 +34,6 @@ public class MileStoneTrackerData implements Serializable {
     private HashMap<Integer, String> DayBasedMilestone; // Day, Message
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    MileStoneTrackerData(String Username, String Password, LocalDate Birthday) {
-        this.Author = Username;
-        this.Password = Password;
-        this.EmptyPassword = false;
-        this.Birthday = Birthday;
-        this.Today = LocalDate.now();
-        this.Age = DataManager.getAge(Birthday);
-        this.AgeBasedMilestone = new HashMap<>();
-        this.DayBasedMilestone = new HashMap<>();
-    }
     MileStoneTrackerData(String Username, LocalDate Birthday) {
         this.Author = Username;
         this.EmptyPassword = true;
