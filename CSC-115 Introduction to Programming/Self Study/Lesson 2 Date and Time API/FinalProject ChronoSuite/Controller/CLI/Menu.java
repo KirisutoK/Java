@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 03, 2026. at 12:12 AM
+// Last Modified: October 04, 2026. at 10:01 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -1014,3 +1014,6 @@ public class Menu {
 // This class will manage all the 4 classes and in the future objects too.
 
 // NOTE: I realized i can not change my git push messages because i have an auto-write timestampppppppppp
+
+
+// NOTE: STREEAK, STUDYING MATH RIGHT NOW.
