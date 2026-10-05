@@ -2,11 +2,10 @@ package Applications.SubscriptionTracker;
 
 
 // Creation Date: September 30, 2026. at 6:18 PM
-// Last Modified: October 03, 2026. at 12:12 AM
+// Last Modified: October 05, 2026. at  4:44 PM
 
 import Applications.Application;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 
 public class SubscriptionTrackerData { // implements Application
@@ -14,19 +13,20 @@ public class SubscriptionTrackerData { // implements Application
     // [PERSONAL]
     private String Author;
 
-    // [CALCULATIONS]
-    private int TotalMonthlyPrice;
-    private int TotalYearlyPrice;
-    private HashSet<SubcriptionData> Subscriptions;
-
     // [SECURITY]
     private String Password; // TODO: WE NEED TO ENCRYPT THIS! in the object file, it shows the password. (DO THIS AFTER LEARNING HOW TO ENCRYPT AND HASHING [Cryptography Lessons: Not OOP])
     private boolean EmptyPassword;
     private boolean LoggedIn = false;
 
+    // [CALCULATIONS]
+    private int TotalMonthlyPrice;
+    private int TotalYearlyPrice;
+    private HashSet<SubcriptionData> Subscriptions;
+
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     SubscriptionTrackerData(String Author) {
         this.Author = Author;
+        EmptyPassword = true;
     }
     
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES

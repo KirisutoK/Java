@@ -1,7 +1,7 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: October 03, 2026. at 12:07 AM
+// Last Modified: October 05, 2026. at  4:51 PM
 
 import Misc.DataManager;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class MileStoneTrackerData implements Serializable {
+public class MileStoneTrackerData {
     //=======VARIABLES=======//
     // [Class Data]
     private static final long serialVersionUID = 1L; // this is for serialization versions of the class
@@ -26,7 +26,7 @@ public class MileStoneTrackerData implements Serializable {
     private String Author;
     private int Age;
     private LocalDate Birthday;
-    private LocalDate Today;
+    private transient LocalDate Today;
     private String LoggedUser;
 
     // [Milestones Data]

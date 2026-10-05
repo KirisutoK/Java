@@ -1,5 +1,5 @@
 package Misc;// Creation Date: August 21, 2026. at 10:50 PM
-// Last Modified: September 29, 2026. at  5:11 PM
+// Last Modified: October 05, 2026. at  5:11 PM
 
 import com.google.gson.*;
 
@@ -131,7 +131,9 @@ public class ReuseableMethodsCLI {
     }
 
     // [FILE MANAGEMENT]
-    public static boolean printSavedFiles(File[] savedFiles, File currentFile) {
+    public static boolean printSavedFiles(String ApplicationName, File[] savedFiles, File currentFile) {
+
+        // NOTE: ENTIRELY MADE BY CLAUDE
         // Check if it's null
         if (savedFiles == null || savedFiles.length == 0) {
             System.out.println("[ERROR] Saved Files is empty!");
@@ -139,26 +141,37 @@ public class ReuseableMethodsCLI {
             return false; // false means it did not load successfully
         }
 
+        // CLAUDE: build the title and compute a box width that always lines up, growing if the title is too long to fit the default width
+        String title = "[" + ApplicationName.toUpperCase() + " SAVES]";
+        int minInnerWidth = 51; // CLAUDE: the original fixed border width (matches the bottom border's length)
+        int minPadding = 4; // CLAUDE: smallest amount of "═" allowed on each side of the title
+        int innerWidth = Math.max(minInnerWidth, title.length() + (minPadding * 2));
+        int boxWidth = innerWidth + 2; // CLAUDE: +2 accounts for the "│ ... │" side characters lineAutoSpacing expects (53 when innerWidth is the default 51)
+
+        int totalDashes = innerWidth - title.length();
+        int leftDashes = totalDashes / 2;
+        int rightDashes = totalDashes - leftDashes;
+
         // Print
-        System.out.println("╒══════════[AGE MILESTONE TRACKER SAVES]════════════╕");
+        System.out.println("╒" + "═".repeat(leftDashes) + title + "═".repeat(rightDashes) + "╕");
         for (File f:savedFiles) {
             if (currentFile != null) {
-                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Name: "+ FileManager.fileNameOnly(f, 5)+((f.getName().equals(currentFile.getName())) ? " (CURRENT FILE)":""), 53)); // The extra methods are meant to remove the `.txt
+                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Name: "+ FileManager.fileNameOnly(f, 5)+((f.getName().equals(currentFile.getName())) ? " (CURRENT FILE)":""), boxWidth)); // The extra methods are meant to remove the `.txt
             } else {
-                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Name: "+ FileManager.fileNameOnly(f, 5), 53)); // The extra methods are meant to remove the `.txt`
+                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Name: "+ FileManager.fileNameOnly(f, 5), boxWidth)); // The extra methods are meant to remove the `.txt`
             }
             try {
-                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Size: "+ FileManager.formatFileSize(f.length()), 53));
-                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Date Created: "+ FileManager.getDateCreated(f), 53));
-                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Last Modified: "+ FileManager.getLastModified(f), 53));
+                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Size: "+ FileManager.formatFileSize(f.length()), boxWidth));
+                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Date Created: "+ FileManager.getDateCreated(f), boxWidth));
+                System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│ Last Modified: "+ FileManager.getLastModified(f), boxWidth));
             } catch (IOException e) { // Note: I feel like we will never run into this because savedFiles are called every single time to double check so it's impossible to delete a file in nanoseconds while this method runs
                 System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
             }
 
-            System.out.println("╞═══════════════════════════════════════════════════╡");
+            System.out.println("╞" + "═".repeat(innerWidth) + "╡"); // CLAUDE: was hardcoded dashes, now matches the dynamic width
         }
-        System.out.println("│[NOTE] Input \"e\" to exit.                          │");
-        System.out.println("╘═══════════════════════════════════════════════════╛");
+        System.out.println(ReuseableMethodsCLI.lineAutoSpacing("│[NOTE] Input \"e\" to exit.", boxWidth)); // CLAUDE: switched to lineAutoSpacing so this line also stays aligned at any box width
+        System.out.println("╘" + "═".repeat(innerWidth) + "╛"); // CLAUDE: was hardcoded dashes, now matches the dynamic width
         System.out.println();
 
         return true; // true means that it loaded successfully

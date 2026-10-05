@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 04, 2026. at 10:01 PM
+// Last Modified: October 05, 2026. at  5:18 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -236,7 +236,7 @@ public class Menu {
                 // [DISPLAY]
                 FeatureRunning = true;
                 while (FeatureRunning) {
-                    FeatureRunning = STracker_Menu();  //... This runs multiple process
+                    FeatureRunning = ST_Menu();  //... This runs multiple process
                             //... Runs the Method
                             //... Returns boolean
                 }
@@ -341,7 +341,7 @@ public class Menu {
                 isRunningMethod = true;
                 while (isRunningMethod) {
                     //... DISPLAY
-                    if (!ReuseableMethodsCLI.printSavedFiles(FileManager.getSavedFiles("MileStoneTracker"), MST.getCurrentFile())) {
+                    if (!ReuseableMethodsCLI.printSavedFiles("MileStone Tracker" ,FileManager.getSavedFiles("MileStoneTracker"), MST.getCurrentFile())) {
                         isRunningMethod = false;
                         continue;
                     }
@@ -551,7 +551,7 @@ public class Menu {
                 return false; // false means that this method will now stop running due to a while loop by the caller.
             case 2: // +[DELETE SELECTED FILE]+
                 // DISPLAY
-                ReuseableMethodsCLI.printSavedFiles(FileManager.getSavedFiles("MileStoneTracker"), MST.getCurrentFile());
+                ReuseableMethodsCLI.printSavedFiles("MileStone Tracker", FileManager.getSavedFiles("MileStoneTracker"), MST.getCurrentFile());
 
                 // GATHER INPUT
                 System.out.print("Choose File: ");
@@ -911,10 +911,10 @@ public class Menu {
 
     // [SubscriptionTracker Methods] ============================================================================================<<<<<<
     // +[MENUS]+
-    public boolean STracker_Menu () {
+    public boolean ST_Menu() {
         // DISPLAY
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println("║              Subscription Tracker [Launcher Menu]               ║");
+        System.out.println("║                  SUBSCRIPTION TRACKER [ MENU ]                  ║");
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + Username, 67));
         if (ST.getCurrentFile() != null) {
@@ -935,7 +935,7 @@ public class Menu {
         // OUTPUT
         boolean isRunningMethod;
         switch (Answer) {
-            case 1:
+            case 1: // +[CREATE FILE]+
                 isRunningMethod = true;
                 while (isRunningMethod) {
                     // GET FILENAME INPUT
@@ -977,7 +977,7 @@ public class Menu {
 
                                 //... FINISH TOUCH
                                 System.out.println(FileName+" has been created!");
-                                ReuseableMethodsCLI.log("MileStoneTracker", FileName, "{Author: "+ST.getCurrentST_Data().getAuthor()+"} has created the file."); // records the action into a log file.
+                                ReuseableMethodsCLI.log("SubscriptionTracker", FileName, "{Author: "+ST.getCurrentST_Data().getAuthor()+"} has created the file."); // records the action into a log file.
                                 System.out.println();
                                 isRunningMethod = false;
                                 validFile = true;
@@ -991,18 +991,96 @@ public class Menu {
 
                 }
                 return true; // true means that this method will keep running due to a while loop of the caller.
-            case 2:
+            case 2: // +[LOAD FILE]+
+                isRunningMethod = true;
+                while (isRunningMethod) {
+                    //... DISPLAY
+                    if (!ReuseableMethodsCLI.printSavedFiles("Subscription Tracker", FileManager.getSavedFiles("SubscriptionTracker"), ST.getCurrentFile())) {
+                        isRunningMethod = false;
+                        continue;
+                    }
+
+                    //... GET INPUT
+                    boolean ValidAnswer = false;
+                    while (!ValidAnswer) {
+                        String FilenameAnswer = "NULL";
+                        try {
+                            System.out.print("Choose File: ");
+                            FilenameAnswer = ReuseableMethodsCLI.input.nextLine(); // get input
+
+                            // security
+                            if(FilenameAnswer.equals("e")) {
+                                isRunningMethod = false;
+                                ValidAnswer = true;
+                                System.out.println();
+                                break;
+                            }
+                            if (ST.getCurrentFile() != null && FilenameAnswer.equals(FileManager.fileNameOnly(ST.getCurrentFile(), 5))) {
+                                System.out.println("[ERROR] This file has already been loaded!");
+                                System.out.println();
+                                isRunningMethod = false;
+                                ValidAnswer = true;
+                                break;
+                            }
+
+                            //... LOAD THE FILE INTO THE ST OBJECT
+                            if (!ST.loadFile(FilenameAnswer)) { // if it did not load
+                                System.out.println(FilenameAnswer+" does not exist! please choose another file.");
+                                continue;
+                            }
+                        } catch (JsonSyntaxException e) {
+                            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                        } catch (IOException e) {
+                            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                        }
+
+                        //... ENTER PASSWORD <======== LOGGING IN
+                        boolean ValidPassword = false;
+                        while (!ValidPassword) {
+                            // Grab Input
+                            System.out.print("Please enter password for "+FilenameAnswer+": ");
+                            String Password = ReuseableMethodsCLI.input.nextLine();
+
+                            // Security
+                            if (Password.equals("e")) {
+                                isRunningMethod = false;
+                                ValidAnswer = true;
+                                ST.resetCurrentFileData(); // since it was the data was loaded into the object but it was not logged in, it gotta be removed for security purposes.
+                                System.out.println();
+                                break; // exits out of the while loop (ValidPassword)
+                            }
+
+                            // Process
+                            if (ST.getCurrentST_Data().logIn(ReuseableMethodsCLI.hashPassword(Password), Username)) {
+                                //... Runs the method and returns boolean
+
+                                ValidPassword = true;
+                                ValidAnswer = true;
+                                isRunningMethod = false;
+
+                                System.out.println(FilenameAnswer+" has been successfully loaded!");
+                                ReuseableMethodsCLI.log("SubscriptionTracker", FilenameAnswer, "{User: "+Username+"} has loaded the file.");
+                                System.out.println();
+                            } else {
+                                System.out.println("[ERROR] Invalid Password");
+                                System.out.println();
+                            }
+                        }
+                    }
+                }
+                return true; // true means that this method will keep running due to a while loop of the caller.
+            case 3: // +[VIEW FILE]+
                 break;
-            case 3:
+            case 4: // +[DELETE FILE]+
+                //! <=================== YOU LEFT HERE, CHECK CLAUDE BECAUSE I PROMPTED TO REPRODUCE THE SAME CODE I CREATED AND CHANGE IT INTO SUBSCRIPTION TRACKER, TREATING MST AS THE BLUEPRINT
                 break;
-            case 4:
-                break;
-            case 5:
+            case 5: // +[GO BACK]+
                 return false; // false means that this method will now stop running because of the while loop from the caller
         }
 
         return true; // true means that this method will keep running because of the while loop from caller.
     }
+    // +[FILE MANAGEMENT]+
 
     // [WorkHoursTracker Methods] ==============================================================================================<<<<<<<
 
