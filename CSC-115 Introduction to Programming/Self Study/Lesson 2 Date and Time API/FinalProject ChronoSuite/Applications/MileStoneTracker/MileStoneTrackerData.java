@@ -1,11 +1,10 @@
 package Applications.MileStoneTracker;
 
 // Creation Date: August 26, 2026. at 11:59 PM
-// Last Modified: October 05, 2026. at  4:51 PM
+// Last Modified: October 06, 2026. at  3:20 PM
 
 import Misc.DataManager;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;

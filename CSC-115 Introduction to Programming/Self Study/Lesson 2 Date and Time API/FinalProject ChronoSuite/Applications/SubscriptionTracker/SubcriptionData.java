@@ -1,7 +1,7 @@
 package Applications.SubscriptionTracker;
 
 // Creation Date: September 30, 2026. at 6:31 PM
-// Last Modified: October 03, 2026. at 12:07 AM
+// Last Modified: October 06, 2026. at  3:45 PM
 
 import Misc.DataManager;
 
@@ -14,8 +14,11 @@ public class SubcriptionData {
     private LocalDate ExpiryDate;
     private LocalDate CreationDate;
     private double Price;
+
+    // [PERIODICALS]
     private boolean Monthly;
     private boolean Yearly;
+    private String CustomPeriod;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     SubcriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price) {

@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 05, 2026. at  5:18 PM
+// Last Modified: October 06, 2026. at  3:48 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -441,7 +441,7 @@ public class Menu {
                 // Process
                 isRunningMethod = true;
                 while (isRunningMethod) {
-                    isRunningMethod = deleteFileConfirmation(SavedFiles);
+                    isRunningMethod = deleteFileConfirmationMST(SavedFiles);
                 }
 
                 return true; // true means that this method will keep running due to a while loop of the caller.
@@ -520,7 +520,7 @@ public class Menu {
         return false; // false means that this method will now stop running.
     }
     // +[FILE MANAGEMENT]+
-    public boolean deleteFileConfirmation(File[] SavedFiles) {
+    public boolean deleteFileConfirmationMST(File[] SavedFiles) {
         // DISPLAY
         System.out.println("╔═══════════════════════════════════════════════════════════════════╗");
         System.out.println("║ Please specify which type of delete method would you like to run? ║");
@@ -585,9 +585,13 @@ public class Menu {
                 return false; // false means that this method will now stop running due to a while loop by the caller.
             case 3: // +[DELETE ALL SAVED FILES]+
                 //... Security
-                if (SavedFiles.length == 1 && SavedFiles[0].getName().equals(MST.getCurrentFile().getName())) { // Note: initially compared files but it was comparing the instance memory allocation instead of the content of the file
-                    System.out.println("[ERROR] You only have a current file in your Saved Files Folder which can't be deleted.");
-                    return false; // false means that this method will now stop running due to a while loop by the caller.
+                if (SavedFiles.length == 1 ) { // Note: initially compared files but it was comparing the instance memory allocation instead of the content of the file
+                    if (MST.getCurrentFile() != null) {
+                        if (SavedFiles[0].getName().equals(MST.getCurrentFile().getName())) {
+                            System.out.println("[ERROR] You only have a current file in your Saved Files Folder which can't be deleted.");
+                            return false; // false means that this method will now stop running due to a while loop by the caller.
+                        }
+                    }
                 }
 
                 //... Process
@@ -1072,8 +1076,21 @@ public class Menu {
             case 3: // +[VIEW FILE]+
                 break;
             case 4: // +[DELETE FILE]+
-                //! <=================== YOU LEFT HERE, CHECK CLAUDE BECAUSE I PROMPTED TO REPRODUCE THE SAME CODE I CREATED AND CHANGE IT INTO SUBSCRIPTION TRACKER, TREATING MST AS THE BLUEPRINT
-                break;
+                /// Security
+                File[] SavedFiles = FileManager.getSavedFiles("SubscriptionTracker");
+                if (ST.getCurrentFile() == null && (SavedFiles == null || SavedFiles.length == 0)) {
+                    System.out.println("[ERROR] You currently do not have a Current File and Saved Files in the saved files Folder!");
+                    System.out.println();
+                    return true; // true means that this method will keep running due to a while loop of the caller.
+                }
+
+                // Process
+                isRunningMethod = true;
+                while (isRunningMethod) {
+                    isRunningMethod = deleteFileConfirmationST(SavedFiles); // CLAUDE: named with an "ST" suffix since `deleteFileConfirmation(File[])` already exists for MST — same signature, needs a distinct name
+                }
+
+                return true; // true means that this method will keep running due to a while loop of the caller.
             case 5: // +[GO BACK]+
                 return false; // false means that this method will now stop running because of the while loop from the caller
         }
@@ -1081,6 +1098,119 @@ public class Menu {
         return true; // true means that this method will keep running because of the while loop from caller.
     }
     // +[FILE MANAGEMENT]+
+    public boolean deleteFileConfirmationST(File[] SavedFiles) {
+        // DISPLAY
+        System.out.println("╔═══════════════════════════════════════════════════════════════════╗");
+        System.out.println("║ Please specify which type of delete method would you like to run? ║");
+        System.out.println("╟───────────────────────────────────────────────────────────────────╢");
+        System.out.println("║ 1. Delete Current File                                            ║");
+        System.out.println("║ 2. Delete Selected File                                           ║");
+        System.out.println("║ 3. Delete All Saved Files                                         ║");
+        System.out.println("║ 4. Go Back                                                        ║");
+        System.out.println("╚═══════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+
+        int AnswerViewFile = ReuseableMethodsCLI.getAnswer(1, 4);
+
+        switch (AnswerViewFile) {
+            case 1: // +[DELETE CURRENT FILE]+
+                // Security
+                if (ST.getCurrentFile() == null) {
+                    System.out.println("[ERROR] There is currently no file at the moment.");
+                    System.out.println();
+                    return false; // false means that this method will now stop running due to a while loop by the caller.
+                }
+
+                // Process
+                if (ReuseableMethodsCLI.Confirmation("Delete Current File")) {
+                    ST.deleteCurrentFile();
+                }
+
+                return false; // false means that this method will now stop running due to a while loop by the caller.
+            case 2: // +[DELETE SELECTED FILE]+
+                // DISPLAY
+                ReuseableMethodsCLI.printSavedFiles("SubscriptionTracker" ,FileManager.getSavedFiles("SubscriptionTracker"), ST.getCurrentFile());
+
+                // GATHER INPUT
+                System.out.print("Choose File: ");
+                String FileAnswer = ReuseableMethodsCLI.input.nextLine();
+                if (FileAnswer.equals("e")) {
+                    System.out.println();
+                    return false; // false means that this method will now stop running due to a while loop by the caller.
+                }
+
+                // PROCESS
+                if (ST.getCurrentFile() != null && FileAnswer.equals(FileManager.fileNameOnly(ST.getCurrentFile(), 5))) {
+                    if (ReuseableMethodsCLI.Confirmation("Delete Current File")) {
+                        ST.deleteCurrentFile();
+                        return false; // false means that this method will now stop running due to a while loop by the caller.
+                    }
+                }
+
+                for (File f: SavedFiles) {
+                    if (FileManager.fileNameOnly(f, 5).equals(FileAnswer)) {
+                        if (ReuseableMethodsCLI.Confirmation("Delete `"+FileAnswer+"` File") && ST.deleteSelectedFile(FileAnswer)) {
+                            System.out.println(FileAnswer+" has been successfully deleted!");
+                            return false; // false means that this method will now stop running due to a while loop by the caller.
+                        } else {
+                            System.out.println("[ERROR] "+FileAnswer+" did not get deleted!");
+                            return false; // false means that this method will now stop running due to a while loop by the caller.
+                        }
+                    }
+                }
+                System.out.println(FileAnswer+" does not exist!");
+                System.out.println();
+                return false; // false means that this method will now stop running due to a while loop by the caller.
+            case 3: // +[DELETE ALL SAVED FILES]+
+                //... Security
+                if (SavedFiles.length == 1 ) { // Note: initially compared files but it was comparing the instance memory allocation instead of the content of the file
+                    if (ST.getCurrentFile() != null) {
+                        if (SavedFiles[0].getName().equals(ST.getCurrentFile().getName())) {
+                            System.out.println("[ERROR] You only have a current file in your Saved Files Folder which can't be deleted.");
+                            return false; // false means that this method will now stop running due to a while loop by the caller.
+                        }
+                    }
+                }
+
+                //... Process
+                System.out.println("Note: `Delete All Saved File` will not delete your current File.");
+
+                if (SavedFiles != null && ReuseableMethodsCLI.Confirmation("Delete All Saved Files")) {
+                    for (File f : SavedFiles) {
+                        if (ST.getCurrentFile() != null) { // if we currently have a file
+                            if (!(f.getName().equals(ST.getCurrentFile().getName()))) { // if the f is not equal to the current file
+                                Logger.deleteLog("SubscriptionTracker", FileManager.fileNameOnly(f, 5));
+                                if (!f.delete()) { // if it did not get deleted
+                                    System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
+                                }
+                            }
+                        } else { // If there is no current file yet.
+                            Logger.deleteLog("SubscriptionTracker", FileManager.fileNameOnly(f, 5));
+                            if (!f.delete()) { // if it did not get deleted
+                                System.out.println("[ERROR] "+f.getName()+" did not get deleted!");
+                            }
+                        }
+                    }
+                    System.out.println("Delete All Saved File has successfully completed!");
+                }
+                System.out.println();
+
+                return false; // false means that this method will now stop running due to a while loop by the caller.
+            case 4:
+                return false; // false means that this method will now stop running due to a while loop by the caller.
+        }
+        return false; // false means that this method will now stop running due to a while loop by the caller.
+    }
+    // +[DATA MANAGEMENT] <================================ CURRENTLY IN HERE
+    public void ST_ViewData() { //! <========================== YOU LEFT HERE TO CREATE A VIEW DATA IN ORDER FOR YOU TO KNOW IF ADD, REMOVE, MODIFY DATA EXIST
+        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + FileManager.fileNameOnly(MST.getCurrentFile(), 5) + ((MST.getCurrentMST_Data().AgeMilestoneIsEmpty() && MST.getCurrentMST_Data().DayMilestoneIsEmpty()) ? " (EMPTY)" : ""), 67));
+        System.out.println("╟─────────────────────────────────────────────────────────────────╢");
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + MST.getCurrentMST_Data().getAuthor(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Age: " + MST.getCurrentMST_Data().getAge(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Next Birthday: " + MST.getCurrentMST_Data().getNextBirthday(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Days Alive: " + MST.getCurrentMST_Data().getTotalDaysAlive(), 67));
+    }
 
     // [WorkHoursTracker Methods] ==============================================================================================<<<<<<<
 
