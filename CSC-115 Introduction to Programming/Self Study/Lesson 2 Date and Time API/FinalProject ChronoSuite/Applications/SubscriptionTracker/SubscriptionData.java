@@ -1,13 +1,13 @@
 package Applications.SubscriptionTracker;
 
 // Creation Date: September 30, 2026. at 6:31 PM
-// Last Modified: October 06, 2026. at  3:45 PM
+// Last Modified: October 07, 2026. at  1:24 PM
 
 import Misc.DataManager;
 
 import java.time.LocalDate;
 
-public class SubcriptionData {
+public class SubscriptionData {
     //=======VARIABLES=======//
     // [PERSONAL]
     private String SubscriptionName;
@@ -18,17 +18,17 @@ public class SubcriptionData {
     // [PERIODICALS]
     private boolean Monthly;
     private boolean Yearly;
-    private String CustomPeriod;
+    private String CustomPeriod; // Need to customize this a little bit more (it can be every 6 months, every yearly, or we can use the Yearly/Monthly boolean whatever.
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
-    SubcriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price) {
+    SubscriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price) {
         this.SubscriptionName = SubscriptionName;
         this.ExpiryDate = ExpiryDate;
         this.Price = Price;
 
         CreationDate = LocalDate.now();
     }
-    SubcriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price, int MonthlyOrYearly) {
+    SubscriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price, int MonthlyOrYearly) {
         this.SubscriptionName = SubscriptionName;
         this.ExpiryDate = ExpiryDate;
         this.Price = Price;
@@ -48,7 +48,7 @@ public class SubcriptionData {
     String getExpiryDate() {
         return DataManager.toStringDate(ExpiryDate, "MMMM dd, yyyy");
     }
-    String getPrice() {
+    String getPrice() { // NOTE: STILL NEEDS TO CALCULATE HOW MUCH IS IT PER MONTH OR PER YEARLY?
         if (Monthly) {
             return Price+" (Monthly)";
         } else if (Yearly) {

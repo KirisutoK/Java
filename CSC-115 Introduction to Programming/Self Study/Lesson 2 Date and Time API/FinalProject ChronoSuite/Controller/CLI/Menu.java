@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 06, 2026. at  3:48 PM
+// Last Modified: October 07, 2026. at  1:24 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -1074,6 +1074,10 @@ public class Menu {
                 }
                 return true; // true means that this method will keep running due to a while loop of the caller.
             case 3: // +[VIEW FILE]+
+                isRunningMethod = true;
+                while (isRunningMethod) {
+
+                }
                 break;
             case 4: // +[DELETE FILE]+
                 /// Security
@@ -1097,6 +1101,7 @@ public class Menu {
 
         return true; // true means that this method will keep running because of the while loop from caller.
     }
+    // ! ST_FileMenu() <============================== WE NEED THIS IN ORDER FOR ME TO ACCESS TO MODIFYING, REMOVING, AND ADDING DATA INTO THE FILE
     // +[FILE MANAGEMENT]+
     public boolean deleteFileConfirmationST(File[] SavedFiles) {
         // DISPLAY
@@ -1206,10 +1211,25 @@ public class Menu {
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + FileManager.fileNameOnly(MST.getCurrentFile(), 5) + ((MST.getCurrentMST_Data().AgeMilestoneIsEmpty() && MST.getCurrentMST_Data().DayMilestoneIsEmpty()) ? " (EMPTY)" : ""), 67));
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + MST.getCurrentMST_Data().getAuthor(), 67));
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Age: " + MST.getCurrentMST_Data().getAge(), 67));
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Next Birthday: " + MST.getCurrentMST_Data().getNextBirthday(), 67));
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Days Alive: " + MST.getCurrentMST_Data().getTotalDaysAlive(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + ST.getCurrentST_Data().getAuthor(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Monthly Paid: (WIP)", 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Yearly Paid: (WIP)", 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Monthly Cost Due: ", 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Yearly Cost Due: ", 67));
+        if (ST.getCurrentST_Data() != null) {
+            System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+            System.out.println("║                         SUBSCRIPTIONS                           ║");
+            System.out.println("╟─────────────────────────────────────────────────────────────────╢");
+        }
+        System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+        System.out.println("║[NOTE] Input \"e\" to exit.                                        ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+        System.out.println();
+    }
+    // +[PRINTS]+
+    public void printSubscriptions() {
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Yearly Paid: (WIP)", 67));
     }
 
     // [WorkHoursTracker Methods] ==============================================================================================<<<<<<<
