@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 07, 2026. at  1:24 PM
+// Last Modified: October 08, 2026. at 10:08 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -498,7 +498,7 @@ public class Menu {
         // [PROCESSING OUTPUTS]
         switch (Answer) {
             case 1:
-                MST_viewData();
+                MST_displayData();
                 ReuseableMethodsCLI.log("MileStoneTracker", FileManager.fileNameOnly(MST.getCurrentFile(), 5), "{User: "+Username+"} has viewed the data."); // records the action into a log file.
                 return true; // true means that this method will keep running after this case finishes
             case 2:
@@ -624,7 +624,7 @@ public class Menu {
         return false; // false means that this method will now stop running due to a while loop by the caller.
     }
     // +[DATA MANAGEMENT]+
-    public void MST_viewData() {
+    public void MST_displayData() {
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + FileManager.fileNameOnly(MST.getCurrentFile(), 5) + ((MST.getCurrentMST_Data().AgeMilestoneIsEmpty() && MST.getCurrentMST_Data().DayMilestoneIsEmpty()) ? " (EMPTY)" : ""), 67));
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
@@ -1076,7 +1076,7 @@ public class Menu {
             case 3: // +[VIEW FILE]+
                 isRunningMethod = true;
                 while (isRunningMethod) {
-
+                    isRunningMethod = ST_FileMenu();
                 }
                 break;
             case 4: // +[DELETE FILE]+
@@ -1101,7 +1101,66 @@ public class Menu {
 
         return true; // true means that this method will keep running because of the while loop from caller.
     }
-    // ! ST_FileMenu() <============================== WE NEED THIS IN ORDER FOR ME TO ACCESS TO MODIFYING, REMOVING, AND ADDING DATA INTO THE FILE
+    public boolean ST_FileMenu()  {
+        try {
+            ReuseableMethodsCLI.log("SubscriptionTracker", FileManager.fileNameOnly(ST.getCurrentFile(), 5), "{User: "+Username+"} has viewed the file."); // records the action into a log file.
+
+            // Error Check
+            String DateCreation = FileManager.getDateCreated(ST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
+            String LastModified = FileManager.getLastModified(ST.getCurrentFile()); // Note: this method throws an error so having this to be in the first process and catch early will not run any print as long as it catches.
+
+            // Print
+            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+            System.out.println("║                SUBSCRIPTION TRACKER [ FILE MENU ]               ║");
+            System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Author: " + ST.getCurrentST_Data().getAuthor(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + FileManager.fileNameOnly(ST.getCurrentFile(), 5), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ File Size: " + FileManager.formatFileSize(ST.getCurrentFile().length()), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Date Created: " + DateCreation, 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Last Modified: " + LastModified, 67));
+            System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢ ");
+            System.out.println("║ 1. View Subscriptions                                           ║");
+            System.out.println("║ 2. Add Subscriptions                                            ║");
+            System.out.println("║ 3. Remove Subscriptions                                         ║");
+            System.out.println("║ 4. Go Back                                                      ║");
+            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+            System.out.println();
+        } catch (NoSuchFileException e) {
+            ST.resetCurrentFileData(); // turns currentfile and currentdata into null
+
+            System.out.println("[ERROR] Current File has been either deleted or moved.");
+            System.out.println();
+
+            return false; // false means that this method will now stop running.
+        } catch (IOException e) {
+            System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+            return false; // false means that this method will now stop running.
+        }
+
+        // [PROCESSING INPUTS]
+        int Answer = ReuseableMethodsCLI.getAnswer(1, 4);
+
+        // [PROCESSING OUTPUTS]
+        switch (Answer) {
+            case 1:
+                boolean viewDataRunning = true;
+                while (viewDataRunning) {
+                    viewDataRunning = ST_ViewData();
+                }
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+        }
+
+        return false; // false means that this method will now stop running because of the while loop from the caller
+    }
     // +[FILE MANAGEMENT]+
     public boolean deleteFileConfirmationST(File[] SavedFiles) {
         // DISPLAY
@@ -1207,7 +1266,7 @@ public class Menu {
         return false; // false means that this method will now stop running due to a while loop by the caller.
     }
     // +[DATA MANAGEMENT] <================================ CURRENTLY IN HERE
-    public void ST_ViewData() { //! <========================== YOU LEFT HERE TO CREATE A VIEW DATA IN ORDER FOR YOU TO KNOW IF ADD, REMOVE, MODIFY DATA EXIST
+    public boolean ST_ViewData() { //! <========================== YOU LEFT HERE
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + FileManager.fileNameOnly(MST.getCurrentFile(), 5) + ((MST.getCurrentMST_Data().AgeMilestoneIsEmpty() && MST.getCurrentMST_Data().DayMilestoneIsEmpty()) ? " (EMPTY)" : ""), 67));
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
@@ -1226,6 +1285,10 @@ public class Menu {
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
         System.out.println();
         System.out.println();
+
+        // GET INPUT
+
+        return true;
     }
     // +[PRINTS]+
     public void printSubscriptions() {
