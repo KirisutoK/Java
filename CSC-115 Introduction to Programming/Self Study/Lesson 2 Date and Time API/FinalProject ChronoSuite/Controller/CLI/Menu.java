@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 08, 2026. at 10:08 PM
+// Last Modified: October 09, 2026. at 11:23 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -1287,8 +1287,13 @@ public class Menu {
         System.out.println();
 
         // GET INPUT
+        String Answer = ReuseableMethodsCLI.input.nextLine();
 
-        return true;
+        if (Answer.equals("e")) {
+            return false; // false means that this method will now stop running becasue of the while loop from the caller.
+        }
+
+        return true; // true means that this method will keep running becasue of  the while loop from the caller.
     }
     // +[PRINTS]+
     public void printSubscriptions() {
