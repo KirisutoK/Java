@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 12, 2026. at 11:50 PM
+// Last Modified: October 13, 2026. at 12:35 AM
 
 import java.io.File;
 import java.io.IOException;
@@ -1306,7 +1306,7 @@ public class Menu {
         return false; // false means that this method will now stop running due to a while loop by the caller.
     }
     // +[DATA MANAGEMENT] <================================ CURRENTLY IN HERE
-    public boolean ST_ViewData() { //! <========================== YOU LEFT HERE  (WORK WITH IF ITS EMPTY, PRINT ONLY FILE NAME LABALED "EMPTY")
+    public boolean ST_ViewData() { //! <========================== YOU LEFT HERE  (SUBSCRIPTION PRINT)
         // [SECURITY]
         if (ST.getCurrentST_Data().isEmpty()) {
             System.out.println("[ERROR] Current File is empty, it does not have any data (Subscriptions) inside.");

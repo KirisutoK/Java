@@ -1,7 +1,7 @@
 package Applications.SubscriptionTracker;
 
 // Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: October 06, 2026. at  3:45 PM
+// Last Modified: October 13, 2026. at 12:35 AM
 
 import Applications.Application;
 import Misc.DataManager;
@@ -159,14 +159,6 @@ public class SubscriptionTracker implements Application {
     }
 
     // [DATA MANAGEMENT]
-    public boolean addSubscription(String SubscriptionName, String ExpiryDate, double Price, int MonthlyorYearly) {
-        if (MonthlyorYearly == -1) {
-            // call SubscriptionTrackerData.addSubcsription without the monthly or yearly
-        } else {
-            // call SubscriptionTrackerData.addSubcsription without the monthly or yearly
-        }
-        return false;
-    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 
