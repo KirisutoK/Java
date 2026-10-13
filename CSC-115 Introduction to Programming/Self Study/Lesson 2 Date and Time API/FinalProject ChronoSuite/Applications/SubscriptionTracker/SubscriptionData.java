@@ -1,7 +1,7 @@
 package Applications.SubscriptionTracker;
 
 // Creation Date: September 30, 2026. at 6:31 PM
-// Last Modified: October 07, 2026. at  1:35 PM
+// Last Modified: October 13, 2026. at 12:01 AM
 
 import Misc.DataManager;
 
@@ -14,11 +14,7 @@ public class SubscriptionData {
     private LocalDate ExpiryDate;
     private LocalDate CreationDate;
     private double Price;
-
-    // [PERIODICALS]
-    private boolean Monthly;
-    private boolean Yearly;
-    private String CustomPeriod; // Need to customize this a little bit more (it can be every 6 months, every yearly, or we can use the Yearly/Monthly boolean whatever.
+    private int DaysUntilDue;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     SubscriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price) {
@@ -28,15 +24,11 @@ public class SubscriptionData {
 
         CreationDate = LocalDate.now();
     }
-    SubscriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price, int MonthlyOrYearly) {
+    SubscriptionData(String SubscriptionName, LocalDate ExpiryDate, double Price, int DaysUntilDue) {
         this.SubscriptionName = SubscriptionName;
         this.ExpiryDate = ExpiryDate;
         this.Price = Price;
-        if (MonthlyOrYearly == 1) {
-            Monthly = true;
-        } else {
-            Yearly = true;
-        }
+        this.DaysUntilDue = DaysUntilDue; // Note: We must
 
         CreationDate = LocalDate.now();
     }
@@ -47,15 +39,6 @@ public class SubscriptionData {
     }
     String getExpiryDate() {
         return DataManager.toStringDate(ExpiryDate, "MMMM dd, yyyy");
-    }
-    String getPrice() { // NOTE: STILL NEEDS TO CALCULATE HOW MUCH IS IT PER MONTH OR PER YEARLY?
-        if (Monthly) {
-            return Price+" (Monthly)";
-        } else if (Yearly) {
-            return Price+" (Yearly)";
-        } else {
-            return Price+"";
-        }
     }
 
 

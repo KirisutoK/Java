@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 11, 2026. at  9:53 PM
+// Last Modified: October 12, 2026. at 11:50 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -160,7 +160,7 @@ public class Menu {
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: "+Username, 74));
         System.out.println(ReuseableMethodsCLI.lineAutoSpacing("║ Birthday: "+ DataManager.toStringBirthday(UserBirthday), 74));
         System.out.println("╟──[APPLICATIONS]────────────────────────────────────────────────────────╢");
-        System.out.println("║ 1. MileStone Tracker                 4. Subscription Tracker (WIP)     ║");
+        System.out.println("║ 1. MileStone Tracker                 4. Subscription Tracker           ║");
         System.out.println("║ 2. Day Planner (WIP)                 5. Work Hours Tracker (WIP)       ║");
         System.out.println("║ 3. Multi-TimeZone Tracker (WIP)      6. Change Profile                 ║");
         System.out.println("╠════════════════════════════════════════════════════════════════════════╣");
@@ -181,7 +181,7 @@ public class Menu {
                     MST = new MileStoneTracker(Username, UserBirthday);
                 } else if( MST.getCurrentMST_Data() != null && !(MST.getCurrentMST_Data().getLoggedIn()) ) { // if the currentASMT_Data is not null and that the password is not passed (not logged in)
                     //... this is so that unauthorized users will not be able to see the file without having to log in again.
-                    System.out.println("You currently have a file open in the Milestone Tracker Program, you will have to enter your password again for "+ MST.getCurrentFile().getName()+".");
+                    System.out.println("You currently have a file open in the Milestone Tracker Application, you will have to enter your password again for "+ FileManager.fileNameOnly(MST.getCurrentFile(), 5)+".");
                     System.out.println("[NOTE] input \"e\" to load the application with no current files open.");
                     System.out.println();
                     boolean ValidPassword = false;
@@ -226,8 +226,32 @@ public class Menu {
                 System.out.println();
                 break;
             case 4: // +[SUBSCRIPTION TRACKER]+
+                // [SECURITY]
                 if (ST == null) {
                     ST = new SubscriptionTracker(Username, UserBirthday);
+                } else if (ST.getCurrentST_Data() != null && !ST.getCurrentST_Data().getLoggedIn()){ // If we currently have an open file and its logged out
+                    //... this is so that unauthorized users will not be able to see the file without having to log in again.
+                    System.out.println("You currently have a file open in the Subscription Tracker Application, you will have to enter your password again for "+ FileManager.fileNameOnly(ST.getCurrentFile(), 5)+".");
+                    System.out.println("[NOTE] input \"e\" to load the application with no current files open.");
+                    System.out.println();
+                    boolean ValidPassword = false;
+                    while (!ValidPassword) {
+                        System.out.print("Enter Password: ");
+                        String UserInputPassword = ReuseableMethodsCLI.input.nextLine();
+                        if (ST.getCurrentST_Data().logIn(ReuseableMethodsCLI.hashPassword(UserInputPassword), Username)) {
+                            ReuseableMethodsCLI.log("SubscriptionTracker", FileManager.fileNameOnly(ST.getCurrentFile(), 5), "{User: "+Username+"} has logged in."); // records the action into a log file.
+
+                            ValidPassword = true;
+                            System.out.println();
+                        } else {
+                            System.out.println("[ERROR] Invalid Password");
+                        }
+
+                        if (UserInputPassword.equals("e")) { // NOTE: Lowky dont know how to deal with this, initially planning to go back to selecting files but dont know how
+                            MST.resetCurrentFileData();
+                            ValidPassword = true;
+                        }
+                    }
                 }
 
                 // [PROCESS] We need to add this so that every time a user changes their username/birthday in the main menu, it will also apply into AMST.
@@ -914,6 +938,7 @@ public class Menu {
     // [MultiTimeZoneMeetingPlanner Methods] ===================================================================================<<<<<<<
 
     // [SubscriptionTracker Methods] ============================================================================================<<<<<<
+    // NOTE: MAKE SURE TO IMPLEMENT THE LOG LATER ON WHEN THE APPLICATION IS FINISHED OR YOU NEED TO DEBUG SOMETHING (EVEN THOUGH WE CAN US THE INTELLIJ IDEA DEBUGGER)
     // +[MENUS]+
     public boolean ST_Menu() {
         // DISPLAY
@@ -922,7 +947,7 @@ public class Menu {
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + Username, 67));
         if (ST.getCurrentFile() != null) {
-            System.out.println(ReuseableMethodsCLI.softWrapping("║ Current File: "+FileManager.fileNameOnly(ST.getCurrentFile(), 5), 67) );
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Current File: "+FileManager.fileNameOnly(ST.getCurrentFile(), 5)+((ST.getCurrentST_Data().isEmpty()) ? " (EMPTY)" : ""), 67));
         }
         System.out.println("╟──[ACTIONS]──────────────────────────────────────────────────────╢");
         System.out.println("║ 1. Create File                                                  ║");
@@ -1074,10 +1099,19 @@ public class Menu {
                 }
                 return true; // true means that this method will keep running due to a while loop of the caller.
             case 3: // +[VIEW FILE]+
+                // Security
+                if (ST.getCurrentFile() == null) {
+                    System.out.println("[ERROR] There is currently no file at the moment.");
+                    System.out.println();
+                    break;
+                }
+
+                // Process
                 isRunningMethod = true;
                 while (isRunningMethod) {
                     isRunningMethod = ST_FileMenu();
                 }
+
                 break;
             case 4: // +[DELETE FILE]+
                 /// Security
@@ -1096,6 +1130,11 @@ public class Menu {
 
                 return true; // true means that this method will keep running due to a while loop of the caller.
             case 5: // +[GO BACK]+
+                if (ST.getCurrentFile() != null) {
+                    ST.getCurrentST_Data().logOut();
+
+                }
+
                 return false; // false means that this method will now stop running because of the while loop from the caller
         }
 
@@ -1111,7 +1150,7 @@ public class Menu {
 
             // Print
             System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-            System.out.println("║                SUBSCRIPTION TRACKER [ FILE MENU ]               ║");
+            System.out.println("║              SUBSCRIPTION TRACKER [ FILE MENU ]                 ║");
             System.out.println("╠═════════════════════════════════════════════════════════════════╣");
             System.out.println(ReuseableMethodsCLI.softWrapping("║ Author: " + ST.getCurrentST_Data().getAuthor(), 67));
             System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + FileManager.fileNameOnly(ST.getCurrentFile(), 5), 67));
@@ -1142,21 +1181,21 @@ public class Menu {
 
         // [PROCESSING OUTPUTS]
         switch (Answer) {
-            case 1:
+            case 1: // +[VIEW SUBSCRIPTIONS]+
                 boolean viewDataRunning = true;
                 while (viewDataRunning) {
                     viewDataRunning = ST_ViewData();
                 }
-                break;
-            case 2:
+                return true; // true means that this method will keep running becasue of  the while loop from the caller.
+            case 2: // +[ADD SUBSCRIPTIONS]+
 
-                break;
-            case 3:
+                return true; // true means that this method will keep running becasue of  the while loop from the caller.
+            case 3: // +[REMOVE SUBSCRIPTIONS]+
 
-                break;
-            case 4:
+                return true; // true means that this method will keep running becasue of  the while loop from the caller.
+            case 4:// +[GO BACK]+
 
-                break;
+                return false; // false means that this method will now stop running because of the while loop from the caller
         }
 
         return false; // false means that this method will now stop running because of the while loop from the caller
@@ -1230,7 +1269,8 @@ public class Menu {
                 if (SavedFiles.length == 1 ) { // Note: initially compared files but it was comparing the instance memory allocation instead of the content of the file
                     if (ST.getCurrentFile() != null) {
                         if (SavedFiles[0].getName().equals(ST.getCurrentFile().getName())) {
-                            System.out.println("[ERROR] You only have a current file in your Saved Files Folder which can't be deleted.");
+                            System.out.println("[ERROR] You only have a current file in your Saved Files Folder.");
+                            System.out.println();
                             return false; // false means that this method will now stop running due to a while loop by the caller.
                         }
                     }
@@ -1266,29 +1306,34 @@ public class Menu {
         return false; // false means that this method will now stop running due to a while loop by the caller.
     }
     // +[DATA MANAGEMENT] <================================ CURRENTLY IN HERE
-    public boolean ST_ViewData() { //! <========================== YOU LEFT HERE
+    public boolean ST_ViewData() { //! <========================== YOU LEFT HERE  (WORK WITH IF ITS EMPTY, PRINT ONLY FILE NAME LABALED "EMPTY")
+        // [SECURITY]
+        if (ST.getCurrentST_Data().isEmpty()) {
+            System.out.println("[ERROR] Current File is empty, it does not have any data (Subscriptions) inside.");
+            System.out.println();
+            return false; // false means that this method will now stop running becasue of the while loop from the caller.
+        }
+
+        // [PROCESS]
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ File Name: " + FileManager.fileNameOnly(MST.getCurrentFile(), 5) + ((MST.getCurrentMST_Data().AgeMilestoneIsEmpty() && MST.getCurrentMST_Data().DayMilestoneIsEmpty()) ? " (EMPTY)" : ""), 67));
-        System.out.println("╟─────────────────────────────────────────────────────────────────╢");
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: " + ST.getCurrentST_Data().getAuthor(), 67));
+        System.out.println(ReuseableMethodsCLI.softWrapping("║ Current Date: "+DataManager.toStringDate(LocalDate.now(), "MMMM dd, yyyy") , 67));
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Monthly Paid: (WIP)", 67));
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Yearly Paid: (WIP)", 67));
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Monthly Cost Due: ", 67));
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Yearly Cost Due: ", 67));
-        if (ST.getCurrentST_Data() != null) {
-            System.out.println("╠═════════════════════════════════════════════════════════════════╣");
-            System.out.println("║                         SUBSCRIPTIONS                           ║");
-            System.out.println("╟─────────────────────────────────────────────────────────────────╢");
-        }
+        System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+        System.out.println("║                         SUBSCRIPTIONS                           ║");
+        System.out.println("╟─────────────────────────────────────────────────────────────────╢");
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
         System.out.println("║[NOTE] Input \"e\" to exit.                                        ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
         System.out.println();
         System.out.println();
 
-        // GET INPUT
+        // [INPUT]
         String Answer = ReuseableMethodsCLI.input.nextLine();
 
+        // [OUTPUT]
         if (Answer.equals("e")) {
             return false; // false means that this method will now stop running becasue of the while loop from the caller.
         }

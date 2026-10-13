@@ -2,7 +2,7 @@ package Applications.SubscriptionTracker;
 
 
 // Creation Date: September 30, 2026. at 6:18 PM
-// Last Modified: October 07, 2026. at  1:35 PM
+// Last Modified: October 12, 2026. at 11:53 PM
 
 import java.util.HashSet;
 
@@ -34,20 +34,8 @@ public class SubscriptionTrackerData { // implements Application
     public String getAuthor() {
         return (LoggedIn) ? Author : null;
     }
-    public double getTotalMonthlyPrice() {
-        // SECURITY
-        if (Subscriptions == null) {
-            return 0;
-        }
-
-        // PROCESS
-        for (SubscriptionData s: Subscriptions) {
-
-        }
-
-
-
-        return 0;
+    public boolean isEmpty() {
+        return Subscriptions == null || Subscriptions.isEmpty();
     }
 
     // [SECURITY]
