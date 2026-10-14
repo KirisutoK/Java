@@ -1,7 +1,7 @@
 package Applications.SubscriptionTracker;
 
 // Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: October 13, 2026. at 12:35 AM
+// Last Modified: October 13, 2026. at 11:36 PM
 
 import Applications.Application;
 import Misc.DataManager;
@@ -159,6 +159,9 @@ public class SubscriptionTracker implements Application {
     }
 
     // [DATA MANAGEMENT]
+    public boolean addSubscription() { //! <==================== YOU LEFT HERE! (PLANNING TO DO THE ADD/REMOVE/MODIFY AS WE HAVE NOW THE METHOD TO CHECK IT'S STATUS)
+        return false; // false means the addition was successful
+    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 

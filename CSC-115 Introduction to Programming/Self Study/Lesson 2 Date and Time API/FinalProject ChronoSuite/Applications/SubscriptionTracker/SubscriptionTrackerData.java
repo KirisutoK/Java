@@ -2,7 +2,7 @@ package Applications.SubscriptionTracker;
 
 
 // Creation Date: September 30, 2026. at 6:18 PM
-// Last Modified: October 12, 2026. at 11:53 PM
+// Last Modified: October 13, 2026. at 11:36 PM
 
 import java.util.HashSet;
 
@@ -17,10 +17,8 @@ public class SubscriptionTrackerData { // implements Application
     private boolean LoggedIn = false;
 
     // [CALCULATIONS]
-    private double TotalMonthlyPrice;
-    private double TotalYearlyPrice;
-    private double TotalMonthlyPriceDue;
-    private double TotalYearlyPriceDue;
+    private double TotalMonthlyCost;
+    private double TotalYearlyCost;
     private HashSet<SubscriptionData> Subscriptions;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
@@ -37,6 +35,9 @@ public class SubscriptionTrackerData { // implements Application
     public boolean isEmpty() {
         return Subscriptions == null || Subscriptions.isEmpty();
     }
+    public HashSet<SubscriptionData> getSubscriptions() {
+        return Subscriptions;
+    }
 
     // [SECURITY]
     public boolean getLoggedIn() {
@@ -51,7 +52,6 @@ public class SubscriptionTrackerData { // implements Application
     }
 
     //==========SETTERS==========\\ NOTE: CHANGES THE VARIABLES ON THIS FILE
-
     // [SECURITY]
     public boolean logIn(String input, String currentUser) {
         //// LoggedUser = currentUser;
@@ -65,6 +65,8 @@ public class SubscriptionTrackerData { // implements Application
     public void logOut() {
         LoggedIn = false;
     }
+
+    // [DATA MANAGEMENT]
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 

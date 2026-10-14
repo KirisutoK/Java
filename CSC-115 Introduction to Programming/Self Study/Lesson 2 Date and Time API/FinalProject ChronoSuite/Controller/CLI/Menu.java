@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 13, 2026. at 12:35 AM
+// Last Modified: October 13, 2026. at 11:36 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +15,7 @@ import Applications.DayPlanner.DayPlanner;
 import Applications.MileStoneTracker.MileStoneTracker;
 import Applications.MileStoneTracker.MileStoneTrackerData;
 import Applications.MultiTimeZoneMeetingPlanner.MultiTimeZoneMeetingPlanner;
+import Applications.SubscriptionTracker.SubscriptionData;
 import Applications.SubscriptionTracker.SubscriptionTracker;
 import Applications.WorkHoursTracker.WorkHoursTracker;
 import Misc.DataManager;
@@ -1306,7 +1307,7 @@ public class Menu {
         return false; // false means that this method will now stop running due to a while loop by the caller.
     }
     // +[DATA MANAGEMENT] <================================ CURRENTLY IN HERE
-    public boolean ST_ViewData() { //! <========================== YOU LEFT HERE  (SUBSCRIPTION PRINT)
+    public boolean ST_ViewData() {
         // [SECURITY]
         if (ST.getCurrentST_Data().isEmpty()) {
             System.out.println("[ERROR] Current File is empty, it does not have any data (Subscriptions) inside.");
@@ -1317,13 +1318,12 @@ public class Menu {
         // [PROCESS]
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Current Date: "+DataManager.toStringDate(LocalDate.now(), "MMMM dd, yyyy") , 67));
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Monthly Paid: (WIP)", 67));
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Yearly Paid: (WIP)", 67));
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Monthly Cost Due: ", 67));
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Yearly Cost Due: ", 67));
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
         System.out.println("║                         SUBSCRIPTIONS                           ║");
         System.out.println("╟─────────────────────────────────────────────────────────────────╢");
+        SubscriptionPrint();
         System.out.println("╠═════════════════════════════════════════════════════════════════╣");
         System.out.println("║[NOTE] Input \"e\" to exit.                                        ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
@@ -1341,8 +1341,13 @@ public class Menu {
         return true; // true means that this method will keep running becasue of  the while loop from the caller.
     }
     // +[PRINTS]+
-    public void printSubscriptions() {
-        System.out.println(ReuseableMethodsCLI.softWrapping("║ Total Yearly Paid: (WIP)", 67));
+    public void SubscriptionPrint() {
+        for (SubscriptionData SD : ST.getCurrentST_Data().getSubscriptions()) {
+            System.out.println(ReuseableMethodsCLI.softWrapping("Subscription Name: "+SD.getSubscriptionName(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("Creation Date: "+SD.getCreationDate(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("Price: "+SD.getPrice(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("Billing Cycle: "+SD.getBillingCycle(), 67));
+        }
     }
 
     // [WorkHoursTracker Methods] ==============================================================================================<<<<<<<
