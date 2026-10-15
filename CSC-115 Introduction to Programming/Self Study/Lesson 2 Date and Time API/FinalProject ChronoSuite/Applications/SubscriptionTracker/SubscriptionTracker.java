@@ -1,7 +1,7 @@
 package Applications.SubscriptionTracker;
 
 // Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: October 14, 2026. at  9:46 PM
+// Last Modified: October 14, 2026. at  9:59 PM
 
 import Applications.Application;
 import Misc.DataManager;

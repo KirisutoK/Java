@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 14, 2026. at  9:55 PM
+// Last Modified: October 15, 2026. at 12:08 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -152,7 +152,6 @@ public class Menu {
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
-
     boolean MainMenu() {
         // DISPLAY
         System.out.println("╔════════════════════════════════════════════════════════════════════════╗");
@@ -1190,10 +1189,7 @@ public class Menu {
                 }
                 return true; // true means that this method will keep running becasue of  the while loop from the caller.
             case 2: // +[ADD SUBSCRIPTIONS]+
-                methodRunning = true;
-                while (methodRunning) {
-                    methodRunning = ST_AddSubscription();
-                }
+                ST_AddSubscription();
                 return true; // true means that this method will keep running becasue of  the while loop from the caller.
             case 3: // +[REMOVE SUBSCRIPTIONS]+
 
@@ -1365,12 +1361,41 @@ public class Menu {
                 ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle);
                 break;
             case 2: // +[ALREADY STARTED]+
-                System.out.println("[NOTE] Date Format is MMMM dd, yyyy");
-                System.out.println("Date Creation: ");
+                LocalDate SubscriptionDateCreation = null;
+                boolean ValidInput = false;
+                while (!ValidInput) {
+                    try {
+                        System.out.println("[NOTE] input \"e\" to exit");
+                        System.out.println("[NOTE] (Month DayOfMonth Year) => ex: 12/05/2006");
+                        System.out.print("Date Creation: ");
+                        String SDC = ReuseableMethodsCLI.input.nextLine();
 
+                        // IF EXIT
+                        if (SDC.equals("e")) {
+                            return false; // false means the add and creation of the subscription has been unsuccessful.
+                        }
 
-                ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle);
-                break;
+                        // LETS SPLIT THEM LINES AND CONVERT IT INTO INTEGERS THEN PASS IT ON
+                        String[] Lines = SDC.split("/");
+
+                        // ADD THE CONVERTED LINES INTO THE CONSTRUCTOR
+                        SubscriptionDateCreation = LocalDate.of(Integer.parseInt(Lines[2]), Integer.parseInt(Lines[0]), Integer.parseInt(Lines[1]));
+
+                    } catch (DateTimeException e) {
+                        System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                    } catch (NumberFormatException e) {
+                        System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] Please follow the Date Format which is `MM/DD/YY` or `Month/DayOfMonth/Year`.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] You are missing the required numbers, please enter your Birthday, separating with `/`.");
+                    } catch (Exception e) {
+                        System.out.println("[UNEXPECTED ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                    } finally {
+                        System.out.println();
+                    }
+                }
+
+                ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle, SubscriptionDateCreation);
+                return true; // true means that the add and creation of the subscription has been successful.
         }
 
         return false;

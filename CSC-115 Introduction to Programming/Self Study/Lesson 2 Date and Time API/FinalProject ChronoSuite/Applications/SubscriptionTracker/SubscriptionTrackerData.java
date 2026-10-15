@@ -2,7 +2,7 @@ package Applications.SubscriptionTracker;
 
 
 // Creation Date: September 30, 2026. at 6:18 PM
-// Last Modified: October 14, 2026. at  9:46 PM
+// Last Modified: October 15, 2026. at 12:15 PM
 
 import java.util.HashSet;
 
@@ -24,7 +24,10 @@ public class SubscriptionTrackerData { // implements Application
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
     SubscriptionTrackerData(String Author) {
         this.Author = Author;
+        TotalMonthlyCost = 0.0;
+        TotalYearlyCost = 0.0;
         EmptyPassword = true;
+        Subscriptions = new HashSet<>();
     }
     
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
