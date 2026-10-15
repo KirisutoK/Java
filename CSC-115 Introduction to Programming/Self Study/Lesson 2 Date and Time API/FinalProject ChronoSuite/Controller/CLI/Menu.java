@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 13, 2026. at 11:36 PM
+// Last Modified: October 14, 2026. at  9:55 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -1181,15 +1181,19 @@ public class Menu {
         int Answer = ReuseableMethodsCLI.getAnswer(1, 4);
 
         // [PROCESSING OUTPUTS]
+        boolean methodRunning;
         switch (Answer) {
             case 1: // +[VIEW SUBSCRIPTIONS]+
-                boolean viewDataRunning = true;
-                while (viewDataRunning) {
-                    viewDataRunning = ST_ViewData();
+                methodRunning = true;
+                while (methodRunning) {
+                    methodRunning = ST_ViewData();
                 }
                 return true; // true means that this method will keep running becasue of  the while loop from the caller.
             case 2: // +[ADD SUBSCRIPTIONS]+
-
+                methodRunning = true;
+                while (methodRunning) {
+                    methodRunning = ST_AddSubscription();
+                }
                 return true; // true means that this method will keep running becasue of  the while loop from the caller.
             case 3: // +[REMOVE SUBSCRIPTIONS]+
 
@@ -1310,7 +1314,7 @@ public class Menu {
     public boolean ST_ViewData() {
         // [SECURITY]
         if (ST.getCurrentST_Data().isEmpty()) {
-            System.out.println("[ERROR] Current File is empty, it does not have any data (Subscriptions) inside.");
+            System.out.println("[ERROR] "+FileManager.fileNameOnly(ST.getCurrentFile(), 5)+" is empty, it does not have any data (Subscriptions) inside.");
             System.out.println();
             return false; // false means that this method will now stop running becasue of the while loop from the caller.
         }
@@ -1332,6 +1336,7 @@ public class Menu {
 
         // [INPUT]
         String Answer = ReuseableMethodsCLI.input.nextLine();
+        //! THINKING OF ADDING "SORT LIST" OPTION
 
         // [OUTPUT]
         if (Answer.equals("e")) {
@@ -1339,6 +1344,36 @@ public class Menu {
         }
 
         return true; // true means that this method will keep running becasue of  the while loop from the caller.
+    }
+    public boolean ST_AddSubscription() { //! <============================== YOU LEFT HERE TO ADD INPUT FOR DATE CREATION
+        // [INPUT]
+        System.out.println("Subscription Name: ");
+        String SubscriptionName = ReuseableMethodsCLI.input.nextLine();
+        System.out.println("Price: ");
+        double SubscriptionPrice = ReuseableMethodsCLI.input.nextDouble();
+        System.out.println("Billing Cycle (Days): ");
+        int BillingCycle = ReuseableMethodsCLI.input.nextInt();
+        System.out.println("Is this subcription already started or it just started today?");
+        System.out.println("1. Today");
+        System.out.println("2. Already Started");
+
+        int SubscriptionChoice = ReuseableMethodsCLI.getAnswer(1, 2);
+
+        // [OUTPUT]
+        switch(SubscriptionChoice) {
+            case 1: // +[TODAY]+
+                ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle);
+                break;
+            case 2: // +[ALREADY STARTED]+
+                System.out.println("[NOTE] Date Format is MMMM dd, yyyy");
+                System.out.println("Date Creation: ");
+
+
+                ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle);
+                break;
+        }
+
+        return false;
     }
     // +[PRINTS]+
     public void SubscriptionPrint() {

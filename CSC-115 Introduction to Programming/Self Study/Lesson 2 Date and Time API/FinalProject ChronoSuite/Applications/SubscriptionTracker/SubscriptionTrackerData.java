@@ -2,7 +2,7 @@ package Applications.SubscriptionTracker;
 
 
 // Creation Date: September 30, 2026. at 6:18 PM
-// Last Modified: October 13, 2026. at 11:36 PM
+// Last Modified: October 14, 2026. at  9:46 PM
 
 import java.util.HashSet;
 
@@ -67,6 +67,12 @@ public class SubscriptionTrackerData { // implements Application
     }
 
     // [DATA MANAGEMENT]
+    boolean addSubscription(SubscriptionData Subscription) {
+        return Subscriptions.add(Subscription);
+    }
+    boolean removeSubscription(SubscriptionData Subscription) {
+        return Subscriptions.remove(Subscription);
+    }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
 
