@@ -2,7 +2,7 @@ package Applications.SubscriptionTracker;
 
 
 // Creation Date: September 30, 2026. at 6:18 PM
-// Last Modified: October 16, 2026. at  9:19 PM
+// Last Modified: October 18, 2026. at 11:15 AM
 
 import java.util.HashSet;
 
@@ -83,7 +83,5 @@ public class SubscriptionTrackerData { // implements Application
     // ================================================== OTHER CLASSES ================================================== \\
 
 
-    // note: streak
-    // note: streal
 
 }

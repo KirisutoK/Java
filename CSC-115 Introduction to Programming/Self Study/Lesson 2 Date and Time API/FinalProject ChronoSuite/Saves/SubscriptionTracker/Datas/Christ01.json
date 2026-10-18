@@ -3,8 +3,14 @@
   "Password": "6ebee2ea18a702f01051ce55841fd746e0b114e0fb908f34ff67d4c0179c1d5f",
   "EmptyPassword": false,
   "LoggedIn": true,
-  "TotalMonthlyPrice": 0.0,
-  "TotalYearlyPrice": 0.0,
-  "TotalMonthlyPriceDue": 0.0,
-  "TotalYearlyPriceDue": 0.0
+  "TotalMonthlyCost": 0.0,
+  "TotalYearlyCost": 0.0,
+  "Subscriptions": [
+    {
+      "SubscriptionName": "ChristOtenBaho",
+      "CreationDate": "October 18, 2026",
+      "Price": 67.0,
+      "BillingCycle": 100
+    }
+  ]
 }

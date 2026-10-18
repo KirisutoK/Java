@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 15, 2026. at 12:08 PM
+// Last Modified: October 18, 2026. at 11:31 AM
 
 import java.io.File;
 import java.io.IOException;
@@ -1358,7 +1358,20 @@ public class Menu {
         // [OUTPUT]
         switch(SubscriptionChoice) {
             case 1: // +[TODAY]+
-                ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle);
+                try {
+                    ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle);
+                    Logger.log("SubscriptionTracker", FileManager.fileNameOnly(ST.getCurrentFile(), 5), "{User: "+Username+"} has added subscription -> \""+SubscriptionName+"\"");
+                    FileManager.updateJsonFile(ST.getCurrentST_Data(), ST.getCurrentFile());
+                } catch (InputMismatchException e) {
+                    System.out.println("[ERROR: InputMismatchException] "+e.getMessage());
+                    System.out.println();
+                    ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
+                } catch (IOException e) {
+                    System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                    System.out.println();
+                } catch (Exception e) {
+                    System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                }
                 break;
             case 2: // +[ALREADY STARTED]+
                 LocalDate SubscriptionDateCreation = null;
@@ -1394,19 +1407,33 @@ public class Menu {
                     }
                 }
 
-                ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle, SubscriptionDateCreation);
+                try {
+                    ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle, SubscriptionDateCreation);
+                    Logger.log("SubscriptionTracker", FileManager.fileNameOnly(ST.getCurrentFile(), 5), "{User: "+Username+"} has added subscription -> \""+SubscriptionName+"\"");
+                    FileManager.updateJsonFile(ST.getCurrentST_Data(), ST.getCurrentFile());
+                } catch (InputMismatchException e) {
+                    System.out.println("[ERROR: InputMismatchException] "+e.getMessage());
+                    System.out.println();
+                    ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
+                } catch (IOException e) {
+                    System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                    System.out.println();
+                } catch (Exception e) {
+                    System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                }
                 return true; // true means that the add and creation of the subscription has been successful.
         }
 
         return false;
     }
-    // +[PRINTS]+
+    // +[PRINTS]+   
     public void SubscriptionPrint() {
         for (SubscriptionData SD : ST.getCurrentST_Data().getSubscriptions()) {
-            System.out.println(ReuseableMethodsCLI.softWrapping("Subscription Name: "+SD.getSubscriptionName(), 67));
-            System.out.println(ReuseableMethodsCLI.softWrapping("Creation Date: "+SD.getCreationDate(), 67));
-            System.out.println(ReuseableMethodsCLI.softWrapping("Price: "+SD.getPrice(), 67));
-            System.out.println(ReuseableMethodsCLI.softWrapping("Billing Cycle: "+SD.getBillingCycle(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Subscription Name: "+SD.getSubscriptionName(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Creation Date: "+SD.getCreationDate(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Price: "+SD.getPrice(), 67));
+            System.out.println(ReuseableMethodsCLI.softWrapping("║ Billing Cycle: "+SD.getBillingCycle(), 67));
+            System.out.println("╟─────────────────────────────────────────────────────────────────╢");
         }
     }
 

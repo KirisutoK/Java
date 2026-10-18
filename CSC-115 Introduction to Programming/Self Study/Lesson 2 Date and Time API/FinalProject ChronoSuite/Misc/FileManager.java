@@ -1,7 +1,7 @@
 package Misc;
 
 // Creation Date: September 28, 2026. at 4:35 PM
-// Last Modified: October 05, 2026. at  4:35 PM
+// Last Modified: October 18, 2026. at 11:19 AM
 
 import Misc.GSON_Adapters.GsonAdapter_Date;
 import com.google.gson.Gson;
@@ -123,7 +123,7 @@ public class FileManager {
         }
 
         //... UNDER `MileStoneTracker`, Check if it already exists in the list.
-        File SaveFile = new File(MileStoneTrackerFolder, Filename+".json"); // NOTE: `.AMST_Data` append so that every file will be a `.AMST_Data` file
+        File SaveFile = new File(MileStoneTrackerFolder, Filename+".json"); // NOTE: `.JSON` append so that every file will be a `.JSON` file
         try {
             if (!SaveFile.exists() || SaveFile.isDirectory()) { // if the SaveFile does not exist or is currently a directory then.
                 SaveFile.createNewFile();
