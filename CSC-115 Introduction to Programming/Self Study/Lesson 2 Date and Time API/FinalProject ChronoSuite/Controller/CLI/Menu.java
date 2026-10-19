@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 18, 2026. at 11:31 AM
+// Last Modified: October 19, 2026. at 12:50 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -1328,7 +1328,6 @@ public class Menu {
         System.out.println("║[NOTE] Input \"e\" to exit.                                        ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
         System.out.println();
-        System.out.println();
 
         // [INPUT]
         String Answer = ReuseableMethodsCLI.input.nextLine();
@@ -1336,22 +1335,62 @@ public class Menu {
 
         // [OUTPUT]
         if (Answer.equals("e")) {
+            System.out.println();
             return false; // false means that this method will now stop running becasue of the while loop from the caller.
         }
 
         return true; // true means that this method will keep running becasue of  the while loop from the caller.
     }
-    public boolean ST_AddSubscription() { //! <============================== YOU LEFT HERE TO ADD INPUT FOR DATE CREATION
+    public boolean ST_AddSubscription() {
         // [INPUT]
-        System.out.println("Subscription Name: ");
-        String SubscriptionName = ReuseableMethodsCLI.input.nextLine();
-        System.out.println("Price: ");
-        double SubscriptionPrice = ReuseableMethodsCLI.input.nextDouble();
-        System.out.println("Billing Cycle (Days): ");
-        int BillingCycle = ReuseableMethodsCLI.input.nextInt();
+        String SubscriptionName = null;
+        double SubscriptionPrice = -1.0;
+        int BillingCycle = -1;
+
+        boolean ValidInput = false;
+        while (!ValidInput) {
+            System.out.print("Subscription Name: ");
+            SubscriptionName = ReuseableMethodsCLI.input.nextLine();
+            
+            boolean ValidPrice = false;
+            while (!ValidPrice) {
+                try {
+                    System.out.print("Price: ");
+                    SubscriptionPrice = ReuseableMethodsCLI.input.nextDouble();
+                    if (SubscriptionPrice <= 0) {
+                        System.out.println("[ERROR] Subscription Price can not be less than or equal to 0");
+                    } else {
+                        ValidPrice = true;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("[ERROR: InputMismatchException] Subscription Price must be a number");
+                    ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
+                }
+            }
+
+            boolean ValidBillingCycle = false;
+            while (!ValidBillingCycle) {
+                try {
+                    System.out.print("Billing Cycle (Days): ");
+                    BillingCycle = ReuseableMethodsCLI.input.nextInt();
+                    if (BillingCycle < 1) {
+                        System.out.println("[ERROR] Billing Cycle (Days) can not be less than 1");
+                    } else {
+                        ValidBillingCycle = true;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("[ERROR: InputMismatchException] Billing Cycle must be a number");
+                    ReuseableMethodsCLI.input.nextLine(); // this refreshes buffer
+                }
+            }
+
+            ValidInput = true;
+        }
+
         System.out.println("Is this subcription already started or it just started today?");
         System.out.println("1. Today");
         System.out.println("2. Already Started");
+        System.out.println();
 
         int SubscriptionChoice = ReuseableMethodsCLI.getAnswer(1, 2);
 
@@ -1375,8 +1414,8 @@ public class Menu {
                 break;
             case 2: // +[ALREADY STARTED]+
                 LocalDate SubscriptionDateCreation = null;
-                boolean ValidInput = false;
-                while (!ValidInput) {
+                ValidInput = false;
+                while (!ValidInput) { //! <====================================  NEED TO WORK ON THIS
                     try {
                         System.out.println("[NOTE] input \"e\" to exit");
                         System.out.println("[NOTE] (Month DayOfMonth Year) => ex: 12/05/2006");
@@ -1411,6 +1450,7 @@ public class Menu {
                     ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle, SubscriptionDateCreation);
                     Logger.log("SubscriptionTracker", FileManager.fileNameOnly(ST.getCurrentFile(), 5), "{User: "+Username+"} has added subscription -> \""+SubscriptionName+"\"");
                     FileManager.updateJsonFile(ST.getCurrentST_Data(), ST.getCurrentFile());
+                    return true; // true means that the add and creation of the subscription has been successful.
                 } catch (InputMismatchException e) {
                     System.out.println("[ERROR: InputMismatchException] "+e.getMessage());
                     System.out.println();
@@ -1421,7 +1461,6 @@ public class Menu {
                 } catch (Exception e) {
                     System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
                 }
-                return true; // true means that the add and creation of the subscription has been successful.
         }
 
         return false;

@@ -7,6 +7,12 @@
   "TotalYearlyCost": 0.0,
   "Subscriptions": [
     {
+      "SubscriptionName": "TIME TO PLAY MINECRAFT",
+      "CreationDate": "October 19, 2026",
+      "Price": 0.1,
+      "BillingCycle": 365
+    },
+    {
       "SubscriptionName": "ChristOtenBaho",
       "CreationDate": "October 18, 2026",
       "Price": 67.0,
