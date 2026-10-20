@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 19, 2026. at 12:50 PM
+// Last Modified: October 20, 2026. at 12:11 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -1413,6 +1413,7 @@ public class Menu {
                 }
                 break;
             case 2: // +[ALREADY STARTED]+
+                // [INPUT]
                 LocalDate SubscriptionDateCreation = null;
                 ValidInput = false;
                 while (!ValidInput) { //! <====================================  NEED TO WORK ON THIS
@@ -1433,6 +1434,8 @@ public class Menu {
                         // ADD THE CONVERTED LINES INTO THE CONSTRUCTOR
                         SubscriptionDateCreation = LocalDate.of(Integer.parseInt(Lines[2]), Integer.parseInt(Lines[0]), Integer.parseInt(Lines[1]));
 
+                        // PRINT
+                        ValidInput = true;
                     } catch (DateTimeException e) {
                         System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
                     } catch (NumberFormatException e) {
@@ -1446,11 +1449,21 @@ public class Menu {
                     }
                 }
 
+                // [OUTPUT]
                 try {
-                    ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle, SubscriptionDateCreation);
-                    Logger.log("SubscriptionTracker", FileManager.fileNameOnly(ST.getCurrentFile(), 5), "{User: "+Username+"} has added subscription -> \""+SubscriptionName+"\"");
-                    FileManager.updateJsonFile(ST.getCurrentST_Data(), ST.getCurrentFile());
-                    return true; // true means that the add and creation of the subscription has been successful.
+                    if (ST.addSubscription(SubscriptionName, SubscriptionPrice, BillingCycle, SubscriptionDateCreation)) { // if it returned true (successfully added subscription)
+                        System.out.println(SubscriptionName+" has been successfully added into [File: "+FileManager.fileNameOnly(ST.getCurrentFile(), 5)+"] ");
+                        System.out.println();
+                        Logger.log("SubscriptionTracker", FileManager.fileNameOnly(ST.getCurrentFile(), 5), "{User: "+Username+"} has added subscription -> \""+SubscriptionName+"\"");
+                        FileManager.updateJsonFile(ST.getCurrentST_Data(), ST.getCurrentFile());
+                        return true; // true means that the add and creation of the subscription has been successful.
+                    } else {
+                        System.out.println(SubscriptionName+" has been successfully added into [File: "+FileManager.fileNameOnly(ST.getCurrentFile(), 5)+"] ");
+                        System.out.println();
+                        Logger.log("SubscriptionTracker", FileManager.fileNameOnly(ST.getCurrentFile(), 5), "{User: "+Username+"} has failed to add subscription -> \""+SubscriptionName+"\"");
+                        FileManager.updateJsonFile(ST.getCurrentST_Data(), ST.getCurrentFile());
+                        return false; // false means that the add and creation of the subscription was unsuccessful.
+                    }
                 } catch (InputMismatchException e) {
                     System.out.println("[ERROR: InputMismatchException] "+e.getMessage());
                     System.out.println();
