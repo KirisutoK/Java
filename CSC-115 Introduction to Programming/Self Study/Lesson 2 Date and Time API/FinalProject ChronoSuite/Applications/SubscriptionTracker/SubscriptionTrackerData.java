@@ -2,7 +2,7 @@ package Applications.SubscriptionTracker;
 
 
 // Creation Date: September 30, 2026. at 6:18 PM
-// Last Modified: October 18, 2026. at 11:15 AM
+// Last Modified: October 21, 2026. at  4:41 PM
 
 import java.util.HashSet;
 
@@ -31,7 +31,6 @@ public class SubscriptionTrackerData { // implements Application
     }
     
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
-    // [PERSONAL]
     public String getAuthor() {
         return (LoggedIn) ? Author : null;
     }
@@ -40,6 +39,15 @@ public class SubscriptionTrackerData { // implements Application
     }
     public HashSet<SubscriptionData> getSubscriptions() {
         return Subscriptions;
+    }
+    public SubscriptionData getSubscription(String SubscriptionName) {
+        for (SubscriptionData SD: Subscriptions) {
+            if (SD.getSubscriptionName().equals(SubscriptionName)) {
+                return SD;
+            }
+        }
+
+        return null; // It's null if nothing matches in the HashSet<SubscriptionData>
     }
 
     // [SECURITY]

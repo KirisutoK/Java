@@ -13,18 +13,6 @@
       "BillingCycle": 365
     },
     {
-      "SubscriptionName": "ChristOtenBaho",
-      "CreationDate": "October 18, 2026",
-      "Price": 67.0,
-      "BillingCycle": 100
-    },
-    {
-      "SubscriptionName": "TestHaloHalo",
-      "CreationDate": "October 20, 2026",
-      "Price": 66669.0,
-      "BillingCycle": 123
-    },
-    {
       "SubscriptionName": "CustomizedCreationDateSubscription",
       "CreationDate": "December 05, 2006",
       "Price": 6767.0,

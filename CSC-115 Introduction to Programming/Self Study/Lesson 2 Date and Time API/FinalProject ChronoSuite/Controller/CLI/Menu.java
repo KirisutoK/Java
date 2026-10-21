@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 20, 2026. at 12:11 PM
+// Last Modified: October 21, 2026. at  4:53 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -1192,7 +1192,7 @@ public class Menu {
                 ST_AddSubscription();
                 return true; // true means that this method will keep running becasue of  the while loop from the caller.
             case 3: // +[REMOVE SUBSCRIPTIONS]+
-
+                ST_RemoveSubscription();
                 return true; // true means that this method will keep running becasue of  the while loop from the caller.
             case 4:// +[GO BACK]+
 
@@ -1477,6 +1477,50 @@ public class Menu {
         }
 
         return false;
+    }
+    public boolean ST_RemoveSubscription() {
+        // [INPUT]
+        System.out.println("╔═══[SUBSCRIPTIONS]═══════════════════════════════════════════════╗");
+        SubscriptionPrint();
+        System.out.println("╠═════════════════════════════════════════════════════════════════╣");
+        System.out.println("║[NOTE] Input \"e\" to exit.                                        ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+        System.out.println("Which Subscription would you like to remove? ");
+        System.out.println();
+
+        boolean ValidInput = false;
+        while (!ValidInput) {
+            System.out.print("Answer: ");
+            String Answer = ReuseableMethodsCLI.input.nextLine();
+
+            if (Answer.equals("e")) {
+                System.out.println();
+                return false;
+            }
+
+            SubscriptionData SelectedSD = ST.getCurrentST_Data().getSubscription(Answer);
+
+            if (SelectedSD == null) {
+                System.out.println("[ERROR] "+Answer+" does not exists!");
+                System.out.println();
+            } else {
+                try {
+                    ST.removeSubscription(SelectedSD);
+                    System.out.println(Answer+" has been successfully deleted!");
+                    System.out.println();
+                    Logger.log("SubscriptionTracker", FileManager.fileNameOnly(ST.getCurrentFile(), 5), "{"+Username+"} has removed a subscription ->\""+Answer+"\" " );
+                    FileManager.updateJsonFile(ST.getCurrentST_Data(), ST.getCurrentFile());
+                    ValidInput = true;
+                    return true;
+                } catch (IOException e) {
+                    System.out.println("[ERROR: "+e.getClass().getSimpleName()+"] "+e.getMessage());
+                    ReuseableMethodsCLI.input.nextLine();
+                }
+            }
+        }
+
+        return false; // false means that it did not remove successfully
     }
     // +[PRINTS]+   
     public void SubscriptionPrint() {

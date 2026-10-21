@@ -1,7 +1,7 @@
 package Applications.SubscriptionTracker;
 
 // Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: October 20, 2026. at 12:05 PM
+// Last Modified: October 21, 2026. at  4:41 PM
 
 import Applications.Application;
 import Misc.DataManager;
@@ -159,11 +159,14 @@ public class SubscriptionTracker implements Application {
     }
 
     // [DATA MANAGEMENT]
-    public boolean addSubscription(String SubscriptionName, double SubscriptionPrice, int BillingCycle) { //! <==================== YOU LEFT HERE! (PLANNING TO DO THE ADD/REMOVE/MODIFY AS WE HAVE NOW THE METHOD TO CHECK IT'S STATUS)
+    public boolean addSubscription(String SubscriptionName, double SubscriptionPrice, int BillingCycle) {
         return CurrentST_Data.addSubscription(new SubscriptionData(SubscriptionName, SubscriptionPrice, BillingCycle));
     }
     public boolean addSubscription(String SubscriptionName, double SubscriptionPrice, int BillingCycle, LocalDate CreationDate) {
         return CurrentST_Data.addSubscription(new SubscriptionData(SubscriptionName, SubscriptionPrice, BillingCycle, CreationDate));
+    }
+    public boolean removeSubscription(SubscriptionData SD) {
+        return CurrentST_Data.removeSubscription(SD);
     }
 
     //===========METHODS===========\\ NOTE: THIS ARE THE SPECIFIC PROCESS IN ORDER TO MEET THE DESIRED RESULTS
