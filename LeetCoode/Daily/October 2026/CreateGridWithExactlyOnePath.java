@@ -1,5 +1,5 @@
 // Creation Date: October 27, 2026. at 12:10 PM
-// Last Modified: October 27, 2026. at  3:45 PM
+// Last Modified: October 27, 2026. at  7:31 PM
 
 // LINK: https://leetcode.com/problems/create-grid-with-exactly-one-path/?envType=daily-question&envId=2026-10-27
 
@@ -39,4 +39,5 @@ public class CreateGridWithExactlyOnePath {
     }
 }
 
-// Note: I took many hours because i read the question/problem wrong.
+// Note: I took couple of hours to solve because i misinterpreted the question/problem
+// .
