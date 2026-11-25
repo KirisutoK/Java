@@ -1,7 +1,7 @@
 package Controller.CLI;
 
 // Creation Date: August 21, 2026. at 12:09 AM
-// Last Modified: October 21, 2026. at  4:53 PM
+// Last Modified: November 25, 2026. at  4:36 PM
 
 import java.io.File;
 import java.io.IOException;
@@ -11,10 +11,8 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 
-import Applications.DayPlanner.DayPlanner;
 import Applications.MileStoneTracker.MileStoneTracker;
 import Applications.MileStoneTracker.MileStoneTrackerData;
-import Applications.MultiTimeZoneMeetingPlanner.MultiTimeZoneMeetingPlanner;
 import Applications.SubscriptionTracker.SubscriptionData;
 import Applications.SubscriptionTracker.SubscriptionTracker;
 import Applications.WorkHoursTracker.WorkHoursTracker;
@@ -32,8 +30,6 @@ public class Menu {
 
     // [CLASSES OR APPLICATIONS]
     private MileStoneTracker MST;
-    private DayPlanner DP;
-    private MultiTimeZoneMeetingPlanner MTZMP;
     private SubscriptionTracker ST;
     private WorkHoursTracker WHT;
 
@@ -160,9 +156,8 @@ public class Menu {
         System.out.println(ReuseableMethodsCLI.softWrapping("║ Username: "+Username, 74));
         System.out.println(ReuseableMethodsCLI.lineAutoSpacing("║ Birthday: "+ DataManager.toStringBirthday(UserBirthday), 74));
         System.out.println("╟──[APPLICATIONS]────────────────────────────────────────────────────────╢");
-        System.out.println("║ 1. MileStone Tracker                 4. Subscription Tracker           ║");
-        System.out.println("║ 2. Day Planner (WIP)                 5. Work Hours Tracker (WIP)       ║");
-        System.out.println("║ 3. Multi-TimeZone Tracker (WIP)      6. Change Profile                 ║");
+        System.out.println("║ 1. MileStone Tracker                 3. Subscription Tracker           ║");
+        System.out.println("║ 2. Work Hours Tracker (WIP)          4. Change Profile                 ║");
         System.out.println("╠════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║ By: Christ Aerjil C. Dampog                            August 28, 2026 ║");
         System.out.println("╚════════════════════════════════════════════════════════════════════════╝");
@@ -217,15 +212,11 @@ public class Menu {
                 }
 
                 break;
-            case 2: // +[DAY PLANNER]+
+            case 2: // +[WORK HOURS TRACKER]+
                 System.out.println("This application is still in progress.");
                 System.out.println();
                 break;
-            case 3: // +[MULTI-TIMEZEONE TRACKER]+
-                System.out.println("This application is still in progress.");
-                System.out.println();
-                break;
-            case 4: // +[SUBSCRIPTION TRACKER]+
+            case 3: // +[SUBSCRIPTION TRACKER]+
                 // [SECURITY]
                 if (ST == null) {
                     ST = new SubscriptionTracker(Username, UserBirthday);
@@ -266,11 +257,7 @@ public class Menu {
                 }
 
                 break;
-            case 5: // +[WORK HOURS TRACKER]+
-                System.out.println("This application is still in progress.");
-                System.out.println();
-                break;
-            case 6: // +[CHANGE PROFILE]+
+            case 4: // +[CHANGE PROFILE]+
                 return false;
         }
         return true; // Only Case 6 of Switch(Answer) will return `false` since its an indication of "Stop" or "Running is False"

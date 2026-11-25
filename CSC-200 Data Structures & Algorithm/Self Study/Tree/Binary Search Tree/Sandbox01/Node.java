@@ -1,12 +1,15 @@
-package Applications.MultiTimeZoneMeetingPlanner;
+// Creation Date: November 10, 2026. at 12:04 PM
+// Last Modified: November 10, 2026. at 12:07 PM
 
-// Creation Date: August 21, 2026. at 12:03 AM
-// Last Modified: September 26, 2026. at  1:30 AM
-
-public class MultiTimeZoneMeetingPlanner {
+public class Node {
     //=======VARIABLES=======//
+    int value;
+    Node left, right;
 
     //=======CONSTRUCTOR=======// NOTE: IN ORDER TO USE THIS FILES WE NEED A CONSTRUCTOR TO CREATE INSTANCES FROM OTHER FILES
+    Node(int value) {
+        this.value = value;
+    }
 
     //==========GETTERS==========\\ NOTE: TO ACCESS THE PRIVATE VARIABLES AND USE IT TO OTHER FILES
 
@@ -17,7 +20,3 @@ public class MultiTimeZoneMeetingPlanner {
 
     // ================================================== OTHER CLASSES ================================================== \\
 }
-
-// INITIAL IDEA:
-// Given a list of participants each in a different timezone and a proposed meeting time, checks if the time falls within business
-// hours for everyone and suggests alternatives if not. Reusable in any collaborative or international scheduling tool.
