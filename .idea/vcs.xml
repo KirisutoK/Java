@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PersonalProjects/AgeSorter [FINISHED]" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PersonalProjects/Basic Math Quiz Randomizer [FINISHED]" vcs="Git" />
   </component>
 </project>

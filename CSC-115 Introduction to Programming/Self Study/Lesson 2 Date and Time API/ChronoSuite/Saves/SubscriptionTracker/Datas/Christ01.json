@@ -1,0 +1,28 @@
+{
+  "Author": "Christ",
+  "Password": "6ebee2ea18a702f01051ce55841fd746e0b114e0fb908f34ff67d4c0179c1d5f",
+  "EmptyPassword": false,
+  "LoggedIn": true,
+  "TotalMonthlyCost": 1674.7032990756209,
+  "TotalYearlyCost": 20094.789092883395,
+  "Subscriptions": [
+    {
+      "SubscriptionName": "CustomizedCreationDateSubscription1",
+      "CreationDate": "November 27, 2026",
+      "Price": 25.99,
+      "BillingCycle": 31
+    },
+    {
+      "SubscriptionName": "CustomizedCreationDateSubscription",
+      "CreationDate": "December 05, 2006",
+      "Price": 6767.0,
+      "BillingCycle": 123
+    },
+    {
+      "SubscriptionName": "TIME TO PLAY MINECRAFT",
+      "CreationDate": "October 19, 2026",
+      "Price": 0.1,
+      "BillingCycle": 365
+    }
+  ]
+}

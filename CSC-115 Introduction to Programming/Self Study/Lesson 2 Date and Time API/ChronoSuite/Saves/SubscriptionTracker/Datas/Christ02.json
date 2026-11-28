@@ -1,0 +1,21 @@
+{
+  "Author": "Christ",
+  "Password": "208b0c614baadf4487487c4fa33fe8fc0eb4435c40fc0d39c2ead00e883de09d",
+  "EmptyPassword": false,
+  "TotalMonthlyCost": 25.52050322580645,
+  "TotalYearlyCost": 306.2208870967742,
+  "Subscriptions": [
+    {
+      "SubscriptionName": "Netflix",
+      "CreationDate": "November 27, 2026",
+      "Price": 25.99,
+      "BillingCycle": 31
+    },
+    {
+      "SubscriptionName": "Netflix1",
+      "CreationDate": "December 05, 2006",
+      "Price": 67.0,
+      "BillingCycle": 100000
+    }
+  ]
+}

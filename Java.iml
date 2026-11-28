@@ -8,10 +8,10 @@
       <sourceFolder url="file://$MODULE_DIR$/CSC-190 Object-Oriented Soft Dev/Self Study/Lesson 9 Collections Framework/Debugging01" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CSC-190 Object-Oriented Soft Dev/Self Study/Lesson 9 Collections Framework/Problems/Problems05 Hard (Real-World)" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PersonalProjects/GitHub Profile" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CSC-115 Introduction to Programming/Self Study/Lesson 2 Date and Time API/FinalProject ChronoSuite" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/LeetCoode/Daily/November 2026" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CSC-200 Data Structures &amp; Algorithm/Self Study/Tree/Binary Search Tree/Sandbox01" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/OpenTest" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CSC-115 Introduction to Programming/Self Study/Lesson 2 Date and Time API/ChronoSuite" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CSC-115 Introduction to Programming/Self Study/Lesson 2 Date and Time API/ChronoSuite-CLI" isTestSource="false" />
     </content>
   </component>
 </module>
